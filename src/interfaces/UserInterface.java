@@ -30,8 +30,8 @@ public class UserInterface
    */
   public void homePage(){
     
-    
-    String str= scan.next("s for search, m for manage saved schools, p for manage profile");
+    System.out.print("s for search, m for manage saved schools, p for manage profile: ");
+    String str= scan.next();
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
       viewSearchedSchools(db.getUniversities());
