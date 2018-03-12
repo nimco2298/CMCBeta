@@ -57,7 +57,8 @@ public class AccountInterface
    */
   public void start()
   {
-    Scanner sc = new Scanner(System.in);
+    @SuppressWarnings("resource")
+	Scanner sc = new Scanner(System.in);
     System.out.print("Please enter your username: ");
     String u = sc.next();
     System.out.print("Now enter your password: ");
