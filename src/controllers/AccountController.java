@@ -38,23 +38,22 @@ public class AccountController
     // find a user in the database   
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
-    System.out.println(matchedUser.getDetails());
-    System.out.println("Test");
+    
     //check if the matchedUser is a dummy user, if it is do not CONTINUE
-    if(matchedUser.getUsername() == "DummyUser")
+    if(matchedUser.getUsername().equals("DummyUser"))
     { 
       //The user name and password associated with this account is not registered 
       System.out.println("Error: The username is not registered ");
       return false;
     }
-    else if(matchedUser.getPassword() != password)
+    else if(!matchedUser.getPassword().equals(password))
     {
       //print the username and password do not match an an asociated account
       System.out.println("Error: The username and password do not match");
       return false;
     }
     else { 
-      
+      System.out.println("lalalalalalla");
       this.account = matchedUser;  
       char type = account.getType(); // get the type assocated with this acount 
       

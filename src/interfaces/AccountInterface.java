@@ -29,7 +29,6 @@ public class AccountInterface
    */
   public void login(String usr, String password)
   {
-	 // System.out.println("Test");
     if (ac.login(usr, password))
     {
       System.out.println("Login successful");
