@@ -57,7 +57,7 @@ public class AccountController
       return false;
     }
     else { 
-      System.out.println("lalalalalalla");
+      //System.out.println("lalalalalalla");
       this.account = matchedUser;  
       char type = account.getType(); // get the type assocated with this acount 
       
