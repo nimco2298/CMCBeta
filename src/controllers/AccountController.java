@@ -39,7 +39,6 @@ public class AccountController
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
     System.out.println(matchedUser.getDetails());
-    System.out.println("Test");
     //check if the matchedUser is a dummy user, if it is do not CONTINUE
     if(matchedUser.getUsername() == "DummyUser")
     { 
