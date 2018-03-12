@@ -63,12 +63,14 @@ public class AccountController
       
       if(type == 'a') 
       {
-        new AdminInterface().homepage(); 
+        AdminInterface ai = new AdminInterface();
+        ai.homepage(); 
         return true;
       }
       else if(type == 'u')
       {
-        new UserInterface((GeneralUser)matchedUser).homePage();  
+        UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
+        ui.homePage();
         return true;
       }
       else
