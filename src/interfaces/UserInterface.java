@@ -92,13 +92,16 @@ public class UserInterface
     }
     else if(str.equals("m")){
       viewSavedSchools();
-      String s3 = scan.next("r for remove and v for view:");
+      System.out.print("r for remove and v for view: ");
+      String s3 = scan.next();
       if(s3.equals("r")){
-        String sName= scan.next("please enter the name of the school you want to remove:");
+    	System.out.print("please enter the name of the school you want to remove: ");
+        String sName= scan.next();
         removeSavedSchool(db.getUniversity(sName));
       }
       else{
-        String sName= scan.next("please enter the name of the school you want to view details:");
+    	System.out.print("please enter the name of the school you want to view details: ");
+        String sName= scan.next();
         viewSchoolDetailsAndTop5(db.getUniversity(sName));
       }
     }
@@ -188,11 +191,12 @@ public class UserInterface
           System.out.println("not a valid input");
           break;
       }
-      prompt = scan.next("What would you like to edit:" + '\n' +
+      System.out.print("What would you like to edit:" + '\n' +
                        "1: FirstName" + '\n' +
                        "2: LastName" + '\n' +
                        "3: Password" + '\n' +   
-                       "q: Quit");
+                       "q: Quit: ");
+      prompt = scan.next();
     }
   }
   /**
