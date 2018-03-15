@@ -302,7 +302,7 @@ public class AdminInterface
 						"3: Password" + '\n' +
 						"4: Type" + '\n' +  
 						"5: Status" + '\n' +  
-            			"q: Quit");
+            			"q: Quit (Return to homepage and save updates)");
     String prompt = sc.next();
     
     while(!prompt.equals("q")&&!prompt.equals("Q")){
@@ -337,11 +337,16 @@ public class AdminInterface
     		  				"3: Password" + '\n' +
     		  				"4: Type" + '\n' +  
     		  				"5: Status" + '\n' +  
-              				"q: Quit");
+              				"q: Quit (Return to homepage and save updates)");
       prompt = sc.next();
     }
     ad.saveAccountChanges(user);
-    System.out.println("Updates have been saved");
+    System.out.println("Updates have been saved:" + '\n' + 
+    						"FirstName: " + user.getFirstName() + '\n' + 
+    						"LastName: " + user.getLastName() + '\n' + 
+    						"Password: " + user.getPassword() + '\n' + 
+    						"Type: " + user.getType() + '\n' + 
+    						"Active: " + user.getActive());
     homepage();
   }
   
