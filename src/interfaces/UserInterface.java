@@ -41,6 +41,7 @@ public class UserInterface
     	  String sName= scan.next();
     	  System.out.println(db.getUniversity(sName).getName());
 	      saveToSavedSchoolList(db.getUniversity(sName));
+	      this.user=(GeneralUser)db.getUser(user.getUsername());
       }
       else {
 	      String schoolName=strIn("School Name: ");
@@ -73,7 +74,7 @@ public class UserInterface
 	      int qualLifeScaleHigh=intIn("high qual life scale: ");  
 	      ArrayList<String> emphases=new ArrayList<String>();
 	      String sss=strIn("emphases: ");
-	      while(!sss.equals("")){
+	      while(!sss.equals(" ")){
 	        emphases.add(sss);
 	        sss=strIn("some more emphases? space to finish: ");
 	      }
@@ -117,6 +118,9 @@ public class UserInterface
         	sName= scan.next();
         }
         	viewSchoolDetailsAndTop5(db.getUniversity(sName));
+      }
+      else {
+    	  homePage();
       }
     }
     else{
