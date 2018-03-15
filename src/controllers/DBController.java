@@ -6,7 +6,7 @@ import entities.*;
 /**
  * Performs all the messy work needed for accessing and modifying the database
  * @author Ian Bush
- * @version February 22, 2018
+ * @version March 15, 2018
  */
 public class DBController
 {
