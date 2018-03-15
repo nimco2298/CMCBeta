@@ -56,6 +56,6 @@ public class AccountInterface
     System.out.print("Now enter your password: ");
     String p = sc.nextLine();
     this.login(u,p);
-    //sc.close();
+    
   }
 }
