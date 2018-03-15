@@ -164,10 +164,12 @@ public abstract class Account {
    */
   public String getDetails()
   {
-    return  "First name: " + this.firstName + "\n" 
+    return "***ACCOUNT INFORMATION****** \n"
+  +"First name: " + this.firstName + "\n" 
    + "Last Name:  " + this.lastName + "\n" + 
    "Account Status: " + this.active + "\n" +
    "Password: " + this.password + "\n" +
-   "Saved Schools List: " + this.savedUniversities;
+   "Saved Schools List: " + this.savedUniversities + "\n"
+   +" **********************************" ;
   }
 }
