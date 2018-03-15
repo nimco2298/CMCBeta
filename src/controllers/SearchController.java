@@ -10,9 +10,15 @@ package controllers;
 import entities.*;
 import java.util.*;
 
+/**
+ * Performs all of the search methods for the project
+ * 
+ * @author Zhaochen Bai
+ * @version March 15, 2018
+ */
 public class SearchController{
   
-  private DBController db;
+  private DBController db = new DBController();
   /*
    * @param schoolName the name of the school
    * @param state the state the school is at
@@ -24,7 +30,6 @@ public class SearchController{
    * @return a list of searching result
    * 
    */
-  
   public ArrayList<University> search(String schoolName, String state, String location, String control,int studentsLow,
                                       int studentsHigh, int femPercLow, int femPercHigh, int satVLow, int satVHigh, 
                                       int satMLow, int satMHigh, int costLow, int costHigh, int finAidPercLow, int finAidPercHigh,
@@ -33,12 +38,11 @@ public class SearchController{
                                       int socLifeScaleHigh, int qualLifeScaleLow, int qualLifeScaleHigh, 
                                       ArrayList<String> emphases){
     ArrayList<University> rlist = new ArrayList<University>();
-    db = new DBController();
     boolean n=false, s=false, l=false, c=false, ns=false, pf=false, sv=false, sm=false, exp=false, pfa=false, na=false, 
       pa=false, pe=false, as=false, ss=false, qls=false, em=false;
     ArrayList<University> ulist = db.getUniversities();
-    for(University u: ulist){
-      
+    for(University u: ulist)
+    {
       if(u.getName().contains(schoolName))
         n=true;
       if(u.getState().contains(state))
@@ -75,13 +79,11 @@ public class SearchController{
         if(u.getEmphases().contains(str))
           em=true;
       }
-      if(n && s && l && c && ns && pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em){
+      if(n && s && l && c && ns && pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
+      {
         rlist.add(u);
       }
-      
     }
-    
-
     return rlist;
   }
   
@@ -90,12 +92,10 @@ public class SearchController{
   /*
    * @param a University object that the user selected
    * @return a list of searching result
-   * 
    */
   public ArrayList<University> recSearch(University cu){
     
     ArrayList<University> rlist = new ArrayList<University>();
-    db = new DBController();
     ArrayList<University> ulist = db.getUniversities();
     
     int n=ulist.size();
