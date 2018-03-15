@@ -40,6 +40,12 @@ public class AccountController
     Account matchedUser = db.getUser(username); 
     System.out.println(matchedUser.getDetails());
     System.out.println("Test");
+    
+    if(matchedUser.getActive() == 'N')
+    {
+    	
+    	System.out.println("Error: Your account is deactivated and you cannot be logged in");
+    }
     //check if the matchedUser is a dummy user, if it is do not CONTINUE
     if(matchedUser.getUsername() == "DummyUser")
     { 
@@ -49,7 +55,7 @@ public class AccountController
     }
     else if(matchedUser.getPassword() != password)
     {
-      //print the username and password do not match an an asociated account
+      //print the username and password do not match an an associated account
       System.out.println("Error: The username and password do not match");
       return false;
     }
@@ -60,6 +66,7 @@ public class AccountController
       
       if(type == 'a') 
       {
+ 
         new AdminInterface().homepage(); 
         return true;
       }

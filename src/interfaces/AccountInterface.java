@@ -29,15 +29,16 @@ public class AccountInterface
    */
   public void login(String usr, String password)
   {
-	 // System.out.println("Test");
+	 
     if (ac.login(usr, password))
     {
       System.out.println("Login successful");
     }
+   
     else
     {
-      System.out.println("Please try again");
-      this.start();
+      System.out.println("Login unsuccesful.");
+      //this.start();
     }
   }
   
