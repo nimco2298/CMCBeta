@@ -8,7 +8,7 @@ import java.util.*;  //Java's ArrayList<ET>
 /**
  * Account is an abstract that is extends Admin and GeneralUser. 
  * The purpose of this class is to define the behavior of an Account for the CMC System.
- * The accesor methods in this class return information about an Account. 
+ * The accessor methods in this class return information about an Account. 
  * The mutator methods allow the information of an Account to be manipulated. 
  * 
  *
@@ -30,7 +30,7 @@ public abstract class Account {
   /** The type of an Account */
   private char type;
   
-   /** The string representation of a list of saved universisities t */
+   /** The string representation of a list of saved universities */
   private ArrayList<String> savedUniversities;
   
  
@@ -165,8 +165,10 @@ public abstract class Account {
    */
   public String getDetails()
   {
-    return  "First name: " +this.firstName + "Last Name:  " +
-      this.lastName + "Account Status: " + this.active + "Password: " + this.password + 
-      "Saved Schools List: " + this.savedUniversities;
+    return  "First name: " + this.firstName + "\n" 
+   + "Last Name:  " + this.lastName + "\n" + 
+   "Account Status: " + this.active + "\n" +
+   "Password: " + this.password + "\n" +
+   "Saved Schools List: " + this.savedUniversities;
   }
 }

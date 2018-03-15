@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import entities.*;
 
 /**
- * Performs all the messy work needed for accessing and modifiying the databse
+ * Performs all the messy work needed for accessing and modifying the database
  * @author Ian Bush
  * @version February 22, 2018
  */
@@ -58,7 +58,7 @@ public class DBController
   /**
    * Returns a specific university based on the name provided
    * @param univName the name of the university
-   * @return the unviersity with the matching name
+   * @return the university with the matching name
    */
   public University getUniversity(String univName)
   {
@@ -72,7 +72,7 @@ public class DBController
   }
   
   /**
-   * Returns a list of all users in the databse
+   * Returns a list of all users in the database
    * @return all of the users in the system
    */
   public ArrayList<Account> getAccounts()
@@ -178,7 +178,7 @@ public class DBController
   }
   
   /**
-   * Modifies a univeristy
+   * Modifies a university
    * @param univ the University to modify
    */
   public void updateUniversity(University univ)

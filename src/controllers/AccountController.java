@@ -39,9 +39,16 @@ public class AccountController
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
 
-    
-
     System.out.println(matchedUser.getDetails());
+
+    
+    if(matchedUser.getActive() == 'N')
+    {
+    	
+    	System.out.println("Error: Your account is deactivated and you cannot be logged in");
+    	return false;
+    }
+
 
     //check if the matchedUser is a dummy user, if it is do not CONTINUE
     if(matchedUser.getUsername().equals("DummyUser"))
@@ -52,7 +59,7 @@ public class AccountController
     }
     else if(!matchedUser.getPassword().equals(password))
     {
-      //print the username and password do not match an an asociated account
+      //print the username and password do not match an an associated account
       System.out.println("Error: The username and password do not match");
       return false;
     }
@@ -64,12 +71,14 @@ public class AccountController
       if(type == 'a') 
       {
         AdminInterface ai = new AdminInterface();
+        System.out.println("Login successful");
         ai.homepage(); 
         return true;
       }
       else if(type == 'u')
       {
         UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
+        System.out.println("Login successful");
         ui.homePage();
         return true;
       }

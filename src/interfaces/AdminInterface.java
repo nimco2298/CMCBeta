@@ -13,16 +13,18 @@ import controllers.*;
  */
 public class AdminInterface
 {
+  //==================================INSTANCE VARIABLES==========================
   private AdminFuncController ad;
   Scanner sc = new Scanner(System.in);
   
+  //==================================CONSTRUCTORS==========================
   /**
    * Constructor for the AdminInterface
    */
   public AdminInterface() {
     this.ad = new AdminFuncController();
   }
-  
+  //==================================METHODS==========================
   /**
    * Shows a list of all universities in the system
    */
@@ -31,16 +33,17 @@ public class AdminInterface
     System.out.println("Would you like to add or edit Universities?" + '\n'
                          +'\t'+ "a: Add Universities" + '\n'
                          +'\t'+ "e: Edit Universities" + '\n' 
-                         +'\t'+ "q: Quit");
+                         +'\t'+ "q: Quit (Return to Homepage)");
     String cmd = sc.next();
     if(cmd == "a"){ // ADD UNIVERSITIES
       addUniversity();
     }
     else if(cmd == "e"){ // EDIT UNIVERSITIES
-      editUniversity(sc.next("Enter a University name"));
+      System.out.println("Enter a University name");
+      editUniversity(sc.next());
     }
     else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-      // homepage() //maybe this will cause a loop (recursive loop)?
+      homepage();
     }
     else{ // INPUT ERROR
       System.out.println("Invalid input");
@@ -56,19 +59,21 @@ public class AdminInterface
                          +'\t'+ "a: Add User" + '\n'
                          +'\t'+ "e: Edit User" + '\n'
                          +'\t'+ "d: Deactivate User" + '\n'
-                         +'\t'+ "q: Quit");
+                         +'\t'+ "q: Quit (Return to Homepage)");
     String cmd = sc.next();
-    if(cmd == "a"){ // ADD USER
+    if(cmd.equals("a")){ // ADD USER
       addAccount();
     }
-    else if(cmd == "e"){ // EDIT USER
-      editUser(ad.getAccount(sc.next("Enter a Username")));
+    else if(cmd.equals("e")){ // EDIT USER
+      System.out.println("Enter a Username");
+      editUser(ad.getAccount(sc.next()));
     }
-    else if(cmd == "d"){ // DEACTIVATE USER
-      deactivate(ad.getAccount(sc.next("Enter a Username")));
+    else if(cmd.equals("d")){ // DEACTIVATE USER
+      System.out.println("Enter a Username");
+      deactivate(ad.getAccount(sc.next()));
     }
     else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-      // homepage() //maybe this will cause a loop (recursive loop)?
+      homepage();
     }
     else{ // INPUT ERROR
       System.out.println("Invalid input");
@@ -82,36 +87,40 @@ public class AdminInterface
    */
   public void editUniversity(String univ) {
     University u = ad.getUniversity(univ);
-    String prompt = sc.next("What would you like to edit:" + '\n' +
-                            "1: state" + '\n' +
-                            "2: location" + '\n' +
-                            "3: control" + '\n' +
-                            "4: students" + '\n' +
-                            "5: female percentage" + '\n' +
-                            "6: SAT verbal score" + '\n' +
-                            "7: SAT math score" + '\n' +
-                            "8: cost" + '\n' +
-                            "9: financial aid percentage" + '\n' +
-                            "10: applicants" + '\n' +
-                            "11: admitted" + '\n' +
-                            "12: enrolled" + '\n' +
-                            "13: academic scale" + '\n' +
-                            "14: social scale" + '\n' +
-                            "15: quality scale" + '\n' +
-                            "16: add emphases" + '\n' +
-                            "17: remove emphases" + '\n' +
-                            "q: Quit");
+    System.out.println("What would you like to edit:" + '\n' +
+            				"1: state" + '\n' +
+            				"2: location" + '\n' +
+            				"3: control" + '\n' +
+            				"4: students" + '\n' +
+            				"5: female percentage" + '\n' +
+            				"6: SAT verbal score" + '\n' +
+            				"7: SAT math score" + '\n' +
+            				"8: cost" + '\n' +
+            				"9: financial aid percentage" + '\n' +
+            				"10: applicants" + '\n' +
+            				"11: admitted" + '\n' +
+            				"12: enrolled" + '\n' +
+            				"13: academic scale" + '\n' +
+            				"14: social scale" + '\n' +
+            				"15: quality scale" + '\n' +
+            				"16: add emphases" + '\n' +
+            				"17: remove emphases" + '\n' +
+            				"q: Quit");
+    String prompt = sc.next();
     
     while(!prompt.equals("q")||!prompt.equals("Q")){
       switch (prompt){
         case "1":
-          u.setState(sc.next("Enter the state"));
+          System.out.println("Enter the state");
+          u.setState(sc.next());
           break;
         case "2":
-          u.setLocation(sc.next("Enter the location"));
+          System.out.println("Enter the location");
+          u.setLocation(sc.next());
           break;
         case "3":
-          u.setControl(sc.next("Enter the control"));
+          System.out.println("Enter the control");
+          u.setControl(sc.next());
           break;
         case "4":
           System.out.println("Enter the number of students");
@@ -162,34 +171,37 @@ public class AdminInterface
           u.setQualScale(sc.nextInt());
           break;
         case "16":
-          u.addEmphases(sc.next("Enter an emphasis to add"));
+          System.out.println("Enter an emphasis to add");
+          u.addEmphases(sc.next());
           break;
         case "17":
-          u.removeEmphases(sc.next("Enter an emphasis to remove"));
+          System.out.println("Enter an emphasis to remove");
+          u.removeEmphases(sc.next());
           break;
         default:
           System.out.println("Invalid input");
           break;
       }
-      prompt = sc.next("What would you like to edit:" + '\n' +
-                       "1: state" + '\n' +
-                       "2: location" + '\n' +
-                       "3: control" + '\n' +
-                       "4: students" + '\n' +
-                       "5: female percentage" + '\n' +
-                       "6: SAT verbal score" + '\n' +
-                       "7: SAT math score" + '\n' +
-                       "8: cost" + '\n' +
-                       "9: financial aid percentage" + '\n' +
-                       "10: applicants" + '\n' +
-                       "11: admitted" + '\n' +
-                       "12: enrolled" + '\n' +
-                       "13: academic scale" + '\n' +
-                       "14: social scale" + '\n' +
-                       "15: quality scale" + '\n' +
-                       "16: add emphases" + '\n' +
-                       "17: remove emphases" + '\n' +
-                       "q: Quit");
+      System.out.println("What would you like to edit:" + '\n' +
+    		  				"1: state" + '\n' +
+    		  				"2: location" + '\n' +
+    		  				"3: control" + '\n' +
+    		  				"4: students" + '\n' +
+    		  				"5: female percentage" + '\n' +
+    		  				"6: SAT verbal score" + '\n' +
+    		  				"7: SAT math score" + '\n' +
+    		  				"8: cost" + '\n' +
+    		  				"9: financial aid percentage" + '\n' +
+    		  				"10: applicants" + '\n' +
+    		  				"11: admitted" + '\n' +
+    		  				"12: enrolled" + '\n' +
+    		  				"13: academic scale" + '\n' +
+    		  				"14: social scale" + '\n' +
+    		  				"15: quality scale" + '\n' +
+    		  				"16: add emphases" + '\n' +
+    		  				"17: remove emphases" + '\n' +
+              				"q: Quit");
+      prompt = sc.next();
     }
     ad.saveUnivChanges(u);
   }
@@ -199,10 +211,14 @@ public class AdminInterface
    */
   public void addUniversity() {
     // ask user for university properties
-    String schoolName = sc.next("Enter school name");
-    String state = sc.next("Enter state");
-    String location = sc.next("Enter location");
-    String control = sc.next("Enter control");
+	System.out.println("Enter school name");
+    String schoolName = sc.next();
+    System.out.println("Enter state");
+    String state = sc.next();
+    System.out.println("Enter location");
+    String location = sc.next();
+    System.out.println("Enter control");
+    String control = sc.next();
     System.out.println("Enter number of students");
     int students = sc.nextInt();
     System.out.println("Enter female percentage");
@@ -228,10 +244,12 @@ public class AdminInterface
     System.out.println("Enter quality scale");
     int qualScale = sc.nextInt();
     ArrayList<String> emphases = new ArrayList<String>();
-    String emphasis = sc.next("Enter an emphasis. Press enter without typing anything to finish.");
+    System.out.println("Enter an emphasis. Press enter without typing anything to finish.");
+    String emphasis = sc.next();
     while(!emphasis.equals("")){
       emphases.add(emphasis);
-      emphasis = sc.next("Enter an emphasis. Press enter without typing anything to finish.");
+      System.out.println("Enter an emphasis. Press enter without typing anything to finish.");
+      emphasis = sc.next();
     }
     // apply properties to a University object
     University u = new University(schoolName, state, location, control, students, femPerc, satV, satM, cost,
@@ -278,43 +296,53 @@ public class AdminInterface
    * @param usr the user to modify
    */
   public void editUser(Account user){
-    String prompt = sc.next("What would you like to edit:" + '\n' +
-                              "1: FirstName" + '\n' +
-                              "2: LastName" + '\n' +
-                              "3: Password" + '\n' +
-                              "4: Type" + '\n' +  
-                              "5: Status" + '\n' +  
-                              "q: Quit");
-    while(!prompt.equals("q")||!prompt.equals("Q")){
+	System.out.println("What would you like to edit:" + '\n' +
+						"1: FirstName" + '\n' +
+						"2: LastName" + '\n' +
+						"3: Password" + '\n' +
+						"4: Type" + '\n' +  
+						"5: Status" + '\n' +  
+            			"q: Quit");
+    String prompt = sc.next();
+    
+    while(!prompt.equals("q")&&!prompt.equals("Q")){
       switch (prompt){
         case "1":
-          user.setFirstName(sc.next("Enter the state"));
+          System.out.println("Enter the new name");
+          user.setFirstName(sc.next());
           break;
         case "2":
-          user.setLastName(sc.next("Enter the location"));
+          System.out.println("Enter the location");
+          user.setLastName(sc.next());
           break;
         case "3":
-          user.setPassword(sc.next("Enter the control"));
+          System.out.println("Enter the control");
+          user.setPassword(sc.next());
           break;
         case "4":
-          user.setType(sc.next("Enter the type").charAt(0));
+          System.out.println("Enter the type");
+          user.setType(sc.next().charAt(0));
           break;
         case "5":
-          user.setActive(sc.next("Enter the status").charAt(0));
+          System.out.println("Enter the status");
+          user.setActive(sc.next().charAt(0));
           break;
         default:
           System.out.println("not a valid input");
           break;
       }
-      prompt = sc.next("What would you like to edit:" + '\n' +
-                         "1: FirstName" + '\n' +
-                         "2: LastName" + '\n' +
-                         "3: Password" + '\n' +
-                         "4: Type" + '\n' +  
-                         "5: Status" + '\n' +  
-                         "q: Quit");
+      System.out.println("What would you like to edit:" + '\n' +
+    		  				"1: FirstName" + '\n' +
+    		  				"2: LastName" + '\n' +
+    		  				"3: Password" + '\n' +
+    		  				"4: Type" + '\n' +  
+    		  				"5: Status" + '\n' +  
+              				"q: Quit");
+      prompt = sc.next();
     }
     ad.saveAccountChanges(user);
+    System.out.println("Updates have been saved");
+    homepage();
   }
   
   /**
@@ -327,13 +355,18 @@ public class AdminInterface
     System.out.println("Are you sure you want to deactivate this user?" + '\n'
                          + "Type y for 'yes'" + '\n' + "Type n for 'no'");
     String prompt = sc.next();
-    if(prompt == "y"){
+    if(prompt.equals("y")){
       char active = usr.getActive();
       if(active == 'Y'){
+    	System.out.println(usr.getFirstName() + " has been deactivated");
         usr.setActive('N');
+      }
+      else {
+    	System.out.println(usr.getFirstName() + " is already deactivated");
       }
       ad.saveAccountChanges(usr);
     }
+    viewUsers();
   }
   
   /**
