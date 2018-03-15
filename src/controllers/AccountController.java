@@ -39,8 +39,6 @@ public class AccountController
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
 
-    
-
     System.out.println(matchedUser.getDetails());
 
     
@@ -48,6 +46,7 @@ public class AccountController
     {
     	
     	System.out.println("Error: Your account is deactivated and you cannot be logged in");
+    	return false;
     }
 
 
@@ -71,10 +70,6 @@ public class AccountController
       
       if(type == 'a') 
       {
-
- 
-     
-
         AdminInterface ai = new AdminInterface();
         System.out.println("Login successful");
         ai.homepage(); 
