@@ -8,7 +8,7 @@ import controllers.*;
 /**
  * The starting terminal in which the user will log into the system
  * @author Ian Bush
- * @version February 23, 2018
+ * @version March 15, 2018
  */
 public class AccountInterface
 {
@@ -52,9 +52,9 @@ public class AccountInterface
     @SuppressWarnings("resource")
 	Scanner sc = new Scanner(System.in);
     System.out.print("Please enter your username: ");
-    String u = sc.next();
+    String u = sc.nextLine();
     System.out.print("Now enter your password: ");
-    String p = sc.next();
+    String p = sc.nextLine();
     this.login(u,p);
     //sc.close();
   }
