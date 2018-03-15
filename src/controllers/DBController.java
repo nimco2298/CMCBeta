@@ -65,7 +65,7 @@ public class DBController
     ArrayList<University> list = this.getUniversities();
     for (University u: list)
     {
-      if (u.getName() == univName)
+      if (u.getName().equals(univName))
         return u;
     }
     return null;
