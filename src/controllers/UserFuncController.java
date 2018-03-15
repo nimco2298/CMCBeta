@@ -60,7 +60,7 @@ public class UserFuncController
    * @param firstName users first name
    * @param lastName users last name
    */
-  public void submitProfileChanges(String password, String firstName, String lastName)
+  public void submitProfileChanges( String firstName, String lastName,String password)
   {
     gu.setPassword(password);
     gu.setFirstName(firstName);
