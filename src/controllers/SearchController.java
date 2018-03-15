@@ -1,17 +1,13 @@
 /* 
  * File: SearchController.java
- * Description: This class get all the universities from DBController and
- * return one or more schools based user's input condition
- * 
- * @author Karld Bai
- * @version Feb 22 2018
  */
 package controllers;
 import entities.*;
 import java.util.*;
 
 /**
- * Performs all of the search methods for the project
+ * Description: This class gets all the universities from DBController and
+ * returns one or more schools based on the request from the user
  * 
  * @author Zhaochen Bai
  * @version March 15, 2018
@@ -19,7 +15,8 @@ import java.util.*;
 public class SearchController{
   
   private DBController db = new DBController();
-  /*
+  /**
+   * Description: generates a list of schools that match the search criteria
    * 
    * @param schoolName the name of the school
    * @param state the state in which the school is located
@@ -45,6 +42,11 @@ public class SearchController{
    * @param enrolledHigh the maximum percentage of enrolled applicants
    * @param acadScaleLow the minimum academic ranking (on a scale of 1-5, 1 being worst and 5 being best)
    * @param acadScaleHigh the maximum academic ranking (on a scale of 1-5, 1 being worst and 5 being best)
+   * @param socLifeScaleLow the minimum social life ranking (on a scale of 1-5, 1 being worst and 5 being best)
+   * @param socLifeScaleHigh the maximum social life ranking (on a scale of 1-5, 1 being worst and 5 being best)
+   * @param qualLifeScaleLow the minimum quality of life ranking (on a scale of 1-5, 1 being worst and 5 being best)
+   * @param qualLifeScaleHigh the maximum quality of life ranking (on a scale of 1-5, 1 being worst and 5 being best)
+   * @param emphases the academic emphases of the universities
    * @return a list of universities that match the search criteria
    * 
    */
@@ -106,9 +108,11 @@ public class SearchController{
   }
   
  
-  /*
-   * @param a University object that the user selected
-   * @return a list of searching result
+  /**
+   * Finds the five universities closest to the selected university
+   * 
+   * @param a University that the user selected
+   * @return a list of five universities that are the closest to the selected university
    */
   public ArrayList<University> recSearch(University cu){
     

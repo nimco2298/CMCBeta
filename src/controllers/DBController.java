@@ -174,7 +174,7 @@ public class DBController
    */
   public void updateAccount(Account acc)
   {
-    this.ud.user_editUser(acc.getFirstName(), acc.getLastName(), acc.getUsername(), acc.getPassword(), acc.getType(), acc.getActive());
+    this.ud.user_editUser(acc.getUsername(), acc.getFirstName(), acc.getLastName(), acc.getPassword(), acc.getType(), acc.getActive());
   }
   
   /**
