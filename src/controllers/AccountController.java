@@ -11,7 +11,7 @@ import interfaces.*;
  * 
  *
  * @author  Nimco Hussein
- * @version February 26, 2018
+ * @version March 15 2018
  */
 public class AccountController  
 {
@@ -23,7 +23,7 @@ public class AccountController
   {
     
   } 
-  /**Log in method takes username and pssword and return true or false, if the information belongs to an account
+  /**Log in method takes username and password and return true or false, if the information belongs to an account
     * If the credentials that are added are verified, then based on the type a GeneralUser or Admin object 
     * will be created
     * 
@@ -49,7 +49,6 @@ public class AccountController
     	return false;
     }
 
-
     //check if the matchedUser is a dummy user, if it is do not CONTINUE
     if(matchedUser.getUsername().equals("DummyUser"))
     { 
@@ -64,9 +63,9 @@ public class AccountController
       return false;
     }
     else { 
-      //System.out.println("lalalalalalla");
+      
       this.account = matchedUser;  
-      char type = account.getType(); // get the type assocated with this acount 
+      char type = account.getType(); // get the type associated with this account 
       
       if(type == 'a') 
       {
