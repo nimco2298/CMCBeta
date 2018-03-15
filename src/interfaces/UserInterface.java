@@ -34,7 +34,7 @@ public class UserInterface
     String str= scan.next();
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
-      viewSearchedSchools(db.getUniversities());
+      //viewSearchedSchools(db.getUniversities());
       
       String schoolName=strIn("School Name: ");
       String state= strIn("State: ");
@@ -99,10 +99,15 @@ public class UserInterface
         String sName= scan.next();
         removeSavedSchool(db.getUniversity(sName));
       }
-      else{
+      else if(!user.getSavedSchools().isEmpty()){
+    	
     	System.out.print("please enter the name of the school you want to view details: ");
         String sName= scan.next();
-        viewSchoolDetailsAndTop5(db.getUniversity(sName));
+        while(user.getSavedSchools().contains(sName)) {
+        	System.out.println("no match, plz enter again");
+        	sName= scan.next();
+        }
+        	viewSchoolDetailsAndTop5(db.getUniversity(sName));
       }
     }
     else{
@@ -122,6 +127,7 @@ public class UserInterface
    */
   public void viewSchoolDetailsAndTop5(University u)
   {
+	  
     viewSavedSchoolDetails(u);
     viewSearchedSchools(sc.recSearch(u));
     String s2 = scan.next("Do you want to save it? y/n:");
@@ -173,22 +179,29 @@ public class UserInterface
                             "3: Password" + '\n' +                            
                             "q: Quit: ");
     String prompt = scan.next();
-    while(!prompt.equals("q")||!prompt.equals("Q")){
+    while(!prompt.equals("q")){
       switch (prompt){
         case "1":
           System.out.print("Enter the new first name: ");
-          user.setFirstName(scan.next());
+          String change=scan.next();
+          ufc.submitProfileChanges(change,user.getLastName(),user.getPassword());
+          user.setFirstName(change);
           break;
         case "2":
           System.out.print("Enter the new last name: ");
-          user.setLastName(scan.next());
+          change=scan.next();
+          ufc.submitProfileChanges(user.getFirstName(),change,user.getPassword());
+          user.setLastName(change);
           break;
         case "3":
           System.out.print("Enter the new password: ");
-          user.setPassword(scan.next());
+          change=scan.next();
+          ufc.submitProfileChanges(user.getFirstName(),user.getLastName(),change);
+          user.setPassword(change);
           break;
+          
         default:
-          System.out.println("not a valid input");
+          System.out.println("Invalid input");
           break;
       }
       System.out.print("What would you like to edit:" + '\n' +
@@ -198,6 +211,7 @@ public class UserInterface
                        "q: Quit: ");
       prompt = scan.next();
     }
+    homePage();
   }
   /**
    * redirect the user to the homepage and save the changes
