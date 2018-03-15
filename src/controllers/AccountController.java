@@ -38,41 +38,53 @@ public class AccountController
     // find a user in the database   
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
+
+    
+
     System.out.println(matchedUser.getDetails());
-    System.out.println("Test");
+
     
     if(matchedUser.getActive() == 'N')
     {
     	
     	System.out.println("Error: Your account is deactivated and you cannot be logged in");
     }
+
+
     //check if the matchedUser is a dummy user, if it is do not CONTINUE
-    if(matchedUser.getUsername() == "DummyUser")
+    if(matchedUser.getUsername().equals("DummyUser"))
     { 
       //The user name and password associated with this account is not registered 
       System.out.println("Error: The username is not registered ");
       return false;
     }
-    else if(matchedUser.getPassword() != password)
+    else if(!matchedUser.getPassword().equals(password))
     {
       //print the username and password do not match an an associated account
       System.out.println("Error: The username and password do not match");
       return false;
     }
     else { 
-      
+      //System.out.println("lalalalalalla");
       this.account = matchedUser;  
       char type = account.getType(); // get the type assocated with this acount 
       
       if(type == 'a') 
       {
+
  
-        new AdminInterface().homepage(); 
+     
+
+        AdminInterface ai = new AdminInterface();
+        System.out.println("Login successful");
+        ai.homepage(); 
         return true;
       }
       else if(type == 'u')
       {
-        new UserInterface((GeneralUser)matchedUser).homePage();  
+        UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
+        System.out.println("Login successful");
+        ui.homePage();
         return true;
       }
       else

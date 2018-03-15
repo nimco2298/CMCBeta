@@ -340,9 +340,10 @@ public class AdminInterface
    * Brings the admin to their homepage
    */
   public void homepage() {
-    String prompt = sc.next("Welcome to the Admin Homepage:" + '\n' + 
-                            +'\t'+ "Type 1 to Manage Universities" + '\n' + 
-                            +'\t'+ "Type 2 to Manage Users");
+	System.out.println("Welcome to the Admin Homepage:" + '\n' + 
+						"     	Type 1 to Manage Universities" + '\n' + 
+            			"	Type 2 to Manage Users");
+    String prompt = sc.next();
     if(prompt.equals("1")){ // Manage univserities
       viewUniversities();
     }
