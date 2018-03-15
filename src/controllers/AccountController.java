@@ -64,12 +64,14 @@ public class AccountController
       if(type == 'a') 
       {
         AdminInterface ai = new AdminInterface();
+        System.out.println("Login successful");
         ai.homepage(); 
         return true;
       }
       else if(type == 'u')
       {
         UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
+        System.out.println("Login successful");
         ui.homePage();
         return true;
       }
