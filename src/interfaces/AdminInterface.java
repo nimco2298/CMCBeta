@@ -308,19 +308,19 @@ public class AdminInterface
     while(!prompt.equals("q")&&!prompt.equals("Q")){
       switch (prompt){
         case "1":
-          System.out.println("Enter the new name");
+          System.out.println("Enter the new first name");
           user.setFirstName(sc.next());
           break;
         case "2":
-          System.out.println("Enter the location");
+          System.out.println("Enter the new last name");
           user.setLastName(sc.next());
           break;
         case "3":
-          System.out.println("Enter the control");
+          System.out.println("Enter the new password");
           user.setPassword(sc.next());
           break;
         case "4":
-          System.out.println("Enter the type");
+          System.out.println("Enter the type" + '\n' + "a for admin" + '\n' + "u for user");
           user.setType(sc.next().charAt(0));
           break;
         case "5":
