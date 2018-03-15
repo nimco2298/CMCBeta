@@ -75,7 +75,7 @@ private Admin admin;
   
   
   /**
-   * View a list of universities; gets a list of universities from the databse
+   * View a list of universities; gets a list of universities from the database
    */
   public void viewUniversities(){
     DBController dbc = new DBController();
@@ -125,9 +125,11 @@ private Admin admin;
   /**
    * Finds a university based on name
    * 
-   * @param univ the university to find
+   * @param univ the name of the university
+   * @return the 
    */
-  public University getUniversity(String univ){
+  public University getUniversity(String univ) throws NullPointerException
+  {
     DBController dbc = new DBController();
     return dbc.getUniversity(univ);
   }
@@ -135,9 +137,11 @@ private Admin admin;
   /**
    * Finds an account based on username
    * 
-   * @param account the account to find
+   * @param account the name of the requested account
+   * @return the user
    */
-  public Account getAccount(String account){
+  public Account getAccount(String account) throws NullPointerException
+  {
     DBController dbc = new DBController();
     return dbc.getUser(account);
   }
