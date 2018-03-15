@@ -20,14 +20,32 @@ public class SearchController{
   
   private DBController db = new DBController();
   /*
+   * 
    * @param schoolName the name of the school
-   * @param state the state the school is at
-   * @param location the location of the school
+   * @param state the state in which the school is located
+   * @param location the location of the school (urban, suburban, small city, etc.)
    * @param control the control
-   * @param studentsLow the low value of the number of students
-   * @param studentHigh the high value of the number of students
-   * @param 
-   * @return a list of searching result
+   * @param studentsLow the minimum number of students
+   * @param studentHigh the maximum number of students
+   * @param femPercLow the minimum percentage of female students
+   * @param femPercHigh the maximum percentage of female students
+   * @param satVLow the minimum average on SAT verbal score of admitted students
+   * @param satVHigh the maximum average on SAT verbal score of admitted students
+   * @param satMLow the minimum average on SAT math score of admitted students
+   * @param satMHigh the maximum average on SAT math score of admitted students
+   * @param costLow the minimum annual cost of attending
+   * @param costHigh the maximum annual cost of attending
+   * @param finAidPercLow the minimum percentage of students receiving financial aid
+   * @param finAidPercHigh the maximum percentage of students receiving financial aid
+   * @param applicantsLow the minimum number of applicants
+   * @param applicantsHigh the maximum number of applicants
+   * @param admittedLow the minimum percentage of admitted applicants
+   * @param admittedHigh the maximum percentage of admitted applicants
+   * @param enrolledLow the minimum percentage of enrolled applicants
+   * @param enrolledHigh the maximum percentage of enrolled applicants
+   * @param acadScaleLow the minimum academic ranking (on a scale of 1-5, 1 being worst and 5 being best)
+   * @param acadScaleHigh the maximum academic ranking (on a scale of 1-5, 1 being worst and 5 being best)
+   * @return a list of universities that match the search criteria
    * 
    */
   public ArrayList<University> search(String schoolName, String state, String location, String control,int studentsLow,
@@ -87,8 +105,7 @@ public class SearchController{
     return rlist;
   }
   
-  
-  
+ 
   /*
    * @param a University object that the user selected
    * @return a list of searching result
@@ -152,18 +169,20 @@ public class SearchController{
       }
       diff[i]=max-min;
     }
-    for(University u: ulist){
+    for(University u: ulist)
+    {
       int j=0,index;
       index=ulist.indexOf(cu);
-     if(!u.getName().equals(cu.getName()))
+      if(!u.getName().equals(cu.getName()))
        dist++;
-     if(!u.getState().equals(cu.getState()))
+      if(!u.getState().equals(cu.getState()))
        dist++;
-     if(!u.getLocation().equals(cu.getLocation()))
+      if(!u.getLocation().equals(cu.getLocation()))
        dist++;
-     if(!u.getControl().equals(cu.getControl()))
+      if(!u.getControl().equals(cu.getControl()))
        dist++;
-     for(int i=0; i<12; i++){
+      for(int i=0; i<12; i++)
+      {
        dist+=(data[i][index]-data[i][j])/diff[i];
      }
      map.put(dist, u);
@@ -176,9 +195,6 @@ public class SearchController{
     rlist.add(map.get(distList[2]));
     rlist.add(map.get(distList[3]));
     rlist.add(map.get(distList[4]));
-    
-    
-    
     
     return rlist;
   }
