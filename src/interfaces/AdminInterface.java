@@ -35,10 +35,10 @@ public class AdminInterface
                          +'\t'+ "e: Edit Universities" + '\n' 
                          +'\t'+ "q: Quit (Return to Homepage)");
     String cmd = sc.next();
-    if(cmd == "a"){ // ADD UNIVERSITIES
+    if(cmd.equals("a")){ // ADD UNIVERSITIES
       addUniversity();
     }
-    else if(cmd == "e"){ // EDIT UNIVERSITIES
+    else if(cmd.equals("e")){ // EDIT UNIVERSITIES
       System.out.println("Enter a University name");
       editUniversity(sc.next());
     }
@@ -108,7 +108,7 @@ public class AdminInterface
             				"q: Quit");
     String prompt = sc.next();
     
-    while(!prompt.equals("q")||!prompt.equals("Q")){
+    while(!prompt.equals("q")&&!prompt.equals("Q")){
       switch (prompt){
         case "1":
           System.out.println("Enter the state");
@@ -203,7 +203,9 @@ public class AdminInterface
               				"q: Quit");
       prompt = sc.next();
     }
+    System.out.println("Saving updates to " + univ);
     ad.saveUnivChanges(u);
+    viewUniversities();
   }
   
   /**
@@ -289,6 +291,7 @@ public class AdminInterface
     information.add(sc.next());
     
     ad.addAccount(information);
+    homepage();
   }
   
   /**
@@ -320,12 +323,24 @@ public class AdminInterface
           user.setPassword(sc.next());
           break;
         case "4":
-          System.out.println("Enter the type" + '\n' + "a for admin" + '\n' + "u for user");
-          user.setType(sc.next().charAt(0));
+          System.out.println("Enter the type:" + '\n' + "a for admin" + '\n' + "u for user");
+          char type = sc.next().charAt(0);
+          if(type == 'a' || type == 'u') {
+          	user.setType(type);
+            }
+          else {
+        	System.out.println("Invalid input");
+          }
           break;
         case "5":
-          System.out.println("Enter the status");
-          user.setActive(sc.next().charAt(0));
+          System.out.println("Enter the status:"+ '\n' + "Y for active" + '\n' + "N for deactive");
+          char status = sc.next().charAt(0);
+          if(status == 'Y' || status == 'N') {
+        	user.setActive(status);
+          }
+          else {
+          	System.out.println("Invalid input");
+          }
           break;
         default:
           System.out.println("not a valid input");
@@ -382,13 +397,15 @@ public class AdminInterface
 						"     	Type 1 to Manage Universities" + '\n' + 
             			"	Type 2 to Manage Users");
     String prompt = sc.next();
-    if(prompt.equals("1")){ // Manage univserities
+    if(prompt.equals("1")){ // Manage universities
       viewUniversities();
     }
     else if(prompt.equals("2")){ // Manage users
       viewUsers();
     }
     else{ // invalid input
+      System.out.println("Invalid Input");
+      homepage();
     }
   }
 }
