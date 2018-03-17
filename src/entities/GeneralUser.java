@@ -45,5 +45,15 @@ public class GeneralUser extends Account
    return this.savedUniversities;
       
   } 
+  public String getDetails() {
+	  
+	  return "***ACCOUNT INFORMATION****** \n"
+			  +"First name: " + this.getFirstName() + "\n" 
+			   + "Last Name:  " + this.getLastName() + "\n" + 
+			   "Account Status: " + this.getActive() + "\n" +
+			   "Password: " + this.getPassword() + "\n" +
+			   "Saved Schools List: " + this.savedUniversities + "\n"
+			   +" **********************************" ;
+  }
    
 }

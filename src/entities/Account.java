@@ -2,7 +2,6 @@
  * File: Account.java
  */
 package entities;
-import java.util.*;  //Java's ArrayList<ET>
 
 
 /**
@@ -30,11 +29,7 @@ public abstract class Account {
   /** The type of an Account */
   private char type;
   
-   /** The string representation of a list of saved universities */
-  private ArrayList<String> savedUniversities;
-  
- 
-  /**
+   /**
    * Return the username of an Account
    * 
    * @return String  username
@@ -162,14 +157,5 @@ public abstract class Account {
    * 
    * @return  ArrayList<String> list of account information 
    */
-  public String getDetails()
-  {
-    return "***ACCOUNT INFORMATION****** \n"
-  +"First name: " + this.firstName + "\n" 
-   + "Last Name:  " + this.lastName + "\n" + 
-   "Account Status: " + this.active + "\n" +
-   "Password: " + this.password + "\n" +
-   "Saved Schools List: " + this.savedUniversities + "\n"
-   +" **********************************" ;
-  }
+  public abstract String getDetails();
 }

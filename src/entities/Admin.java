@@ -24,4 +24,12 @@ public class Admin extends Account
     this.setLastName(lastName);
     this.setType('a');
   }
+    public String getDetails() {
+  	  
+  	  return "***ACCOUNT INFORMATION****** \n"
+  			  +"First name: " + this.getFirstName() + "\n" 
+  			   + "Last Name:  " + this.getLastName() + "\n" + 
+  			   "Account Status: " + this.getActive() + "\n" +
+  			   "Password: " + this.getPassword() + "\n" ;
+    }
 }

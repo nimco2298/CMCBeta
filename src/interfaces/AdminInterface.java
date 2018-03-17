@@ -9,7 +9,7 @@ import controllers.*;
 /**
  * All the functionalities which the admin should be able to do
  * @author Ian Bush, Sara Laufers
- * @version February 22, 2018
+ * @version March 17, 2018
  */
 public class AdminInterface {
   //==================================INSTANCE VARIABLES==========================

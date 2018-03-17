@@ -39,7 +39,7 @@ public class AccountController
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
 
-    System.out.println(matchedUser.getDetails());
+  //  System.out.println(matchedUser.getDetails());
 
     
     if(matchedUser.getActive() == 'N')
@@ -65,6 +65,7 @@ public class AccountController
     else { 
       
       this.account = matchedUser;  
+      System.out.println(matchedUser.getDetails());
       char type = account.getType(); // get the type associated with this account 
       
       if(type == 'a') 
