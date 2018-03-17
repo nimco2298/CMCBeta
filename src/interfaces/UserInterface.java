@@ -111,7 +111,7 @@ public class UserInterface
         removeSavedSchool(db.getUniversity(sName));
       }
       //!user.getSavedSchools().isEmpty()
-      else if(true){
+      else if(!user.getSavedSchools().isEmpty()){
     	
     	System.out.print("please enter the name of the school you want to view details: ");
         String sName= scan.next();
