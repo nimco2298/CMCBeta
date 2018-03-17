@@ -31,11 +31,10 @@ public class DBController
     String[][] univEmph = ud.university_getNamesWithEmphases();
     String[][] univ = ud.university_getUniversities();
     University u;
-    @SuppressWarnings("unused")
-	int start = 0;
     for(int i = 0; i < univ.length; i++)
     {
-      u = new University(univ[i][0], univ[i][1], univ[i][2], univ[i][3], new Integer(univ[i][4]).intValue(), 
+    	String uName = univ[1][0];
+      u = new University(uName, univ[i][1], univ[i][2], univ[i][3], new Integer(univ[i][4]).intValue(), 
                          new Integer(univ[i][5]).intValue(), new Integer(univ[i][6]).intValue(), new Integer(univ[i][7]).intValue(), 
                          new Integer(univ[i][8]).intValue(), new Integer(univ[i][9]).intValue(), new Integer(univ[i][10]).intValue(), 
                          new Integer(univ[i][11]).intValue(), new Integer(univ[i][12]).intValue(), new Integer(univ[i][13]).intValue(),
@@ -43,10 +42,9 @@ public class DBController
       
       for (int x = 0; x < univEmph.length; x++)
       {
-        if (univ[i][0] == univEmph[x][0])
+        if (uName == univEmph[x][0])
         {
             u.addEmphases(univEmph[x][1]);
-            start++;
         }
       }
       univList.add(u);
