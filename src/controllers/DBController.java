@@ -33,7 +33,7 @@ public class DBController
     University u;
     for(int i = 0; i < univ.length; i++)
     {
-    	String uName = univ[1][0];
+    	String uName = univ[i][0];
       u = new University(uName, univ[i][1], univ[i][2], univ[i][3], new Integer(univ[i][4]).intValue(), 
                          new Integer(univ[i][5]).intValue(), new Integer(univ[i][6]).intValue(), new Integer(univ[i][7]).intValue(), 
                          new Integer(univ[i][8]).intValue(), new Integer(univ[i][9]).intValue(), new Integer(univ[i][10]).intValue(), 
