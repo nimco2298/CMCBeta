@@ -102,6 +102,7 @@ public class UserInterface
     }
     else if(str.equals("m")){
       viewSavedSchools();
+     
       System.out.print("r for remove and v for view: ");
       String s3 = scan.next();
       if(s3.equals("r")){
@@ -109,12 +110,13 @@ public class UserInterface
         String sName= scan.next();
         removeSavedSchool(db.getUniversity(sName));
       }
-      else if(!user.getSavedSchools().isEmpty()){
+      //!user.getSavedSchools().isEmpty()
+      else if(true){
     	
     	System.out.print("please enter the name of the school you want to view details: ");
         String sName= scan.next();
-        while(user.getSavedSchools().contains(sName)) {
-        	System.out.println("no match, plz enter again");
+        while(!user.getSavedSchools().contains(sName)) {
+        	System.out.println("no match, please enter again");
         	sName= scan.next();
         }
         	viewSchoolDetailsAndTop5(db.getUniversity(sName));

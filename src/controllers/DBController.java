@@ -81,6 +81,7 @@ public class DBController
     String[][] users = ud.user_getUsers();
     String[][] userSchools = ud.user_getUsernamesWithSavedSchools();
     String[] userInfo;
+    
     for  (int i =0; i <users.length; i++)
     {
       userInfo = users[i];
@@ -94,12 +95,11 @@ public class DBController
         ArrayList<String> userUniv = new ArrayList<String>();
         for (int j = 0; j < userSchools.length; j++)
         {
-          if(userSchools[j][0] == userInfo[0])
+          if(userSchools[j][0].equals(userInfo[2]))
           {
-            for (int k = 1; k < userSchools[j].length; k++)
-            {
-              userUniv.add(userSchools[j][k]);
-            }
+        	 
+              userUniv.add(userSchools[j][1]);
+           
           }
         }
         accList.add(new GeneralUser(userInfo[0], userInfo[1], userInfo[5].charAt(0), userInfo[2], userInfo[3], userUniv));
@@ -217,4 +217,6 @@ public class DBController
   {
     ud.user_deleteUser(acc.getUsername());
   }
+  
+  
 }

@@ -162,14 +162,5 @@ public abstract class Account {
    * 
    * @return  ArrayList<String> list of account information 
    */
-  public String getDetails()
-  {
-    return "***ACCOUNT INFORMATION****** \n"
-  +"First name: " + this.firstName + "\n" 
-   + "Last Name:  " + this.lastName + "\n" + 
-   "Account Status: " + this.active + "\n" +
-   "Password: " + this.password + "\n" +
-   "Saved Schools List: " + this.savedUniversities + "\n"
-   +" **********************************" ;
-  }
+  public abstract String getDetails();
 }
