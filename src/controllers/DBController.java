@@ -33,20 +33,21 @@ public class DBController
     University u;
     for(int i = 0; i < univ.length; i++)
     {
-    	String uName = univ[i][0];
-      u = new University(uName, univ[i][1], univ[i][2], univ[i][3], new Integer(univ[i][4]).intValue(), 
-                         new Integer(univ[i][5]).intValue(), new Integer(univ[i][6]).intValue(), new Integer(univ[i][7]).intValue(), 
-                         new Integer(univ[i][8]).intValue(), new Integer(univ[i][9]).intValue(), new Integer(univ[i][10]).intValue(), 
-                         new Integer(univ[i][11]).intValue(), new Integer(univ[i][12]).intValue(), new Integer(univ[i][13]).intValue(),
-                         new Integer(univ[i][14]).intValue(), new Integer(univ[i][15]).intValue(), new ArrayList<String>());
-      
+    	ArrayList<String> uEmph = new ArrayList<String>();
+      String uName = univ[i][0];
       for (int x = 0; x < univEmph.length; x++)
       {
         if (uName == univEmph[x][0])
         {
-            u.addEmphases(univEmph[x][1]);
+            uEmph.add(univEmph[x][1]);
         }
       }
+      u = new University(uName, univ[i][1], univ[i][2], univ[i][3], new Integer(univ[i][4]).intValue(), 
+                         new Integer(univ[i][5]).intValue(), new Integer(univ[i][6]).intValue(), new Integer(univ[i][7]).intValue(), 
+                         new Integer(univ[i][8]).intValue(), new Integer(univ[i][9]).intValue(), new Integer(univ[i][10]).intValue(), 
+                         new Integer(univ[i][11]).intValue(), new Integer(univ[i][12]).intValue(), new Integer(univ[i][13]).intValue(),
+                         new Integer(univ[i][14]).intValue(), new Integer(univ[i][15]).intValue(), uEmph);
+     
       univList.add(u);
       
     }
