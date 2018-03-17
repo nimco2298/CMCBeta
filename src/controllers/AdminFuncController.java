@@ -16,7 +16,7 @@ public class AdminFuncController{
   // ================================= INSTANCE VARIABLES =================================
   /** An Admin class named admin */
   @SuppressWarnings("unused")
-private Admin admin;
+  private Admin admin;
   
   // ================================= CONSTRUCTORS =================================
   /**
@@ -53,8 +53,8 @@ private Admin admin;
       dbc.addAccount(ad);
     }
     else if(type == 'u'){
-      // new GeneralUser( firstName, lastName, active, type, password)
-      GeneralUser gu = new GeneralUser( information.get(0),  information.get(1), information.get(5).charAt(0), information.get(2), information.get(3), new ArrayList<String>());
+      // new GeneralUser( firstName, lastName, active, username, password, arrayList)
+      GeneralUser gu = new GeneralUser( information.get(3),  information.get(4), information.get(2).charAt(0), information.get(0), information.get(1), new ArrayList<String>());
       dbc.addAccount(gu);
     }
   }
@@ -65,11 +65,12 @@ private Admin admin;
   public void viewUsers(){
     DBController dbc = new DBController();
     ArrayList<Account> accountList = dbc.getAccounts();
-    System.out.println("First" + '\t'+'\t' + "Last" + '\t'+'\t' + "Username" + '\t'+'\t' + "Password" + '\t'+'\t' + "Type" + '\t'+'\t' + "Status" +'\n'+ 
-                       "========================================================================================================================");
+    System.out.println("========================================================================================================================" +'\n'+
+    					"First" + '\t'+'\t' + "Last" + '\t'+'\t' + "Username" + '\t'+'\t' + "Password" + '\t'+'\t' + "Type" + '\t'+'\t' + "Status" +'\n'+ 
+                       	"========================================================================================================================");
     for(Account user: accountList){
-      System.out.println(user.getFirstName()+'\t'+'\t'+user.getLastName()+'\t'+'\t'+user.getUsername()+'\t'+'\t'+
-                         user.getPassword()+'\t'+'\t'+user.getType()+'\t'+'\t'+user.getActive());
+      System.out.println(user.getFirstName()+'\t'+'\t'+user.getLastName()+'\t'+'\t'+user.getUsername()+'\t'+'\t'+'\t'+
+                         user.getPassword()+'\t'+'\t'+'\t'+user.getType()+'\t'+'\t'+user.getActive());
     }
   }
   
@@ -77,30 +78,70 @@ private Admin admin;
   /**
    * View a list of universities; gets a list of universities from the database
    */
+//  public void viewUniversities(){
+//    DBController dbc = new DBController();
+//    ArrayList<University> list = dbc.getUniversities();
+//    for(University u: list){
+//      System.out.println("School: " + u.getName() +'\n'+
+//                         "State: " + u.getState() +'\n'+
+//                         "Location: " + u.getLocation() +'\n'+
+//                         "Control: " + u.getControl() +'\n'+
+//                         "# of Students: " + u.getStudents() +'\n'+
+//                         "% Females: " + u.getFemPerc() +'\n'+
+//                         "SAT Verbal: " + u.getSatV() +'\n'+
+//                         "SAT Math: " + u.getSatM() +'\n'+
+//                         "Expenses: " + u.getCost() +'\n'+
+//                         "% with Financial Aid: " + u.getFinAidPerc() +'\n'+
+//                         "# of Applicants: " + u.getApplicants() +'\n'+
+//                         "% Admitted: " + u.getAdmitted() +'\n'+
+//                         "% Enrolled: " + u.getEnrolled() +'\n'+
+//                         "Academic Scale (1-5): " + u.getAcadScale() +'\n'+
+//                         "Social Scale (1-5): " + u.getSocScale() +'\n'+
+//                         "Quality of Life Scale (1-5): " + u.getQualScale() +'\n'+
+//                         "======================================================");
+//    }
+//  }
+  
+  /**
+   * View a list of university names; gets a list of universities from the database
+   */
   public void viewUniversities(){
-    DBController dbc = new DBController();
+	DBController dbc = new DBController();
     ArrayList<University> list = dbc.getUniversities();
+    System.out.println("=======================================" + '\n' +
+    				   "             SchoolNames" + '\n' + 
+    				   "=======================================");
     for(University u: list){
-      System.out.println("School: " + u.getName() +'\n'+
-                         "State: " + u.getState() +'\n'+
-                         "Location: " + u.getLocation() +'\n'+
-                         "Control: " + u.getControl() +'\n'+
-                         "# of Students: " + u.getStudents() +'\n'+
-                         "% Females: " + u.getFemPerc() +'\n'+
-                         "SAT Verbal: " + u.getSatV() +'\n'+
-                         "SAT Math: " + u.getSatM() +'\n'+
-                         "Expenses: " + u.getCost() +'\n'+
-                         "% with Financial Aid: " + u.getFinAidPerc() +'\n'+
-                         "# of Applicants: " + u.getApplicants() +'\n'+
-                         "% Admitted: " + u.getAdmitted() +'\n'+
-                         "% Enrolled: " + u.getEnrolled() +'\n'+
-                         "Academic Scale (1-5): " + u.getAcadScale() +'\n'+
-                         "Social Scale (1-5): " + u.getSocScale() +'\n'+
-                         "Quality of Life Scale (1-5): " + u.getQualScale() +'\n'+
-                         "======================================================");
+      System.out.println(u.getName());
     }
+    
   }
   
+  /**
+   * View the university's details
+   */
+  public void viewUniversityDetails(String univName){
+	DBController dbc = new DBController();
+    University u = dbc.getUniversity(univName);
+    System.out.println("=======================================" 			+'\n'+'\t'+
+    				    univName + " Details"							 	+'\n'+ 
+    				   "=======================================" 			+'\n'+
+    				   "State: " + u.getState() 							+'\n'+
+    				   "Location: " + u.getLocation() 						+'\n'+
+    				   "Control: " + u.getControl() 						+'\n'+
+    				   "# of Students: " + u.getStudents() 					+'\n'+
+    				   "% Females: " + u.getFemPerc() 						+'\n'+
+    				   "SAT Verbal: " + u.getSatV() 						+'\n'+
+    				   "SAT Math: " + u.getSatM() 							+'\n'+
+    				   "Expenses: " + u.getCost() 							+'\n'+
+    				   "% with Financial Aid: " + u.getFinAidPerc() 		+'\n'+
+    				   "# of Applicants: " + u.getApplicants() 				+'\n'+
+    				   "% Admitted: " + u.getAdmitted() 					+'\n'+
+    				   "% Enrolled: " + u.getEnrolled() 					+'\n'+
+    				   "Academic Scale (1-5): " + u.getAcadScale() 			+'\n'+
+    				   "Social Scale (1-5): " + u.getSocScale() 			+'\n'+
+    				   "Quality of Life Scale (1-5): " + u.getQualScale() 	);
+  }
   
   /**
    * Accesses the Database and saves changes made to an account
@@ -137,7 +178,7 @@ private Admin admin;
   /**
    * Finds an account based on username
    * 
-   * @param account the name of the requested account
+   * @param account the username of the requested account
    * @return the user
    */
   public Account getAccount(String account) throws NullPointerException
