@@ -481,7 +481,7 @@ public class University{
     System.out.println("Emphasis: ");
     for (String emph: this.emphases)
     {
-      System.out.print(emph);
+      System.out.println(emph);
     }
   }
 }

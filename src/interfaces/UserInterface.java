@@ -119,7 +119,7 @@ public class UserInterface
         	System.out.println("no match, please enter again");
         	sName= scan.next();
         }
-        	viewSchoolDetailsAndTop5(db.getUniversity(sName));
+        viewSavedSchoolDetails(db.getUniversity(sName));
       }
       else {
     	  homePage();

@@ -37,7 +37,7 @@ public class DBController
       String uName = univ[i][0];
       for (int x = 0; x < univEmph.length; x++)
       {
-        if (uName == univEmph[x][0])
+        if (uName.equals(univEmph[x][0]))
         {
             uEmph.add(univEmph[x][1]);
         }
