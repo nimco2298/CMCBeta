@@ -30,6 +30,11 @@ public class AccountInterface
   public void login(String usr, String password)
   {
     ac.login(usr, password);
+    
+   if(ac.login(usr, password) == false)
+   {
+	   this.start();
+   }
   }
   
   /**
