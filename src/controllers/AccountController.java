@@ -106,7 +106,6 @@ public class AccountController
   {
    
     this.loginStatus = false;
-   
     
   } 
   
