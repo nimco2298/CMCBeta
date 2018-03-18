@@ -217,5 +217,18 @@ public class DBController
     ud.user_deleteUser(acc.getUsername());
   }
   
+  /**
+   * Adds an emphasis to the corresponding university in the database
+   * @param univ the university to add the emphasis
+   * @param emphasis the emphasis to add
+   */
+  public void addEmphasis(University univ, String emphasis) 
+  {
+	ud.university_addUniversityEmphasis(univ.getName(), emphasis);
+  }
   
+  public void deleteEmphasis(University univ, String emphasis) 
+  {
+    ud.university_removeUniversityEmphasis(univ.getName(), emphasis);
+  }
 }

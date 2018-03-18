@@ -72,7 +72,7 @@ public class AdminInterface {
       }
     }
     
-    else if(cmd.equals("d")||cmd.equals("D")) {
+    else if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY
       System.out.print("=======================================" +'\n'+ "Enter University Name: ");
       String univName = sc.next();
       if(ad.getUniversity(univName) instanceof University) {
@@ -160,7 +160,7 @@ public class AdminInterface {
 			  				"y: yes" 													+'\n'+'\t'+
 			  				"n: no"														);
 	  String prompt = sc.next();
-	  if(prompt.equals("y") || prompt.equals("y")) {
+	  if(prompt.equals("y") || prompt.equals("Y")) {
 		  System.out.println("*** Deleted " + univ + " ***");
 		  ad.delete(u);
 	  }
@@ -268,12 +268,12 @@ public class AdminInterface {
 	        	u.setQualScale(sc.nextInt());
 	        	break;
 	        case "16":
-	        	System.out.print("Enter an emphasis to add: ");
-	        	u.addEmphases(sc.next());
+	        	System.out.print("Enter an emphasis to add (automatically saved once entered): ");
+	        	ad.addAnEmphasis(u, sc.next());
 	        	break;
 	        case "17":
-	        	System.out.print("Enter an emphasis to remove: ");
-	        	u.removeEmphases(sc.next());
+	        	System.out.print("Enter an emphasis to remove (automatically saved once entered): ");
+	        	ad.deleteAnEmphasis(u, sc.next());
 	        	break;
 	        case "s":
 	        	ad.saveUnivChanges(u);
@@ -299,6 +299,12 @@ public class AdminInterface {
     // ask user for university properties
 	System.out.print("Enter school name: ");
     String schoolName = sc.next();
+    
+    if(ad.getUniversity(schoolName) instanceof University) { // if the university already exists
+    	System.out.println("*** This university name already exists, please choose a different one ***");
+    	addUniversity();
+    }
+    
     System.out.print("Enter state: ");
     String state = sc.next();
     System.out.print("Enter location: ");
@@ -330,16 +336,19 @@ public class AdminInterface {
     System.out.print("Enter quality scale: ");
     int qualScale = sc.nextInt();
     ArrayList<String> emphases = new ArrayList<String>();
-    System.out.print("Enter an emphasis (Press q to finish): ");
+    System.out.print("Enter an emphasis/use underscore for spacing (Enter Press q to finish): ");
     emphasis = sc.next();
     while(!emphasis.equals("q")){
       emphases.add(emphasis);
-      System.out.print("Enter an emphasis (Press q to finish): ");
+      // When entering an emphasis, you can only input one word
+      // input two words using _ (underscore) for spacing
+      System.out.print("Enter an emphasis/use underscore for spacing (Enter Press q to finish): ");
       emphasis = sc.next();
     }
     University u = new University(schoolName, state, location, control, students, femPerc, satV, satM, cost,
                                   finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
     ad.addUniversity(u);
+    ad.addEmphases(u);
     System.out.println("*** Saved university " + schoolName + " to list ***");
     viewUniversities();
   }
