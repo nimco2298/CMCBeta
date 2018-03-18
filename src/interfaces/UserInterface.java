@@ -93,16 +93,13 @@ public class UserInterface
         
         viewSavedSchoolDetails(db.getUniversity(sName));
         homePage();
-<<<<<<< HEAD
+
 	      }
-=======
+
 	    }
->>>>>>> 94bae3c295940ff063afcf5efb31d8e0eaed00f0
-	      else {
-	    	  System.out.print("Invalid input ");  
-	      }
+	      
         
-      }
+      
 
 
      else if (str.equals("p") || str.equals("P")) {  
@@ -121,8 +118,12 @@ public class UserInterface
             ai.logout();
 
         }  
-   
+     else {
+   	  System.out.print("Invalid input ");  
+   	  homePage();
+     }
     }
+
 
   
   /**
@@ -142,6 +143,7 @@ public class UserInterface
       homePage();
     }
   }
+  
   /**
    * takes the view saved school command and displays the saved school list
    */
