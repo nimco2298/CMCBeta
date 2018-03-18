@@ -218,82 +218,66 @@ public class UserInterface
   /**
    * This method takes the search command and shows the result
    * 
-   * @param schoolName the name of the school
-   * @param state      the state of the school
-   * @param location   the location of the school
-   * @param control    the area of the school
-   * @param students   the number of students in the school
-   * @param femPerc    the female percentage of the school
-   * @param satV       the SAT verbal score of the school
-   * @param satM       the SAT math score of the school
-   * @param cost       the cost of the school
-   * @param finAidPerc the financial aid percentage of the school
-   * @param applicants the number of applicants in the school
-   * @param admitted   the number of admitted students in the school
-   * @param enrolled   the number of enrolled students in the school
-   * @param acadScale  the academic scale of the school
-   * @param socScale   the social scale of the school
-   * @param qualScale  the quality scale of the schools
-   * @param emphases   the department fields (emphasis) of the school
-   * 
-   * @return Collection the schools that have matched this criteria
+   * @return the schools that have matched this criteria
    */
   public ArrayList<University> searchForSchools()
   {
-	 /* String schoolName=strIn("School Name: ");
-      String state= strIn("State: ");
-      String location=strIn("Location: ");
-      String control=strIn("Control: ");
-      int studentsLow=intIn("low num of students: ");                           
-      int studentsHigh=intIn("high num of students: ");
-      int femPercLow=intIn("low % of female: ");
-      int femPercHigh =intIn("high % of female: ");
-      int satVLow=intIn("low verbal sat: ");
-      int satVHigh=intIn("high verbal sat: ");                       
-      int satMLow=intIn("low math sat: ");
-      int satMHigh=intIn("high math sat: ");
-      int costLow=intIn("low cost: ");
-      int costHigh=intIn("High cost: ");
-      int finAidPercLow=intIn("low financial aid: ");
-      int finAidPercHigh=intIn("high financial aid: ");                       
-      int applicantsLow=intIn("low applicants num: ");
-      int applicantsHigh=intIn("high applicants num: ");
-      int admittedLow=intIn("low admitted num: ");
-      int admittedHigh=intIn("high admitted num: ");                            
-      int enrolledLow=intIn("low enrolled num: ");
-      int enrolledHigh=intIn("high enrolled num: ");
-      int acadScaleLow=intIn("low academic scale: ");
-      int acadScaleHigh=intIn("high academic scale: ");
-      int socLifeScaleLow=intIn("low social life scale: ");                      
-      int socLifeScaleHigh =intIn("high social life scale: ");  
-      int qualLifeScaleLow=intIn("low qual life scale: ");  
-      int qualLifeScaleHigh=intIn("high qual life scale: ");  
-      ArrayList<String> emphases=new ArrayList<String>();
-      String sss=strIn("emphases: ");
-      while(!sss.equals(" ")){
-        emphases.add(sss);
-        sss=strIn("some more emphases? space to finish: ");
-      }
-    return sc.search( schoolName,  state,  location,  control, studentsLow,
-            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
-            satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
-            applicantsLow,  applicantsHigh,  admittedLow,  admittedHigh, 
-            enrolledLow,  enrolledHigh,  acadScaleLow,  acadScaleHigh,  socLifeScaleLow,
-            socLifeScaleHigh,  qualLifeScaleLow,  qualLifeScaleHigh, 
-            emphases);
-            */
-	  ArrayList<String> test=new ArrayList<String>();
-	  //test.add("BIOLOGY");
-	  ArrayList<University> ulist= sc.search( "YA",  "",  "", "", 0,
-              99999,  0,  99,  0,  999,0,999, 0,99999,  0,  99,
-              0,  99999,  0,  99, 
-              0,  99,  0,  99,  0,
-              99,  0,  99, test);
-	  if (ulist.isEmpty())
+	  String schoolName = "", state = "", location = "", control = "";
+	  int studentsLow = 0, studentsHigh = 999999, femPercLow = 0, femPercHigh = 100, satVLow = -1,
+			  satVHigh = 1000, satMLow = -1, satMHigh = 1000, costLow = 0, costHigh = 999999, finAidPercLow = 0, 
+			  finAidPercHigh = 100, applicantsLow = 0, applicantsHigh = 1000000, admittedLow = 0, 
+			  admittedHigh = 100, enrolledLow = 0, enrolledHigh =100, acadScaleLow = 1, acadScaleHigh = 5, 
+			  socLifeScaleLow = 1, socLifeScaleHigh = 5, qualLifeScaleLow = 1, qualLifeScaleHigh = 5;
+	  ArrayList<String> emphases = new ArrayList<String>();
+	  ArrayList<University> uList = new ArrayList<University>();
+	  System.out.println("Enter the desired search criteria");
+	  int i = intIn("");
+	  do
 	  {
-		  System.out.println("empty");
+		  switch(i)
+		  {
+		  case 1: schoolName=strIn("School Name: ");  		  	  		break;
+		  case 2: state = strIn("State: ");           		  	  		break;
+		  case 3: location=strIn("Location: ");       		      		break;
+		  case 4:  control=strIn("Control: ");                    		break;
+		  case 5: studentsLow=intIn("low num of students: ");	  		break;
+		  case 6: studentsHigh=intIn("high num of students: ");	  		break;
+		  case 7: femPercLow=intIn("low % of female: "); 		  		break;
+		  case 8: femPercHigh =intIn("high % of female: ");		  		break;
+		  case 9: satVLow=intIn("low verbal sat: ");			  		break;
+		  case 10: satVHigh=intIn("high verbal sat: ");			  		break;
+		  case 11: satMLow=intIn("low math sat: ");				  		break;
+		  case 12: satMHigh=intIn("high math sat: ");			  		break;
+		  case 13: costLow=intIn("low cost: ");					  		break;
+		  case 14: costHigh=intIn("High cost: ");				  		break;
+		  case 15: finAidPercLow=intIn("low financial aid: ");	  		break;
+		  case 16: finAidPercHigh=intIn("high financial aid: ");  		break;
+		  case 17: applicantsLow=intIn("low applicants num: ");	  		break;
+		  case 18: applicantsHigh=intIn("high applicants num: "); 		break;
+		  case 19: admittedLow=intIn("low admitted num: ");		  		break;
+		  case 20: admittedHigh=intIn("high admitted num: "); 	 		break;
+		  case 21: enrolledLow=intIn("low enrolled num: ");		 		break;
+		  case 22: enrolledHigh=intIn("high enrolled num: ");	  		break;
+		  case 23: acadScaleLow=intIn("low academic scale: ");	  		break;
+		  case 24: acadScaleHigh=intIn("high academic scale: ");  		break;
+		  case 25: socLifeScaleLow=intIn("low social life scale: ");	break;
+		  case 26: socLifeScaleHigh =intIn("high social life scale: "); break;
+		  case 27: qualLifeScaleLow=intIn("low qual life scale: ");		break;
+		  case 28: qualLifeScaleHigh=intIn("high qual life scale: ");	break;
+		  case 29: emphases.add(strIn("Add an emphasis"));				break;
+		  case 30:  uList = sc.search(schoolName,  state,  location,  control, studentsLow,
+	            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
+	            satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
+	            applicantsLow,  applicantsHigh,  admittedLow,  admittedHigh, 
+	            enrolledLow,  enrolledHigh,  acadScaleLow,  acadScaleHigh,  socLifeScaleLow,
+	            socLifeScaleHigh,  qualLifeScaleLow,  qualLifeScaleHigh, 
+	            emphases);
+		  break;
+		  default: System.out.println("ERROR: Invalid input");			break; 
 	  }
-	  return ulist;
+	  }while(i != 30);
+	 
+	  return uList;
 	 
   }
   /**
@@ -337,7 +321,5 @@ public class UserInterface
     int re= scan.nextInt();
     return re;
   }
-  
-//para for copy: String schoolName, String state, String location, String control,int students, int femPerc, int satM, int cost, int finAidPerc, int applicants, int admitted, ArrayList<String> emphases
 }
 

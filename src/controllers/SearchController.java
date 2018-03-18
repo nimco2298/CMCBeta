@@ -73,29 +73,29 @@ public class SearchController{
         l=true;
       if(u.getControl().contains(control))
         c=true;
-      if(studentsLow<u.getStudents() && u.getStudents()<studentsHigh)
+      if(studentsLow<=u.getStudents() && u.getStudents()<=studentsHigh)
         ns=true;
-      if(femPercLow<u.getFemPerc() && u.getFemPerc()<femPercHigh)
+      if(femPercLow<=u.getFemPerc() && u.getFemPerc()<=femPercHigh)
         pf=true;
-      if(satVLow<u.getSatV() && u.getFemPerc()<satVHigh)
+      if(satVLow<=u.getSatV() && u.getFemPerc()<=satVHigh)
         sv=true;
-      if(satMLow<u.getSatM() && u.getSatM()<satMHigh)
+      if(satMLow<=u.getSatM() && u.getSatM()<=satMHigh)
         sm=true;
-      if(costLow<u.getCost() && u.getCost()<costHigh)
+      if(costLow<=u.getCost() && u.getCost()<=costHigh)
         exp=true;
-      if(finAidPercLow<u.getFinAidPerc() && u.getFinAidPerc()<finAidPercHigh)
+      if(finAidPercLow<=u.getFinAidPerc() && u.getFinAidPerc()<=finAidPercHigh)
         pfa=true;
-      if(applicantsLow<u.getApplicants() && u.getApplicants()<applicantsHigh)
+      if(applicantsLow<=u.getApplicants() && u.getApplicants()<=applicantsHigh)
         na=true;
-      if(admittedLow<u.getAdmitted() && u.getAdmitted()<admittedHigh)
+      if(admittedLow<u.getAdmitted() && u.getAdmitted()<=admittedHigh)
         pa=true;
-      if(enrolledLow<u.getEnrolled() && u.getEnrolled()<enrolledHigh)
+      if(enrolledLow<=u.getEnrolled() && u.getEnrolled()<=enrolledHigh)
         pe=true;
-      if(acadScaleLow<u.getAcadScale() && u.getAcadScale()<acadScaleHigh)
+      if(acadScaleLow<=u.getAcadScale() && u.getAcadScale()<=acadScaleHigh)
         as=true;
-      if(socLifeScaleLow<u.getSocScale() && u.getSocScale()<socLifeScaleHigh)
+      if(socLifeScaleLow<=u.getSocScale() && u.getSocScale()<=socLifeScaleHigh)
         ss=true;
-      if(qualLifeScaleLow<u.getQualScale() && u.getQualScale()<qualLifeScaleHigh)
+      if(qualLifeScaleLow<=u.getQualScale() && u.getQualScale()<=qualLifeScaleHigh)
         qls=true;
       for(String str: emphases){
         if(u.getEmphases().contains(str))
