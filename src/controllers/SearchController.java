@@ -63,6 +63,8 @@ public class SearchController{
     ArrayList<University> ulist = db.getUniversities();
     for(University u: ulist)
     {
+    	n=false; s=false; l=false; c=false; ns=false; pf=false; sv=false; sm=false; exp=false; pfa=false; na=false; 
+	      pa=false; pe=false; as=false; ss=false; qls=false; em=false;
       if(u.getName().contains(schoolName))
         n=true;
       if(u.getState().contains(state))
@@ -99,7 +101,7 @@ public class SearchController{
         if(u.getEmphases().contains(str))
           em=true;
       }
-      if(n && s && l && c && ns && pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
+      if(n && s && l && c && ns && pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls)
       {
         rlist.add(u);
       }
