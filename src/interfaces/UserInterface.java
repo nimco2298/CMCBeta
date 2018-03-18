@@ -53,7 +53,7 @@ public class UserInterface
 	      this.user=(GeneralUser)db.getUser(user.getUsername());
       }
       else {
-    	  viewSearchedSchools(this.searchForSchools());
+    	  viewSearchedSchools(searchForSchools());
 	      String s1 = scan.next("s for save and v for view:");
 	      if(s1.equals("s")){
 	        String sName= scan.next("please enter the name of the school you want to save:");
@@ -237,7 +237,7 @@ public class UserInterface
    */
   public ArrayList<University> searchForSchools()
   {
-	  String schoolName=strIn("School Name: ");
+	 /* String schoolName=strIn("School Name: ");
       String state= strIn("State: ");
       String location=strIn("Location: ");
       String control=strIn("Control: ");
@@ -278,6 +278,15 @@ public class UserInterface
             enrolledLow,  enrolledHigh,  acadScaleLow,  acadScaleHigh,  socLifeScaleLow,
             socLifeScaleHigh,  qualLifeScaleLow,  qualLifeScaleHigh, 
             emphases);
+            */
+	  ArrayList<String> test=new ArrayList<String>();
+	  ArrayList<University> ulist= new ArrayList<University>();
+	  ulist= sc.search( "Y",  "C",  "S", "P", 0,
+              99999,  0,  99,  0,  999,0,999, 0,99999,  0,  99,
+              0,  99999,  0,  99, 
+              0,  99,  0,  99,  0,
+              99,  0,  99, test);
+	  return ulist;
   }
   /**
    * displays the result of searching
