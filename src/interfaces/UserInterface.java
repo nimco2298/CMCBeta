@@ -25,6 +25,7 @@ public class UserInterface
     this.user = user;
     this.db = new DBController();
     this.ai = new AccountInterface();
+    sc = new SearchController();
   }
   
   Scanner scan = new Scanner(System.in);
@@ -282,13 +283,18 @@ public class UserInterface
             emphases);
             */
 	  ArrayList<String> test=new ArrayList<String>();
-	  ArrayList<University> ulist= new ArrayList<University>();
-	  ulist= sc.search( "Y",  "C",  "S", "P", 0,
+	  //test.add("BIOLOGY");
+	  ArrayList<University> ulist= sc.search( "YA",  "",  "", "", 0,
               99999,  0,  99,  0,  999,0,999, 0,99999,  0,  99,
               0,  99999,  0,  99, 
               0,  99,  0,  99,  0,
               99,  0,  99, test);
+	  if (ulist.isEmpty())
+	  {
+		  System.out.println("empty");
+	  }
 	  return ulist;
+	 
   }
   /**
    * displays the result of searching
