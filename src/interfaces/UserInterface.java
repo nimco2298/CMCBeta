@@ -4,12 +4,14 @@
  * before passing them to the Controller
  * 
  * @author Karld Bai
- * @version Feb 22 2018
+ * @version March 19 2018
  */
 package interfaces;
 import java.util.*;
 import entities.*;
 import controllers.*;
+
+
 public class UserInterface
 {
   private GeneralUser user;
@@ -66,7 +68,7 @@ public class UserInterface
 	      }
 	    }
     }
-    else if(str.equals("m")){  //MANAGE SAVED SCHOOLS
+    else if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
      
 
@@ -96,11 +98,8 @@ public class UserInterface
       }
 
 
-     else if (str.equals("p")) {  //I SWITCHED THIS TO P command
+     else if (str.equals("p") || str.equals("P")) {  
         System.out.print("Do you want to edit your profile? y/n: ");
-
-     
-        System.out.print("Do you want to edit? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
           editProfile();

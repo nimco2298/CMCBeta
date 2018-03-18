@@ -1,13 +1,15 @@
+
+/*
+ * File:AdminInterface.java
+ */
 package interfaces;
 import java.util.*;
 import entities.*;
 import controllers.*;
-/*
- * File:AdminInterface.java
- */
+
 
 /**
- * All the functionalities which the admin should be able to do
+ * AdminInterface contains all the functionalities which the admin should be able to do
  * @author Ian Bush, Sara Laufers
  * @version March 17, 2018
  */
@@ -15,6 +17,8 @@ public class AdminInterface {
   //==================================INSTANCE VARIABLES==========================
   private AdminFuncController ad;
   Scanner sc = new Scanner(System.in);
+  private AccountInterface ai;
+  
   
   //==================================CONSTRUCTORS==========================
   /**
@@ -22,6 +26,7 @@ public class AdminInterface {
    */
   public AdminInterface() {
     this.ad = new AdminFuncController();
+    this.ai = new AccountInterface();
   }
   //==================================METHODS==========================
   /**
@@ -81,7 +86,7 @@ public class AdminInterface {
     }
     
     else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-      homepage();
+     homepage();
     }
     
     else{ // INPUT ERROR
@@ -506,7 +511,7 @@ public class AdminInterface {
       viewUsers();
     }
     else if(prompt.equals("3")){ // Manage users
-      
+      ai.logout();
     }
     else{ // invalid input
       System.out.println("ERROR: Invalid Input");
