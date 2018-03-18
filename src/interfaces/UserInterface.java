@@ -4,12 +4,14 @@
  * before passing them to the Controller
  * 
  * @author Karld Bai
- * @version Feb 22 2018
+ * @version March 19 2018
  */
 package interfaces;
 import java.util.*;
 import entities.*;
 import controllers.*;
+
+
 public class UserInterface
 {
   private GeneralUser user;

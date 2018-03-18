@@ -1,15 +1,17 @@
 /** 
   * File: GeneralUser.java
   */
+
+
 package entities;
 import java.util.*; //Java's ArrayList<ET>
-//package cmcclasses
+
 
 /**
- * GeneralUser is a class that is extends Account.
+ * GeneralUser is a class that is an Account and stores a user's information.
  *
  * @author  Nimco Hussein
- * @version February 26, 2018
+ * @version March 15, 2018
  */
 public class GeneralUser extends Account
 {
@@ -52,8 +54,8 @@ public class GeneralUser extends Account
 			   + "Last Name:   " + "\t" + "\t"+ this.getLastName() + "\n" + 
 			   "Account Status: " + "\t" + this.getActive() + "\n" +
 			   "Password:      " + "\t" + "\t" + this.getPassword() + "\n" +
-			   "Saved Schools List: " + this.savedUniversities + "\n"
-			   +"************************" ;
+			   "Saved Schools List: " + this.savedUniversities + "\n";
+			   
   }
    
 }

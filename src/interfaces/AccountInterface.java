@@ -1,9 +1,11 @@
-package interfaces;
-import java.util.Scanner;
-import controllers.*;
+
 /*
  * File:AccountInterface.java
  */
+
+package interfaces;
+import java.util.Scanner;
+import controllers.*;
 
 /**
  * The starting terminal in which the user will log into the system
@@ -48,13 +50,14 @@ public class AccountInterface
     	System.out.println("You have been logged out of the system");
     }
       
+   System.out.println( "\n" + "You have been logged out. Please sign  in"); 
     this.start();
   }
   
  
   
   /**
-   * Starting point for the user
+   * Starting point for the user to log in and access the system.
    */
   public void start()
   {
