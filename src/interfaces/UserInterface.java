@@ -267,12 +267,12 @@ public class UserInterface
    * @param enrolled   the number of enrolled students in the school
    * @param acadScale  the academic scale of the school
    * @param socScale   the social scale of the school
-   * @param qualScale  the quality scale of the schoos
+   * @param qualScale  the quality scale of the schools
    * @param emphases   the department fields (emphasis) of the school
    * 
    * @return Collection the schools that have matched this criteria
    */
-  public Collection<University> searchForShools(String schoolName, String state, String location, String control,int studentsLow,
+  public Collection<University> searchForSchools(String schoolName, String state, String location, String control,int studentsLow,
                                     int studentsHigh, int femPercLow, int femPercHigh, int satVLow, int satVHigh, 
                                     int satMLow, int sayMHigh, int costLow, int costHigh, int finAidPercLow, int finAidPercHigh,
                                     int applicantsLow, int applicantsHigh, int admittedLow, int admittedHigh, 
