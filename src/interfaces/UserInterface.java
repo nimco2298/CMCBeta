@@ -110,15 +110,12 @@ public class UserInterface
      }
      
      else if(str.equals("q")||str.equals("Q")){ // QUIT)
-            ai.logout();  	  
-        }
-           
+            ai.logout();
+
+        }  
    
     }
 
-
-  
-  
   
   /**
    * takes the view details command and displays the details

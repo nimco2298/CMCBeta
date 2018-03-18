@@ -46,7 +46,6 @@ public class AccountInterface
     {
     	ac.logout();
     	System.out.println("You have been logged out of the system");
-    	
     }
       
     this.start();
