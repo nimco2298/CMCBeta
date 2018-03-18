@@ -22,6 +22,7 @@ public class UserInterface
     this.ufc = new UserFuncController(user);
     this.user = user;
     this.db = new DBController();
+    this.ai = new AccountInterface();
   }
   
   Scanner scan = new Scanner(System.in);
