@@ -17,10 +17,11 @@ public class UserInterface
   private SearchController sc;
   private DBController db;
   
+  
   public UserInterface(GeneralUser user){
-    this.ufc= new UserFuncController(user);
-    this.user=user;
-    this.db=new DBController();
+    this.ufc = new UserFuncController(user);
+    this.user = user;
+    this.db = new DBController();
   }
   
   Scanner scan= new Scanner(System.in);
@@ -29,8 +30,15 @@ public class UserInterface
    * redirects the user to the homepage
    */
   public void homePage(){
-    
-    System.out.print("s for search, m for manage saved schools, p for manage profile: ");
+    System.out.println( "=======================================" 			+'\n'+
+    		            "Welcome " + user.getFirstName() +  user.getLastName() + "! " +'\n'+
+    					"Would would you like to do?" 	+'\n'+'\t'+
+                       		"s: Search for Schools"						+'\n'+'\t'+
+                        	"m: Manage Saved Schools"						+'\n'+'\t'+
+                        	"p: Manage Your Profile"						+'\n'+'\t'+
+                        	"q: Quit (Return to Homepage)"				+'\n'+
+                        "Enter Here: ");
+   // System.out.print("s for search, m for manage saved schools, p for manage profile, q for quit program: ");
     String str= scan.next();
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
@@ -100,7 +108,7 @@ public class UserInterface
 	      }
 	    }
     }
-    else if(str.equals("m")){
+    else if(str.equals("m")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
      
       System.out.print("r for remove and v for view: ");
@@ -121,21 +129,22 @@ public class UserInterface
         }
         viewSavedSchoolDetails(db.getUniversity(sName));
       }
-      else {
-    	  homePage();
-      }
+      
     }
-    else{
-      viewProfile();
-      System.out.print("Do you want to edit? y/n: ");
-      String s4 = scan.next();
-      if(s4.equals("y")){
-        editProfile();
-      }
-      else
+     else{  //CAN THIS ELSE EXECUTE THE QUIT COMMAND INSTEAD?
+        viewProfile();
+        System.out.print("Do you want to edit? y/n: ");
+        String s4 = scan.next();
+        if(s4.equals("y")){
+          editProfile();
+        }
+        else if(str.equals("q")||str.equals("Q")){ // QUIT)
         homePage();
+       	
+    	  
     }
     
+   }
   }
   /**
    * takes the view details command and displays the details

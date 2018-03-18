@@ -26,10 +26,10 @@ public class Admin extends Account
   }
     public String getDetails() {
   	  
-  	  return "***ACCOUNT INFORMATION****** \n"
-  			  +"First name: " + this.getFirstName() + "\n" 
-  			   + "Last Name:  " + this.getLastName() + "\n" + 
-  			   "Account Status: " + this.getActive() + "\n" +
-  			   "Password: " + this.getPassword() + "\n" ;
+  	  return "\n" + "***ACCOUNT INFORMATION****** \n"
+  			+"First name:    " + "\t" + "\t" + this.getFirstName() + "\n" 
+			   + "Last Name:   " + "\t" + "\t"+ this.getLastName() + "\n" + 
+			   "Account Status: " + "\t" + this.getActive() + "\n" +
+			   "Password:      " + "\t" + "\t" + this.getPassword() + "\n"; 
     }
 }
