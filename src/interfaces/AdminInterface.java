@@ -299,6 +299,12 @@ public class AdminInterface {
     // ask user for university properties
 	System.out.print("Enter school name: ");
     String schoolName = sc.next();
+    
+    if(ad.getUniversity(schoolName) instanceof University) { // if the university already exists
+    	System.out.println("*** This university name already exists, please choose a different one ***");
+    	addUniversity();
+    }
+    
     System.out.print("Enter state: ");
     String state = sc.next();
     System.out.print("Enter location: ");
