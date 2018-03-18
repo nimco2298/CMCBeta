@@ -16,7 +16,7 @@ public class UserInterface
   private UserFuncController ufc;
   private SearchController sc;
   private DBController db;
-  
+  private AccountInterface ai;
   
   public UserInterface(GeneralUser user){
     this.ufc = new UserFuncController(user);
@@ -24,19 +24,19 @@ public class UserInterface
     this.db = new DBController();
   }
   
-  Scanner scan= new Scanner(System.in);
+  Scanner scan = new Scanner(System.in);
   
   /**
    * redirects the user to the homepage
    */
   public void homePage(){
     System.out.println( "=======================================" 			+'\n'+
-    		            "Welcome " + user.getFirstName() +  user.getLastName() + "! " +'\n'+
+    		            "Welcome " + user.getFirstName() +  " " + user.getLastName() + "! " +'\n'+
     					"Would would you like to do?" 	+'\n'+'\t'+
                        		"s: Search for Schools"						+'\n'+'\t'+
                         	"m: Manage Saved Schools"						+'\n'+'\t'+
                         	"p: Manage Your Profile"						+'\n'+'\t'+
-                        	"q: Quit (Return to Homepage)"				+'\n'+
+                        	"q: Quit"				+'\n'+
                         "Enter Here: ");
    // System.out.print("s for search, m for manage saved schools, p for manage profile, q for quit program: ");
     String str= scan.next();
@@ -111,7 +111,7 @@ public class UserInterface
     else if(str.equals("m")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
      
-      System.out.print("r for remove and v for view: ");
+      System.out.print("Please select r for remove or  v for view: ");
       String s3 = scan.next();
       if(s3.equals("r")){
     	System.out.print("please enter the name of the school you want to remove: ");
@@ -131,21 +131,24 @@ public class UserInterface
       }
       
     }
-     else{  //CAN THIS ELSE EXECUTE THE QUIT COMMAND INSTEAD?
-        viewProfile();
-        System.out.print("Do you want to edit? y/n: ");
+     else if (str.equals("p")) {  //I SWITCHED THIS TO P command
+        System.out.print("Do you want to edit your profile? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
           editProfile();
         }
-        else if(str.equals("q")||str.equals("Q")){ // QUIT)
-        homePage();
-       	
-    	  
-    }
-    
+        else { 
+        homePage(); 	  
+        }
+     }
+        
+     else if(str.equals("q")||str.equals("Q")){ // QUIT)
+            ai.logout();  	  
+        }     
    }
-  }
+  
+  
+  
   /**
    * takes the view details command and displays the details
    */

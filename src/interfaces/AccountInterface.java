@@ -29,7 +29,6 @@ public class AccountInterface
    */
   public void login(String usr, String password)
   {
-    ac.login(usr, password);
     
    if(ac.login(usr, password) == false)
    {
@@ -43,8 +42,14 @@ public class AccountInterface
    */
   public void logout()
   {
-    ac.logout();
-    System.out.println("You have been logged out of the system");
+    if(ac.loginStatus == true) // user is logged on
+    {
+    	ac.logout();
+    	System.out.println("You have been logged out of the system");
+    	
+    }
+      
+    this.start();
   }
   
  
