@@ -5,24 +5,28 @@ package controllers;
 import entities.*;
 import interfaces.*;
 
+ 
 /**
  * AccountController is a class that is controlled by AccountInterface
  * The purpose of this class is to validate the login information when a GeneralUser or Admin logs in.
  * 
  *
  * @author  Nimco Hussein
- * @version March 15 2018
+ * @version March 19 2018
  */
 public class AccountController  
 {
+  /** an Account object that stores account information */	
   private Account account;
+  /** an Account object that stores account information */	
+  public boolean loginStatus;
   
   /**A constructor that creates an AccountController object 
     */
   public AccountController()
   {
-    
-  } 
+  }
+  
   /**Log in method takes username and password and return true or false, if the information belongs to an account
     * If the credentials that are added are verified, then based on the type a GeneralUser or Admin object 
     * will be created
@@ -46,6 +50,7 @@ public class AccountController
     {
     	
     	System.out.println("Error: Your account is deactivated and you cannot be logged in");
+    	this.loginStatus = false;
     	return false;
     }
 
@@ -54,17 +59,20 @@ public class AccountController
     { 
       //The user name and password associated with this account is not registered 
       System.out.println("Error: The username is not registered ");
+      this.loginStatus = false;
       return false;
     }
     else if(!matchedUser.getPassword().equals(password))
     {
       //print the username and password do not match an an associated account
       System.out.println("Error: The username and password do not match");
+      this.loginStatus = false;
       return false;
     }
     else { 
       
       this.account = matchedUser;  
+      this.loginStatus = true;
       System.out.println(matchedUser.getDetails());
       char type = account.getType(); // get the type associated with this account 
       
@@ -73,12 +81,14 @@ public class AccountController
         AdminInterface ai = new AdminInterface();
         System.out.println("Login successful");
         ai.homepage(); 
+        this.loginStatus = true;
         return true;
       }
       else if(type == 'u')
       {
         UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
         System.out.println("Login successful");
+        this.loginStatus = true;
         ui.homePage();
         return true;
       }
@@ -91,11 +101,13 @@ public class AccountController
     
   }
   
-  /** The logout method will ;
+  /** The logout method will set their account login status to false, and prompt them to log in page;
     */ 
   public void logout() 
   {
-    this.account = null;  
+   
+    this.loginStatus = false;
+    
   } 
   
   

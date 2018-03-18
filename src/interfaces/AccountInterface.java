@@ -1,9 +1,11 @@
-package interfaces;
-import java.util.Scanner;
-import controllers.*;
+
 /*
  * File:AccountInterface.java
  */
+
+package interfaces;
+import java.util.Scanner;
+import controllers.*;
 
 /**
  * The starting terminal in which the user will log into the system
@@ -29,7 +31,6 @@ public class AccountInterface
    */
   public void login(String usr, String password)
   {
-    ac.login(usr, password);
     
    if(ac.login(usr, password) == false)
    {
@@ -43,14 +44,20 @@ public class AccountInterface
    */
   public void logout()
   {
-    ac.logout();
-    System.out.println("You have been logged out of the system");
+    if(ac.loginStatus == true) // user is logged on
+    {
+    	ac.logout();
+    	System.out.println("You have been logged out of the system");
+    }
+      
+   System.out.println( "\n" + "You have been logged out. Please sign  in"); 
+    this.start();
   }
   
  
   
   /**
-   * Starting point for the user
+   * Starting point for the user to log in and access the system.
    */
   public void start()
   {
