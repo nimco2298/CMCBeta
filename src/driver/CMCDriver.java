@@ -12,7 +12,7 @@ import interfaces.AccountInterface;
  * The main driver class for the CMC project
  * 
  * @author Ian Bush
- * @version March 15, 2018
+ * @version March 18, 2018
  */
 @SuppressWarnings("unused")
 public class CMCDriver

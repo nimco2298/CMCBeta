@@ -69,16 +69,14 @@ public class UserInterface
     }
     else if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
-     
-
-      System.out.print("Please select r for remove or  v for view: ");
+      System.out.print( "\n" + "Please select r for removing a school or  v for viewing further details: ");
       String s3 = scan.next();
       if(s3.equals("r")){
     	System.out.print("please enter the name of the school you want to remove: ");
         String sName= scan.next();
         removeSavedSchool(db.getUniversity(sName));
       }
-      //!user.getSavedSchools().isEmpty()
+ 
       else if(!user.getSavedSchools().isEmpty()){
     	
     	System.out.print("please enter the name of the school you want to view details: ");
@@ -87,9 +85,10 @@ public class UserInterface
         	System.out.println("no match, please enter again");
         	sName= scan.next();
         }
+        
         viewSavedSchoolDetails(db.getUniversity(sName));
-
-	      }
+        homePage();
+	    }
 	      else {
 	    	  System.out.print("Invalid input ");  
 	      }
@@ -137,6 +136,7 @@ public class UserInterface
    * takes the view saved school command and displays the saved school list
    */
   public void viewSavedSchools(){
+	  System.out.println("Your list of saved schools:" + "\n");
     for(String u: user.getSavedSchools()){
       System.out.println(u);
     }
@@ -168,13 +168,14 @@ public class UserInterface
    * takes the edit file command and redirect the user to the edit page
    */
   public void editProfile(){
-	  System.out.print("What would you like to edit:" + '\n' +
-                            "1: FirstName" + '\n' +
-                            "2: LastName" + '\n' +
-                            "3: Password" + '\n' +                            
-                            "q: Quit: ");
+	  System.out.println("What would you like to edit:" + '\n' +
+			                "1: FirstName" + '\n' +
+                             "2: LastName" + '\n' +
+                             "3: Password" + '\n' +                            
+                             "4: Quit " + '\n'
+                             + "Enter here: ");
+                    
     String prompt = scan.next();
-    while(!prompt.equals("q")){
       switch (prompt){
         case "1":
           System.out.print("Enter the new first name: ");
@@ -195,16 +196,15 @@ public class UserInterface
           user.setPassword(change);
           break;
           
+        case "4":
+        	homePage();
+        	break;
+       
         default:
           System.out.println("Invalid input");
           break;
-      }
-      System.out.print("What would you like to edit:" + '\n' +
-                       "1: FirstName" + '\n' +
-                       "2: LastName" + '\n' +
-                       "3: Password" + '\n' +   
-                       "q: Quit: ");
-      prompt = scan.next();
+      
+      
     }
     homePage();
   }
