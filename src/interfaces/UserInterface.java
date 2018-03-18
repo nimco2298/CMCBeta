@@ -111,6 +111,7 @@ public class UserInterface
     else if(str.equals("m")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
      
+<<<<<<< HEAD
       System.out.print("Please select r for remove or  v for view: ");
       String s3 = scan.next();
       if(s3.equals("r")){
@@ -128,11 +129,42 @@ public class UserInterface
         	sName= scan.next();
         }
         viewSavedSchoolDetails(db.getUniversity(sName));
+=======
+      System.out.print("r for remove and v for view: ");
+      boolean loop=true;
+      while(loop) {
+	      String s3 = scan.next();
+	      if(s3.equals("r")){
+	    	  loop=false;
+	    	System.out.print("please enter the name of the school you want to remove: ");
+	        String sName= scan.next();
+	        removeSavedSchool(db.getUniversity(sName));
+	      }
+	      //!user.getSavedSchools().isEmpty()
+	      else if(!user.getSavedSchools().isEmpty()&&s3.equals("v")){
+	    	loop=false;
+	    	System.out.print("please enter the name of the school you want to view details: ");
+	        String sName= scan.next();
+	        while(!user.getSavedSchools().contains(sName)) {
+	        	System.out.println("no match, please enter again");
+	        	sName= scan.next();
+	        }
+	        viewSavedSchoolDetails(db.getUniversity(sName));
+	      }
+	      else {
+	    	  System.out.print("Invalid input ");  
+	      }
+>>>>>>> 440c14e86b2f6061427f3b8af786967111f1a632
       }
-      
     }
+<<<<<<< HEAD
      else if (str.equals("p")) {  //I SWITCHED THIS TO P command
         System.out.print("Do you want to edit your profile? y/n: ");
+=======
+     else{  //CAN THIS ELSE EXECUTE THE QUIT COMMAND INSTEAD?
+        //viewProfile();
+        System.out.print("Do you want to edit? y/n: ");
+>>>>>>> 440c14e86b2f6061427f3b8af786967111f1a632
         String s4 = scan.next();
         if(s4.equals("y")){
           editProfile();
@@ -264,12 +296,12 @@ public class UserInterface
    * @param enrolled   the number of enrolled students in the school
    * @param acadScale  the academic scale of the school
    * @param socScale   the social scale of the school
-   * @param qualScale  the quality scale of the schoos
+   * @param qualScale  the quality scale of the schools
    * @param emphases   the department fields (emphasis) of the school
    * 
    * @return Collection the schools that have matched this criteria
    */
-  public Collection<University> searchForShools(String schoolName, String state, String location, String control,int studentsLow,
+  public Collection<University> searchForSchools(String schoolName, String state, String location, String control,int studentsLow,
                                     int studentsHigh, int femPercLow, int femPercHigh, int satVLow, int satVHigh, 
                                     int satMLow, int sayMHigh, int costLow, int costHigh, int finAidPercLow, int finAidPercHigh,
                                     int applicantsLow, int applicantsHigh, int admittedLow, int admittedHigh, 
