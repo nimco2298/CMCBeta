@@ -141,6 +141,11 @@ public class AdminFuncController{
     				   "Academic Scale (1-5): " + u.getAcadScale() 			+'\n'+
     				   "Social Scale (1-5): " + u.getSocScale() 			+'\n'+
     				   "Quality of Life Scale (1-5): " + u.getQualScale() 	);
+    ArrayList<String> emphases = u.getEmphases();
+    System.out.println("Emphases:");
+    for(String emphasis: emphases) {
+    	System.out.println('\t'+emphasis);
+    }
   }
   
   /**
@@ -154,12 +159,13 @@ public class AdminFuncController{
   }
   
   /**
-   * Deletes a university
+   * Deletes a university and its emphases
    * 
    * @param univ the university to be deleted
    */
   public void delete(University univ){
     DBController dbc = new DBController();
+    deleteEmphases(univ);
     dbc.deleteUniversity(univ);
   }
   
@@ -205,5 +211,32 @@ public class AdminFuncController{
   public void addUniversity(University univ){
     DBController dbc = new DBController();
     dbc.addNewUniversity(univ);
+    addEmphases(univ);
+  }
+  
+  public void addEmphases(University univ) {
+	ArrayList<String> emphases = univ.getEmphases();
+	for(String emphasis: emphases) {
+	  addAnEmphasis(univ, emphasis);
+	}
+  }
+  
+  public void addAnEmphasis(University univ, String emphasis) {
+	  	//univ.addEmphases(emphasis);
+  		DBController dbc = new DBController();
+  		dbc.addEmphasis(univ, emphasis);
+  }
+  
+  public void deleteEmphases(University univ) {
+	ArrayList<String> emphases = univ.getEmphases();
+	for(String emphasis: emphases) {
+	  deleteAnEmphasis(univ, emphasis);
+	}
+  }
+  
+  public void deleteAnEmphasis(University univ, String emphasis) {
+	  	//univ.removeEmphases(emphasis);
+		DBController dbc = new DBController();
+		dbc.deleteEmphasis(univ, emphasis);
   }
 }
