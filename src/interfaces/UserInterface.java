@@ -112,27 +112,33 @@ public class UserInterface
       viewSavedSchools();
      
       System.out.print("r for remove and v for view: ");
-      String s3 = scan.next();
-      if(s3.equals("r")){
-    	System.out.print("please enter the name of the school you want to remove: ");
-        String sName= scan.next();
-        removeSavedSchool(db.getUniversity(sName));
+      boolean loop=true;
+      while(loop) {
+	      String s3 = scan.next();
+	      if(s3.equals("r")){
+	    	  loop=false;
+	    	System.out.print("please enter the name of the school you want to remove: ");
+	        String sName= scan.next();
+	        removeSavedSchool(db.getUniversity(sName));
+	      }
+	      //!user.getSavedSchools().isEmpty()
+	      else if(!user.getSavedSchools().isEmpty()&&s3.equals("v")){
+	    	loop=false;
+	    	System.out.print("please enter the name of the school you want to view details: ");
+	        String sName= scan.next();
+	        while(!user.getSavedSchools().contains(sName)) {
+	        	System.out.println("no match, please enter again");
+	        	sName= scan.next();
+	        }
+	        viewSavedSchoolDetails(db.getUniversity(sName));
+	      }
+	      else {
+	    	  System.out.print("Invalid input ");  
+	      }
       }
-      //!user.getSavedSchools().isEmpty()
-      else if(!user.getSavedSchools().isEmpty()){
-    	
-    	System.out.print("please enter the name of the school you want to view details: ");
-        String sName= scan.next();
-        while(!user.getSavedSchools().contains(sName)) {
-        	System.out.println("no match, please enter again");
-        	sName= scan.next();
-        }
-        viewSavedSchoolDetails(db.getUniversity(sName));
-      }
-      
     }
      else{  //CAN THIS ELSE EXECUTE THE QUIT COMMAND INSTEAD?
-        viewProfile();
+        //viewProfile();
         System.out.print("Do you want to edit? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
