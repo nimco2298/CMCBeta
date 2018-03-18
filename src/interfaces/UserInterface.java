@@ -276,7 +276,6 @@ public class UserInterface
         emphases.add(sss);
         sss=strIn("some more emphases? space to finish: ");
       }
-      ArrayList<University> ulist= new ArrayList<University>();
     return sc.search( schoolName,  state,  location,  control, studentsLow,
             studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
             satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
