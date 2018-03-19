@@ -242,40 +242,40 @@ public class UserInterface
 	  ArrayList<String> emphases = new ArrayList<String>();
 	  ArrayList<University> uList = new ArrayList<University>();
 	  System.out.println("Enter the desired search criteria");
-	  int i = intIn("");
+	  int i = intIn("1: Name\n2: State\3: Location\4: ");
 	  do
 	  {
 		  switch(i)
 		  {
-		  case 1: schoolName=strIn("School Name: ");  		  	  		break;
-		  case 2: state = strIn("State: ");           		  	  		break;
-		  case 3: location=strIn("Location: ");       		      		break;
-		  case 4:  control=strIn("Control: ");                    		break;
-		  case 5: studentsLow=intIn("low num of students: ");	  		break;
-		  case 6: studentsHigh=intIn("high num of students: ");	  		break;
-		  case 7: femPercLow=intIn("low % of female: "); 		  		break;
-		  case 8: femPercHigh =intIn("high % of female: ");		  		break;
-		  case 9: satVLow=intIn("low verbal sat: ");			  		break;
-		  case 10: satVHigh=intIn("high verbal sat: ");			  		break;
-		  case 11: satMLow=intIn("low math sat: ");				  		break;
-		  case 12: satMHigh=intIn("high math sat: ");			  		break;
-		  case 13: costLow=intIn("low cost: ");					  		break;
-		  case 14: costHigh=intIn("High cost: ");				  		break;
-		  case 15: finAidPercLow=intIn("low financial aid: ");	  		break;
-		  case 16: finAidPercHigh=intIn("high financial aid: ");  		break;
-		  case 17: applicantsLow=intIn("low applicants num: ");	  		break;
-		  case 18: applicantsHigh=intIn("high applicants num: "); 		break;
-		  case 19: admittedLow=intIn("low admitted num: ");		  		break;
-		  case 20: admittedHigh=intIn("high admitted num: "); 	 		break;
-		  case 21: enrolledLow=intIn("low enrolled num: ");		 		break;
-		  case 22: enrolledHigh=intIn("high enrolled num: ");	  		break;
-		  case 23: acadScaleLow=intIn("low academic scale: ");	  		break;
-		  case 24: acadScaleHigh=intIn("high academic scale: ");  		break;
-		  case 25: socLifeScaleLow=intIn("low social life scale: ");	break;
-		  case 26: socLifeScaleHigh =intIn("high social life scale: "); break;
-		  case 27: qualLifeScaleLow=intIn("low qual life scale: ");		break;
-		  case 28: qualLifeScaleHigh=intIn("high qual life scale: ");	break;
-		  case 29: emphases.add(strIn("Add an emphasis"));				break;
+		  case 1: schoolName=strIn("School Name: "); i = intIn("");  					break;
+		  case 2: state = strIn("State: "); i = intIn("");          		  	  		break;
+		  case 3: location=strIn("Location: ");   i = intIn("");    		      		break;
+		  case 4:  control=strIn("Control: "); i = intIn("");                   		break;
+		  case 5: studentsLow=intIn("low num of students: ");i = intIn("");	  			break;
+		  case 6: studentsHigh=intIn("high num of students: ");	 i = intIn(""); 		break;
+		  case 7: femPercLow=intIn("low % of female: "); 		 i = intIn(""); 		break;
+		  case 8: femPercHigh =intIn("high % of female: ");		 i = intIn(""); 		break;
+		  case 9: satVLow=intIn("low verbal sat: ");			 i = intIn(""); 		break;
+		  case 10: satVHigh=intIn("high verbal sat: ");			i = intIn("");   		break;
+		  case 11: satMLow=intIn("low math sat: ");				i = intIn("");   		break;
+		  case 12: satMHigh=intIn("high math sat: ");			i = intIn("");   		break;
+		  case 13: costLow=intIn("low cost: ");					i = intIn("");   		break;
+		  case 14: costHigh=intIn("High cost: ");				i = intIn("");   		break;
+		  case 15: finAidPercLow=intIn("low financial aid: ");	 i = intIn("");  		break;
+		  case 16: finAidPercHigh=intIn("high financial aid: "); i = intIn("");  		break;
+		  case 17: applicantsLow=intIn("low applicants num: ");	 i = intIn("");  		break;
+		  case 18: applicantsHigh=intIn("high applicants num: "); i = intIn(""); 		break;
+		  case 19: admittedLow=intIn("low admitted num: ");		  i = intIn(""); 		break;
+		  case 20: admittedHigh=intIn("high admitted num: "); 	 i = intIn(""); 		break;
+		  case 21: enrolledLow=intIn("low enrolled num: ");		 i = intIn(""); 		break;
+		  case 22: enrolledHigh=intIn("high enrolled num: ");	 i = intIn("");  		break;
+		  case 23: acadScaleLow=intIn("low academic scale: ");	 i = intIn("");  		break;
+		  case 24: acadScaleHigh=intIn("high academic scale: ");  i = intIn(""); 		break;
+		  case 25: socLifeScaleLow=intIn("low social life scale: ");i = intIn(""); 		break;
+		  case 26: socLifeScaleHigh =intIn("high social life scale: ");i = intIn("");  break;
+		  case 27: qualLifeScaleLow=intIn("low qual life scale: ");		i = intIn(""); break;
+		  case 28: qualLifeScaleHigh=intIn("high qual life scale: ");i = intIn(""); 	break;
+		  case 29: emphases.add(strIn("Add an emphasis"));			i = intIn(""); 	break;
 		  case 30:  uList = sc.search(schoolName,  state,  location,  control, studentsLow,
 	            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
 	            satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
