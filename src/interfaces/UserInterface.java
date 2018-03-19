@@ -1,5 +1,5 @@
 /* 
- * File: SearchController.java
+ * File: UserInterface.java
  * Description: This class displays the UI and take all user's commands
  * before passing them to the Controller
  * 
