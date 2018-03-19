@@ -234,15 +234,15 @@ public class UserInterface
   public ArrayList<University> searchForSchools()
   {
 	  String schoolName = "", state = "", location = "", control = "";
-	  int studentsLow = 0, studentsHigh = 999999, femPercLow = 0, femPercHigh = 100, satVLow = -1,
-			  satVHigh = 1000, satMLow = -1, satMHigh = 1000, costLow = 0, costHigh = 999999, finAidPercLow = 0, 
-			  finAidPercHigh = 100, applicantsLow = 0, applicantsHigh = 1000000, admittedLow = 0, 
-			  admittedHigh = 100, enrolledLow = 0, enrolledHigh =100, acadScaleLow = 1, acadScaleHigh = 5, 
-			  socLifeScaleLow = 1, socLifeScaleHigh = 5, qualLifeScaleLow = 1, qualLifeScaleHigh = 5;
+	  int studentsLow = 0, studentsHigh = 999999, femPercLow = 0, femPercHigh = 100, satVLow = 0,
+			  satVHigh = 1000, satMLow = 0, satMHigh = 1000, costLow = 0, costHigh = 99999, finAidPercLow = 0, 
+			  finAidPercHigh = 100, applicantsLow = 0, applicantsHigh = 99999, admittedLow = 0, 
+			  admittedHigh = 100, enrolledLow = 0, enrolledHigh =100, acadScaleLow = 0, acadScaleHigh = 99, 
+			  socLifeScaleLow = 0, socLifeScaleHigh = 99, qualLifeScaleLow = 0, qualLifeScaleHigh = 99;
 	  ArrayList<String> emphases = new ArrayList<String>();
 	  ArrayList<University> uList = new ArrayList<University>();
 	  System.out.println("Enter the desired search criteria");
-	  int i = intIn("1: Name\n2: State\3: Location\4: ");
+	  int i = intIn("1: Name\n2: State\n3: Location\n4: ");
 	  do
 	  {
 		  switch(i)
@@ -276,18 +276,19 @@ public class UserInterface
 		  case 27: qualLifeScaleLow=intIn("low qual life scale: ");		i = intIn(""); break;
 		  case 28: qualLifeScaleHigh=intIn("high qual life scale: ");i = intIn(""); 	break;
 		  case 29: emphases.add(strIn("Add an emphasis"));			i = intIn(""); 	break;
-		  case 30:  uList = sc.search(schoolName,  state,  location,  control, studentsLow,
+		  
+		  
+		  default: System.out.println("ERROR: Invalid input");			break; 
+	  }
+	  }while(i != 30);
+	  uList = sc.search(schoolName,  state,  location,  control, studentsLow,
 	            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
 	            satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
 	            applicantsLow,  applicantsHigh,  admittedLow,  admittedHigh, 
 	            enrolledLow,  enrolledHigh,  acadScaleLow,  acadScaleHigh,  socLifeScaleLow,
 	            socLifeScaleHigh,  qualLifeScaleLow,  qualLifeScaleHigh, 
 	            emphases);
-		  break;
-		  default: System.out.println("ERROR: Invalid input");			break; 
-	  }
-	  }while(i != 30);
-	 
+	  //uList=sc.search("Y", "", "", "", 0, 999999, 0, 99, 0, 999, 0, 999, 0, 99999, 0, 99, 0, 99999, 0, 99, 0, 999999, 0, 99999, 0, 99999, 0, 99, emphases);
 	  return uList;
 	 
   }

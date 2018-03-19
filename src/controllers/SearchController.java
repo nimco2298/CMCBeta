@@ -87,7 +87,7 @@ public class SearchController{
         pfa=true;
       if(applicantsLow<=u.getApplicants() && u.getApplicants()<=applicantsHigh)
         na=true;
-      if(admittedLow<u.getAdmitted() && u.getAdmitted()<=admittedHigh)
+      if(admittedLow<=u.getAdmitted() && u.getAdmitted()<=admittedHigh)
         pa=true;
       if(enrolledLow<=u.getEnrolled() && u.getEnrolled()<=enrolledHigh)
         pe=true;
@@ -103,7 +103,7 @@ public class SearchController{
       }
       if(emphases.isEmpty())
     	  em=true;
-      if(n && s && l && c && ns && pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
+      if(n && s && l && c && ns& pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
       {
         rlist.add(u);
       }
