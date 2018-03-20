@@ -73,7 +73,7 @@ public class AccountController
       
       this.account = matchedUser;  
       this.loginStatus = true;
-      System.out.println(matchedUser.getDetails());
+     // System.out.println(matchedUser.getDetails());
       char type = account.getType(); // get the type associated with this account 
       
       if(type == 'a') 

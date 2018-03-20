@@ -5,7 +5,7 @@ import entities.*;
 /**
  * Controlls functions for the general user 
  * @author Will Haanen
- * @version February 26, 2018
+ * @version March 19, 2018
  */
 
 public class UserFuncController

@@ -73,29 +73,29 @@ public class SearchController{
         l=true;
       if(u.getControl().contains(control))
         c=true;
-      if(studentsLow<u.getStudents() && u.getStudents()<studentsHigh)
+      if(studentsLow<=u.getStudents() && u.getStudents()<=studentsHigh)
         ns=true;
-      if(femPercLow<u.getFemPerc() && u.getFemPerc()<femPercHigh)
+      if(femPercLow<=u.getFemPerc() && u.getFemPerc()<=femPercHigh)
         pf=true;
-      if(satVLow<u.getSatV() && u.getFemPerc()<satVHigh)
+      if(satVLow<=u.getSatV() && u.getFemPerc()<=satVHigh)
         sv=true;
-      if(satMLow<u.getSatM() && u.getSatM()<satMHigh)
+      if(satMLow<=u.getSatM() && u.getSatM()<=satMHigh)
         sm=true;
-      if(costLow<u.getCost() && u.getCost()<costHigh)
+      if(costLow<=u.getCost() && u.getCost()<=costHigh)
         exp=true;
-      if(finAidPercLow<u.getFinAidPerc() && u.getFinAidPerc()<finAidPercHigh)
+      if(finAidPercLow<=u.getFinAidPerc() && u.getFinAidPerc()<=finAidPercHigh)
         pfa=true;
-      if(applicantsLow<u.getApplicants() && u.getApplicants()<applicantsHigh)
+      if(applicantsLow<=u.getApplicants() && u.getApplicants()<=applicantsHigh)
         na=true;
-      if(admittedLow<u.getAdmitted() && u.getAdmitted()<admittedHigh)
+      if(admittedLow<=u.getAdmitted() && u.getAdmitted()<=admittedHigh)
         pa=true;
-      if(enrolledLow<u.getEnrolled() && u.getEnrolled()<enrolledHigh)
+      if(enrolledLow<=u.getEnrolled() && u.getEnrolled()<=enrolledHigh)
         pe=true;
-      if(acadScaleLow<u.getAcadScale() && u.getAcadScale()<acadScaleHigh)
+      if(acadScaleLow<=u.getAcadScale() && u.getAcadScale()<=acadScaleHigh)
         as=true;
-      if(socLifeScaleLow<u.getSocScale() && u.getSocScale()<socLifeScaleHigh)
+      if(socLifeScaleLow<=u.getSocScale() && u.getSocScale()<=socLifeScaleHigh)
         ss=true;
-      if(qualLifeScaleLow<u.getQualScale() && u.getQualScale()<qualLifeScaleHigh)
+      if(qualLifeScaleLow<=u.getQualScale() && u.getQualScale()<=qualLifeScaleHigh)
         qls=true;
       for(String str: emphases){
         if(u.getEmphases().contains(str))
@@ -103,7 +103,7 @@ public class SearchController{
       }
       if(emphases.isEmpty())
     	  em=true;
-      if(n && s && l && c && ns && pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
+      if(n && s && l && c && ns& pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
       {
         rlist.add(u);
       }
@@ -124,10 +124,10 @@ public class SearchController{
     ArrayList<University> ulist = db.getUniversities();
     
     int n=ulist.size();
-    int[][] data = new int[n-1][11];
-    int[] diff = new int[11];
-    int[] distList = new int[n-1];
-    Map<Integer, University> map=new HashMap<Integer, University>();
+    int[][] data = new int[12][n];
+    int[] diff = new int[12];
+    double[] distList = new double[n];
+    Map<Double, University> map=new HashMap<Double, University>();
     
     for(int i=0; i<n; i++){    
         data[0][i]=ulist.get(i).getStudents();
@@ -165,7 +165,8 @@ public class SearchController{
     for(int i=0; i<n; i++){    
         data[11][i]=ulist.get(i).getQualScale();
     }
-    int max,min,dist=0;
+    int max,min;
+    double dist=0;
     for(int i=0; i<12; i++){
       max=data[i][0];
       min=data[i][0];
@@ -177,10 +178,19 @@ public class SearchController{
       }
       diff[i]=max-min;
     }
+    //int index=ulist.indexOf(cu);
+    int index=-1;
     for(University u: ulist)
     {
-      int j=0,index;
-      index=ulist.indexOf(cu);
+    	if(u.getName().equals(cu.getName()))
+    		break;
+    	index++;
+    }
+    int j=0;
+    for(University u: ulist)
+    {
+      
+      dist=0;
       if(!u.getName().equals(cu.getName()))
        dist++;
       if(!u.getState().equals(cu.getState()))
@@ -191,19 +201,20 @@ public class SearchController{
        dist++;
       for(int i=0; i<12; i++)
       {
-       dist+=(data[i][index]-data[i][j])/diff[i];
+       dist+=Math.abs((double)(data[i][index]-data[i][j])/(double)diff[i]);
+       
      }
      map.put(dist, u);
      distList[j]=dist;
       j++;
     }
     Arrays.sort(distList);
-    rlist.add(map.get(distList[0]));
+    //the first one will be itself so we don't add distList[0]
     rlist.add(map.get(distList[1]));
     rlist.add(map.get(distList[2]));
     rlist.add(map.get(distList[3]));
     rlist.add(map.get(distList[4]));
-    
+    rlist.add(map.get(distList[5]));
     return rlist;
   }
  

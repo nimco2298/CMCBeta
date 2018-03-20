@@ -1,5 +1,5 @@
 /* 
- * File: SearchController.java
+ * File: UserInterface.java
  * Description: This class displays the UI and take all user's commands
  * before passing them to the Controller
  * 
@@ -25,7 +25,7 @@ public class UserInterface
     this.user = user;
     this.db = new DBController();
     this.ai = new AccountInterface();
-    sc = new SearchController();
+    this.sc = new SearchController();
   }
   
   Scanner scan = new Scanner(System.in);
@@ -40,9 +40,9 @@ public class UserInterface
                        		"s: Search for Schools"						+'\n'+'\t'+
                         	"m: Manage Saved Schools"						+'\n'+'\t'+
                         	"p: Manage Your Profile"						+'\n'+'\t'+
-                        	"q: Quit"				+'\n'+
+                        	"q: Logout"				+'\n'+
                         "Enter Here: ");
-   // System.out.print("s for search, m for manage saved schools, p for manage profile, q for quit program: ");
+  
     String str= scan.next();
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
@@ -57,13 +57,15 @@ public class UserInterface
       }
       else {
     	  viewSearchedSchools(searchForSchools());
-	      String s1 = scan.next("s for save and v for view:");
+    	  System.out.println("s for save and v for view:");
+	      String s1 = scan.next();
 	      if(s1.equals("s")){
-	        String sName= scan.next("please enter the name of the school you want to save:");
+	    	  System.out.println("please enter the name of the school you want to save:");
+	        String sName= scan.next();
 	        saveToSavedSchoolList(db.getUniversity(sName));
 	      }
 	      else{
-	        String sName= scan.next("please enter the name of the school you want to view details:");
+	        String sName=strIn("please enter the name of the school you want to view details:");
 	        viewSchoolDetailsAndTop5(db.getUniversity(sName));
 	      }
 	    }
@@ -73,14 +75,15 @@ public class UserInterface
       System.out.print( "\n" + "Please select r for removing a school or  v for viewing further details: ");
       String s3 = scan.next();
       if(s3.equals("r")){
-    	System.out.print("please enter the name of the school you want to remove: ");
-        String sName= scan.next();
+    	System.out.println("please enter the name of the school you want to remove: ");
+    	String sName="";
+    	sName= scan.next();
         removeSavedSchool(db.getUniversity(sName));
       }
  
       else if(!user.getSavedSchools().isEmpty()){
     	
-    	System.out.print("please enter the name of the school you want to view details: ");
+    	System.out.println("please enter the name of the school you want to view details: ");
         String sName= scan.next();
         while(!user.getSavedSchools().contains(sName)) {
         	System.out.println("no match, please enter again");
@@ -89,15 +92,17 @@ public class UserInterface
         
         viewSavedSchoolDetails(db.getUniversity(sName));
         homePage();
-	    }
-	      else {
-	    	  System.out.print("Invalid input ");  
+
 	      }
+
+	    }
+	      
         
-      }
+      
 
 
      else if (str.equals("p") || str.equals("P")) {  
+    	viewProfile();
         System.out.print("Do you want to edit your profile? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
@@ -113,8 +118,12 @@ public class UserInterface
             ai.logout();
 
         }  
-   
+     else {
+   	  System.out.print("Invalid input ");  
+   	  homePage();
+     }
     }
+
 
   
   /**
@@ -125,7 +134,8 @@ public class UserInterface
 	  
     viewSavedSchoolDetails(u);
     viewSearchedSchools(sc.recSearch(u));
-    String s2 = scan.next("Do you want to save it? y/n:");
+    System.out.print("Do you want to save it? y/n:");  
+    String s2 = scan.next();
     if(s2.equals("y")){
       saveToSavedSchoolList(u);
     }
@@ -133,6 +143,7 @@ public class UserInterface
       homePage();
     }
   }
+  
   /**
    * takes the view saved school command and displays the saved school list
    */
@@ -218,82 +229,67 @@ public class UserInterface
   /**
    * This method takes the search command and shows the result
    * 
-   * @param schoolName the name of the school
-   * @param state      the state of the school
-   * @param location   the location of the school
-   * @param control    the area of the school
-   * @param students   the number of students in the school
-   * @param femPerc    the female percentage of the school
-   * @param satV       the SAT verbal score of the school
-   * @param satM       the SAT math score of the school
-   * @param cost       the cost of the school
-   * @param finAidPerc the financial aid percentage of the school
-   * @param applicants the number of applicants in the school
-   * @param admitted   the number of admitted students in the school
-   * @param enrolled   the number of enrolled students in the school
-   * @param acadScale  the academic scale of the school
-   * @param socScale   the social scale of the school
-   * @param qualScale  the quality scale of the schools
-   * @param emphases   the department fields (emphasis) of the school
-   * 
-   * @return Collection the schools that have matched this criteria
+   * @return the schools that have matched this criteria
    */
   public ArrayList<University> searchForSchools()
   {
-	 /* String schoolName=strIn("School Name: ");
-      String state= strIn("State: ");
-      String location=strIn("Location: ");
-      String control=strIn("Control: ");
-      int studentsLow=intIn("low num of students: ");                           
-      int studentsHigh=intIn("high num of students: ");
-      int femPercLow=intIn("low % of female: ");
-      int femPercHigh =intIn("high % of female: ");
-      int satVLow=intIn("low verbal sat: ");
-      int satVHigh=intIn("high verbal sat: ");                       
-      int satMLow=intIn("low math sat: ");
-      int satMHigh=intIn("high math sat: ");
-      int costLow=intIn("low cost: ");
-      int costHigh=intIn("High cost: ");
-      int finAidPercLow=intIn("low financial aid: ");
-      int finAidPercHigh=intIn("high financial aid: ");                       
-      int applicantsLow=intIn("low applicants num: ");
-      int applicantsHigh=intIn("high applicants num: ");
-      int admittedLow=intIn("low admitted num: ");
-      int admittedHigh=intIn("high admitted num: ");                            
-      int enrolledLow=intIn("low enrolled num: ");
-      int enrolledHigh=intIn("high enrolled num: ");
-      int acadScaleLow=intIn("low academic scale: ");
-      int acadScaleHigh=intIn("high academic scale: ");
-      int socLifeScaleLow=intIn("low social life scale: ");                      
-      int socLifeScaleHigh =intIn("high social life scale: ");  
-      int qualLifeScaleLow=intIn("low qual life scale: ");  
-      int qualLifeScaleHigh=intIn("high qual life scale: ");  
-      ArrayList<String> emphases=new ArrayList<String>();
-      String sss=strIn("emphases: ");
-      while(!sss.equals(" ")){
-        emphases.add(sss);
-        sss=strIn("some more emphases? space to finish: ");
-      }
-    return sc.search( schoolName,  state,  location,  control, studentsLow,
-            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
-            satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
-            applicantsLow,  applicantsHigh,  admittedLow,  admittedHigh, 
-            enrolledLow,  enrolledHigh,  acadScaleLow,  acadScaleHigh,  socLifeScaleLow,
-            socLifeScaleHigh,  qualLifeScaleLow,  qualLifeScaleHigh, 
-            emphases);
-            */
-	  ArrayList<String> test=new ArrayList<String>();
-	  //test.add("BIOLOGY");
-	  ArrayList<University> ulist= sc.search( "YA",  "",  "", "", 0,
-              99999,  0,  99,  0,  999,0,999, 0,99999,  0,  99,
-              0,  99999,  0,  99, 
-              0,  99,  0,  99,  0,
-              99,  0,  99, test);
-	  if (ulist.isEmpty())
+	  String schoolName = "", state = "", location = "", control = "";
+	  int studentsLow = 0, studentsHigh = 999999, femPercLow = 0, femPercHigh = 100, satVLow = 0,
+			  satVHigh = 1000, satMLow = 0, satMHigh = 1000, costLow = 0, costHigh = 99999, finAidPercLow = 0, 
+			  finAidPercHigh = 100, applicantsLow = 0, applicantsHigh = 99999, admittedLow = 0, 
+			  admittedHigh = 100, enrolledLow = 0, enrolledHigh =100, acadScaleLow = 0, acadScaleHigh = 99, 
+			  socLifeScaleLow = 0, socLifeScaleHigh = 99, qualLifeScaleLow = 0, qualLifeScaleHigh = 99;
+	  ArrayList<String> emphases = new ArrayList<String>();
+	  ArrayList<University> uList = new ArrayList<University>();
+	  System.out.println("Enter the desired search criteria");
+	  int i = intIn("1: Name\n2: State\n3: Location\n4: ");
+	  do
 	  {
-		  System.out.println("empty");
+		  switch(i)
+		  {
+		  case 1: schoolName=strIn("School Name: "); i = intIn("");  					break;
+		  case 2: state = strIn("State: "); i = intIn("");          		  	  		break;
+		  case 3: location=strIn("Location: ");   i = intIn("");    		      		break;
+		  case 4:  control=strIn("Control: "); i = intIn("");                   		break;
+		  case 5: studentsLow=intIn("low num of students: ");i = intIn("");	  			break;
+		  case 6: studentsHigh=intIn("high num of students: ");	 i = intIn(""); 		break;
+		  case 7: femPercLow=intIn("low % of female: "); 		 i = intIn(""); 		break;
+		  case 8: femPercHigh =intIn("high % of female: ");		 i = intIn(""); 		break;
+		  case 9: satVLow=intIn("low verbal sat: ");			 i = intIn(""); 		break;
+		  case 10: satVHigh=intIn("high verbal sat: ");			i = intIn("");   		break;
+		  case 11: satMLow=intIn("low math sat: ");				i = intIn("");   		break;
+		  case 12: satMHigh=intIn("high math sat: ");			i = intIn("");   		break;
+		  case 13: costLow=intIn("low cost: ");					i = intIn("");   		break;
+		  case 14: costHigh=intIn("High cost: ");				i = intIn("");   		break;
+		  case 15: finAidPercLow=intIn("low financial aid: ");	 i = intIn("");  		break;
+		  case 16: finAidPercHigh=intIn("high financial aid: "); i = intIn("");  		break;
+		  case 17: applicantsLow=intIn("low applicants num: ");	 i = intIn("");  		break;
+		  case 18: applicantsHigh=intIn("high applicants num: "); i = intIn(""); 		break;
+		  case 19: admittedLow=intIn("low admitted num: ");		  i = intIn(""); 		break;
+		  case 20: admittedHigh=intIn("high admitted num: "); 	 i = intIn(""); 		break;
+		  case 21: enrolledLow=intIn("low enrolled num: ");		 i = intIn(""); 		break;
+		  case 22: enrolledHigh=intIn("high enrolled num: ");	 i = intIn("");  		break;
+		  case 23: acadScaleLow=intIn("low academic scale: ");	 i = intIn("");  		break;
+		  case 24: acadScaleHigh=intIn("high academic scale: ");  i = intIn(""); 		break;
+		  case 25: socLifeScaleLow=intIn("low social life scale: ");i = intIn(""); 		break;
+		  case 26: socLifeScaleHigh =intIn("high social life scale: ");i = intIn("");  break;
+		  case 27: qualLifeScaleLow=intIn("low qual life scale: ");		i = intIn(""); break;
+		  case 28: qualLifeScaleHigh=intIn("high qual life scale: ");i = intIn(""); 	break;
+		  case 29: emphases.add(strIn("Add an emphasis"));			i = intIn(""); 	break;
+		  
+		  
+		  default: System.out.println("ERROR: Invalid input");			break; 
 	  }
-	  return ulist;
+	  }while(i != 30);
+	  uList = sc.search(schoolName,  state,  location,  control, studentsLow,
+	            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
+	            satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
+	            applicantsLow,  applicantsHigh,  admittedLow,  admittedHigh, 
+	            enrolledLow,  enrolledHigh,  acadScaleLow,  acadScaleHigh,  socLifeScaleLow,
+	            socLifeScaleHigh,  qualLifeScaleLow,  qualLifeScaleHigh, 
+	            emphases);
+	  //uList=sc.search("Y", "", "", "", 0, 999999, 0, 99, 0, 999, 0, 999, 0, 99999, 0, 99, 0, 99999, 0, 99, 0, 999999, 0, 99999, 0, 99999, 0, 99, emphases);
+	  return uList;
 	 
   }
   /**
@@ -323,7 +319,7 @@ public class UserInterface
     ufc.removeSavedSchool( u);
     this.user=(GeneralUser)db.getUser(user.getUsername());
     ufc.updateUser(user);
-    System.out.println("Success");
+    System.out.println("Success!" + "Your current list of saved schools are: " + user.getSavedSchools() + '\n');
     homePage();
   }
   
@@ -337,7 +333,5 @@ public class UserInterface
     int re= scan.nextInt();
     return re;
   }
-  
-//para for copy: String schoolName, String state, String location, String control,int students, int femPerc, int satM, int cost, int finAidPerc, int applicants, int admitted, ArrayList<String> emphases
 }
 
