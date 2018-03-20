@@ -30,7 +30,9 @@ public class AdminInterface {
   }
   //==================================METHODS==========================
   /**
-   * Shows a list of all universities in the system
+   * Shows a list of all universities in the system, and
+   * presents options for the admin to manage those
+   * universities.
    */
   public void viewUniversities() {
 	ad.viewUniversities();
@@ -97,6 +99,8 @@ public class AdminInterface {
   
   /**
    * Shows a list of all users in the system (both general and admin)
+   * and presents a list of options for the admin to manage those
+   * users.
    */
   public void viewUsers() {
 	ad.viewUsers();
@@ -105,7 +109,6 @@ public class AdminInterface {
                          +'\t'+ "a: Add User" + '\n'
                          +'\t'+ "e: Edit User" + '\n'
                          +'\t'+ "d: Deactivate User" + '\n'
-                         //+'\t'+ "r" + '\n' // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                          +'\t'+ "q: Quit (Return to Homepage)" + '\n' +
                          "Enter Here: ");
     String cmd = sc.next();
@@ -134,11 +137,6 @@ public class AdminInterface {
     		viewUsers();
     	}
     }
-//    else if(cmd.equals("r")){ // TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//    	DBController db = new DBController();
-//    	db.deleteAccount(ad.getAccount(sc.next()));
-//    	viewUsers();
-//    }
     else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
     	homepage();
     }
@@ -200,79 +198,79 @@ public class AdminInterface {
 				  				"13: academic scale" 						+'\n'+'\t'+
 				  				"14: social scale" 							+'\n'+'\t'+
 				  				"15: quality scale" 						+'\n'+'\t'+
-				  				"16: add emphases" 							+'\n'+'\t'+
-				  				"17: remove emphases" 						+'\n'+'\t'+
+				  				"16: add emphases (automatically saved once entered)" 							+'\n'+'\t'+
+				  				"17: remove emphases (automatically saved once entered)" 						+'\n'+'\t'+
 				  				"s: Save"									+'\n'+'\t'+
 				  				"c: Cancel"									+'\n'+
             				"Enter Here: ");
 		  prompt = sc.next();
 		  switch (prompt){
 		  	case "1":
-		  		System.out.print("Enter the state: ");
+		  		System.out.print("=======================================" + '\n' + "Enter the state: ");
 		  		u.setState(sc.next());
 		  		break;
 		  	case "2":
-		  		System.out.print("Enter the location: ");
+		  		System.out.print("=======================================" + '\n' + "Enter the location: ");
 		  		u.setLocation(sc.next());
 		  		break;
 		  	case "3":
-		  		System.out.print("Enter the control: ");
+		  		System.out.print("=======================================" + '\n' + "Enter the control: ");
 		  		u.setControl(sc.next());
 		  		break;
 		  	case "4":
-		  		System.out.print("Enter the number of students: ");
+		  		System.out.print("=======================================" + '\n' + "Enter the number of students: ");
 		  		u.setStudents(sc.nextInt());
 		  		break;
 	        case "5":
-	        	System.out.print("Enter the female percentage: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the female percentage: ");
 	        	u.setFemPerc(sc.nextInt());
 	        	break;
 	        case "6":
-	        	System.out.print("Enter the SAT verbal score: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the SAT verbal score: ");
 	        	u.setSatV(sc.nextInt());
 	        	break;
 	        case "7":
-	        	System.out.print("Enter the SAT math score: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the SAT math score: ");
 	        	u.setSatM(sc.nextInt());
 	        	break;
 	        case "8":
-	        	System.out.print("Enter the cost: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the cost: ");
 	        	u.setCost(sc.nextInt());
 	        	break;
 	        case "9":
-	        	System.out.print("Enter the financial aid percentage: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the financial aid percentage: ");
 	        	u.setFinAidPerc(sc.nextInt());
 	        	break;
 	        case "10":
-	        	System.out.print("Enter the applicants: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the applicants: ");
 	        	u.setApplicants(sc.nextInt());
 	        	break;
 	        case "11":
-	        	System.out.print("Enter the admitted students: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the admitted students: ");
 	        	u.setAdmitted(sc.nextInt());
 	        	break;
 	        case "12":
-	        	System.out.print("Enter the enrolled students: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the enrolled students: ");
 	        	u.setEnrolled(sc.nextInt());
 	        	break;
 	        case "13":
-	        	System.out.print("Enter the academic scale: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the academic scale: ");
 	        	u.setAcadScale(sc.nextInt());
 	        	break;
 	        case "14":
-	        	System.out.print("Enter the social scale: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the social scale: ");
 	        	u.setSocScale(sc.nextInt());
 	        	break;
 	        case "15":
-	        	System.out.print("Enter the quality scale: ");
+	        	System.out.print("=======================================" + '\n' + "Enter the quality scale: ");
 	        	u.setQualScale(sc.nextInt());
 	        	break;
 	        case "16":
-	        	System.out.print("Enter an emphasis to add (automatically saved once entered): ");
+	        	System.out.print("=======================================" + '\n' + "Enter an emphasis to add: ");
 	        	ad.addAnEmphasis(u, sc.next());
 	        	break;
 	        case "17":
-	        	System.out.print("Enter an emphasis to remove (automatically saved once entered): ");
+	        	System.out.print("=======================================" + '\n' + "Enter an emphasis to remove: ");
 	        	ad.deleteAnEmphasis(u, sc.next());
 	        	break;
 	        case "s":

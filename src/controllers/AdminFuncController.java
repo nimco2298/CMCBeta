@@ -17,6 +17,7 @@ public class AdminFuncController{
   /** An Admin class named admin */
   @SuppressWarnings("unused")
   private Admin admin;
+  private DBController dbc = new DBController();
   
   // ================================= CONSTRUCTORS =================================
   /**
@@ -45,7 +46,6 @@ public class AdminFuncController{
    * @param information a list of a user's properties including one that determines if the user is an admin or a general user (type)
    */
   public void addAccount(ArrayList<String> information){ // DONE I THINK!!!!!!!!!!!!!!!
-    DBController dbc = new DBController();
     char type = information.get(5).charAt(0);
     if(type == 'a'){
       // new Admin(username, password, active, firstName, lastName, type)
@@ -63,7 +63,6 @@ public class AdminFuncController{
    * View a list of users; gets a list of users from the database
    */
   public void viewUsers(){
-    DBController dbc = new DBController();
     ArrayList<Account> accountList = dbc.getAccounts();
     System.out.println("========================================================================================================================" +'\n'+
     					"First" + '\t'+'\t' + "Last" + '\t'+'\t' + "Username" + '\t'+'\t' + "Password" + '\t'+'\t' + "Type" + '\t'+'\t' + "Status" +'\n'+ 
@@ -74,39 +73,10 @@ public class AdminFuncController{
     }
   }
   
-  
-  /**
-   * View a list of universities; gets a list of universities from the database
-   */
-//  public void viewUniversities(){
-//    DBController dbc = new DBController();
-//    ArrayList<University> list = dbc.getUniversities();
-//    for(University u: list){
-//      System.out.println("School: " + u.getName() +'\n'+
-//                         "State: " + u.getState() +'\n'+
-//                         "Location: " + u.getLocation() +'\n'+
-//                         "Control: " + u.getControl() +'\n'+
-//                         "# of Students: " + u.getStudents() +'\n'+
-//                         "% Females: " + u.getFemPerc() +'\n'+
-//                         "SAT Verbal: " + u.getSatV() +'\n'+
-//                         "SAT Math: " + u.getSatM() +'\n'+
-//                         "Expenses: " + u.getCost() +'\n'+
-//                         "% with Financial Aid: " + u.getFinAidPerc() +'\n'+
-//                         "# of Applicants: " + u.getApplicants() +'\n'+
-//                         "% Admitted: " + u.getAdmitted() +'\n'+
-//                         "% Enrolled: " + u.getEnrolled() +'\n'+
-//                         "Academic Scale (1-5): " + u.getAcadScale() +'\n'+
-//                         "Social Scale (1-5): " + u.getSocScale() +'\n'+
-//                         "Quality of Life Scale (1-5): " + u.getQualScale() +'\n'+
-//                         "======================================================");
-//    }
-//  }
-  
   /**
    * View a list of university names; gets a list of universities from the database
    */
   public void viewUniversities(){
-	DBController dbc = new DBController();
     ArrayList<University> list = dbc.getUniversities();
     System.out.println("=======================================" + '\n' +
     				   "             SchoolNames" + '\n' + 
@@ -119,9 +89,10 @@ public class AdminFuncController{
   
   /**
    * View the university's details
+   * 
+   * @param univName the name of the university
    */
   public void viewUniversityDetails(String univName){
-	DBController dbc = new DBController();
     University u = dbc.getUniversity(univName);
     System.out.println("=======================================" 			+'\n'+'\t'+
     				    univName + " Details"							 	+'\n'+ 
@@ -154,7 +125,6 @@ public class AdminFuncController{
    * @param account the account of the user
    */
   public void saveAccountChanges(Account account){
-    DBController dbc = new DBController();
     dbc.updateAccount(account);
   }
   
@@ -164,7 +134,6 @@ public class AdminFuncController{
    * @param univ the university to be deleted
    */
   public void delete(University univ){
-    DBController dbc = new DBController();
     deleteEmphases(univ);
     dbc.deleteUniversity(univ);
   }
@@ -177,7 +146,6 @@ public class AdminFuncController{
    */
   public University getUniversity(String univ) throws NullPointerException
   {
-    DBController dbc = new DBController();
     return dbc.getUniversity(univ);
   }
   
@@ -189,7 +157,6 @@ public class AdminFuncController{
    */
   public Account getAccount(String account) throws NullPointerException
   {
-    DBController dbc = new DBController();
     return dbc.getUser(account);
   }
   
@@ -199,7 +166,6 @@ public class AdminFuncController{
    * @param univ the university
    */
   public void saveUnivChanges(University univ){
-    DBController dbc = new DBController();
     dbc.updateUniversity(univ);
   }
   
@@ -209,11 +175,15 @@ public class AdminFuncController{
    * @param univ the University
    */
   public void addUniversity(University univ){
-    DBController dbc = new DBController();
     dbc.addNewUniversity(univ);
     addEmphases(univ);
   }
   
+  /**
+   * Adds all emphases to a university in the database
+   * 
+   * @param univ the University
+   */
   public void addEmphases(University univ) {
 	ArrayList<String> emphases = univ.getEmphases();
 	for(String emphasis: emphases) {
@@ -221,12 +191,21 @@ public class AdminFuncController{
 	}
   }
   
+  /**
+   * Adds one emphasis to a university in the database
+   * 
+   * @param univ the University
+   * @param emphasis the emphasis to add
+   */
   public void addAnEmphasis(University univ, String emphasis) {
-	  	//univ.addEmphases(emphasis);
-  		DBController dbc = new DBController();
-  		dbc.addEmphasis(univ, emphasis);
+  	dbc.addEmphasis(univ, emphasis);
   }
   
+  /**
+   * Deletes all emphases from a university in the database
+   * 
+   * @param univ the University
+   */
   public void deleteEmphases(University univ) {
 	ArrayList<String> emphases = univ.getEmphases();
 	for(String emphasis: emphases) {
@@ -234,9 +213,13 @@ public class AdminFuncController{
 	}
   }
   
+  /**
+   * Deletes one emphasis from a university in the database
+   * 
+   * @param univ the University
+   * @param emphasis the emphasis to delete
+   */
   public void deleteAnEmphasis(University univ, String emphasis) {
-	  	//univ.removeEmphases(emphasis);
-		DBController dbc = new DBController();
-		dbc.deleteEmphasis(univ, emphasis);
+	dbc.deleteEmphasis(univ, emphasis);
   }
 }

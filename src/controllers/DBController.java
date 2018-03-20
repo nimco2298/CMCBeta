@@ -227,6 +227,11 @@ public class DBController
 	ud.university_addUniversityEmphasis(univ.getName(), emphasis);
   }
   
+  /**
+   * Deletes an emphasis to the corresponding university in the database
+   * @param univ the university to delete the emphasis
+   * @param emphasis the emphasis to delete
+   */
   public void deleteEmphasis(University univ, String emphasis) 
   {
     ud.university_removeUniversityEmphasis(univ.getName(), emphasis);
