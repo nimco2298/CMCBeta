@@ -42,7 +42,7 @@ public class UserInterface
                         	"p: Manage Your Profile"						+'\n'+'\t'+
                         	"q: Logout"				+'\n'+
                         "Enter Here: ");
-   // System.out.print("s for search, m for manage saved schools, p for manage profile, q for quit program: ");
+  
     String str= scan.next();
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
@@ -78,7 +78,6 @@ public class UserInterface
     	System.out.println("please enter the name of the school you want to remove: ");
     	String sName="";
     	sName= scan.next();
-        System.out.println(sName);
         removeSavedSchool(db.getUniversity(sName));
       }
  
@@ -320,7 +319,7 @@ public class UserInterface
     ufc.removeSavedSchool( u);
     this.user=(GeneralUser)db.getUser(user.getUsername());
     ufc.updateUser(user);
-    System.out.println("Success");
+    System.out.println("Success!" + "Your current list of saved schools are: " + user.getSavedSchools() + '\n');
     homePage();
   }
   
