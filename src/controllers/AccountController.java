@@ -12,16 +12,17 @@ import interfaces.*;
  * 
  *
  * @author  Nimco Hussein
- * @version March 19 2018
+ * @version March 20 2018
  */
 public class AccountController  
 {
-  /** an Account object that stores account information */	
+  /** an Account object that stores account information */
   private Account account;
+  
   /** an Account object that stores account information */	
   public boolean loginStatus;
   
-  /**A constructor that creates an AccountController object 
+  /**A default constructor that creates an AccountController object 
     */
   public AccountController()
   {
@@ -42,20 +43,23 @@ public class AccountController
     // find a user in the database   
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
-
-  //  System.out.println(matchedUser.getDetails());
-
     
     if(matchedUser.getActive() == 'N')
     {
-    	
     	System.out.println("Error: Your account is deactivated and you cannot be logged in");
     	this.loginStatus = false;
     	return false;
     }
 
+    if(matchedUser.getUsername().equals("") && matchedUser.getPassword().equals(""))
+    {
+    	System.out.println("Error: A username and password was not entered.");
+        this.loginStatus = false;
+        return false;
+    	
+    }
     //check if the matchedUser is a dummy user, if it is do not CONTINUE
-    if(matchedUser.getUsername().equals("DummyUser"))
+    else if(matchedUser.getUsername().equals("DummyUser"))
     { 
       //The user name and password associated with this account is not registered 
       System.out.println("Error: The username is not registered ");
@@ -69,11 +73,11 @@ public class AccountController
       this.loginStatus = false;
       return false;
     }
+    
     else { 
       
       this.account = matchedUser;  
       this.loginStatus = true;
-     // System.out.println(matchedUser.getDetails());
       char type = account.getType(); // get the type associated with this account 
       
       if(type == 'a') 
@@ -101,15 +105,12 @@ public class AccountController
     
   }
   
-  /** The logout method will set their account login status to false, and prompt them to log in page;
+  /** The logout method will set their account login status to false.
     */ 
   public void logout() 
   {
    
-    this.loginStatus = false;
-    
+    this.loginStatus = false;   
   } 
-  
-  
   
 }

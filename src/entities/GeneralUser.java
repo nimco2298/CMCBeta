@@ -11,7 +11,7 @@ import java.util.*; //Java's ArrayList<ET>
  * GeneralUser is a class that is an Account and stores a user's information.
  *
  * @author  Nimco Hussein
- * @version March 15, 2018
+ * @version March 20, 2018
  */
 public class GeneralUser extends Account
 {
@@ -19,6 +19,7 @@ public class GeneralUser extends Account
   /* the user's list of saved schools  */
   private ArrayList<String> savedUniversities;
  
+  
   /** A constructor that creates a GeneralUser object
   * @param String firstName   a user's first name
   * @param String  lastName   a user's last name 
@@ -35,10 +36,11 @@ public class GeneralUser extends Account
     this.setActive(active);
     this.setType('u');
     this.setPassword(password);
-    this.savedUniversities = savedUniversities; // intializes all the users saved schools from DB
+    this.savedUniversities = savedUniversities; // initializes all the users saved schools from DB
   }
   
   /** Returns the list of saved schools as a string
+   * 
   * @return ArrayList<String>   list of saved schools of a General User
   */ 
   public ArrayList<String> getSavedSchools()

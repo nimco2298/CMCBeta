@@ -11,7 +11,12 @@ import java.util.*;
 import entities.*;
 import controllers.*;
 
-
+/**
+ * UserInterface is responsible for calling the UserFuncController
+ * 
+ * @author Karld Bai
+ * @version March 20, 2018
+ */
 public class UserInterface
 {
   private GeneralUser user;
@@ -242,7 +247,7 @@ public class UserInterface
 	  ArrayList<String> emphases = new ArrayList<String>();
 	  ArrayList<University> uList = new ArrayList<University>();
 	  System.out.println("Enter the desired search criteria");
-	  int i = intIn("1: Name\n2: State\n3: Location\n4: ");
+	  int i = intIn("1: School Name\n2: State\n3: Location\nEnter Search Criteria Here: ");
 	  do
 	  {
 		  switch(i)
