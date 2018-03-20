@@ -103,6 +103,7 @@ public class UserInterface
 
 
      else if (str.equals("p") || str.equals("P")) {  
+    	viewProfile();
         System.out.print("Do you want to edit your profile? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
