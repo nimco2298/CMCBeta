@@ -3,13 +3,12 @@
  * File:CMCDriver.java
  */
 
-
 package driver;
 import java.util.*;
 import interfaces.AccountInterface;
 
 /**
- * The main driver class for the CMC project
+ * The main driver class for the CMC project.
  * 
  * @author Ian Bush
  * @version March 20, 2018

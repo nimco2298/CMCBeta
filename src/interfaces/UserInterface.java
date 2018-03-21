@@ -12,7 +12,7 @@ import entities.*;
 import controllers.*;
 
 /**
- * UserInterface is responsible for calling the UserFuncController
+ * UserInterface is responsible for enabling various controllers to carry out a user function.
  * 
  * @author Karld Bai
  * @version March 20, 2018

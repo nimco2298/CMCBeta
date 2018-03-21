@@ -32,10 +32,10 @@ public class AccountController
     * If the credentials that are added are verified, then based on the type a GeneralUser or Admin object 
     * will be created
     * 
-    * @param username entered username of user attempting to login
-    * @param password entered password of user attempting to login
+    * @param username the entered username of user attempting to login
+    * @param password  the entered password of user attempting to login
     * 
-    * @return true if user was logged in false if they were not
+    * @return true if user was logged in, false if they were not
     */ 
   public boolean login(String username, String password)
   {
@@ -51,29 +51,36 @@ public class AccountController
     	return false;
     }
 
-    if(matchedUser.getUsername().equals("") && matchedUser.getPassword().equals(""))
+    else if(matchedUser.getUsername().equals("") && matchedUser.getPassword().equals(""))
     {
     	System.out.println("Error: A username and password was not entered.");
         this.loginStatus = false;
         return false;
     	
     }
-    //check if the matchedUser is a dummy user, if it is do not CONTINUE
-    else if(matchedUser.getUsername().equals("DummyUser"))
-    { 
-      //The user name and password associated with this account is not registered 
-      System.out.println("Error: The username is not registered ");
+    //check if the matchedUser is a dummy user, if it is do not CONTINUE onto User homepage
+  else if(matchedUser.getUsername().equals("DummyUser"))
+   { 
+     //The user name and password associated with this account is not registered 
+      System.out.println("Error: The username is not registered.");
       this.loginStatus = false;
       return false;
     }
     else if(!matchedUser.getPassword().equals(password))
     {
       //print the username and password do not match an an associated account
-      System.out.println("Error: The username and password do not match");
+      System.out.println("Error: The password entered does not match an account.");
       this.loginStatus = false;
       return false;
     }
     
+    else if(!matchedUser.getUsername().equals(username))
+    {
+      //print the username and password do not match an an associated account
+      System.out.println("Error: The username entered does not match an account");
+      this.loginStatus = false;
+      return false;
+    }
     else { 
       
       this.account = matchedUser;  
@@ -99,6 +106,7 @@ public class AccountController
       else
       {
         System.out.println("Error: There is something wrong with the account in the database. Please try again.");
+        this.loginStatus = false;
         return false;
       }
     }

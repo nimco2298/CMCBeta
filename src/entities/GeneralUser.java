@@ -6,7 +6,6 @@
 package entities;
 import java.util.*; //Java's ArrayList<ET>
 
-
 /**
  * GeneralUser is a class that is an Account and stores a user's information.
  *
