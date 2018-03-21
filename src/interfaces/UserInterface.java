@@ -102,10 +102,6 @@ public class UserInterface
 
 	    }
 	      
-        
-      
-
-
      else if (str.equals("p") || str.equals("P")) {  
     	viewProfile();
         System.out.print("Do you want to edit your profile? y/n: ");
@@ -128,7 +124,6 @@ public class UserInterface
    	  homePage();
      }
     }
-
 
   
   /**
@@ -165,13 +160,7 @@ public class UserInterface
     System.out.println("School details: ");
     u.printDetails();
   }
-  /**
-   * 
-   */
-  public boolean isEmpty(){
-    
-    return true;
-  }
+ 
   
   /**
    * takes the view profile command and displays the profile of the user
@@ -234,7 +223,7 @@ public class UserInterface
   /**
    * This method takes the search command and shows the result
    * 
-   * @return the schools that have matched this criteria
+   * @return ArrayList<University> the schools that have matched this criteria
    */
   public ArrayList<University> searchForSchools()
   {
@@ -317,6 +306,7 @@ public class UserInterface
     System.out.println("Success");
     homePage();
   }
+  
   /*
    * removes the selected school
    */
