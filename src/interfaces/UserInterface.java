@@ -17,6 +17,7 @@ import controllers.*;
  * @author Karld Bai
  * @version March 20, 2018
  */
+
 public class UserInterface
 {
   private GeneralUser user;
@@ -36,7 +37,7 @@ public class UserInterface
   Scanner scan = new Scanner(System.in);
   
   /**
-   * redirects the user to the homepage
+   * Redirects the user to their homepage
    */
   public void homePage(){
     System.out.println( "=======================================" 			+'\n'+
@@ -127,7 +128,8 @@ public class UserInterface
 
   
   /**
-   * takes the view details command and displays the details
+   * Takes the view details command and displays the details
+   * @param University  the selected university 
    */
   public void viewSchoolDetailsAndTop5(University u)
   {
@@ -145,7 +147,7 @@ public class UserInterface
   }
   
   /**
-   * takes the view saved school command and displays the saved school list
+   * Takes the view saved school command and displays the saved school list
    */
   public void viewSavedSchools(){
 	  System.out.println("Your list of saved schools:" + "\n");
@@ -154,7 +156,7 @@ public class UserInterface
     }
   }
   /**
-   * takes the view saved school details command and displays the details
+   * Takes the view saved school details command and displays the details
    */
   public void viewSavedSchoolDetails(University u){
     System.out.println("School details: ");
@@ -163,7 +165,7 @@ public class UserInterface
  
   
   /**
-   * takes the view profile command and displays the profile of the user
+   * Takes the view profile command and displays the profile of the user
    */
   public void viewProfile(){
     System.out.println("Profile details: \n"+this.user.getDetails());
@@ -171,7 +173,7 @@ public class UserInterface
   
   
   /**
-   * takes the edit file command and redirect the user to the edit page
+   * Takes the edit file command and redirect the user to the edit page
    */
   public void editProfile(){
 	  System.out.println("What would you like to edit:" + '\n' +
@@ -287,8 +289,8 @@ public class UserInterface
 	 
   }
   /**
-   * displays the result of searching
-   * @param  ArrayList<University>  
+   * Displays the result of all universiy names in a list of Universities.
+   * @param  c  The list of Universities stored in DB
    */
   public void viewSearchedSchools(ArrayList<University> c){
     System.out.println("Here is the result of searching: ");
@@ -296,8 +298,10 @@ public class UserInterface
       System.out.println(u.getName());
     }
   }
-  /*
-   *  takes the save to list command and add the school to the saved school list 
+  
+  /**
+   * Takes the save to list command and add the school to the saved school list 
+   * @param  u The select university to save   
    */
   public void saveToSavedSchoolList(University u){
     ufc.saveToSavedSchoolList(u);
@@ -307,8 +311,9 @@ public class UserInterface
     homePage();
   }
   
-  /*
-   * removes the selected school
+  /**
+   * Removes a school from  the saved school list 
+   * @param  u  The select university to remove 
    */
   public void removeSavedSchool(University u){
     ufc.removeSavedSchool( u);
@@ -318,15 +323,25 @@ public class UserInterface
     homePage();
   }
   
+  /**
+   * Takes a string and prints it, and prompts user to enter another String
+   * @param ss       a string that will be printed 
+   * @return String  a new string the User entered
+   */
   public String strIn(String ss){
     System.out.print(ss);
     String re= scan.next();
     return re;
   }
+  
+  /**
+   * Takes a String and prints it, and prompts user to enter a Integer 
+   * @param ss       a string that will be printed 
+   * @return int  a new integer the User entered
+   */
   public int intIn(String ss){
     System.out.print(ss);
     int re= scan.nextInt();
     return re;
   }
 }
-

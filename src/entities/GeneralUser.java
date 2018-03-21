@@ -1,7 +1,6 @@
-/** 
-  * File: GeneralUser.java
-  */
-
+/*
+ * File:GeneralUser.java
+ */
 
 package entities;
 import java.util.*; //Java's ArrayList<ET>
@@ -48,6 +47,10 @@ public class GeneralUser extends Account
    return this.savedUniversities;
       
   } 
+  /**Prints a the Users account details
+   * 
+   * @return String the string representation of Account details
+   */
   public String getDetails() {
 	  
 	  return "\n" + "***ACCOUNT INFORMATION*** \n"

@@ -10,14 +10,15 @@ import controllers.*;
 /**
  * The starting terminal in which the user will log into the system
  * @author Ian Bush
- * @version March 15, 2018
+ * @version March 20, 2018
  */
 public class AccountInterface
 {
+	/** instance of AccountController */
   private AccountController ac;
   
   /**
-   * Constructor 
+   * Constructor to create ac object
    */
   public AccountInterface()
   {

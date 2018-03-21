@@ -1,3 +1,8 @@
+
+/*
+ * File:DBController.java
+ */
+
 package controllers;
 import dblibrary.project.csci230.*;
 import java.util.ArrayList;
@@ -10,11 +15,11 @@ import entities.*;
  */
 public class DBController
 {
-  /* Accessing the database library */
+  /** Accessing the database library */
   private UniversityDBLibrary ud;
   
   /**
-   * Constructor
+   * Constructor to create a UniversityDBLibrary object
    */
   public DBController()
   {
@@ -23,7 +28,7 @@ public class DBController
   
   /**
    * Returns the list of all universities in the database
-   * @return all of the universities in the system
+   * @return ArrayList<University> all of the universities in the system
    */
   public ArrayList<University> getUniversities()
   {
@@ -56,8 +61,8 @@ public class DBController
   
   /**
    * Returns a specific university based on the name provided
-   * @param univName the name of the university
-   * @return the university with the matching name
+   * @param univName    the name of the university
+   * @return University the university with the matching name
    */
   public University getUniversity(String univName)
   {
@@ -72,7 +77,7 @@ public class DBController
   
   /**
    * Returns a list of all users in the database
-   * @return all of the users in the system
+   * @return ArrayList<Account> all of the users in the system
    */
   public ArrayList<Account> getAccounts()
   {
