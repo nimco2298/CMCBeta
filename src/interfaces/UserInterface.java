@@ -81,9 +81,13 @@ public class UserInterface
       System.out.print( "\n" + "Please select r for removing a school or  v for viewing further details: ");
       String s3 = scan.next();
       if(s3.equals("r")){
+    	  if(user.getSavedSchools().isEmpty()) {
+    		  System.out.println("Error: " + user.getSavedSchools() + " Your list of saved schools is empty! You cannot remove any schools!");
+    		  homePage();
+    	  }
     	System.out.println("please enter the name of the school you want to remove: ");
-    	String sName="";
-    	sName= scan.next();
+      	String sName="";
+      	sName= scan.next();
         removeSavedSchool(db.getUniversity(sName));
       }
  
@@ -316,7 +320,8 @@ public class UserInterface
    * @param  u  The select university to remove 
    */
   public void removeSavedSchool(University u){
-    ufc.removeSavedSchool( u);
+
+    ufc.removeSavedSchool(u);
     this.user=(GeneralUser)db.getUser(user.getUsername());
     ufc.updateUser(user);
     System.out.println("Success!" + "Your current list of saved schools are: " + user.getSavedSchools() + '\n');
