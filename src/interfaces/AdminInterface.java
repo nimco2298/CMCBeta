@@ -343,12 +343,24 @@ public class AdminInterface {
       System.out.print("Enter an emphasis/use underscore for spacing (Enter Press q to finish): ");
       emphasis = sc.next();
     }
-    University u = new University(schoolName, state, location, control, students, femPerc, satV, satM, cost,
-                                  finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
-    ad.addUniversity(u);
-    ad.addEmphases(u);
-    System.out.println("*** Saved university " + schoolName + " to list ***");
-    viewUniversities();
+    System.out.println("Add School or Cancel:" + '\n' + '\t' + "a: Add School" + '\n' + '\t' + "c: Cancel Changes");
+    String finish = sc.next();
+    if(finish.equals("a")||finish.equals("A")) {
+    	University u = new University(schoolName, state, location, control, students, femPerc, satV, satM, cost,
+                						finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
+    	ad.addUniversity(u);
+    	ad.addEmphases(u);
+    	System.out.println("*** Saved university " + schoolName + " to list ***");
+    	viewUniversities();
+    }
+    else if(finish.equals("c")||finish.equals("C")) {
+      System.out.println("*** Returning to Manage_Universities page ***");
+      viewUniversities();
+    }
+    else {
+      System.out.println("ERROR: Invalid Input");
+      addUniversity();
+    }
   }
   
   /**
@@ -378,7 +390,7 @@ public class AdminInterface {
     information.add(sc.next());
     
     // Ask the admin for new type
-    System.out.print("Please enter the user's type: ");
+    System.out.print("Please enter the user's type (u=user, a=admin): ");
     String type = sc.next();
     if(type.equals("u") || type.equals("a")) {
     	information.add(type);
@@ -387,7 +399,6 @@ public class AdminInterface {
     	System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
     	addAccount();
     }
-    
     ad.addAccount(information);
     viewUsers();
   }
