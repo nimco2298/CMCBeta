@@ -18,6 +18,7 @@ public class AdminFuncController{
   @SuppressWarnings("unused")
   private Admin admin;
   private DBController dbc = new DBController();
+  Scanner sc = new Scanner(System.in);
   
   // ================================= CONSTRUCTORS =================================
   /**
@@ -39,25 +40,6 @@ public class AdminFuncController{
   
   
   // ================================= METHODS =================================
-  /**
-   * Adds a new user account into the Database
-   * Note: The active property should be true inside the information list
-   * 
-   * @param information a list of a user's properties including one that determines if the user is an admin or a general user (type)
-   */
-  public void addAccount(ArrayList<String> information){ // DONE I THINK!!!!!!!!!!!!!!!
-    char type = information.get(5).charAt(0);
-    if(type == 'a'){
-      // new Admin(username, password, active, firstName, lastName, type)
-      Admin ad = new Admin( information.get(0),  information.get(1),  information.get(2).charAt(0),  information.get(3),  information.get(4));
-      dbc.addAccount(ad);
-    }
-    else if(type == 'u'){
-      // new GeneralUser( firstName, lastName, active, username, password, arrayList)
-      GeneralUser gu = new GeneralUser( information.get(3),  information.get(4), information.get(2).charAt(0), information.get(0), information.get(1), new ArrayList<String>());
-      dbc.addAccount(gu);
-    }
-  }
   
   /**
    * View a list of users; gets a list of users from the database
@@ -129,12 +111,24 @@ public class AdminFuncController{
   }
   
   /**
+   * Save changes made to a university
+   * 
+   * @param univ the university
+   */
+  public void saveUnivChanges(University univ){
+	  University univDB = getUniversity(univ.getName()); // deletes all the old emphases from university in the database 
+	  deleteEmphases(univDB);
+	  addEmphases(univ); // adds all new emphases from the university into the database
+	  dbc.updateUniversity(univ);
+  }
+  
+  /**
    * Deletes a university and its emphases
    * 
    * @param univ the university to be deleted
    */
   public void delete(University univ){
-    deleteEmphases(univ);
+	deleteEmphases(univ);
     dbc.deleteUniversity(univ);
   }
   
@@ -157,27 +151,10 @@ public class AdminFuncController{
    */
   public Account getAccount(String account) throws NullPointerException
   {
-    return dbc.getUser(account);
+	  return dbc.getUser(account);
   }
   
-  /**
-   * Save changes made to a university
-   * 
-   * @param univ the university
-   */
-  public void saveUnivChanges(University univ){
-    dbc.updateUniversity(univ);
-  }
   
-  /**
-   * Adds a University
-   * 
-   * @param univ the University
-   */
-  public void addUniversity(University univ){
-    dbc.addNewUniversity(univ);
-    addEmphases(univ);
-  }
   
   /**
    * Adds all emphases to a university in the database
@@ -185,20 +162,9 @@ public class AdminFuncController{
    * @param univ the University
    */
   public void addEmphases(University univ) {
-	ArrayList<String> emphases = univ.getEmphases();
-	for(String emphasis: emphases) {
-	  addAnEmphasis(univ, emphasis);
-	}
-  }
-  
-  /**
-   * Adds one emphasis to a university in the database
-   * 
-   * @param univ the University
-   * @param emphasis the emphasis to add
-   */
-  public void addAnEmphasis(University univ, String emphasis) {
-  	dbc.addEmphasis(univ, emphasis);
+	  for(String emphasis: univ.getEmphases()) {
+		  dbc.addEmphasis(univ, emphasis);
+	  }
   }
   
   /**
@@ -207,19 +173,326 @@ public class AdminFuncController{
    * @param univ the University
    */
   public void deleteEmphases(University univ) {
-	ArrayList<String> emphases = univ.getEmphases();
-	for(String emphasis: emphases) {
-	  deleteAnEmphasis(univ, emphasis);
-	}
+	  for(String emphasis: univ.getEmphases()) {
+		  dbc.deleteEmphasis(univ, emphasis);
+	  }
+  }
+  
+  //======================================= METHODS CALLED FROM AdminInterface ========================================
+  
+  /**
+   * Prompts the user to edit a university through several options
+   * 
+   * @param u the university to edit
+   */
+  
+  public void editUniversity(University u) {
+	  String prompt = "";
+	  do {
+		  System.out.print("=======================================" +'\n'+ "What would you like to edit:" 			+'\n'+'\t'+ 	
+		      "1: state" 			+'\n'+'\t'+ "2: location" 			+'\n'+'\t'+ "3: control" 					+'\n'+'\t'+ 
+		      "4: students" 		+'\n'+'\t'+ "5: female percentage" 	+'\n'+'\t'+ "6: SAT verbal score" 			+'\n'+'\t'+
+		      "7: SAT math score" 	+'\n'+'\t'+ "8: cost" 				+'\n'+'\t'+ "9: financial aid percentage" 	+'\n'+'\t'+ 
+		      "10: applicants" 		+'\n'+'\t'+ "11: admitted" 			+'\n'+'\t'+ "12: enrolled" 					+'\n'+'\t'+
+		      "13: academic scale" 	+'\n'+'\t'+ "14: social scale" 		+'\n'+'\t'+ "15: quality scale" 			+'\n'+'\t'+ 
+			  "16: add emphases" 	+'\n'+'\t'+ "17: remove emphases" 	+'\n'+'\t'+ 
+			  "s: Save" 			+'\n'+'\t'+ "c: Cancel" 			+'\n'+ "Enter Here: ");
+		  prompt = sc.nextLine();
+		  switch (prompt){
+		  	case "1":
+		  		System.out.print("=======================================" +'\n'+ "Current state: " + u.getState() +'\n'+ "Enter the state: ");
+		  		u.setState(sc.nextLine());
+		  		break;
+		  	case "2":
+		  		System.out.print("=======================================" +'\n'+ "Current location: " + u.getLocation() +'\n'+ "Enter the location: ");
+		  		u.setLocation(sc.nextLine());
+		  		break;
+		  	case "3":
+		  		System.out.print("=======================================" +'\n'+ "Current control: " + u.getControl() +'\n'+ "Enter the control: ");
+		  		u.setControl(sc.nextLine());
+		  		break;
+		  	case "4":
+		  		System.out.print("=======================================" +'\n'+ "Current number of students: " + u.getStudents() +'\n'+ "Enter the number of students: ");
+		  		u.setStudents(sc.nextInt());
+		  		break;
+	        case "5":
+	        	System.out.print("=======================================" +'\n'+ "Current female percentage: " + u.getFemPerc() +'\n'+ "Enter the female percentage: ");
+	        	u.setFemPerc(sc.nextInt());
+	        	break;
+	        case "6":
+	        	System.out.print("=======================================" +'\n'+ "Current SAT verbal score: " + u.getSatV() +'\n'+ "Enter the SAT verbal score: ");
+	        	u.setSatV(sc.nextInt());
+	        	break;
+	        case "7":
+	        	System.out.print("=======================================" +'\n'+ "Current SAT math score: " + u.getSatM() +'\n'+ "Enter the SAT math score: ");
+	        	u.setSatM(sc.nextInt());
+	        	break;
+	        case "8":
+	        	System.out.print("=======================================" +'\n'+ "Current cost: " + u.getCost() +'\n'+ "Enter the cost: ");
+	        	u.setCost(sc.nextInt());
+	        	break;
+	        case "9":
+	        	System.out.print("=======================================" +'\n'+ "Current financial aid %: " + u.getFinAidPerc() +'\n'+ "Enter the financial aid %: ");
+	        	u.setFinAidPerc(sc.nextInt());
+	        	break;
+	        case "10":
+	        	System.out.print("=======================================" +'\n'+ "Current applicants: " + u.getApplicants() +'\n'+ "Enter the applicants: ");
+	        	u.setApplicants(sc.nextInt());
+	        	break;
+	        case "11":
+	        	System.out.print("=======================================" +'\n'+ "Current admitted students: " + u.getAdmitted() +'\n'+ "Enter the admitted students: ");
+	        	u.setAdmitted(sc.nextInt());
+	        	break;
+	        case "12":
+	        	System.out.print("=======================================" +'\n'+ "Current enrolled students: " + u.getEnrolled() +'\n'+ "Enter the enrolled students: ");
+	        	u.setEnrolled(sc.nextInt());
+	        	break;
+	        case "13":
+	        	System.out.print("=======================================" +'\n'+ "Current academic scale: " + u.getAcadScale() +'\n'+ "Enter the academic scale: ");
+	        	u.setAcadScale(sc.nextInt());
+	        	break;
+	        case "14":
+	        	System.out.print("=======================================" +'\n'+ "Current social scale: " + u.getSocScale() +'\n'+ "Enter the social scale: ");
+	        	u.setSocScale(sc.nextInt());
+	        	break;
+	        case "15":
+	        	System.out.print("=======================================" +'\n'+ "Current quality scale: " + u.getQualScale() +'\n'+ "Enter the quality scale: ");
+	        	u.setQualScale(sc.nextInt());
+	        	break;
+	        case "16":
+	        	System.out.println("======================================="+'\n'+ "Current emphases:");
+	        	for(String emphasis: u.getEmphases()) {
+	            	System.out.println('\t'+emphasis);
+	            }
+	        	System.out.print("Enter an emphasis to add: ");
+	        	u.addEmphases(sc.nextLine());
+	        	break;
+	        case "17":
+	        	System.out.println("======================================="+'\n'+ "Current emphases:");
+	        	for(String emphasis: u.getEmphases()) {
+	            	System.out.println('\t'+emphasis);
+	            }
+	        	System.out.print("Enter an emphasis to remove: ");
+	        	u.removeEmphases(sc.nextLine());
+	        	break;
+	        case "s":
+	        	saveUnivChanges(u);
+	      	  	System.out.println("*** Saved updates to " + u.getName() + " ***");
+	        	break;
+	        case "c":
+	      	  	System.out.println("*** Returning to Manage_University page ***");
+	        	break;
+	        default:
+	        	System.out.println("ERROR: Invalid input");
+	        	break;
+		  } 
+	  } while(!prompt.equals("s")&&!prompt.equals("c"));
+  }
+
+  /**
+   * Prompts the user to add a university's properties
+   * 
+   * @param univ the name of the university to add
+   */
+  public void addUniversity(String univ) {
+	  System.out.print("Enter state: ");
+	  String state = sc.nextLine();
+      System.out.print("Enter location: ");
+	  String location = sc.nextLine();
+	  System.out.print("Enter control: ");
+	  String control = sc.nextLine();
+	  System.out.print("Enter number of students: ");
+	  int students = sc.nextInt();    
+	  System.out.print("Enter female percentage: ");
+	  int femPerc = sc.nextInt();
+	  System.out.print("Enter SAT verbal score: ");
+	  int satV = sc.nextInt();
+	  System.out.print("Enter SAT math score: ");
+	  int satM = sc.nextInt();
+	  System.out.print("Enter cost: ");
+	  int cost = sc.nextInt();
+	  System.out.print("Enter financial aid percentage: ");
+	  int finAidPerc = sc.nextInt();
+	  System.out.print("Enter applicants: ");
+	  int applicants = sc.nextInt();
+	  System.out.print("Enter number of admitted students: ");
+	  int admitted = sc.nextInt();
+	  System.out.print("Enter number of enrolled students: ");
+	  int enrolled = sc.nextInt();
+	  System.out.print("Enter academic scale: ");
+	  int acadScale = sc.nextInt();
+	  System.out.print("Enter social scale: ");
+	  int socScale = sc.nextInt();
+	  System.out.print("Enter quality scale: ");
+	  int qualScale = sc.nextInt();
+	  ArrayList<String> emphases = new ArrayList<String>(); // add emphases
+	  System.out.print("Enter an emphasis (Enter Press q to finish): ");
+	  String emphasis = sc.next();
+	  while(!emphasis.equals("q")){
+	     emphases.add(emphasis);
+	     System.out.print("Enter an emphasis (Enter Press q to finish2): ");
+	     emphasis = sc.next();
+	  }
+	  University u = new University(univ, state, location, control, students, femPerc, satV, satM, cost,
+  								finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
+	  dbc.addNewUniversity(u); // add the university to the database
+	  addEmphases(u);
+	  System.out.println("*** Saved university " + univ + " to list ***");
+  }
+
+  /**
+   * Prompts the user to remove a university and confirm deletion
+   * 
+   * @param u the university to remove
+   */
+  public void removeUniversity(University u) {
+	  System.out.println("=======================================" +'\n'+ "Are you sure you want to delete " + u.getName() + " from the list?" 	
+			  				+'\n'+'\t'+ "y: yes" +'\n'+'\t'+ "n: no");
+	  String prompt = sc.nextLine();
+	  if(prompt.equals("y") || prompt.equals("Y")) {
+		  System.out.println("*** Deleted " + u.getName() + " ***");
+		  delete(u);
+	  }
+	  else if(prompt.equals("n") || prompt.equals("N")) {
+		  System.out.println("*** Returning to Manage_University page ***");
+	  }
+	  else {
+		  System.out.println("ERROR: Invalid input");
+		  removeUniversity(u);
+	  }
+  }
+  /**
+   * Prompts the user to add a GeneralUser and its properties
+   * 
+   * @param userName the name of the GeneralUser to add
+   */
+  public void addAccount(String userName) {
+      ArrayList<String> information = new ArrayList<String>();
+	  information.add(userName);
+	  System.out.print("Please enter a new password: ");
+	  information.add(sc.nextLine());
+	  information.add("y");
+	  System.out.print("Please enter the user's first name: ");
+	  information.add(sc.nextLine());
+	  System.out.print("Please enter the user's last name: ");
+	  information.add(sc.nextLine());
+	  System.out.print("Please enter the user's type (u=user, a=admin): ");
+	  String type = sc.nextLine();
+	  if(type.charAt(0) == 'a'){
+		  // new Admin(username, password, active, firstName, lastName)
+		  Admin ad = new Admin( information.get(0),  information.get(1),  information.get(2).charAt(0),  information.get(3),  information.get(4));
+		  dbc.addAccount(ad);
+	  }
+	  else if(type.charAt(0) == 'u'){
+		  // new GeneralUser(firstName, lastName, active, username, password, arrayList)
+		  GeneralUser gu = new GeneralUser( information.get(3),  information.get(4), information.get(2).charAt(0), information.get(0), information.get(1), new ArrayList<String>());
+		  dbc.addAccount(gu);
+	  }
+	  else {
+		  System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
+		  addAccount(userName);
+	  }
   }
   
   /**
-   * Deletes one emphasis from a university in the database
+   * Prompts the user to edit an account through several options
    * 
-   * @param univ the University
-   * @param emphasis the emphasis to delete
+   * @param user the account to edit
    */
-  public void deleteAnEmphasis(University univ, String emphasis) {
-	dbc.deleteEmphasis(univ, emphasis);
+  public void editUser(Account user) {
+	  String prompt = "";
+	  do {
+		  System.out.print("======================================="	+ '\n' +
+							"What would you like to edit:" 			+ '\n' +'\t'+
+								"1: FirstName" 						+ '\n' +'\t'+
+								"2: LastName" 						+ '\n' +'\t'+
+								"3: Password" 						+ '\n' +'\t'+
+								"4: Type" 							+ '\n' +'\t'+
+								"5: Status" 						+ '\n' +'\t'+
+	            				"s: Save"							+ '\n' +'\t'+
+	            				"c: Cancel"							+ '\n' +
+	            			"Enter Here: ");
+		  prompt = sc.nextLine();
+	      switch (prompt){
+	      	case "1":
+	          System.out.print("Enter the new first name: ");
+	          user.setFirstName(sc.nextLine());
+	          break;
+	        case "2":
+	          System.out.print("Enter the new last name: ");
+	          user.setLastName(sc.nextLine());
+	          break;
+	        case "3":
+	          System.out.print("Enter the new password: ");
+	          user.setPassword(sc.nextLine());
+	          break;
+	        case "4":
+	          System.out.print("Enter the type (a=admin, u=general user): ");
+	          char type = sc.nextLine().charAt(0);
+	          if(type != 'a' && type != 'u') {
+	        	  System.out.println("ERROR: Invalid input");
+	          }
+	          else {
+	        	  user.setType(type);
+	          }
+	          break;
+	        case "5":
+	          System.out.print("Enter the status (Y=active, N=deactive): ");
+	          char status = sc.nextLine().charAt(0);
+	          if(status != 'Y' && status != 'N') {
+	        	  System.out.println("ERROR: Invalid input; inputs must be capitalized");
+	          }
+	          else {
+	        	  user.setActive(status);
+	          }
+	          break;
+	        case "s":
+	          saveAccountChanges(user);
+	          System.out.println("======================================="	+ '\n' +
+	        		  			"Updates have been saved:" + '\n' + '\t'+
+	            					"FirstName: " + user.getFirstName() + '\n' + '\t'+
+	            					"LastName: " + user.getLastName() + '\n' + '\t'+
+	            					"Password: " + user.getPassword() + '\n' + '\t'+
+	            					"Type: " + user.getType() + '\n' + '\t'+
+	            					"Active: " + user.getActive());
+	          break;
+	        case "c":
+	          System.out.println("*** Returning to Manage_Users page ***");
+	          break;
+	        default:
+	          System.out.println("ERROR: Invalid input");
+	          break;
+	      }
+	    } while(!prompt.equals("s")&&!prompt.equals("c"));
+  }
+  /**
+   * Prompts the user to deactivate an account
+   * 
+   * @param usr the account to deactivate
+   */
+  public void deactivate(Account usr) {
+	  System.out.print("======================================="				+ '\n' +
+				"Are you sure you want to deactivate this user?" 	+ '\n' + '\t'+ 
+					"y: yes" 										+ '\n' + '\t'+ 
+					"n: no"											+ '\n' + 
+				"Enter Here: ");
+	  String prompt = sc.nextLine();
+	  if(prompt.equals("y") || prompt.equals("Y")){
+		  if(usr.getActive() == 'Y'){
+			  System.out.println("*** "+ usr.getFirstName() + " has been deactivated ***");
+			  usr.setActive('N');
+			  saveAccountChanges(usr);
+		  }
+		  else {
+			  System.out.println("*** "+ usr.getFirstName() + " is already deactivated ***");
+		  }
+	  }
+	  else if(prompt.equals("n") || prompt.equals("N")) {
+		  System.out.println("*** Returning to Manage_Users page ***");
+	  }
+	  else {
+		  System.out.println("ERROR: Invalid Input");
+		  deactivate(usr);
+	  }
   }
 }
