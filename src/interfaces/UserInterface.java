@@ -233,67 +233,11 @@ public class UserInterface
    */
   public ArrayList<University> searchForSchools()
   {
-	  String schoolName = "", state = "", location = "", control = "";
-	  int studentsLow = 0, studentsHigh = 999999, femPercLow = 0, femPercHigh = 100, satVLow = 0,
-			  satVHigh = 1000, satMLow = 0, satMHigh = 1000, costLow = 0, costHigh = 99999, finAidPercLow = 0, 
-			  finAidPercHigh = 100, applicantsLow = 0, applicantsHigh = 99999, admittedLow = 0, 
-			  admittedHigh = 100, enrolledLow = 0, enrolledHigh =100, acadScaleLow = 0, acadScaleHigh = 99, 
-			  socLifeScaleLow = 0, socLifeScaleHigh = 99, qualLifeScaleLow = 0, qualLifeScaleHigh = 99;
-	  ArrayList<String> emphases = new ArrayList<String>();
-	  ArrayList<University> uList = new ArrayList<University>();
-	  System.out.println("Enter the desired search criteria");
-	  int i = intIn("1: School Name\n2: State\n3: Location\nEnter Search Criteria Here: ");
-	  do
-	  {
-		  switch(i)
-		  {
-		  case 1: schoolName=strIn("School Name: "); i = intIn("");  					break;
-		  case 2: state = strIn("State: "); i = intIn("");          		  	  		break;
-		  case 3: location=strIn("Location: ");   i = intIn("");    		      		break;
-		  case 4:  control=strIn("Control: "); i = intIn("");                   		break;
-		  case 5: studentsLow=intIn("low num of students: ");i = intIn("");	  			break;
-		  case 6: studentsHigh=intIn("high num of students: ");	 i = intIn(""); 		break;
-		  case 7: femPercLow=intIn("low % of female: "); 		 i = intIn(""); 		break;
-		  case 8: femPercHigh =intIn("high % of female: ");		 i = intIn(""); 		break;
-		  case 9: satVLow=intIn("low verbal sat: ");			 i = intIn(""); 		break;
-		  case 10: satVHigh=intIn("high verbal sat: ");			i = intIn("");   		break;
-		  case 11: satMLow=intIn("low math sat: ");				i = intIn("");   		break;
-		  case 12: satMHigh=intIn("high math sat: ");			i = intIn("");   		break;
-		  case 13: costLow=intIn("low cost: ");					i = intIn("");   		break;
-		  case 14: costHigh=intIn("High cost: ");				i = intIn("");   		break;
-		  case 15: finAidPercLow=intIn("low financial aid: ");	 i = intIn("");  		break;
-		  case 16: finAidPercHigh=intIn("high financial aid: "); i = intIn("");  		break;
-		  case 17: applicantsLow=intIn("low applicants num: ");	 i = intIn("");  		break;
-		  case 18: applicantsHigh=intIn("high applicants num: "); i = intIn(""); 		break;
-		  case 19: admittedLow=intIn("low admitted num: ");		  i = intIn(""); 		break;
-		  case 20: admittedHigh=intIn("high admitted num: "); 	 i = intIn(""); 		break;
-		  case 21: enrolledLow=intIn("low enrolled num: ");		 i = intIn(""); 		break;
-		  case 22: enrolledHigh=intIn("high enrolled num: ");	 i = intIn("");  		break;
-		  case 23: acadScaleLow=intIn("low academic scale: ");	 i = intIn("");  		break;
-		  case 24: acadScaleHigh=intIn("high academic scale: ");  i = intIn(""); 		break;
-		  case 25: socLifeScaleLow=intIn("low social life scale: ");i = intIn(""); 		break;
-		  case 26: socLifeScaleHigh =intIn("high social life scale: ");i = intIn("");  break;
-		  case 27: qualLifeScaleLow=intIn("low qual life scale: ");		i = intIn(""); break;
-		  case 28: qualLifeScaleHigh=intIn("high qual life scale: ");i = intIn(""); 	break;
-		  case 29: emphases.add(strIn("Add an emphasis"));			i = intIn(""); 	break;
-		  
-		  
-		  default: System.out.println("ERROR: Invalid input");			break; 
-	  }
-	  }while(i != 30);
-	  uList = sc.search(schoolName,  state,  location,  control, studentsLow,
-	            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
-	            satMLow,  satMHigh,  costLow,  costHigh,  finAidPercLow,  finAidPercHigh,
-	            applicantsLow,  applicantsHigh,  admittedLow,  admittedHigh, 
-	            enrolledLow,  enrolledHigh,  acadScaleLow,  acadScaleHigh,  socLifeScaleLow,
-	            socLifeScaleHigh,  qualLifeScaleLow,  qualLifeScaleHigh, 
-	            emphases);
-	  //uList=sc.search("Y", "", "", "", 0, 999999, 0, 99, 0, 999, 0, 999, 0, 99999, 0, 99, 0, 99999, 0, 99, 0, 999999, 0, 99999, 0, 99999, 0, 99, emphases);
-	  return uList;
+	  return ufc.searchForSchools();
 	 
   }
   /**
-   * Displays the result of all universiy names in a list of Universities.
+   * Displays the result of all university names in a list of Universities.
    * @param  c  The list of Universities stored in DB
    */
   public void viewSearchedSchools(ArrayList<University> c){
