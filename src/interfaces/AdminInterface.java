@@ -131,7 +131,7 @@ public class AdminInterface {
       String univ = sc.nextLine();
       if(!(ad.getUniversity(univ) instanceof University)) {// if the university does not exist
     	  System.out.println("*** There is no such university ***");
-    	  this.removeUniversity();
+    	  removeUniversity();
       }
 	  ad.removeUniversity(ad.getUniversity(univ));
 	  viewUniversities();
@@ -192,7 +192,7 @@ public class AdminInterface {
   		System.out.println("*** There is no such user ***");
   		editUser();
   	}
-  	ad.saveAccountChanges(ad.getAccount(userName));
+  	ad.editUser(ad.getAccount(userName));
     viewUsers();
   }
   
