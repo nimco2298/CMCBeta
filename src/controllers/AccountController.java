@@ -44,67 +44,81 @@ public class AccountController
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
     
+    //C1
     if(matchedUser.getActive() == 'N')
     {
+        //S1
     	System.out.println("Error: Your account is deactivated and you cannot be logged in");
     	this.loginStatus = false;
     	return false;
     }
-
+    //C2
     else if(matchedUser.getUsername().equals("") && matchedUser.getPassword().equals(""))
     {
+    	//S2
     	System.out.println("Error: A username and password was not entered.");
         this.loginStatus = false;
         return false;
     	
     }
-    //check if the matchedUser is a dummy user, if it is do not CONTINUE onto User homepage
-  else if(matchedUser.getUsername().equals("DummyUser"))
+    
+    //C3
+   else if(matchedUser.getUsername().equals("DummyUser"))
    { 
-     //The user name and password associated with this account is not registered 
+     //S3
       System.out.println("Error: The username is not registered.");
       this.loginStatus = false;
       return false;
     }
+    //C4
     else if(!matchedUser.getPassword().equals(password))
     {
-      //print the username and password do not match an an associated account
+      //S4
       System.out.println("Error: The password entered does not match an account.");
       this.loginStatus = false;
       return false;
     }
     
+    //C5
     else if(!matchedUser.getUsername().equals(username))
     {
-      //print the username and password do not match an an associated account
+      //S5
       System.out.println("Error: The username entered does not match an account");
       this.loginStatus = false;
       return false;
     }
+    //C6
     else { 
-      
+    	
+      //S6
       this.account = matchedUser;  
       this.loginStatus = true;
       char type = account.getType(); // get the type associated with this account 
       
+      //C7
       if(type == 'a') 
       {
+    	//S7  
         AdminInterface ai = new AdminInterface();
         System.out.println("Login successful");
         ai.homepage(); 
         this.loginStatus = true;
         return true;
       }
+      //C8
       else if(type == 'u')
       {
+    	//S8  
         UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
         System.out.println("Login successful");
         this.loginStatus = true;
         ui.homePage();
         return true;
       }
+      //C9
       else
       {
+    	//S9  
         System.out.println("Error: There is something wrong with the account in the database. Please try again.");
         this.loginStatus = false;
         return false;
