@@ -148,8 +148,9 @@ public class UserFuncController
    * @param firstName users first name
    * @param lastName users last name
    */
-  public void submitProfileChanges( String firstName, String lastName,String password)
+  public void submitProfileChanges(String firstName, String lastName,String password)
   {
+	//ADD IN INPUT VALIDATION SO METHODS ONLY ACCCEPTS STRINGS  
     gu.setPassword(password);
     gu.setFirstName(firstName);
     gu.setLastName(lastName);

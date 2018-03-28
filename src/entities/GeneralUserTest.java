@@ -108,15 +108,16 @@ public class GeneralUserTest {
 		fail("Not yet implemented"); // TODO
 	}
 
-	/**
+	/**USER CANNOT SET THEIR USERNAME
 	 * Test method for {@link entities.Account#setUsername(java.lang.String)}.
 	 */
 	@Test
 	public void testSetUsername() {
-		String expected = "Simon";
-		user.setUsername(expected);
-		String result = user.getUsername();
-		assertEquals("Your username is now: " + result, expected,result);
+		//String expected = "Simon";
+		//user.setUsername(expected);
+		//String result = user.getUsername();
+		//assertEquals("Your username is now: " + result, expected,result);
+		fail("Not yet implemented"); // TODO
 	}
 
 	/**
@@ -135,7 +136,10 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testSetFirstName() {
-		fail("Not yet implemented"); // TODO
+		String expected = "Simone";
+		user.setFirstName(expected);
+		String result = user.getFirstName();
+		assertEquals("Your first name is now: " + result, expected,result);
 	}
 
 	/**
@@ -143,18 +147,21 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testSetLastName() {
-		fail("Not yet implemented"); // TODO
+		String expected = "Salahi";
+		user.setUsername(expected);
+		String result = user.getLastName();
+		assertEquals("Your password is now: " + result, expected,result);
 	}
 
-	/**
+	/**USER CANNOT SET THEIR TYPE,ADMINS CAN MODIFY TYPE
 	 * Test method for {@link entities.Account#setType(char)}.
 	 */
 	@Test
 	public void testSetType() {
-		fail("Not yet implemented"); // TODO
+		fail("When called on GenUser object, should throw an message??"); // TODO
 	}
 
-	/**
+	/**USER CANNOT SET THEIR ACTIVE
 	 * Test method for {@link entities.Account#setActive(char)}.
 	 */
 	@Test

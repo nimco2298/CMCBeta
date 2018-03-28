@@ -30,7 +30,7 @@ public class Admin extends Account
     this.setType('a');
   }
     
-    /**Prints a the Admin account details
+    /**Prints the Admin account details
      * 
      * @return String the string representation of Account details
      */
@@ -39,7 +39,8 @@ public class Admin extends Account
   	  return "\n" + "***ACCOUNT INFORMATION****** \n"
   			+"First name:    " + "\t" + "\t" + this.getFirstName() + "\n" 
 			   + "Last Name:   " + "\t" + "\t"+ this.getLastName() + "\n" + 
-			   "Account Status: " + "\t" + this.getActive() + "\n" +
-			   "Password:      " + "\t" + "\t" + this.getPassword() + "\n"; 
+			   "Username: " + "\t" + this.getUsername() + "\n" +
+			   "Password:      " + "\t" + "\t" + this.getPassword() + "\n" +
+			   "Account Status: " + "\t" + this.getActive(); 
     }
 }
