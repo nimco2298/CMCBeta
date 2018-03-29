@@ -51,7 +51,7 @@ public abstract class Account {
   
   /**
    * Return the firstName of an Account
-   * 
+   * type
    * @return String  firstName
    */
   public String getFirstName()
@@ -155,11 +155,14 @@ public abstract class Account {
    */
   public void setType(char type) 
   {
-	  if(type != 'u' || type != 'a')
+	  if(type == 'u' || type == 'a')
+	  {
+		  this.type = type;
+	  }
+	  else 
 	  {
 		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
 	  }
-      this.type = type;
   }          
   
     
@@ -171,11 +174,14 @@ public abstract class Account {
    */
   public void setActive(char activity)
   {
-	  if(type != 'Y' || type != 'N')
+	  if(activity == 'Y' || activity == 'N') // this was type before i changed it to activity
 	  {
-	  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the activity status!");
+		  this.active = activity;
 	  }
-     this.active = activity;
+	  else
+	  {
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the activity status!");
+	  }
   }
   
     
