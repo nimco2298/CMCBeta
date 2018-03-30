@@ -103,7 +103,7 @@ public class SearchController{
       }
       if(emphases.isEmpty())
     	  em=true;
-      if(n && s && l && c && ns& pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
+      if(n && s && l && c && ns & pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
       {
         rlist.add(u);
       }

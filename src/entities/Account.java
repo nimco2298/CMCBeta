@@ -51,7 +51,7 @@ public abstract class Account {
   
   /**
    * Return the firstName of an Account
-   * 
+   * type
    * @return String  firstName
    */
   public String getFirstName()
@@ -89,24 +89,34 @@ public abstract class Account {
     return this.active;
   }
     
-  /**
+  /**USER CANNOT SET OWN USERNAME,ADMINS CANNOT SET USERNAMES AT ALL
    * Sets the username of an Account
    * 
    * @param String    newUsername  
    */
   public void setUsername (String newUsername)
   {
-    this.username = newUsername;
+	this.username = newUsername;  
+	   
   }
   
   /**
    * Sets the password of an Account
    * 
-   * @param String    newPassword  
+   * @param String    newPassword 
+   * @throws  IllegalArgumentException  when the parameter is not of type String  
    */
-  public void setPassword(String newPassword)
-  {
-    this.password = newPassword;
+  public void setPassword(String newPassword) {
+	  
+    if(newPassword.length() > 0) 
+    {
+ 	    this.password = newPassword;
+    }
+    else
+     {
+      throw new IllegalArgumentException("Error! You must enter a non-empty String to set the last name field!");
+      }
+   
   }
   
   /**
@@ -122,33 +132,56 @@ public abstract class Account {
   /**
    * Sets the lastName of an Account
    * 
-   * @param String lastName    
+   * @param String lastName
+   * @throws  IllegalArgumentException  when the parameter is not of type String    
    */
   public void setLastName(String lastName) 
   {
+     if(lastName.length() > 0) {
+    	 this.lastName = lastName; 
   
-     this.lastName = lastName;
+     }
+     else
+     {
+         throw new IllegalArgumentException("Error! You can only enter a String to set the last name field!");
+     }
   }
     
   /**
-   * Sets the type of an Account
+   * Sets the type of an Account to either a 'a' for Admin or 'u' for User
    * 
    * @param char type    
+   * @throws  IllegalArgumentException  when the parameter is not of type char
    */
   public void setType(char type) 
   {
-     this.type = type;
+	  if(type == 'u' || type == 'a')
+	  {
+		  this.type = type;
+	  }
+	  else 
+	  {
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
+	  }
   }          
   
     
   /**
-   * Sets the activiy of an Account
+   * Sets the activity of an Account
    * 
-   * @param char activity  
+   * @param char activity 
+   * @throws  IllegalArgumentException  when the parameter is not of type char 
    */
   public void setActive(char activity)
   {
-     this.active = activity;
+	  if(activity == 'Y' || activity == 'N') // this was type before i changed it to activity
+	  {
+		  this.active = activity;
+	  }
+	  else
+	  {
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the activity status!");
+	  }
   }
   
     
