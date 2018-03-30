@@ -36,6 +36,10 @@ public class UserInterface
   
   Scanner scan = new Scanner(System.in);
   
+  
+  /** THE FOLLOWIGN CODE WAS MOVED FROM USERINTERFACE TO HERE */
+  
+  
   /**
    * Redirects the user to their homepage
    */
@@ -50,6 +54,10 @@ public class UserInterface
                         "Enter Here: ");
   
     String str= scan.next();
+    
+    
+   // ac.homepage(str);
+    
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
       viewSearchedSchools(db.getUniversities());
@@ -220,12 +228,7 @@ public class UserInterface
     }
     homePage();
   }
-  /**
-   * redirect the user to the homepage and save the changes
-   */
-  public void submitProfileChanges(){
-    
-  }
+
   /**
    * This method takes the search command and shows the result
    * 
@@ -253,9 +256,6 @@ public class UserInterface
    */
   public void saveToSavedSchoolList(University u){
     ufc.saveToSavedSchoolList(u);
-    this.user=(GeneralUser)db.getUser(user.getUsername());
-    ufc.updateUser(user);
-    System.out.println("Success");
     homePage();
   }
   
@@ -264,11 +264,7 @@ public class UserInterface
    * @param  u  The select university to remove 
    */
   public void removeSavedSchool(University u){
-
     ufc.removeSavedSchool(u);
-    this.user=(GeneralUser)db.getUser(user.getUsername());
-    ufc.updateUser(user);
-    System.out.println("Success!" + "Your current list of saved schools are: " + user.getSavedSchools() + '\n');
     homePage();
   }
   

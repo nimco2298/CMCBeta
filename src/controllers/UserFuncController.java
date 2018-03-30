@@ -26,6 +26,9 @@ public class UserFuncController
     db = new DBController();
     sc = new SearchController();
   }
+  
+  
+  
   /**
    * Gets the list of saved schools for a specific general user
    * 
@@ -44,6 +47,11 @@ public class UserFuncController
   public void saveToSavedSchoolList(University university)
   {
     db.addSchoolToUserList(gu,university);
+    
+    ///moved from interface!
+    this.gu=(GeneralUser)db.getUser(gu.getUsername());
+    this.updateUser(gu);
+    System.out.println("Success");
   }
   
   public ArrayList<University> searchForSchools()
@@ -139,6 +147,11 @@ public class UserFuncController
   public void removeSavedSchool(University university)
   {
     db.removeSchoolFromSavedSchoolList(gu, university);
+    
+    //moved from USERINTERFACE
+    this.gu=(GeneralUser)db.getUser(gu.getUsername());
+    this.updateUser(gu);
+    System.out.println("Success!" + "Your current list of saved schools are: " + gu.getSavedSchools() + '\n');
   }
   
   /**
@@ -150,7 +163,6 @@ public class UserFuncController
    */
   public void submitProfileChanges(String firstName, String lastName,String password)
   {
-	//ADD IN INPUT VALIDATION SO METHODS ONLY ACCCEPTS STRINGS  
     gu.setPassword(password);
     gu.setFirstName(firstName);
     gu.setLastName(lastName);
@@ -180,6 +192,11 @@ public class UserFuncController
 	    return re;
 	  }
   
+  /**
+   * Takes a string and prints it, and prompts user to enter another String
+   * @param ss      a string that will be printed 
+   * @return int  a new integer the User entered
+   */
   public int intIn(String ss){
 	  Scanner scan = new Scanner(System.in);  
 	    System.out.print(ss);
@@ -187,4 +204,7 @@ public class UserFuncController
 	    scan.close();
 	    return re;
 	  }
+  
+  
+  
 }
