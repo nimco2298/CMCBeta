@@ -118,7 +118,7 @@ public class UserFuncController
 		  case 28: qualLifeScaleHigh=intIn("high qual life scale: ");i = intIn(prompt); 	break;
 		  case 29: emphases.add(strIn("Add an emphasis"));			i = intIn(prompt); 	break; 
 		  default: System.out.println("ERROR: Invalid input");			break; 
-	  }
+		  }
 	  }while(i != 0);
 	  uList = sc.search(schoolName,  state,  location,  control, studentsLow,
 	            studentsHigh,  femPercLow,  femPercHigh,  satVLow,  satVHigh, 
