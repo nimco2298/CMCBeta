@@ -232,5 +232,6 @@ public class UserFuncController
 	break;
 	
 	}
+	scan.close();
   }
 }
