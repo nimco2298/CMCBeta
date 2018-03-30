@@ -62,7 +62,7 @@ public class UserInterface
 	      this.user=(GeneralUser)db.getUser(user.getUsername());
       }
       else {
-    	  viewSearchedSchools(searchForSchools());
+    	  viewSearchedSchools(ufc.searchForSchools());
     	  System.out.println("s for save and v for view:");
 	      String s1 = scan.next();
 	      if(s1.equals("s")){
@@ -112,7 +112,8 @@ public class UserInterface
         System.out.print("Do you want to edit your profile? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
-          editProfile();
+        	ufc.editProfile();
+            homePage();
         }
         else { 
         homePage(); 	  
@@ -176,66 +177,10 @@ public class UserInterface
   }
   
   
-  /**
-   * Takes the edit file command and redirect the user to the edit page
-   */
-  public void editProfile(){
-	  System.out.println("What would you like to edit:" + '\n' +
-			                "1: FirstName" + '\n' +
-                             "2: LastName" + '\n' +
-                             "3: Password" + '\n' +                            
-                             "4: Quit " + '\n'
-                             + "Enter here: ");
-                    
-    String prompt = scan.next();
-      switch (prompt){
-        case "1":
-          System.out.print("Enter the new first name: ");
-          String change=scan.next();
-          ufc.submitProfileChanges(change,user.getLastName(),user.getPassword());
-          user.setFirstName(change);
-          break;
-        case "2":
-          System.out.print("Enter the new last name: ");
-          change=scan.next();
-          ufc.submitProfileChanges(user.getFirstName(),change,user.getPassword());
-          user.setLastName(change);
-          break;
-        case "3":
-          System.out.print("Enter the new password: ");
-          change=scan.next();
-          ufc.submitProfileChanges(user.getFirstName(),user.getLastName(),change);
-          user.setPassword(change);
-          break;
-          
-        case "4":
-        	homePage();
-        	break;
-       
-        default:
-          System.out.println("Invalid input");
-          break;
-      
-      
-    }
-    homePage();
-  }
-  /**
-   * redirect the user to the homepage and save the changes
-   */
-  public void submitProfileChanges(){
-    
-  }
-  /**
-   * This method takes the search command and shows the result
-   * 
-   * @return ArrayList<University> the schools that have matched this criteria
-   */
-  public ArrayList<University> searchForSchools()
-  {
-	  return ufc.searchForSchools();
-	 
-  }
+
+
+
+
   /**
    * Displays the result of all university names in a list of Universities.
    * @param  c  The list of Universities stored in DB
