@@ -26,7 +26,6 @@ public class DBController
     this.ud = new UniversityDBLibrary("cloud9", "csci230");
   }
   
-  //////this interface 
   /**
    * Returns the list of all universities in the database
    * @return ArrayList<University> all of the universities in the system

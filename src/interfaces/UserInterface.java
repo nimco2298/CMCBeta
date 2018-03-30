@@ -13,7 +13,7 @@ import controllers.*;
 
 /**
  * UserInterface is responsible for enabling various controllers to carry out a user function.
- * h
+ * 
  * @author Karld Bai
  * @version March 20, 2018
  */
@@ -54,9 +54,6 @@ public class UserInterface
                         "Enter Here: ");
   
     String str= scan.next();
-    
-    
-   // ac.homepage(str);
     
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
