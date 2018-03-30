@@ -59,12 +59,12 @@ public class SearchController{
                                       ArrayList<String> emphases){
     ArrayList<University> rlist = new ArrayList<University>();
     boolean n=false, s=false, l=false, c=false, ns=false, pf=false, sv=false, sm=false, exp=false, pfa=false, na=false, 
-      pa=false, pe=false, as=false, ss=false, qls=false, em=false;
+      pa=false, pe=false, as=false, ss=false, qls=false, em=true;
     ArrayList<University> ulist = db.getUniversities();
     for(University u: ulist)
     {
     	n=false; s=false; l=false; c=false; ns=false; pf=false; sv=false; sm=false; exp=false; pfa=false; na=false; 
-	      pa=false; pe=false; as=false; ss=false; qls=false; em=false;
+	      pa=false; pe=false; as=false; ss=false; qls=false; em=true;
       if(u.getName().contains(schoolName))
         n=true;
       if(u.getState().contains(state))
@@ -97,12 +97,14 @@ public class SearchController{
         ss=true;
       if(qualLifeScaleLow<=u.getQualScale() && u.getQualScale()<=qualLifeScaleHigh)
         qls=true;
+      
       for(String str: emphases){
-        if(u.getEmphases().contains(str))
-          em=true;
+        if(!u.getEmphases().contains(str)) {
+          em=false;
+          break;
+        }
       }
-      if(emphases.isEmpty())
-    	  em=true;
+      
       if(n && s && l && c && ns & pf && sv && sm && exp && pfa && na && pa && pe && as && ss && qls && em)
       {
         rlist.add(u);
