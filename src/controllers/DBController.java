@@ -38,7 +38,7 @@ public class DBController
     University u;
     for(int i = 0; i < univ.length; i++)
     {
-    	ArrayList<String> uEmph = new ArrayList<String>();
+       ArrayList<String> uEmph = new ArrayList<String>();
       String uName = univ[i][0];
       for (int x = 0; x < univEmph.length; x++)
       {

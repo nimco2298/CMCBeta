@@ -145,7 +145,6 @@ public class UserInterface
    */
   public void viewSchoolDetailsAndTop5(University u)
   {
-	  
     viewSavedSchoolDetails(u);
     viewSearchedSchools(sc.recSearch(u));
     System.out.print("Do you want to save it? y/n:");  

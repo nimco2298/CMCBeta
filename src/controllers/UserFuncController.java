@@ -225,7 +225,6 @@ public class UserFuncController
 	
 	case "4":
 	break;
-
 	default:
 	System.out.println("Invalid input");
 	editProfile();

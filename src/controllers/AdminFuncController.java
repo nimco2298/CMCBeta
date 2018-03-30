@@ -512,7 +512,7 @@ public class AdminFuncController{
 	  }
 	  else {
 		  System.out.println("ERROR: Invalid input");
-		  removeUniversity(u);
+		 // removeUniversity(u);
 	  }
 	  viewUniversities();
   }
