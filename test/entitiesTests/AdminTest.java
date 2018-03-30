@@ -7,12 +7,7 @@ public class AdminTest {
 	
 	@Before
 	public void init() {
-		String username = "USERNAME";
-		String password = "PASSWORD";
-		char active = 'Y';
-		String firstname = "FIRSTNAME";
-		String lastname = "LASTNAME";
-		this.adminTest = new Admin(username, password, active, firstname, lastname);
+		this.adminTest = new Admin("USERNAME", "PASSWORD", 'Y', "FIRSTNAME", "LASTNAME");
 	}
 	
 	@Test
@@ -20,14 +15,30 @@ public class AdminTest {
 		String details = adminTest.getDetails();
 		Assert.assertTrue("Error: Details are not shown", !details.equals(null));
 	}
-
+	
+	// Test methods for constructor - each test method tests a field of admin
 	@Test
-	public void testAdmin() {
-		Assert.assertTrue("Error: Username does not exist", !adminTest.getUsername().equals(null));
-		Assert.assertTrue("Error: Password does not exist", !adminTest.getPassword().equals(null));
-		Assert.assertTrue("Error: Active is set as deactivated", adminTest.getActive() != 'N');
-		Assert.assertTrue("Error: First name does not exist", !adminTest.getFirstName().equals(null));
-		Assert.assertTrue("Error: Last name does not exist", !adminTest.getLastName().equals(null));
+	public void testAdminUserName() {
+		Assert.assertTrue("Error: Username does not exist", adminTest.getUsername().equals("USERNAME"));
+	}
+	
+	@Test
+	public void testAdminPassword() {
+		Assert.assertTrue("Error: Password does not exist", adminTest.getPassword().equals("PASSWORD"));
 	}
 
+	@Test
+	public void testAdminActive() {
+		Assert.assertTrue("Error: Active is set as deactivated", adminTest.getActive() == 'Y');
+	}
+	
+	@Test
+	public void testAdminFirstName() {
+		Assert.assertTrue("Error: First name does not exist", adminTest.getFirstName().equals("FIRSTNAME"));
+	}
+	
+	@Test
+	public void testAdminLastName() {
+		Assert.assertTrue("Error: Last name does not exist", adminTest.getLastName().equals("LASTNAME"));
+	}
 }
