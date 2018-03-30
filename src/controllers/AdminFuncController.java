@@ -10,6 +10,7 @@
 package controllers;
 import java.util.*;
 import entities.*;
+import interfaces.AccountInterface;
 
 public class AdminFuncController{
   
@@ -17,6 +18,7 @@ public class AdminFuncController{
   /** An Admin class named admin */
   @SuppressWarnings("unused")
   private Admin admin;
+  private AccountInterface ai = new AccountInterface();;
   private DBController dbc = new DBController();
   Scanner sc = new Scanner(System.in);
   
@@ -44,7 +46,7 @@ public class AdminFuncController{
   /**
    * View a list of users; gets a list of users from the database
    */
-  public void viewUsers(){
+  public void viewUsersList(){
     ArrayList<Account> accountList = dbc.getAccounts();
     System.out.println("========================================================================================================================" +'\n'+
     					"First" + '\t'+'\t' + "Last" + '\t'+'\t' + "Username" + '\t'+'\t' + "Password" + '\t'+'\t' + "Type" + '\t'+'\t' + "Status" +'\n'+ 
@@ -58,7 +60,7 @@ public class AdminFuncController{
   /**
    * View a list of university names; gets a list of universities from the database
    */
-  public void viewUniversities(){
+  public void viewUniversitiesList(){
     ArrayList<University> list = dbc.getUniversities();
     System.out.println("=======================================" + '\n' +
     				   "             SchoolNames" + '\n' + 
@@ -99,6 +101,7 @@ public class AdminFuncController{
     for(String emphasis: emphases) {
     	System.out.println('\t'+emphasis);
     }
+    viewUniversities();
   }
   
   /**
@@ -179,6 +182,155 @@ public class AdminFuncController{
   }
   
   //======================================= METHODS CALLED FROM AdminInterface ========================================
+  /**
+   * Brings the admin to their homepage
+   */
+  public void homepage() {
+	  System.out.print("=======================================" 		+'\n'+ 
+							"Welcome to the Admin Homepage:" 			+'\n'+'\t'+ 
+								"1: Manage Universities" 				+'\n'+'\t'+
+								"2: Manage Users"						+'\n'+'\t'+
+								"3: Logout"								+'\n'+
+							"Enter Here: ");
+	  String prompt = sc.nextLine();
+	  if(prompt.equals("1")){ // Manage universities
+	      viewUniversities();
+	  }
+	  else if(prompt.equals("2")){ // Manage users
+	      viewUsers();
+	  }
+	  else if(prompt.equals("3")){ // Manage users
+	      ai.logout();
+	  }
+	  else{ // invalid input
+		  System.out.println("ERROR: Invalid Input");
+	      homepage();
+	  }
+  }
+  
+  /**
+   * Shows a list of all universities in the system, and
+   * presents options for the admin to manage those
+   * universities.
+   */
+  public void viewUniversities() {
+	this.viewUniversitiesList();
+    System.out.print("=======================================" 			+'\n'+
+    					"Would you like to add or edit Universities?" 	+'\n'+'\t'+
+                       		"a: Add Universities"						+'\n'+'\t'+
+                        	"e: Edit Universities"						+'\n'+'\t'+
+                        	"r: Remove University"						+'\n'+'\t'+
+                        	"d: Details of University"					+'\n'+'\t'+
+                        	"q: Quit (Return to Homepage)"				+'\n'+
+                        "Enter Here: ");
+    String cmd = sc.nextLine();
+    if(cmd.equals("a")){ // ADD UNIVERSITIES
+    	System.out.print("=======================================" +'\n'+ "Enter University name: ");
+        String univ = sc.nextLine();
+        if(univ.equals("")) {//if the user entered nothing
+        	System.out.println("*** Please enter a university name ***");
+        	this.viewUniversities();
+        }
+        else if(this.getUniversity(univ) instanceof University) {// if the university already exists
+        	System.out.println("*** This university name already exists, please choose a different one ***");
+        	this.viewUniversities();
+        }
+        this.addUniversity(univ);
+    }
+    else if(cmd.equals("e")){ // EDIT UNIVERSITIES
+    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
+        String univ = sc.nextLine();
+        if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
+      	  System.out.println("*** There is no such university ***");
+      	  this.viewUniversities();
+        }
+        this.editUniversity(this.getUniversity(univ));
+    }
+    else if(cmd.equals("r")) { // REMOVE UNIVERSITY
+    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
+        String univ = sc.nextLine();
+        if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
+      	  System.out.println("*** There is no such university ***");
+      	  this.viewUniversities();
+        }
+  	  	this.removeUniversity(this.getUniversity(univ));
+    }
+    else if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY
+    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
+        String univ = sc.nextLine();
+        if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
+      	  System.out.println("*** There is no such university ***");
+      	  this.viewUniversities();
+        }
+        this.viewUniversityDetails(univ);
+    }
+    else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
+    	this.homepage();
+    }
+    else{ // INPUT ERROR
+      System.out.println("ERROR: Invalid input");
+      viewUniversities();
+    }
+  }
+  
+  /**
+   * Shows a list of all users in the system (both general and admin)
+   * and presents a list of options for the admin to manage those
+   * users.
+   */
+  public void viewUsers() {
+	this.viewUsersList();
+    System.out.print("======================================="	+ '\n' +
+    					"Would you like to add, edit, or deactivate a user?" + '\n'
+                         +'\t'+ "a: Add User" + '\n'
+                         +'\t'+ "e: Edit User" + '\n'
+                         +'\t'+ "d: Deactivate User" + '\n'
+                         +'\t'+ "r: Remove User" + '\n'
+                         +'\t'+ "q: Quit (Return to Homepage)" + '\n' +
+                         "Enter Here: ");
+    String cmd = sc.nextLine();
+    if(cmd.equals("a")){ // ADD USER
+    	System.out.print("=======================================" +'\n'+"Enter Username: ");
+        String userName = sc.nextLine();
+        if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
+        	System.out.println("*** This user name already exists, please choose a different one ***");
+            this.viewUsers();
+        }
+        this.addAccount(userName);
+    }
+    else if(cmd.equals("e")){ // EDIT USER
+    	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
+      	String userName = sc.nextLine();
+      	if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username does not exist
+      		System.out.println("*** There is no such user ***");
+      		this.viewUsers();
+      	}
+      	this.editUser(this.getAccount(userName));
+    }
+    else if(cmd.equals("d")){ // DEACTIVATE USER
+    	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
+      	String userName = sc.nextLine();
+      	if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username does not exist
+      		System.out.println("ERROR: There is no such user");
+      		this.viewUsers();
+      	}
+      	this.deactivate(this.getAccount(userName));
+    }
+    else if(cmd.equals("r")){ // REMOVE USER (TESTING PURPOSE ONLY)
+    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
+        String univ = sc.nextLine();
+        DBController dbc = new DBController();
+        dbc.deleteAccount(this.getAccount(univ));
+        viewUsers();
+    }
+    else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
+    	homepage();
+    }
+    else{ // INPUT ERROR
+    	System.out.println("ERROR: Invalid input");
+    	viewUsers();
+    }
+  }
   
   /**
    * Prompts the user to edit a university through several options
@@ -287,6 +439,7 @@ public class AdminFuncController{
 	        	break;
 		  } 
 	  } while(!prompt.equals("s")&&!prompt.equals("c"));
+	  viewUniversities();
   }
 
   /**
@@ -338,6 +491,7 @@ public class AdminFuncController{
 	  dbc.addNewUniversity(u); // add the university to the database
 	  addEmphases(u);
 	  System.out.println("*** Saved university " + univ + " to list ***");
+	  viewUniversities();
   }
 
   /**
@@ -360,6 +514,7 @@ public class AdminFuncController{
 		  System.out.println("ERROR: Invalid input");
 		  removeUniversity(u);
 	  }
+	  viewUniversities();
   }
   /**
    * Prompts the user to add a GeneralUser and its properties
@@ -392,6 +547,7 @@ public class AdminFuncController{
 		  System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
 		  addAccount(userName);
 	  }
+	  viewUsers();
   }
   
   /**
@@ -464,6 +620,7 @@ public class AdminFuncController{
 	          break;
 	      }
 	    } while(!prompt.equals("s")&&!prompt.equals("c"));
+	  viewUsers();
   }
   /**
    * Prompts the user to deactivate an account
@@ -494,5 +651,6 @@ public class AdminFuncController{
 		  System.out.println("ERROR: Invalid Input");
 		  deactivate(usr);
 	  }
+	  viewUsers();
   }
 }

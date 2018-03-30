@@ -133,7 +133,7 @@ public class UserFuncController
   
   /**
    * Removes a specific university from the users saved schools list
-   * 
+   *  j
    * @param university the school to be removed from the list
    */
   public void removeSavedSchool(University university)
@@ -148,9 +148,8 @@ public class UserFuncController
    * @param firstName users first name
    * @param lastName users last name
    */
-  public void submitProfileChanges(String firstName, String lastName,String password)
+  public void submitProfileChanges( String firstName, String lastName,String password)
   {
-	//ADD IN INPUT VALIDATION SO METHODS ONLY ACCCEPTS STRINGS  
     gu.setPassword(password);
     gu.setFirstName(firstName);
     gu.setLastName(lastName);
@@ -187,4 +186,52 @@ public class UserFuncController
 	    scan.close();
 	    return re;
 	  }
+  
+  /**
+   * Takes the edit file command and redirect the user to the edit page
+   */
+
+  public void editProfile()
+  {
+	  Scanner scan = new Scanner(System.in);
+  
+	  System.out.println("What would you like to edit:" + '\n' +
+              "1: FirstName" + '\n' +
+               "2: LastName" + '\n' +
+               "3: Password" + '\n' +                            
+               "4: Quit " + '\n'
+               + "Enter here: ");
+	      
+	String prompt = scan.next();
+	switch (prompt){
+	case "1":
+	System.out.print("Enter the new first name: ");
+	String change=scan.next();
+	submitProfileChanges(change,gu.getLastName(),gu.getPassword());
+	gu.setFirstName(change);
+	break;
+	case "2":
+	System.out.print("Enter the new last name: ");
+	change=scan.next();
+	submitProfileChanges(gu.getFirstName(),change,gu.getPassword());
+	gu.setLastName(change);
+	break;
+	case "3":
+	System.out.print("Enter the new password: ");
+	change=scan.next();
+	submitProfileChanges(gu.getFirstName(),gu.getLastName(),change);
+	gu.setPassword(change);
+	break;
+	
+	case "4":
+	break;
+
+	default:
+	System.out.println("Invalid input");
+	editProfile();
+	break;
+	
+	}
+	scan.close();
+  }
 }
