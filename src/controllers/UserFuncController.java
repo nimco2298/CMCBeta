@@ -141,7 +141,7 @@ public class UserFuncController
   
   /**
    * Removes a specific university from the users saved schools list
-   * 
+   *  j
    * @param university the school to be removed from the list
    */
   public void removeSavedSchool(University university)
