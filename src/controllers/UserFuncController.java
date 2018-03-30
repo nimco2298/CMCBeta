@@ -26,9 +26,6 @@ public class UserFuncController
     db = new DBController();
     sc = new SearchController();
   }
-  
-  
-  
   /**
    * Gets the list of saved schools for a specific general user
    * 
@@ -47,11 +44,6 @@ public class UserFuncController
   public void saveToSavedSchoolList(University university)
   {
     db.addSchoolToUserList(gu,university);
-    
-    ///moved from interface!
-    this.gu=(GeneralUser)db.getUser(gu.getUsername());
-    this.updateUser(gu);
-    System.out.println("Success");
   }
   
   public ArrayList<University> searchForSchools()
@@ -147,11 +139,6 @@ public class UserFuncController
   public void removeSavedSchool(University university)
   {
     db.removeSchoolFromSavedSchoolList(gu, university);
-    
-    //moved from USERINTERFACE
-    this.gu=(GeneralUser)db.getUser(gu.getUsername());
-    this.updateUser(gu);
-    System.out.println("Success!" + "Your current list of saved schools are: " + gu.getSavedSchools() + '\n');
   }
   
   /**
@@ -161,7 +148,7 @@ public class UserFuncController
    * @param firstName users first name
    * @param lastName users last name
    */
-  public void submitProfileChanges(String firstName, String lastName,String password)
+  public void submitProfileChanges( String firstName, String lastName,String password)
   {
     gu.setPassword(password);
     gu.setFirstName(firstName);
@@ -192,11 +179,6 @@ public class UserFuncController
 	    return re;
 	  }
   
-  /**
-   * Takes a string and prints it, and prompts user to enter another String
-   * @param ss      a string that will be printed 
-   * @return int  a new integer the User entered
-   */
   public int intIn(String ss){
 	  Scanner scan = new Scanner(System.in);  
 	    System.out.print(ss);
@@ -205,6 +187,50 @@ public class UserFuncController
 	    return re;
 	  }
   
+  /**
+   * Takes the edit file command and redirect the user to the edit page
+   */
+
+  public void editProfile()
+  {
+	  Scanner scan = new Scanner(System.in);
   
-  
+	  System.out.println("What would you like to edit:" + '\n' +
+              "1: FirstName" + '\n' +
+               "2: LastName" + '\n' +
+               "3: Password" + '\n' +                            
+               "4: Quit " + '\n'
+               + "Enter here: ");
+	      
+	String prompt = scan.next();
+	switch (prompt){
+	case "1":
+	System.out.print("Enter the new first name: ");
+	String change=scan.next();
+	submitProfileChanges(change,gu.getLastName(),gu.getPassword());
+	gu.setFirstName(change);
+	break;
+	case "2":
+	System.out.print("Enter the new last name: ");
+	change=scan.next();
+	submitProfileChanges(gu.getFirstName(),change,gu.getPassword());
+	gu.setLastName(change);
+	break;
+	case "3":
+	System.out.print("Enter the new password: ");
+	change=scan.next();
+	submitProfileChanges(gu.getFirstName(),gu.getLastName(),change);
+	gu.setPassword(change);
+	break;
+	
+	case "4":
+	break;
+
+	default:
+	System.out.println("Invalid input");
+	editProfile();
+	break;
+	
+	}
+  }
 }
