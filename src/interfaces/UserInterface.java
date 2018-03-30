@@ -66,7 +66,7 @@ public class UserInterface
     	  System.out.print("please enter the name of the school you want to save:");
     	  String sName= scan.next();
     	  System.out.println(db.getUniversity(sName).getName());
-	      saveToSavedSchoolList(db.getUniversity(sName));
+	      ufc.saveToSavedSchoolList(db.getUniversity(sName));
 	      this.user=(GeneralUser)db.getUser(user.getUsername());
       }
       else {
@@ -76,7 +76,8 @@ public class UserInterface
 	      if(s1.equals("s")){
 	    	  System.out.println("please enter the name of the school you want to save:");
 	        String sName= scan.next();
-	        saveToSavedSchoolList(db.getUniversity(sName));
+	        ufc.saveToSavedSchoolList(db.getUniversity(sName));
+	        homePage();
 	      }
 	      else{
 	        String sName=strIn("please enter the name of the school you want to view details:");
@@ -96,7 +97,8 @@ public class UserInterface
     	System.out.println("please enter the name of the school you want to remove: ");
       	String sName="";
       	sName= scan.next();
-        removeSavedSchool(db.getUniversity(sName));
+        ufc.removeSavedSchool(db.getUniversity(sName));
+        homePage();
       }
  
       else if(!user.getSavedSchools().isEmpty()){
@@ -152,7 +154,8 @@ public class UserInterface
     System.out.print("Do you want to save it? y/n:");  
     String s2 = scan.next();
     if(s2.equals("y")){
-      saveToSavedSchoolList(u);
+      ufc.saveToSavedSchoolList(u);
+      homePage();
     }
     else{
       homePage();
@@ -184,62 +187,6 @@ public class UserInterface
     System.out.println("Profile details: \n"+this.user.getDetails());
   }
   
-  
-  /**
-   * Takes the edit file command and redirect the user to the edit page
-   */
-  public void editProfile(){
-	  System.out.println("What would you like to edit:" + '\n' +
-			                "1: FirstName" + '\n' +
-                             "2: LastName" + '\n' +
-                             "3: Password" + '\n' +                            
-                             "4: Quit " + '\n'
-                             + "Enter here: ");
-                    
-    String prompt = scan.next();
-      switch (prompt){
-        case "1":
-          System.out.print("Enter the new first name: ");
-          String change=scan.next();
-          ufc.submitProfileChanges(change,user.getLastName(),user.getPassword());
-          user.setFirstName(change);
-          break;
-        case "2":
-          System.out.print("Enter the new last name: ");
-          change=scan.next();
-          ufc.submitProfileChanges(user.getFirstName(),change,user.getPassword());
-          user.setLastName(change);
-          break;
-        case "3":
-          System.out.print("Enter the new password: ");
-          change=scan.next();
-          ufc.submitProfileChanges(user.getFirstName(),user.getLastName(),change);
-          user.setPassword(change);
-          break;
-          
-        case "4":
-        	homePage();
-        	break;
-       
-        default:
-          System.out.println("Invalid input");
-          break;
-      
-      
-    }
-    homePage();
-  }
-
-  /**
-   * This method takes the search command and shows the result
-   * 
-   * @return ArrayList<University> the schools that have matched this criteria
-   */
-  public ArrayList<University> searchForSchools()
-  {
-	  return ufc.searchForSchools();
-	 
-  }
 
   /**
    * Displays the result of all university names in a list of Universities.
@@ -252,23 +199,8 @@ public class UserInterface
     }
   }
   
-  /**
-   * Takes the save to list command and add the school to the saved school list 
-   * @param  u The select university to save   
-   */
-  public void saveToSavedSchoolList(University u){
-    ufc.saveToSavedSchoolList(u);
-    homePage();
-  }
-  
-  /**
-   * Removes a school from  the saved school list 
-   * @param  u  The select university to remove 
-   */
-  public void removeSavedSchool(University u){
-    ufc.removeSavedSchool(u);
-    homePage();
-  }
+
+
   
   /**
    * Takes a string and prints it, and prompts user to enter another String
