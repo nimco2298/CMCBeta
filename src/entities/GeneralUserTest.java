@@ -33,22 +33,32 @@ public class GeneralUserTest {
 		user = new GeneralUser("Simon","Cloud", 'Y', "sassySimon", "simonSays1", savUnisList);
 	}
 	
-	/**
-	 * Test method for {@link entities.GeneralUser#getDetails()}.
-	 */
-	@Test
-	public void testGetDetails() {
-		fail("Not yet implemented"); // TODO
-	}
+	
 
 	/**
 	 * Test method for {@link entities.GeneralUser#GeneralUser(java.lang.String, java.lang.String, char, java.lang.String, java.lang.String, java.util.ArrayList)}.
 	 */
 	@Test
 	public void testGeneralUser() {
-		fail("Not yet implemented"); // TODO
+	    ArrayList<String> savUnis = new ArrayList<String>();
+	    savUnis.add("UNIVERSITY OF MINNESOTA");
+	    GeneralUser newUser = new GeneralUser("Salahi", "Takahashi",'Y',"sTaka", "coolKid1",savUnis);
+	    newUser.getDetails();
+		//fail("Not yet implemented"); // TODO
 	}
 
+	/**
+	 * Test method for {@link entities.GeneralUser#GeneralUser(java.lang.String, java.lang.String, char, java.lang.String, java.lang.String, java.util.ArrayList)}.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testGeneralUserFails() {
+		ArrayList<String> savUni = new ArrayList<String>();
+	    savUni.add("VANDERBILT");
+		user = new GeneralUser("Jeylani", "Jones", 'Y', "sassySimon", "jj123",savUni);
+	    
+	}
+
+	
 	/**
 	 * Test method for {@link entities.GeneralUser#getSavedSchools()}.
 	 */

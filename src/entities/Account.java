@@ -126,7 +126,13 @@ public abstract class Account {
    */
   public void setFirstName(String firstName) 
   {
-    this.firstName = firstName;
+	  if(firstName.length() > 0) {
+	    	 this.firstName = firstName; 
+	     }
+	     else
+	     {
+	         throw new IllegalArgumentException("Error! You can only enter a String to set the first name field!");
+	     }
   }
     
   /**

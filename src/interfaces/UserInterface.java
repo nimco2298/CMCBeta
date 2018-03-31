@@ -91,6 +91,7 @@ public class UserInterface
         ufc.removeSavedSchool(db.getUniversity(sName));
         homePage();
       }
+    }
  
       else if(!user.getSavedSchools().isEmpty()){
     	
