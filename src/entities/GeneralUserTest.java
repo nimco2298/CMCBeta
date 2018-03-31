@@ -26,9 +26,6 @@ public class GeneralUserTest {
 	public void setUp() throws Exception {
 		ArrayList<String> savUnisList = new ArrayList<String>();
 		
-		//user.setUsername("supremeSimon");
-	    //user.setFirstName("Simone");
-	    //user.setLastName("Cloudy");
 	    savUnisList.add("VASSAR");
 	    savUnisList.add("MESA");
 	    savUnisList.add("MESA");

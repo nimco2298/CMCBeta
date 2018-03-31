@@ -58,21 +58,10 @@ public class UserInterface
     if(str.equals("s")){
       System.out.println("Here are all the schools:");
       viewSearchedSchools(db.getUniversities());
-      /*System.out.println("Do you want to add a school very quickly? y/n");
-      if(scan.next().equals("y")) {
-    	  System.out.print("please enter the name of the school you want to save:");
-    	  String sName= scan.next();
-    	  System.out.println(db.getUniversity(sName).getName());
-	      ufc.saveToSavedSchoolList(db.getUniversity(sName));
-	      this.user=(GeneralUser)db.getUser(user.getUsername());
-      }
-<<<<<<< HEAD
-      else {*/
-    	  viewSearchedSchools(searchForSchools());
-=======
+    }
       else {
     	  viewSearchedSchools(ufc.searchForSchools());
->>>>>>> 4e11f31051674d4a7e3e958459483dc83c34bf08
+
     	  System.out.println("s for save and v for view:");
 	      String s1 = scan.next();
 	      if(s1.equals("s")){
@@ -81,12 +70,12 @@ public class UserInterface
 	        ufc.saveToSavedSchoolList(db.getUniversity(sName));
 	        homePage();
 	      }
-	      else{
+	      else {
 	        String sName=strIn("please enter the name of the school you want to view details:");
 	        viewSchoolDetailsAndTop5(db.getUniversity(sName));
 	      }
 	    }
-   // }
+  
     else if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
       System.out.print( "\n" + "Please select r for removing a school or  v for viewing further details: ");

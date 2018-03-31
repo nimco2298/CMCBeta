@@ -29,14 +29,18 @@ public class GeneralUser extends Account
   */
   public GeneralUser(String firstName, String lastName, char active,String username, String password,ArrayList<String> savedUniversities) //add in paramaeter for savedUniverisisyd
   {
+	
     this.setUsername(username); 
     this.setFirstName(firstName);
     this.setLastName(lastName);
     this.setActive(active); //NEW USERS WILL HAVE Y BY DEFUALT!
-    this.setType('u');
+    this.setType('u');    //by default a user type is 'u'
     this.setPassword(password);
     this.savedUniversities = savedUniversities; // initializes all the users saved schools from DB
   }
+  
+  
+  
   
   /** Returns the list of saved schools as a string
    * 
