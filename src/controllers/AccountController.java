@@ -39,7 +39,6 @@ public class AccountController
     */ 
   public boolean login(String username, String password)
   {
-	 
     // find a user in the database   
     DBController db =  new DBController();
     Account matchedUser = db.getUser(username); 
@@ -63,62 +62,64 @@ public class AccountController
     }
     
     //C3
-   else if(matchedUser.getUsername().equals("DummyUser"))
-   { 
-     //S3
-      System.out.println("Error: The username is not registered.");
-      this.loginStatus = false;
-      return false;
-    }
-    //C4
+//   else if(matchedUser.getUsername().equals("DummyUser"))
+//   { 
+//     //S3
+//      System.out.println("Error: The username is not registered.");
+//      this.loginStatus = false;
+//      return false;
+//    }
+    
+    //C3
     else if(!matchedUser.getPassword().equals(password))
     {
-      //S4
+      //S3
       System.out.println("Error: The password entered does not match an account.");
       this.loginStatus = false;
       return false;
     }
     
-    //C5
+    //C4
     else if(!matchedUser.getUsername().equals(username))
     {
-      //S5
+      //S4
       System.out.println("Error: The username entered does not match an account");
       this.loginStatus = false;
       return false;
     }
-    //C6
-    else { 
+    
+    //C5
+    else if(matchedUser.getUsername().equals(username) && matchedUser.getPassword().equals(password)){ 
     	
-      //S6
+      //S5
       this.account = matchedUser;  
       this.loginStatus = true;
       char type = account.getType(); // get the type associated with this account 
       
-      //C7
+      //C6
       if(type == 'a') 
       {
-    	//S7  
+    	//S6
         AdminInterface ai = new AdminInterface();
         System.out.println("Login successful");
         ai.homepage(); 
         this.loginStatus = true;
         return true;
       }
-      //C8
+      //C7
       else if(type == 'u')
       {
-    	//S8  
+    	//S7
         UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
         System.out.println("Login successful");
         this.loginStatus = true;
         ui.homePage();
         return true;
       }
-      //C9
+      //C8
       else
       {
-    	//S9  
+    	//S8
         System.out.println("Error: There is something wrong with the account in the database. Please try again.");
         this.loginStatus = false;
         return false;

@@ -62,7 +62,7 @@ public class UserInterface
       else {
     	  viewSearchedSchools(ufc.searchForSchools());
 
-    	  System.out.println("s for save and v for view:");
+    	  System.out.println("s for save and v for view further details of a school:");
 	      String s1 = scan.next();
 	      if(s1.equals("s")){
 	    	  System.out.println("please enter the name of the school you want to save:");
