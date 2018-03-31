@@ -41,7 +41,6 @@ public class GeneralUser extends Account
   
   
   
-  
   /** Returns the list of saved schools as a string
    * 
   * @return ArrayList<String>   list of saved schools of a General User
