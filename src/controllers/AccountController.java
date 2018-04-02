@@ -139,7 +139,6 @@ public class AccountController
     */ 
   public void logout() 
   {
-   
     this.loginStatus = false;   
   } 
   

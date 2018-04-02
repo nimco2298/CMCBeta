@@ -101,11 +101,11 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testSetUsername() {
-		//String expected = "Simon";
-		//user.setUsername(expected);
-		//String result = user.getUsername();
-		//assertEquals("Your username is now: " + result, expected,result);
-		fail("User cannot set a username."); 
+		String expected = "Simon";
+		user.setUsername(expected);
+		String result = user.getUsername();
+		assertEquals("Your username is now: " + result, expected,result);
+	
 	}
 
 	/**
@@ -168,22 +168,23 @@ public class GeneralUserTest {
 	 * Test method for {@link entities.Account#setType(char)}.
 	 */
 	@Test
-	public void testSetType() {
-		//user.setType('Y');
+	public void testSetTypeUserBecomesAdmin() {
 	    char expected = 'a';
 		user.setType(expected);
 		char result = user.getType();
+		assertEquals("Your type is now: " + result, expected,result);
 		
-		assertEquals("Your password is no: " + result, expected,result);
-		//fail("User canno"); // TODO
 	}
 
-	/**USER CANNOT SET THEIR ACTIVE
+	/**USER CANNOT SET THEIR ACTIVE,ADMINS CAN MODIFY
 	 * Test method for {@link entities.Account#setActive(char)}.
 	 */
 	@Test
-	public void testSetActive() {
-		fail("USER CANNOT SET THEIR ACTIVE"); // TODO
+	public void testSetActiveForAUser() {
+		char expected = 'N';
+		user.setActive(expected);
+		char result = user.getActive();
+		assertEquals("Your activity status is now: " + result, expected,result);
 	}
 
 }
