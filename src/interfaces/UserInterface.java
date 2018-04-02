@@ -53,9 +53,9 @@ public class UserInterface
                         	"q: Logout"				+'\n'+
                         "Enter Here: ");
   
-    String str= scan.next();
+    String str = scan.next();
     
-    if(str.equals("s")){
+    if(str.equals("s") || str.equals("S")){
       System.out.println("Here are all the schools:");
       viewSearchedSchools(db.getUniversities());
     }
@@ -65,7 +65,7 @@ public class UserInterface
     	  System.out.println("s for save and v for view further details of a school:");
 	      String s1 = scan.next();
 	      if(s1.equals("s")){
-	    	  System.out.println("please enter the name of the school you want to save:");
+	    	  System.out.println("Please enter the name of the school you want to save:");
 	        String sName= scan.next();
 	        ufc.saveToSavedSchoolList(db.getUniversity(sName));
 	        homePage();
@@ -76,7 +76,7 @@ public class UserInterface
 	      }
 	    }
   
-    else if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
+    if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
       System.out.print( "\n" + "Please select r for removing a school or  v for viewing further details: ");
       String s3 = scan.next();
@@ -85,7 +85,7 @@ public class UserInterface
     		  System.out.println("Error: " + user.getSavedSchools() + " Your list of saved schools is empty! You cannot remove any schools!");
     		  homePage();
     	  }
-    	System.out.println("please enter the name of the school you want to remove: ");
+    	System.out.println("Please enter the name of the school you want to remove: ");
       	String sName="";
       	sName= scan.next();
         ufc.removeSavedSchool(db.getUniversity(sName));
@@ -95,10 +95,10 @@ public class UserInterface
  
       else if(!user.getSavedSchools().isEmpty()){
     	
-    	System.out.println("please enter the name of the school you want to view details: ");
+    	System.out.println("Please enter the name of the school you want to view details: ");
         String sName= scan.next();
         while(!user.getSavedSchools().contains(sName)) {
-        	System.out.println("no match, please enter again");
+        	System.out.println("No match, please enter again");
         	sName= scan.next();
         }
         
@@ -127,7 +127,7 @@ public class UserInterface
 
         }  
      else {
-   	  System.out.print("Invalid input ");  
+   	  System.out.print("Invalid input.");  
    	  homePage();
      }
     }

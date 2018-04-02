@@ -60,6 +60,7 @@ public class AccountController
         return false;
     	
     }
+     
     
     //C3
 //   else if(matchedUser.getUsername().equals("DummyUser"))
@@ -71,7 +72,7 @@ public class AccountController
 //    }
     
     //C3
-    else if(!matchedUser.getPassword().equals(password))
+    else if(!matchedUser.getPassword().equals(password) && matchedUser.getUsername().equals(username))
     {
       //S3
       System.out.println("Error: The password entered does not match an account.");
@@ -80,7 +81,7 @@ public class AccountController
     }
     
     //C4
-    else if(!matchedUser.getUsername().equals(username))
+    else if(!matchedUser.getUsername().equals(username) && matchedUser.getPassword().equals(password))
     {
       //S4
       System.out.println("Error: The username entered does not match an account");
@@ -116,15 +117,16 @@ public class AccountController
         ui.homePage();
         return true;
       }
+    }
       //C8
-      else
+      else if(!matchedUser.getUsername().equals(username) && !matchedUser.getPassword().equals(password))
       {
     	//S8
-        System.out.println("Error: There is something wrong with the account in the database. Please try again.");
+        System.out.println("Error: The username and pasword entered doesnt match a registered account. Please try again.");
         this.loginStatus = false;
-        return false;
+       
       }
-    }
+    return false;
     
   }
   
