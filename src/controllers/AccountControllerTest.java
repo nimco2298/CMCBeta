@@ -7,10 +7,6 @@ import org.junit.Test;
 import controllers.AccountController;
 
 /**
- * 
- */
-
-/**
  * @author nhussein001
  *
  */
@@ -18,6 +14,7 @@ public class AccountControllerTest {
 
 	private AccountController ac;
 	public boolean loginStatus;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -25,8 +22,6 @@ public class AccountControllerTest {
 	public void setUp() throws Exception {
 		ac = new AccountController();
 	}
-
-
 
 	/**
 	 * Test method for login fails due to invalid user input
@@ -39,7 +34,6 @@ public class AccountControllerTest {
 		
 	}
 	
-
 	/**
 	 * Test method for login fails for a deactivated user.
 	 */
@@ -50,7 +44,6 @@ public class AccountControllerTest {
 		ac.login(expectedUser,expectedPass);
 		
 	}
-
 
 	/**
 	 * Test method for login fails for invalid usernam,and a valid password
@@ -79,8 +72,7 @@ public class AccountControllerTest {
 		boolean loginvalue2 = ac.login(expectedUser2,expectedPass2);
 		assertEquals("Your login status is: " + loginvalue2, loginStatus, loginvalue2);
 		
-	}
-	
+	}	
 	
 	/**
 	 * Test method for login in as an Admin
@@ -108,13 +100,14 @@ public class AccountControllerTest {
 		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
 		assertEquals("Your login status is: " + loginvalue1, loginStatus, loginvalue1);
 		
+		ac.logout();
+		
 		String expectedUser2 = "juser";
 		String expectedPass2 = "user";
 		boolean loginvalue2 = ac.login(expectedUser2,expectedPass2);
 		assertEquals("Your login status is: " + loginvalue2, loginStatus, loginvalue2);
 		
 	}
-	
 	
 	 /** Test method for login in as an User
 		 */
@@ -137,8 +130,13 @@ public class AccountControllerTest {
 	 */
 	@Test
 	public void testLogout() {
+		String expectedUser1 = "juser";
+		String expectedPass1 = "user";
+		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
+		
 		ac.logout();
-		//fail("Not yet implemented"); // TODO
+		assertEquals("Your login status is: " + loginvalue1, loginStatus, loginvalue1);	
+		fail("Not yet implemented"); // TODO
 	}
 
 }
