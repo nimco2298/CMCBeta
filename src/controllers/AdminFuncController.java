@@ -139,11 +139,11 @@ public class AdminFuncController{
    * Finds a university based on name
    * 
    * @param univ the name of the university
-   * @return the 
+   * @return the university
    */
   public University getUniversity(String univ) throws NullPointerException
   {
-    return dbc.getUniversity(univ);
+	  return dbc.getUniversity(univ);
   }
   
   /**
@@ -280,13 +280,13 @@ public class AdminFuncController{
    */
   public void viewUsers() {
 	this.viewUsersList();
-    System.out.print("======================================="	+ '\n' +
-    					"Would you like to add, edit, or deactivate a user?" + '\n'
-                         +'\t'+ "a: Add User" + '\n'
-                         +'\t'+ "e: Edit User" + '\n'
-                         +'\t'+ "d: Deactivate User" + '\n'
-                         +'\t'+ "r: Remove User" + '\n'
-                         +'\t'+ "q: Quit (Return to Homepage)" + '\n' +
+    System.out.print("======================================="					+'\n'+
+    					"Would you like to add, edit, or deactivate a user?" 	+'\n'+'\t'+
+                          "a: Add User" 										+'\n'+'\t'+
+                          "e: Edit User" 										+'\n'+'\t'+
+                          "d: Deactivate User" 									+'\n'+'\t'+
+                          "r: Remove User" 										+'\n'+'\t'+
+                          "q: Quit (Return to Homepage)" 						+'\n'+
                          "Enter Here: ");
     String cmd = sc.nextLine();
     if(cmd.equals("a")){ // ADD USER
@@ -317,7 +317,7 @@ public class AdminFuncController{
       	this.deactivate(this.getAccount(userName));
     }
     else if(cmd.equals("r")){ // REMOVE USER (TESTING PURPOSE ONLY)
-    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
+    	System.out.print("=======================================" +'\n'+ "Enter Username (check name!!!): ");
         String univ = sc.nextLine();
         DBController dbc = new DBController();
         dbc.deleteAccount(this.getAccount(univ));
@@ -501,7 +501,7 @@ public class AdminFuncController{
    */
   public void removeUniversity(University u) {
 	  System.out.println("=======================================" +'\n'+ "Are you sure you want to delete " + u.getName() + " from the list?" 	
-			  				+'\n'+'\t'+ "y: yes" +'\n'+'\t'+ "n: no");
+			  				+'\n'+'\t'+ "y: yes" +'\n'+'\t'+ "n: no"+ '\n' + "Enter Here: ");
 	  String prompt = sc.nextLine();
 	  if(prompt.equals("y") || prompt.equals("Y")) {
 		  System.out.println("*** Deleted " + u.getName() + " ***");
@@ -512,7 +512,6 @@ public class AdminFuncController{
 	  }
 	  else {
 		  System.out.println("ERROR: Invalid input");
-		  removeUniversity(u);
 	  }
 	  viewUniversities();
   }
@@ -526,7 +525,7 @@ public class AdminFuncController{
 	  information.add(userName);
 	  System.out.print("Please enter a new password: ");
 	  information.add(sc.nextLine());
-	  information.add("y");
+	  information.add("Y");
 	  System.out.print("Please enter the user's first name: ");
 	  information.add(sc.nextLine());
 	  System.out.print("Please enter the user's last name: ");
