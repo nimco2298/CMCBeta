@@ -12,7 +12,7 @@ package entities;
  * 
  *
  * @author  Nimco Hussein
- * @version March 15, 2018
+ * @version April 4th, 2018
  */
 public abstract class Account {
   

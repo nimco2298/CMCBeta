@@ -12,7 +12,7 @@ import interfaces.*;
  * 
  *
  * @author  Nimco Hussein
- * @version March 20 2018
+ * @version April 4th 2018
  */
 public class AccountController  
 {
@@ -22,11 +22,7 @@ public class AccountController
   /** an Account object that stores account information */	
   public boolean loginStatus;
   
-  /**A default constructor that creates an AccountController object 
-    */
-  public AccountController()
-  {
-  }
+
   
   /**Log in method takes username and password and return true or false, if the information belongs to an account
     * If the credentials that are added are verified, then based on the type a GeneralUser or Admin object 
@@ -34,6 +30,8 @@ public class AccountController
     * 
     * @param username the entered username of user attempting to login
     * @param password  the entered password of user attempting to login
+    * 
+    * @throws IllegalArgumentException   if input is empty
     * 
     * @return true if user was logged in, false if they were not
     */ 
@@ -44,22 +42,29 @@ public class AccountController
     Account matchedUser = db.getUser(username); 
     
     //C1
+    if(username.length() == 0 || password.length() == 0)
+    {
+    	//S2
+    	throw new IllegalArgumentException("You must enter a non-empty String for log in credentials");
+    }
+    
+    //C2
     if(matchedUser.getActive() == 'N')
     {
-        //S1
-    	System.out.println("Error: Your account is deactivated and you cannot be logged in");
+        //S2
+    	//System.out.println("Error: Your account is deactivated and you cannot be logged in");
     	this.loginStatus = false;
     	return false;
     }
-    //C2
-    else if(matchedUser.getUsername().equals("") && matchedUser.getPassword().equals(""))
-    {
-    	//S2
-    	System.out.println("Error: A username and password was not entered.");
-        this.loginStatus = false;
-        return false;
-    	
-    }
+//    //C2
+//    else if(matchedUser.getUsername().equals("") && matchedUser.getPassword().equals(""))
+//    {
+//    	//S2
+//    	System.out.println("Error: A username and password was not entered.");
+//        this.loginStatus = false;
+//        return false;
+//    	
+//    }
      
     
     //C3
