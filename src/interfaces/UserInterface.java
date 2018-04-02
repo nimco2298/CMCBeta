@@ -36,6 +36,10 @@ public class UserInterface
   
   Scanner scan = new Scanner(System.in);
   
+  
+  /** THE FOLLOWIGN CODE WAS MOVED FROM USERINTERFACE TO HERE */
+  
+  
   /**
    * Redirects the user to their homepage
    */
@@ -49,34 +53,30 @@ public class UserInterface
                         	"q: Logout"				+'\n'+
                         "Enter Here: ");
   
-    String str= scan.next();
-    if(str.equals("s")){
+    String str = scan.next();
+    
+    if(str.equals("s") || str.equals("S")){
       System.out.println("Here are all the schools:");
       viewSearchedSchools(db.getUniversities());
-      System.out.println("Do you want to add a school very quickly? y/n");
-      if(scan.next().equals("y")) {
-    	  System.out.print("please enter the name of the school you want to save:");
-    	  String sName= scan.next();
-    	  System.out.println(db.getUniversity(sName).getName());
-	      saveToSavedSchoolList(db.getUniversity(sName));
-	      this.user=(GeneralUser)db.getUser(user.getUsername());
-      }
+    }
       else {
-    	  viewSearchedSchools(searchForSchools());
-    	  System.out.println("s for save and v for view:");
+    	  viewSearchedSchools(ufc.searchForSchools());
+
+    	  System.out.println("s for save and v for view further details of a school:");
 	      String s1 = scan.next();
 	      if(s1.equals("s")){
-	    	  System.out.println("please enter the name of the school you want to save:");
+	    	  System.out.println("Please enter the name of the school you want to save:");
 	        String sName= scan.next();
-	        saveToSavedSchoolList(db.getUniversity(sName));
+	        ufc.saveToSavedSchoolList(db.getUniversity(sName));
+	        homePage();
 	      }
-	      else{
+	      else {
 	        String sName=strIn("please enter the name of the school you want to view details:");
 	        viewSchoolDetailsAndTop5(db.getUniversity(sName));
 	      }
 	    }
-    }
-    else if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
+  
+    if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
       System.out.print( "\n" + "Please select r for removing a school or  v for viewing further details: ");
       String s3 = scan.next();
@@ -85,18 +85,20 @@ public class UserInterface
     		  System.out.println("Error: " + user.getSavedSchools() + " Your list of saved schools is empty! You cannot remove any schools!");
     		  homePage();
     	  }
-    	System.out.println("please enter the name of the school you want to remove: ");
+    	System.out.println("Please enter the name of the school you want to remove: ");
       	String sName="";
       	sName= scan.next();
-        removeSavedSchool(db.getUniversity(sName));
+        ufc.removeSavedSchool(db.getUniversity(sName));
+        homePage();
       }
+    }
  
       else if(!user.getSavedSchools().isEmpty()){
     	
-    	System.out.println("please enter the name of the school you want to view details: ");
+    	System.out.println("Please enter the name of the school you want to view details: ");
         String sName= scan.next();
         while(!user.getSavedSchools().contains(sName)) {
-        	System.out.println("no match, please enter again");
+        	System.out.println("No match, please enter again");
         	sName= scan.next();
         }
         
@@ -105,14 +107,14 @@ public class UserInterface
 
 	      }
 
-	    }
-	      
+	          
      else if (str.equals("p") || str.equals("P")) {  
     	viewProfile();
         System.out.print("Do you want to edit your profile? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
-          editProfile();
+        	ufc.editProfile();
+            homePage();
         }
         else { 
         homePage(); 	  
@@ -125,7 +127,7 @@ public class UserInterface
 
         }  
      else {
-   	  System.out.print("Invalid input ");  
+   	  System.out.print("Invalid input.");  
    	  homePage();
      }
     }
@@ -137,13 +139,13 @@ public class UserInterface
    */
   public void viewSchoolDetailsAndTop5(University u)
   {
-	  
     viewSavedSchoolDetails(u);
     viewSearchedSchools(sc.recSearch(u));
     System.out.print("Do you want to save it? y/n:");  
     String s2 = scan.next();
     if(s2.equals("y")){
-      saveToSavedSchoolList(u);
+      ufc.saveToSavedSchoolList(u);
+      homePage();
     }
     else{
       homePage();
@@ -175,67 +177,7 @@ public class UserInterface
     System.out.println("Profile details: \n"+this.user.getDetails());
   }
   
-  
-  /**
-   * Takes the edit file command and redirect the user to the edit page
-   */
-  public void editProfile(){
-	  System.out.println("What would you like to edit:" + '\n' +
-			                "1: FirstName" + '\n' +
-                             "2: LastName" + '\n' +
-                             "3: Password" + '\n' +                            
-                             "4: Quit " + '\n'
-                             + "Enter here: ");
-                    
-    String prompt = scan.next();
-      switch (prompt){
-        case "1":
-          System.out.print("Enter the new first name: ");
-          String change=scan.next();
-          ufc.submitProfileChanges(change,user.getLastName(),user.getPassword());
-          user.setFirstName(change);
-          break;
-        case "2":
-          System.out.print("Enter the new last name: ");
-          change=scan.next();
-          ufc.submitProfileChanges(user.getFirstName(),change,user.getPassword());
-          user.setLastName(change);
-          break;
-        case "3":
-          System.out.print("Enter the new password: ");
-          change=scan.next();
-          ufc.submitProfileChanges(user.getFirstName(),user.getLastName(),change);
-          user.setPassword(change);
-          break;
-          
-        case "4":
-        	homePage();
-        	break;
-       
-        default:
-          System.out.println("Invalid input");
-          break;
-      
-      
-    }
-    homePage();
-  }
-  /**
-   * redirect the user to the homepage and save the changes
-   */
-  public void submitProfileChanges(){
-    
-  }
-  /**
-   * This method takes the search command and shows the result
-   * 
-   * @return ArrayList<University> the schools that have matched this criteria
-   */
-  public ArrayList<University> searchForSchools()
-  {
-	  return ufc.searchForSchools();
-	 
-  }
+
   /**
    * Displays the result of all university names in a list of Universities.
    * @param  c  The list of Universities stored in DB
@@ -247,30 +189,8 @@ public class UserInterface
     }
   }
   
-  /**
-   * Takes the save to list command and add the school to the saved school list 
-   * @param  u The select university to save   
-   */
-  public void saveToSavedSchoolList(University u){
-    ufc.saveToSavedSchoolList(u);
-    this.user=(GeneralUser)db.getUser(user.getUsername());
-    ufc.updateUser(user);
-    System.out.println("Success");
-    homePage();
-  }
-  
-  /**
-   * Removes a school from  the saved school list 
-   * @param  u  The select university to remove 
-   */
-  public void removeSavedSchool(University u){
 
-    ufc.removeSavedSchool(u);
-    this.user=(GeneralUser)db.getUser(user.getUsername());
-    ufc.updateUser(user);
-    System.out.println("Success!" + "Your current list of saved schools are: " + user.getSavedSchools() + '\n');
-    homePage();
-  }
+
   
   /**
    * Takes a string and prints it, and prompts user to enter another String

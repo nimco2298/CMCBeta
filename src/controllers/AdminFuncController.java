@@ -512,8 +512,8 @@ public class AdminFuncController{
 	  }
 	  else {
 		  System.out.println("ERROR: Invalid input");
+		  viewUniversities();
 	  }
-	  viewUniversities();
   }
   /**
    * Prompts the user to add a GeneralUser and its properties

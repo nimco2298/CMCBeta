@@ -26,9 +26,6 @@ public class GeneralUserTest {
 	public void setUp() throws Exception {
 		ArrayList<String> savUnisList = new ArrayList<String>();
 		
-		//user.setUsername("supremeSimon");
-	    //user.setFirstName("Simone");
-	    //user.setLastName("Cloudy");
 	    savUnisList.add("VASSAR");
 	    savUnisList.add("MESA");
 	    savUnisList.add("MESA");
@@ -36,36 +33,27 @@ public class GeneralUserTest {
 		user = new GeneralUser("Simon","Cloud", 'Y', "sassySimon", "simonSays1", savUnisList);
 	}
 	
-	/**
-	 * Test method for {@link entities.GeneralUser#getDetails()}.
-	 */
-	@Test
-	public void testGetDetails() {
-		fail("Not yet implemented"); // TODO
-	}
-
+	
 	/**
 	 * Test method for {@link entities.GeneralUser#GeneralUser(java.lang.String, java.lang.String, char, java.lang.String, java.lang.String, java.util.ArrayList)}.
 	 */
 	@Test
 	public void testGeneralUser() {
-		fail("Not yet implemented"); // TODO
+	    ArrayList<String> savUnis = new ArrayList<String>();
+	    savUnis.add("UNIVERSITY OF MINNESOTA");
+	    GeneralUser newUser = new GeneralUser("Salahi", "Takahashi",'Y',"sTaka", "coolKid1",savUnis);
+	    newUser.getDetails();
+		//fail("Not yet implemented"); // TODO
 	}
 
-	/**
-	 * Test method for {@link entities.GeneralUser#getSavedSchools()}.
-	 */
-	@Test
-	public void testGetSavedSchools() {
-		fail("Not yet implemented"); // TODO
-	}
+
 
 	/**
 	 * Test method for {@link entities.Account#getUsername()}.
 	 */
 	@Test
 	public void testGetUsername() {
-		fail("Not yet implemented"); // TODO
+	    assertEquals(user.getUsername(), "sassySimon");
 	}
 
 	/**
@@ -73,7 +61,7 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testGetPassword() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(user.getPassword(), "simonSays1");
 	}
 
 	/**
@@ -81,7 +69,7 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testGetFirstName() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(user.getFirstName(), "Simon");
 	}
 
 	/**
@@ -89,7 +77,7 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testGetLastName() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(user.getLastName(), "Cloud");
 	}
 
 	/**
@@ -97,7 +85,7 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testGetType() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(user.getType(), 'u');
 	}
 
 	/**
@@ -105,7 +93,7 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testGetActive() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(user.getActive(), 'Y');
 	}
 
 	/**USER CANNOT SET THEIR USERNAME
@@ -117,7 +105,7 @@ public class GeneralUserTest {
 		//user.setUsername(expected);
 		//String result = user.getUsername();
 		//assertEquals("Your username is now: " + result, expected,result);
-		fail("Not yet implemented"); // TODO
+		fail("User cannot set a username."); 
 	}
 
 	/**
@@ -126,9 +114,17 @@ public class GeneralUserTest {
 	@Test
 	public void testSetPassword() {
 		String expected = "user";
-		user.setUsername(expected);
+		user.setPassword(expected);
 		String result = user.getPassword();
 		assertEquals("Your password is now: " + result, expected,result);
+	}
+	
+	/**
+	 * Fails to set empty  password
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetPasswordFails() {
+		user.setPassword("");
 	}
 
 	/**
@@ -141,16 +137,31 @@ public class GeneralUserTest {
 		String result = user.getFirstName();
 		assertEquals("Your first name is now: " + result, expected,result);
 	}
+	/**
+	 * Fails to set empty first name
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetFirstNameFails() {
+		user.setFirstName("");
+	}
 
 	/**
 	 * Test method for {@link entities.Account#setLastName(java.lang.String)}.
 	 */
 	@Test
 	public void testSetLastName() {
-		String expected = "Salahi";
-		user.setUsername(expected);
+		String expected = "Claudius";
+		user.setLastName(expected);
 		String result = user.getLastName();
-		assertEquals("Your password is now: " + result, expected,result);
+		assertEquals("Your last name is now: " + result, expected,result);
+	}
+	
+	/**
+	 * Fails to set empty last name 
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetLastNameFails() {
+		user.setLastName("");
 	}
 
 	/**USER CANNOT SET THEIR TYPE,ADMINS CAN MODIFY TYPE
@@ -158,7 +169,13 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testSetType() {
-		fail("When called on GenUser object, should throw an message??"); // TODO
+		//user.setType('Y');
+	    char expected = 'a';
+		user.setType(expected);
+		char result = user.getType();
+		
+		assertEquals("Your password is no: " + result, expected,result);
+		//fail("User canno"); // TODO
 	}
 
 	/**USER CANNOT SET THEIR ACTIVE
@@ -166,7 +183,7 @@ public class GeneralUserTest {
 	 */
 	@Test
 	public void testSetActive() {
-		fail("Not yet implemented"); // TODO
+		fail("USER CANNOT SET THEIR ACTIVE"); // TODO
 	}
 
 }
