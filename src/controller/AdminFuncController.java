@@ -1,6 +1,4 @@
-<<<<<<< HEAD:src/controllers/AdminFuncController.java
-package controllers;
-=======
+
 /**
  * File: AdminFuncController
 
@@ -448,8 +446,5 @@ public class AdminFuncController{
 	  } while(!prompt.equals("s")&&!prompt.equals("c"));
 	  viewUniversities();
   }
->>>>>>> 160cf7783e2a377cc0bb1f447c1819995ae9d467:src/controller/AdminFuncController.java
-
-public class AdminFuncController {
 
 }
