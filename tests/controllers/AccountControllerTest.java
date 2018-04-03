@@ -1,10 +1,14 @@
 package controllers;
-import static org.junit.Assert.*;
 
+
+import controller.*;
+
+
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import controllers.AccountController;
+
 
 /**
  * @author nhussein001

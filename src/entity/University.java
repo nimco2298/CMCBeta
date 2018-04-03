@@ -8,7 +8,7 @@
  * appropriate methods to access these properties of a university
  */
 //package CMCClasses;
-package entities;
+package entity;
 import java.util.ArrayList;
 public class University{
   

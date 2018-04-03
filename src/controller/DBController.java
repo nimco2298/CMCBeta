@@ -3,10 +3,10 @@
  * File:DBController.java
  */
 
-package controllers;
+package controller;
 import dblibrary.project.csci230.*;
 import java.util.ArrayList;
-import entities.*;
+import entity.*;
 
 /**
  * Performs all the messy work needed for accessing and modifying the database

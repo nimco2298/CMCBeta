@@ -8,8 +8,8 @@
  */
 package interfaces;
 import java.util.*;
-import entities.*;
-import controllers.*;
+import entity.*;
+import controller.*;
 
 /**
  * UserInterface is responsible for enabling various controllers to carry out a user function.
