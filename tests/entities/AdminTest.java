@@ -1,4 +1,6 @@
 package entities;
+
+import entity.*;
 import org.junit.*;
 
 public class AdminTest {

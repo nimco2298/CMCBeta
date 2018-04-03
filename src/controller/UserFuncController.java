@@ -1,7 +1,7 @@
-package controllers;
+package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
-import entities.*;
+import entity.*;
 
 /**
  * Controls functions for the general user 

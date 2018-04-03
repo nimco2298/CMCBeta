@@ -1,7 +1,7 @@
 /** 
  * File: Account.java
  */
-package entities;
+package entity;
 
 
 /**

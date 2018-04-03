@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.University;
+import entity.*;
+import controller.*;
 
 public class SearchControllerTest {
 	private SearchController sc;
