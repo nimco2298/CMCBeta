@@ -113,10 +113,6 @@ public class AdminFuncController{
     dbc.updateAccount(account);
   }
   
-  public void insertUniversity(University u) {
-	  dbc.addNewUniversity(u); // add the university to the database
-	  addEmphases(u);
-  }
   
   /**
    * Save changes made to a university
@@ -295,7 +291,17 @@ public class AdminFuncController{
                          "Enter Here: ");
     String cmd = sc.nextLine();
     if(cmd.equals("a")){ // ADD USER
-        this.addAccount();
+    	System.out.print("=======================================" +'\n'+"Enter Username: ");
+        String userName = sc.nextLine();
+        if(userName.length()==0) {//if the userName is empty
+        	System.out.println("*** Please enter a user name ***");
+          this.viewUsers();
+        }
+        else if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
+          System.out.println("*** This user name already exists, please choose a different one ***");
+          this.viewUsers();
+        }
+        this.addAccount(userName);
     }
     else if(cmd.equals("e")){ // EDIT USER
     	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
@@ -486,7 +492,8 @@ public class AdminFuncController{
 	  }
 	  University u = new University(univ, state, location, control, students, femPerc, satV, satM, cost,
   								finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
-	  insertUniversity(u);
+	  dbc.addNewUniversity(u); // add the university to the database
+	  addEmphases(u);
 	  System.out.println("*** Saved university " + univ + " to list ***");
 	  viewUniversities();
   }
@@ -517,17 +524,7 @@ public class AdminFuncController{
    * 
    * @param userName the name of the GeneralUser to add
    */
-  public void addAccount() {
-	  System.out.print("=======================================" +'\n'+"Enter Username: ");
-      String userName = sc.nextLine();
-      if(userName.length()==0) {//if the userName is empty
-      	System.out.println("*** Please enter a user name ***");
-        this.viewUsers();
-      }
-      else if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
-        System.out.println("*** This user name already exists, please choose a different one ***");
-        this.viewUsers();
-      }
+  public void addAccount(String userName) {
       ArrayList<String> information = new ArrayList<String>();
 	  information.add(userName);
 	  System.out.print("Please enter a new password: ");

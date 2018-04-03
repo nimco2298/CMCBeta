@@ -145,7 +145,8 @@ public class AdminFuncControllerTest {
 	@Test
 	public void testAddUniversity() {
 		University u = new University("TestAdded", "", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList<String>());
-		ad.insertUniversity(u);
+		dbc.addNewUniversity(u); // add the university to the database
+		ad.addEmphases(u);
 		Assert.assertTrue("Error: the TestAdded university is not added.", ad.getUniversity("TestAdded").getName().equals("TestAdded"));
 		ad.delete(ad.getUniversity("TestAdded"));
 	}
