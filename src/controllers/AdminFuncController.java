@@ -113,6 +113,11 @@ public class AdminFuncController{
     dbc.updateAccount(account);
   }
   
+  public void insertUniversity(University u) {
+	  dbc.addNewUniversity(u); // add the university to the database
+	  addEmphases(u);
+  }
+  
   /**
    * Save changes made to a university
    * 
@@ -290,13 +295,7 @@ public class AdminFuncController{
                          "Enter Here: ");
     String cmd = sc.nextLine();
     if(cmd.equals("a")){ // ADD USER
-    	System.out.print("=======================================" +'\n'+"Enter Username: ");
-        String userName = sc.nextLine();
-        if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
-        	System.out.println("*** This user name already exists, please choose a different one ***");
-            this.viewUsers();
-        }
-        this.addAccount(userName);
+        this.addAccount();
     }
     else if(cmd.equals("e")){ // EDIT USER
     	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
@@ -319,7 +318,6 @@ public class AdminFuncController{
     else if(cmd.equals("r")){ // REMOVE USER (TESTING PURPOSE ONLY)
     	System.out.print("=======================================" +'\n'+ "Enter Username (check name!!!): ");
         String univ = sc.nextLine();
-        DBController dbc = new DBController();
         dbc.deleteAccount(this.getAccount(univ));
         viewUsers();
     }
@@ -488,8 +486,7 @@ public class AdminFuncController{
 	  }
 	  University u = new University(univ, state, location, control, students, femPerc, satV, satM, cost,
   								finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
-	  dbc.addNewUniversity(u); // add the university to the database
-	  addEmphases(u);
+	  insertUniversity(u);
 	  System.out.println("*** Saved university " + univ + " to list ***");
 	  viewUniversities();
   }
@@ -512,15 +509,25 @@ public class AdminFuncController{
 	  }
 	  else {
 		  System.out.println("ERROR: Invalid input");
-		  viewUniversities();
 	  }
+	  viewUniversities();
   }
   /**
    * Prompts the user to add a GeneralUser and its properties
    * 
    * @param userName the name of the GeneralUser to add
    */
-  public void addAccount(String userName) {
+  public void addAccount() {
+	  System.out.print("=======================================" +'\n'+"Enter Username: ");
+      String userName = sc.nextLine();
+      if(userName.length()==0) {//if the userName is empty
+      	System.out.println("*** Please enter a user name ***");
+        this.viewUsers();
+      }
+      else if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
+        System.out.println("*** This user name already exists, please choose a different one ***");
+        this.viewUsers();
+      }
       ArrayList<String> information = new ArrayList<String>();
 	  information.add(userName);
 	  System.out.print("Please enter a new password: ");
@@ -534,17 +541,16 @@ public class AdminFuncController{
 	  String type = sc.nextLine();
 	  if(type.charAt(0) == 'a'){
 		  // new Admin(username, password, active, firstName, lastName)
-		  Admin ad = new Admin( information.get(0),  information.get(1),  information.get(2).charAt(0),  information.get(3),  information.get(4));
+		  Admin ad = new Admin(information.get(0),  information.get(1),  information.get(2).charAt(0),  information.get(3),  information.get(4));
 		  dbc.addAccount(ad);
 	  }
 	  else if(type.charAt(0) == 'u'){
 		  // new GeneralUser(firstName, lastName, active, username, password, arrayList)
-		  GeneralUser gu = new GeneralUser( information.get(3),  information.get(4), information.get(2).charAt(0), information.get(0), information.get(1), new ArrayList<String>());
+		  GeneralUser gu = new GeneralUser(information.get(3), information.get(4), information.get(2).charAt(0), information.get(0), information.get(1), new ArrayList<String>());
 		  dbc.addAccount(gu);
 	  }
 	  else {
 		  System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
-		  addAccount(userName);
 	  }
 	  viewUsers();
   }

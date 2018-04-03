@@ -135,4 +135,65 @@ public class AdminFuncControllerTest {
 		ad.deleteEmphases(univ);
 		Assert.assertFalse("Error: the emphasis is not deleted", univ.getEmphases().contains("TestEmphasis"));
 	}
+	
+	// WHITE-BOX TESTING =================================================================================
+	@Test
+	public void testHomepage() {
+		
+	}
+	
+	@Test
+	public void testAddUniversity() {
+		University u = new University("TestAdded", "", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList<String>());
+		ad.insertUniversity(u);
+		Assert.assertTrue("Error: the TestAdded university is not added.", ad.getUniversity("TestAdded").getName().equals("TestAdded"));
+		ad.delete(ad.getUniversity("TestAdded"));
+	}
+	
+	/**
+	 * This test adds a non-existing admin account 
+	 * 
+	 */
+	@Test
+	public void testAddAccount_Admin() {
+		System.out.println("================== NOW TESTING ADDING AN ADMIN ACCOUNT ==================");
+		//addAccount()
+		String userName = "testAdmin";
+		ArrayList<String> information = new ArrayList<String>();
+		information.add(userName);
+		information.add("pass");
+		information.add("Y");
+		information.add("firstName");
+		information.add("lastName");
+		Admin account = new Admin(information.get(0),  information.get(1),  information.get(2).charAt(0),  information.get(3),  information.get(4));
+		dbc.addAccount(account);
+		//test if the account is inserted into database
+		Assert.assertTrue("Error: the testUser account is not added.", !(ad.getAccount(userName).getUsername().equals("DummyUser")));
+		dbc.deleteAccount(ad.getAccount(userName)); //revert database back to normal
+	}
+	
+	/**
+	 * This test adds a non-existing user account 
+	 * 
+	 */
+	@Test
+	public void testAddAccount_GeneralUser() {
+		System.out.println("================== NOW TESTING ADDING A GENERAL_USER ACCOUNT ==================");
+		//addAccount()
+		String userName = "testUser";
+		ArrayList<String> information = new ArrayList<String>();
+		information.add(userName);
+		information.add("pass");
+		information.add("Y");
+		information.add("firstName");
+		information.add("lastName");
+		GeneralUser gu = new GeneralUser(information.get(3), information.get(4), information.get(2).charAt(0), information.get(0), information.get(1), new ArrayList<String>());
+		dbc.addAccount(gu);
+		//test if the account is inserted into database
+		Assert.assertTrue("Error: the testUser account is not added.", !(ad.getAccount(userName).getUsername().equals("DummyUser")));
+		System.out.println(">>> Account is inserted successfully" + '\n' + "reverting database back to normal");
+		dbc.deleteAccount(ad.getAccount(userName)); //revert database back to normal
+	}
+	
+	
 }
