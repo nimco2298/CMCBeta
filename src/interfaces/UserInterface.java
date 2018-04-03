@@ -56,25 +56,27 @@ public class UserInterface
     String str = scan.next();
     
     if(str.equals("s") || str.equals("S")){
-      System.out.println("Here are all the schools:");
-      viewSearchedSchools(db.getUniversities());
-    }
+      //System.out.println("Here are all the schools:");
+      viewSearchedSchools(ufc.searchForSchools());
+      
+      System.out.println("s for save and v for view further details of a school:");
+      String s1 = scan.next();
+      if(s1.equals("s")){
+    	  System.out.println("Please enter the name of the school you want to save:");
+        String sName= scan.next();
+        ufc.saveToSavedSchoolList(db.getUniversity(sName));
+        homePage();
+      }
       else {
-    	  viewSearchedSchools(ufc.searchForSchools());
+        String sName=strIn("please enter the name of the school you want to view details:");
+        viewSchoolDetailsAndTop5(db.getUniversity(sName));
+      }
+   
+    }
+    
+    	 
 
-    	  System.out.println("s for save and v for view further details of a school:");
-	      String s1 = scan.next();
-	      if(s1.equals("s")){
-	    	  System.out.println("Please enter the name of the school you want to save:");
-	        String sName= scan.next();
-	        ufc.saveToSavedSchoolList(db.getUniversity(sName));
-	        homePage();
-	      }
-	      else {
-	        String sName=strIn("please enter the name of the school you want to view details:");
-	        viewSchoolDetailsAndTop5(db.getUniversity(sName));
-	      }
-	    }
+    	  
   
     if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
