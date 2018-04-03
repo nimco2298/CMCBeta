@@ -2,7 +2,7 @@
  * File:GeneralUser.java
  */
 
-package entities;
+package entity;
 import java.util.*; //Java's ArrayList<ET>
 
 /**

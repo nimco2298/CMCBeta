@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 import org.junit.*;
 import org.junit.Assert;
-import entities.*;
+import entity.*;
+import controller.*;
 
 
 public class AdminFuncControllerTest {

@@ -2,6 +2,8 @@ package entities;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
+
+import entity.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
