@@ -136,65 +136,67 @@ public class AdminFuncControllerTest {
 		Assert.assertFalse("Error: the emphasis is not deleted", univ.getEmphases().contains("TestEmphasis"));
 	}
 	
-	// WHITE-BOX TESTING =================================================================================
+	// ===================================================================================================
+	//                                      WHITE-BOX TESTING 
+	// ===================================================================================================
+	
 	@Test
-	public void testHomepage() {
+	public void testHomepage_ViewUniversities() {
+		String message = ad.homepage("1");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Going to Manage_Universities page. ***", ad.homepage("1"));
+		//System.out.println("testHomepage_ViewUniversities: " + message);
+	}
+	
+	@Test
+	public void testHomepage_ViewUsers() {
+		String message = ad.homepage("2");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Going to Manage_Users page. ***", ad.homepage("2"));
+		//System.out.println("testHomepage_ViewUsers: " + message);
+	}
+	
+	@Test
+	public void testHomepage_LogOut() {
+		String message = ad.homepage("3");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Logging out. ***", ad.homepage("3"));
+		//System.out.println("testHomepage_LogOut: " + message);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testHomepage_FailsInvalidPrompt() {
+		//System.out.println("testHomepage_FailsInvalidPrompt: Now throwing exception");
+		String message = ad.homepage("4");
+		Assert.assertFalse(message != null);
+	}
+	
+	@Test
+	public void testViewUniversities() {
 		
 	}
 	
 	@Test
-	public void testAddUniversity() {
-		University u = new University("TestAdded", "", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, new ArrayList<String>());
-		dbc.addNewUniversity(u); // add the university to the database
-		ad.addEmphases(u);
-		Assert.assertTrue("Error: the TestAdded university is not added.", ad.getUniversity("TestAdded").getName().equals("TestAdded"));
-		ad.delete(ad.getUniversity("TestAdded"));
+	public void testEditUniversity() {
+		System.out.print("TESTING testEditUniversity" +'\n'+ ">>> ");
+		String univName = "Test";
+		String state = "Minnesota";
+		String location = "URBAN"
+		ad.editUniversity(univName, state, location, control, students,
+				  femPerc, satv, satm, cost, finAidPerc, applicants, admitted, enrolled, 
+				  acadScale, socScale, qualScale, emphases);
 	}
 	
-	/**
-	 * This test adds a non-existing admin account 
-	 * 
-	 */
-	@Test
-	public void testAddAccount_Admin() {
-		System.out.println("================== NOW TESTING ADDING AN ADMIN ACCOUNT ==================");
-		//addAccount()
-		String userName = "testAdmin";
-		ArrayList<String> information = new ArrayList<String>();
-		information.add(userName);
-		information.add("pass");
-		information.add("Y");
-		information.add("firstName");
-		information.add("lastName");
-		Admin account = new Admin(information.get(0),  information.get(1),  information.get(2).charAt(0),  information.get(3),  information.get(4));
-		dbc.addAccount(account);
-		//test if the account is inserted into database
-		Assert.assertTrue("Error: the testUser account is not added.", !(ad.getAccount(userName).getUsername().equals("DummyUser")));
-		dbc.deleteAccount(ad.getAccount(userName)); //revert database back to normal
+	@Test(expected = NumberFormatException.class)
+	public void testEditUniversity_FailsInvalidPrompt() {
+		System.out.print("TESTING testEditUniversity_FailsInvalidPrompt" +'\n'+ ">>> ");
+		ad.editUniversity("Test", 30, "Minnesota");
 	}
 	
-	/**
-	 * This test adds a non-existing user account 
-	 * 
-	 */
-	@Test
-	public void testAddAccount_GeneralUser() {
-		System.out.println("================== NOW TESTING ADDING A GENERAL_USER ACCOUNT ==================");
-		//addAccount()
-		String userName = "testUser";
-		ArrayList<String> information = new ArrayList<String>();
-		information.add(userName);
-		information.add("pass");
-		information.add("Y");
-		information.add("firstName");
-		information.add("lastName");
-		GeneralUser gu = new GeneralUser(information.get(3), information.get(4), information.get(2).charAt(0), information.get(0), information.get(1), new ArrayList<String>());
-		dbc.addAccount(gu);
-		//test if the account is inserted into database
-		Assert.assertTrue("Error: the testUser account is not added.", !(ad.getAccount(userName).getUsername().equals("DummyUser")));
-		System.out.println(">>> Account is inserted successfully" + '\n' + "reverting database back to normal");
-		dbc.deleteAccount(ad.getAccount(userName)); //revert database back to normal
+	@Test(expected = NumberFormatException.class)
+	public void testEditUniversity_FailsInvalidEdition() {
+		System.out.print("TESTING testEditUniversity_FailsInvalidEdition" +'\n'+ ">>> ");
+		ad.editUniversity("Test", 4, "ImNotAnInteger");
 	}
-	
 	
 }
