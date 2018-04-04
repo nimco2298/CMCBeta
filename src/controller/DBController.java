@@ -153,23 +153,26 @@ public class DBController
    * post: a new University will be added to the database 
    * 
    * @param univ the University to add to the database
+   * @return an int value determining whether the university is unique or not
    */
-  public void addNewUniversity(University univ)
+  public int addNewUniversity(University univ)
   {
-    ud.university_addUniversity(univ.getName(), univ.getState(), univ.getLocation(), univ.getControl(), 
+    int i = ud.university_addUniversity(univ.getName(), univ.getState(), univ.getLocation(), univ.getControl(), 
                                 univ.getStudents(), new Integer(univ.getFemPerc()).doubleValue(), new Integer(univ.getSatV()).doubleValue(), 
                                 new Integer(univ.getSatM()).doubleValue(), new Integer(univ.getCost()).doubleValue(), new Integer(univ.getFinAidPerc()).doubleValue(),
                                 univ.getApplicants(), new Integer(univ.getAdmitted()).doubleValue(), new Integer(univ.getEnrolled()).doubleValue(), 
                                 univ.getAcadScale(), univ.getSocScale(), univ.getQualScale());
+    return i;
   }
   /**
    * Adds a new account to the database
    * post: a new Account will add to the database
    * @param acc the account to add to the database
    */
-  public void addAccount(Account acc)
+  public int addAccount(Account acc)
   {
-    this.ud.user_addUser(acc.getFirstName(), acc.getLastName(), acc.getUsername(), acc.getPassword(), acc.getType());
+    int i = this.ud.user_addUser(acc.getFirstName(), acc.getLastName(), acc.getUsername(), acc.getPassword(), acc.getType());
+    return i;
   }
   
   /**
@@ -219,6 +222,14 @@ public class DBController
    */
   public void deleteAccount(Account acc)
   {
+	  if (acc.getType()=='u')
+	  {
+		  ArrayList<String> saved = ((GeneralUser) acc).getSavedSchools();
+		  for(String s: saved)
+		  {
+			  removeSchoolFromSavedSchoolList((GeneralUser) acc, getUniversity(s));
+		  }
+	  }
     ud.user_deleteUser(acc.getUsername());
   }
   
