@@ -178,26 +178,59 @@ public class AdminFuncControllerTest {
 	}
 	
 	@Test
-	public void testEditUniversity() {
-		System.out.print("TESTING testEditUniversity" +'\n'+ ">>> ");
+	public void testEditUniversity_Works() {
+		System.out.println("TESTING testEditUniversity");
 		String univName = "Test";
 		String state = "Minnesota";
-		String location = "URBAN"
-		ad.editUniversity(univName, state, location, control, students,
-				  femPerc, satv, satm, cost, finAidPerc, applicants, admitted, enrolled, 
-				  acadScale, socScale, qualScale, emphases);
+		String location = "URBAN";
+		String control = "CITY";
+		int students = 100;
+		int femPerc = 50;
+		int satv = 400;
+		int satm = 400;
+		int cost = 100;
+		int finAidPerc = 50;
+		int applicants = 100;
+		int admitted = 50;
+		int enrolled = 50;
+		int acadScale = 3;
+		int socScale = 3;
+		int qualScale = 3;
+		ArrayList<String> emphases = new ArrayList<String>();
+		emphases.add("ART");
+		emphases.add("BIOLOGY");
+		ad.editUniversity(univName, state, location, control, students, femPerc, satv, satm, cost, finAidPerc, applicants, 
+							admitted, enrolled, acadScale, socScale, qualScale, emphases);
+		Assert.assertTrue(ad.getUniversity(univName).getState().equals(state));
+		Assert.assertTrue(ad.getUniversity(univName).getLocation().equals(location));
+		Assert.assertTrue(ad.getUniversity(univName).getControl().equals(control));
+		Assert.assertTrue(ad.getUniversity(univName).getStudents() == students);
+		Assert.assertTrue(ad.getUniversity(univName).getFemPerc() == femPerc);
+		Assert.assertTrue(ad.getUniversity(univName).getSatV() == satv);
+		Assert.assertTrue(ad.getUniversity(univName).getSatM() == satm);
+		Assert.assertTrue(ad.getUniversity(univName).getCost() == cost);
+		Assert.assertTrue(ad.getUniversity(univName).getFinAidPerc() == finAidPerc);
+		Assert.assertTrue(ad.getUniversity(univName).getApplicants() == applicants);
+		Assert.assertTrue(ad.getUniversity(univName).getAdmitted() == admitted);
+		Assert.assertTrue(ad.getUniversity(univName).getEnrolled() == enrolled);
+		Assert.assertTrue(ad.getUniversity(univName).getAcadScale() == acadScale);
+		Assert.assertTrue(ad.getUniversity(univName).getSocScale() == socScale);
+		Assert.assertTrue(ad.getUniversity(univName).getQualScale() == qualScale);
+		Assert.assertTrue(ad.getUniversity(univName).getEmphases().contains("ART"));
+		Assert.assertTrue(ad.getUniversity(univName).getEmphases().contains("BIOLOGY"));
+		//revert to normal
+		ad.editUniversity(univName, "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, new ArrayList<String>());
 	}
 	
-	@Test(expected = NumberFormatException.class)
-	public void testEditUniversity_FailsInvalidPrompt() {
-		System.out.print("TESTING testEditUniversity_FailsInvalidPrompt" +'\n'+ ">>> ");
-		ad.editUniversity("Test", 30, "Minnesota");
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUniversity_FailsEmptyState() {
+		ad.editUniversity("Test", "", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, new ArrayList<String>());
 	}
 	
-	@Test(expected = NumberFormatException.class)
-	public void testEditUniversity_FailsInvalidEdition() {
-		System.out.print("TESTING testEditUniversity_FailsInvalidEdition" +'\n'+ ">>> ");
-		ad.editUniversity("Test", 4, "ImNotAnInteger");
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUniversity_FailsLocation() {
+		ad.editUniversity("Test", "0", "invalid", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, new ArrayList<String>());
 	}
+	
 	
 }
