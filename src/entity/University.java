@@ -457,6 +457,10 @@ public class University{
   public void removeEmphases(String field){
     this.emphases.remove(field);
   }
+  
+  public void removeAllEmphases() {
+	  this.emphases = new ArrayList<String>();
+  }
   /**
    * Displays all the details for the university
    */

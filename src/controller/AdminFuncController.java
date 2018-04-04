@@ -120,9 +120,12 @@ public class AdminFuncController{
    * @param univ the university
    */
   public void saveUnivChanges(University univ){
-	  University univDB = getUniversity(univ.getName()); // deletes all the old emphases from university in the database 
+	  // takes the database's university and deletes all the old emphases
+	  University univDB = getUniversity(univ.getName());  
 	  deleteEmphases(univDB);
-	  addEmphases(univ); // adds all new emphases from the university into the database
+	  
+	  // adds all new emphases from the edited university into the database
+	  addEmphases(univ);
 	  dbc.updateUniversity(univ);
   }
   
@@ -332,21 +335,21 @@ public class AdminFuncController{
 	  }
 	  u.setState(state);
 	  //location can be {SUBURBAN, URBAN, SMALL-CITY, -1(unknown/blank)}
-	  if(!location.equals("SUBURBAN") && !location.equals("URBAN") && !location.equals("SMALL-CITY")) {
-		  throw new IllegalArgumentException("Error: The location must be SUBURBAN, URBAN, or SMALL-CITY. It can be left empty if unknown.");
-	  }
-	  else if(location.length() == 0) {
+	  if(location.length() == 0) {
 		  u.setLocation("-1");
+	  }
+	  else if(!location.equals("SUBURBAN") && !location.equals("URBAN") && !location.equals("SMALL-CITY")) {
+		  throw new IllegalArgumentException("Error: The location must be SUBURBAN, URBAN, or SMALL-CITY. It can be left empty if unknown.");
 	  }
 	  else {
 		  u.setLocation(location);
 	  }
 	  //control can be {PRIVATE, STATE, CITY, -1(unknown/blank)}
-	  if(!control.equals("PRIVATE") && !control.equals("STATE") && !control.equals("CITY")) {
-		  throw new IllegalArgumentException("Error: The control must be PRIVATE, STATE, or CITY. It can be left empty if unknown.");
-	  }
-	  else if(control.length() == 0) {
+	  if(control.length() == 0) {
 		  u.setControl("-1");
+	  }
+	  else if(!control.equals("PRIVATE") && !control.equals("STATE") && !control.equals("CITY")) {
+		  throw new IllegalArgumentException("Error: The control must be PRIVATE, STATE, or CITY. It can be left empty if unknown.");
 	  }
 	  else {
 		  u.setControl(control);
@@ -426,7 +429,12 @@ public class AdminFuncController{
 		  System.out.println("Error: The number of emphases is over 5.");
 		  throw new IllegalArgumentException();
 	  }
-	  saveUnivChanges(u);
+	  //replaces u's emphases
+	  u.removeAllEmphases(); // remove all the emphases (not in database)
+	  for(String emphasis: emphases) { // add the new emphases (not in database)
+		  u.addEmphases(emphasis);
+	  }
+	  saveUnivChanges(u); // save university changes in database
   }
 
   /**
@@ -490,27 +498,6 @@ public class AdminFuncController{
 	  viewUniversities();
   }
 
-  /**
-   * Prompts the user to remove a university and confirm deletion
-   * 
-   * @param u the university to remove
-   */
-  public void removeUniversity(University u) {
-	  System.out.println("=======================================" +'\n'+ "Are you sure you want to delete " + u.getName() + " from the list?" 	
-			  				+'\n'+'\t'+ "y: yes" +'\n'+'\t'+ "n: no"+ '\n' + "Enter Here: ");
-	  String prompt = sc.nextLine();
-	  if(prompt.equals("y") || prompt.equals("Y")) {
-		  System.out.println("*** Deleted " + u.getName() + " ***");
-		  delete(u);
-	  }
-	  else if(prompt.equals("n") || prompt.equals("N")) {
-		  System.out.println("*** Returning to Manage_University page ***");
-	  }
-	  else {
-		  System.out.println("ERROR: Invalid input");
-	  }
-	  viewUniversities();
-  }
   /**
    * Prompts the user to add a GeneralUser and its properties
    * 
