@@ -68,13 +68,13 @@ public class AccountController
      
     
     //C3
-//   else if(matchedUser.getUsername().equals("DummyUser"))
-//   { 
-//     //S3
-//      System.out.println("Error: The username is not registered.");
-//      this.loginStatus = false;
-//      return false;
-//    }
+   else if(matchedUser.getUsername().equals("DummyUser"))
+   { 
+     //S3
+      System.out.println("Error: The username is not registered.");
+      this.loginStatus = false;
+      return false;
+    }
     
     //C3
     else if(!matchedUser.getPassword().equals(password) && matchedUser.getUsername().equals(username))
@@ -108,7 +108,7 @@ public class AccountController
     	//S6
         AdminInterface ai = new AdminInterface();
         System.out.println("Login successful");
-        ai.homepage(); 
+        //ai.homepage(); 
         this.loginStatus = true;
         return true;
       }

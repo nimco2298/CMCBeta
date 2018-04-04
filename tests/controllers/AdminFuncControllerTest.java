@@ -136,4 +136,68 @@ public class AdminFuncControllerTest {
 		ad.deleteEmphases(univ);
 		Assert.assertFalse("Error: the emphasis is not deleted", univ.getEmphases().contains("TestEmphasis"));
 	}
+	
+	// ===================================================================================================
+	//                                      WHITE-BOX TESTING 
+	// ===================================================================================================
+	
+	@Test
+	public void testHomepage_ViewUniversities() {
+		String message = ad.homepage("1");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Going to Manage_Universities page. ***", ad.homepage("1"));
+		//System.out.println("testHomepage_ViewUniversities: " + message);
+	}
+	
+	@Test
+	public void testHomepage_ViewUsers() {
+		String message = ad.homepage("2");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Going to Manage_Users page. ***", ad.homepage("2"));
+		//System.out.println("testHomepage_ViewUsers: " + message);
+	}
+	
+	@Test
+	public void testHomepage_LogOut() {
+		String message = ad.homepage("3");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Logging out. ***", ad.homepage("3"));
+		//System.out.println("testHomepage_LogOut: " + message);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testHomepage_FailsInvalidPrompt() {
+		//System.out.println("testHomepage_FailsInvalidPrompt: Now throwing exception");
+		String message = ad.homepage("4");
+		Assert.assertFalse(message != null);
+	}
+	
+	@Test
+	public void testViewUniversities() {
+		
+	}
+	
+	@Test
+	public void testEditUniversity() {
+		System.out.print("TESTING testEditUniversity" +'\n'+ ">>> ");
+		String univName = "Test";
+		String state = "Minnesota";
+		String location = "URBAN"
+		ad.editUniversity(univName, state, location, control, students,
+				  femPerc, satv, satm, cost, finAidPerc, applicants, admitted, enrolled, 
+				  acadScale, socScale, qualScale, emphases);
+	}
+	
+	@Test(expected = NumberFormatException.class)
+	public void testEditUniversity_FailsInvalidPrompt() {
+		System.out.print("TESTING testEditUniversity_FailsInvalidPrompt" +'\n'+ ">>> ");
+		ad.editUniversity("Test", 30, "Minnesota");
+	}
+	
+	@Test(expected = NumberFormatException.class)
+	public void testEditUniversity_FailsInvalidEdition() {
+		System.out.print("TESTING testEditUniversity_FailsInvalidEdition" +'\n'+ ">>> ");
+		ad.editUniversity("Test", 4, "ImNotAnInteger");
+	}
+	
 }
