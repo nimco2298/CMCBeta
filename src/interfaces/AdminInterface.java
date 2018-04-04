@@ -25,7 +25,7 @@ public class AdminInterface {
   /**
    * Brings the admin to their homepage
    */
-  public void homepage() {
-	  ad.homepage();
+  public String homepage(String prompt) {
+	  return ad.homepage(prompt);
   }
 }

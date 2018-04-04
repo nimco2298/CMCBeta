@@ -20,7 +20,6 @@ public class AdminFuncController{
   private Admin admin;
   private AccountInterface ai = new AccountInterface();;
   private DBController dbc = new DBController();
-  Scanner sc = new Scanner(System.in);
   
   // ================================= CONSTRUCTORS =================================
   /**
@@ -101,7 +100,7 @@ public class AdminFuncController{
     for(String emphasis: emphases) {
     	System.out.println('\t'+emphasis);
     }
-    viewUniversities();
+    //viewUniversities();
   }
   
   /**
@@ -184,28 +183,24 @@ public class AdminFuncController{
   
   //======================================= METHODS CALLED FROM AdminInterface ========================================
   /**
-   * Brings the admin to their homepage
+   * Brings the admin to their homepage.
+   * 
+   * @return a message of which page the user will be directed to next.
+   * @throws IllegalArgumentException the user input an invalid prompt.
    */
-  public void homepage() {
-	  System.out.print("=======================================" 		+'\n'+ 
-							"Welcome to the Admin Homepage:" 			+'\n'+'\t'+ 
-								"1: Manage Universities" 				+'\n'+'\t'+
-								"2: Manage Users"						+'\n'+'\t'+
-								"3: Logout"								+'\n'+
-							"Enter Here: ");
-	  String prompt = sc.nextLine();
+  public String homepage(String prompt) {
 	  if(prompt.equals("1")){ // Manage universities
-	      viewUniversities();
+		  return "*** Going to Manage_Universities page. ***";
 	  }
 	  else if(prompt.equals("2")){ // Manage users
-	      viewUsers();
+		  return "*** Going to Manage_Users page. ***";
 	  }
-	  else if(prompt.equals("3")){ // Manage users
-	      ai.logout();
+	  else if(prompt.equals("3")){ // Logout
+		  return "*** Logging out. ***";
 	  }
 	  else{ // invalid input
-		  System.out.println("ERROR: Invalid Input");
-	      homepage();
+		  //System.out.println("Error: Invalid input for prompt. Enter either 1 (view universities), 2 (view users), or 3 (log out)");
+	      throw new IllegalArgumentException();
 	  }
   }
   
@@ -214,64 +209,39 @@ public class AdminFuncController{
    * presents options for the admin to manage those
    * universities.
    */
-  public void viewUniversities() {
-	this.viewUniversitiesList();
-    System.out.print("=======================================" 			+'\n'+
-    					"Would you like to add or edit Universities?" 	+'\n'+'\t'+
-                       		"a: Add Universities"						+'\n'+'\t'+
-                        	"e: Edit Universities"						+'\n'+'\t'+
-                        	"r: Remove University"						+'\n'+'\t'+
-                        	"d: Details of University"					+'\n'+'\t'+
-                        	"q: Quit (Return to Homepage)"				+'\n'+
-                        "Enter Here: ");
-    String cmd = sc.nextLine();
-    if(cmd.equals("a")){ // ADD UNIVERSITIES
-    	System.out.print("=======================================" +'\n'+ "Enter University name: ");
-        String univ = sc.nextLine();
-        if(univ.equals("")) {//if the user entered nothing
-        	System.out.println("*** Please enter a university name ***");
-        	this.viewUniversities();
-        }
-        else if(this.getUniversity(univ) instanceof University) {// if the university already exists
-        	System.out.println("*** This university name already exists, please choose a different one ***");
-        	this.viewUniversities();
-        }
-        this.addUniversity(univ);
-    }
-    else if(cmd.equals("e")){ // EDIT UNIVERSITIES
-    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
-        String univ = sc.nextLine();
-        if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
-      	  System.out.println("*** There is no such university ***");
-      	  this.viewUniversities();
-        }
-        this.editUniversity(this.getUniversity(univ));
-    }
-    else if(cmd.equals("r")) { // REMOVE UNIVERSITY
-    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
-        String univ = sc.nextLine();
-        if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
-      	  System.out.println("*** There is no such university ***");
-      	  this.viewUniversities();
-        }
-  	  	this.removeUniversity(this.getUniversity(univ));
-    }
-    else if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY
-    	System.out.print("=======================================" +'\n'+ "Enter University Name: ");
-        String univ = sc.nextLine();
-        if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
-      	  System.out.println("*** There is no such university ***");
-      	  this.viewUniversities();
-        }
-        this.viewUniversityDetails(univ);
-    }
-    else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-    	this.homepage();
-    }
-    else{ // INPUT ERROR
-      System.out.println("ERROR: Invalid input");
-      viewUniversities();
-    }
+  public String viewUniversities(String prompt, String univName) {
+	  //show the list of universities
+	  this.viewUniversitiesList();
+	  //check for input
+	  if(prompt.equals("a")){ // ADD UNIVERSITIES
+		  return "*** Adding University ***";
+		  //this.addUniversity(univName);
+	  }
+	  else if(prompt.equals("e")){ // EDIT UNIVERSITIES
+		  
+		  //this.editUniversity(editPrompt, this.getUniversity(univName));
+	  }
+	  else if(cmd.equals("r")) { // REMOVE UNIVERSITY
+		  if(!(this.getUniversity(univName) instanceof University)) {// if the university does not exist
+			  System.out.println("*** There is no such university ***");
+			  this.viewUniversities();
+		  }
+  	  		this.removeUniversity(this.getUniversity(univName));
+	  }
+	  else if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY
+		  if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
+			  System.out.println("*** There is no such university ***");
+			  this.viewUniversities();
+		  }
+		  this.viewUniversityDetails(univ);
+	  }
+	  else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
+		  System.out.println("Returning to homepage");
+	  }
+	  else{ // INPUT ERROR
+		  System.out.println("ERROR: Invalid input");
+		  viewUniversities();
+	  }	
   }
   
   /**
@@ -286,7 +256,7 @@ public class AdminFuncController{
                           "a: Add User" 										+'\n'+'\t'+
                           "e: Edit User" 										+'\n'+'\t'+
                           "d: Deactivate User" 									+'\n'+'\t'+
-                          "r: Remove User" 										+'\n'+'\t'+
+                          //"r: Remove User" 										+'\n'+'\t'+
                           "q: Quit (Return to Homepage)" 						+'\n'+
                          "Enter Here: ");
     String cmd = sc.nextLine();
@@ -294,7 +264,7 @@ public class AdminFuncController{
     	System.out.print("=======================================" +'\n'+"Enter Username: ");
         String userName = sc.nextLine();
         if(userName.length()==0) {//if the userName is empty
-        	System.out.println("*** Please enter a user name ***");
+          System.out.println("*** Please enter a user name ***");
           this.viewUsers();
         }
         else if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
@@ -321,12 +291,12 @@ public class AdminFuncController{
       	}
       	this.deactivate(this.getAccount(userName));
     }
-    else if(cmd.equals("r")){ // REMOVE USER (TESTING PURPOSE ONLY)
-    	System.out.print("=======================================" +'\n'+ "Enter Username (check name!!!): ");
-        String univ = sc.nextLine();
-        dbc.deleteAccount(this.getAccount(univ));
-        viewUsers();
-    }
+//    else if(cmd.equals("r")){ // REMOVE USER (TESTING PURPOSE ONLY)
+//    	System.out.print("=======================================" +'\n'+ "Enter Username (check name!!!): ");
+//        String univ = sc.nextLine();
+//        dbc.deleteAccount(this.getAccount(univ));
+//        viewUsers();
+//    }
     else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
     	homepage();
     }
@@ -336,114 +306,126 @@ public class AdminFuncController{
     }
   }
   
+  
   /**
-   * Prompts the user to edit a university through several options
+   * Prompts the user to edit a university's fields
+   * and then save the changes to the database
    * 
-   * @param u the university to edit
+   * 
    */
   
-  public void editUniversity(University u) {
-	  String prompt = "";
-	  do {
-		  System.out.print("=======================================" +'\n'+ "What would you like to edit:" 			+'\n'+'\t'+ 	
-		      "1: state" 			+'\n'+'\t'+ "2: location" 			+'\n'+'\t'+ "3: control" 					+'\n'+'\t'+ 
-		      "4: students" 		+'\n'+'\t'+ "5: female percentage" 	+'\n'+'\t'+ "6: SAT verbal score" 			+'\n'+'\t'+
-		      "7: SAT math score" 	+'\n'+'\t'+ "8: cost" 				+'\n'+'\t'+ "9: financial aid percentage" 	+'\n'+'\t'+ 
-		      "10: applicants" 		+'\n'+'\t'+ "11: admitted" 			+'\n'+'\t'+ "12: enrolled" 					+'\n'+'\t'+
-		      "13: academic scale" 	+'\n'+'\t'+ "14: social scale" 		+'\n'+'\t'+ "15: quality scale" 			+'\n'+'\t'+ 
-			  "16: add emphases" 	+'\n'+'\t'+ "17: remove emphases" 	+'\n'+'\t'+ 
-			  "s: Save" 			+'\n'+'\t'+ "c: Cancel" 			+'\n'+ "Enter Here: ");
-		  prompt = sc.nextLine();
-		  switch (prompt){
-		  	case "1":
-		  		System.out.print("=======================================" +'\n'+ "Current state: " + u.getState() +'\n'+ "Enter the state: ");
-		  		u.setState(sc.nextLine());
-		  		break;
-		  	case "2":
-		  		System.out.print("=======================================" +'\n'+ "Current location: " + u.getLocation() +'\n'+ "Enter the location: ");
-		  		u.setLocation(sc.nextLine());
-		  		break;
-		  	case "3":
-		  		System.out.print("=======================================" +'\n'+ "Current control: " + u.getControl() +'\n'+ "Enter the control: ");
-		  		u.setControl(sc.nextLine());
-		  		break;
-		  	case "4":
-		  		System.out.print("=======================================" +'\n'+ "Current number of students: " + u.getStudents() +'\n'+ "Enter the number of students: ");
-		  		u.setStudents(sc.nextInt());
-		  		break;
-	        case "5":
-	        	System.out.print("=======================================" +'\n'+ "Current female percentage: " + u.getFemPerc() +'\n'+ "Enter the female percentage: ");
-	        	u.setFemPerc(sc.nextInt());
-	        	break;
-	        case "6":
-	        	System.out.print("=======================================" +'\n'+ "Current SAT verbal score: " + u.getSatV() +'\n'+ "Enter the SAT verbal score: ");
-	        	u.setSatV(sc.nextInt());
-	        	break;
-	        case "7":
-	        	System.out.print("=======================================" +'\n'+ "Current SAT math score: " + u.getSatM() +'\n'+ "Enter the SAT math score: ");
-	        	u.setSatM(sc.nextInt());
-	        	break;
-	        case "8":
-	        	System.out.print("=======================================" +'\n'+ "Current cost: " + u.getCost() +'\n'+ "Enter the cost: ");
-	        	u.setCost(sc.nextInt());
-	        	break;
-	        case "9":
-	        	System.out.print("=======================================" +'\n'+ "Current financial aid %: " + u.getFinAidPerc() +'\n'+ "Enter the financial aid %: ");
-	        	u.setFinAidPerc(sc.nextInt());
-	        	break;
-	        case "10":
-	        	System.out.print("=======================================" +'\n'+ "Current applicants: " + u.getApplicants() +'\n'+ "Enter the applicants: ");
-	        	u.setApplicants(sc.nextInt());
-	        	break;
-	        case "11":
-	        	System.out.print("=======================================" +'\n'+ "Current admitted students: " + u.getAdmitted() +'\n'+ "Enter the admitted students: ");
-	        	u.setAdmitted(sc.nextInt());
-	        	break;
-	        case "12":
-	        	System.out.print("=======================================" +'\n'+ "Current enrolled students: " + u.getEnrolled() +'\n'+ "Enter the enrolled students: ");
-	        	u.setEnrolled(sc.nextInt());
-	        	break;
-	        case "13":
-	        	System.out.print("=======================================" +'\n'+ "Current academic scale: " + u.getAcadScale() +'\n'+ "Enter the academic scale: ");
-	        	u.setAcadScale(sc.nextInt());
-	        	break;
-	        case "14":
-	        	System.out.print("=======================================" +'\n'+ "Current social scale: " + u.getSocScale() +'\n'+ "Enter the social scale: ");
-	        	u.setSocScale(sc.nextInt());
-	        	break;
-	        case "15":
-	        	System.out.print("=======================================" +'\n'+ "Current quality scale: " + u.getQualScale() +'\n'+ "Enter the quality scale: ");
-	        	u.setQualScale(sc.nextInt());
-	        	break;
-	        case "16":
-	        	System.out.println("======================================="+'\n'+ "Current emphases:");
-	        	for(String emphasis: u.getEmphases()) {
-	            	System.out.println('\t'+emphasis);
-	            }
-	        	System.out.print("Enter an emphasis to add: ");
-	        	u.addEmphases(sc.nextLine());
-	        	break;
-	        case "17":
-	        	System.out.println("======================================="+'\n'+ "Current emphases:");
-	        	for(String emphasis: u.getEmphases()) {
-	            	System.out.println('\t'+emphasis);
-	            }
-	        	System.out.print("Enter an emphasis to remove: ");
-	        	u.removeEmphases(sc.nextLine());
-	        	break;
-	        case "s":
-	        	saveUnivChanges(u);
-	      	  	System.out.println("*** Saved updates to " + u.getName() + " ***");
-	        	break;
-	        case "c":
-	      	  	System.out.println("*** Returning to Manage_University page ***");
-	        	break;
-	        default:
-	        	System.out.println("ERROR: Invalid input");
-	        	break;
-		  } 
-	  } while(!prompt.equals("s")&&!prompt.equals("c"));
-	  viewUniversities();
+  public void editUniversity(String univName, String state, String location, String control, int students,
+		  int femPerc, int satv, int satm, int cost, int finAidPerc, int applicants, int admitted, int enrolled, 
+		  int acadScale, int socScale, int qualScale, ArrayList<String> emphases) {
+	  
+	  //========================= Fail check: the university does not exist in the database =======================
+	  if(!(this.getUniversity(univName) instanceof University)) {
+		  System.out.println("*** University " + univName + " does not exist in the database ***");
+		  throw new IllegalArgumentException();
+	  }
+	  University u = this.getUniversity(univName);
+	  //============================ Fail checks: check if all field inputs are correct ===========================
+	  //state must be a string
+	  if(state.length() == 0) {
+		  throw new IllegalArgumentException("Error: The state is empty.");
+	  }
+	  u.setState(state);
+	  //location can be {SUBURBAN, URBAN, SMALL-CITY, -1(unknown/blank)}
+	  if(!location.equals("SUBURBAN") && !location.equals("URBAN") && !location.equals("SMALL-CITY")) {
+		  throw new IllegalArgumentException("Error: The location must be SUBURBAN, URBAN, or SMALL-CITY. It can be left empty if unknown.");
+	  }
+	  else if(location.length() == 0) {
+		  u.setLocation("-1");
+	  }
+	  else {
+		  u.setLocation(location);
+	  }
+	  //control can be {PRIVATE, STATE, CITY, -1(unknown/blank)}
+	  if(!control.equals("PRIVATE") && !control.equals("STATE") && !control.equals("CITY")) {
+		  throw new IllegalArgumentException("Error: The control must be PRIVATE, STATE, or CITY. It can be left empty if unknown.");
+	  }
+	  else if(control.length() == 0) {
+		  u.setControl("-1");
+	  }
+	  else {
+		  u.setControl(control);
+	  }
+	  //students must be an integer; cannot be negative
+	  if(students < 0) {
+		  throw new IllegalArgumentException("Error: The number of students is not in range.");
+	  }
+	  u.setStudents(students);
+	  //femPerc must be an integer between 0 and 100
+	  if(femPerc < 0 || femPerc > 100) {
+		  throw new IllegalArgumentException("Error: The female percentage must be between 0 and 100.");
+	  }
+	  u.setFemPerc(femPerc);
+	  //SATV must be between 0 and 800
+	  if(satv < 0 || satv > 800) {
+		  System.out.println("Error: The SAT verbal score must be between 0 and 800.");
+		  throw new IllegalArgumentException();
+	  }
+	  u.setSatV(satv);
+	  //SATM must be between 0 and 800
+	  if(satm < 0 || satm > 800) {
+		  System.out.println("Error: The SAT math score must be between 0 and 800");
+		  throw new IllegalArgumentException();
+	  }
+	  u.setSatM(satm);
+	  //cost must be an integer; cannot be negative
+	  if(cost < 0) {
+		  System.out.println("Error: The cost is not in range.");
+		  throw new IllegalArgumentException();
+	  }
+	  u.setCost(cost);
+	  //financial aid must be between 0 and 100
+	  if(finAidPerc < 0 || finAidPerc > 100) {
+		  System.out.println("Error: The financial aid percentage must be between 0 and 100.");
+		  throw new IllegalArgumentException();
+	  }
+	  u.setFinAidPerc(finAidPerc);
+	  // applicants must be an integer; cannot be negative
+	  if(applicants < 0) {
+		  System.out.println("Error: The number of applicants is not in range.");
+		  throw new IllegalArgumentException();
+	  }
+	  u.setApplicants(applicants);
+	  // admitted must be between 0 and 100
+	  if(admitted < 0 || admitted > 100) {
+		  System.out.println("Error: The admitted percentage is not in range.");
+		  throw new IllegalArgumentException();
+	  }	
+	  u.setAdmitted(admitted);
+	  // enrolled must be between 0 and 100
+	  if(enrolled < 0 || enrolled > 100) {
+		  System.out.println("Error: The enrolled percentage is not in range.");
+		  throw new IllegalArgumentException();
+	  }	
+	  u.setEnrolled(enrolled);
+	  // acadScale must be between 1 and 5
+	  if(acadScale < 1 || acadScale > 5) {
+		  System.out.println("Error: The academic scale must be between 1 and 5");
+		  throw new IllegalArgumentException();
+	  }	
+	  u.setAcadScale(acadScale);
+	  // socScale must be between 1 and 5
+	  if(socScale < 1 || socScale > 5) {
+		  System.out.println("Error: The social scale must be between 1 and 5.");
+		  throw new IllegalArgumentException();
+	  }	
+	  u.setSocScale(socScale);
+	  // qualScale must be between 1 and 5
+	  if(qualScale < 1 || qualScale > 5) {
+		  System.out.println("Error: The quality scale must be between 1 and 5.");
+		  throw new IllegalArgumentException();
+	  }	
+	  u.setQualScale(qualScale);
+	  // number of emphasis is limited to 5
+	  if(emphases.size() > 5) { // almost never be true due to GUI but just in case for testing
+		  System.out.println("Error: The number of emphases is over 5.");
+		  throw new IllegalArgumentException();
+	  }
+	  saveUnivChanges(u);
   }
 
   /**
@@ -451,8 +433,17 @@ public class AdminFuncController{
    * 
    * @param univ the name of the university to add
    */
-  public void addUniversity(String univ) {
-	  System.out.print("Enter state: ");
+  public void addUniversity(String univName) {
+	//Fail: user entered a blank name for university
+	  if(univName.equals("")) {
+		  System.out.println("*** Error: University name is blank. Please enter a university name. ***");
+		  throw new IllegalArgumentException();
+	  }
+	  //Fail: university already exists in database
+	  else if(this.getUniversity(univName) instanceof University) {
+		  System.out.println("*** This university name already exists, please choose a different one ***");
+		  throw new IllegalArgumentException();
+	  }
 	  String state = sc.nextLine();
       System.out.print("Enter location: ");
 	  String location = sc.nextLine();
@@ -651,7 +642,6 @@ public class AdminFuncController{
 	  }
 	  else {
 		  System.out.println("ERROR: Invalid Input");
-		  deactivate(usr);
 	  }
 	  viewUsers();
   }
