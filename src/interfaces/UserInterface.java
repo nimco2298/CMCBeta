@@ -65,6 +65,8 @@ public class UserInterface
     	  System.out.println("Please enter the name of the school you want to save:");
         String sName= scan.next();
         ufc.saveToSavedSchoolList(db.getUniversity(sName));
+        this.user=(GeneralUser) db.getUser(user.getUsername());
+        ufc.updateUser(this.user);
         homePage();
       }
       else {
@@ -91,9 +93,11 @@ public class UserInterface
       	String sName="";
       	sName= scan.next();
         ufc.removeSavedSchool(db.getUniversity(sName));
+        this.user=(GeneralUser) db.getUser(user.getUsername());
+        ufc.updateUser(this.user);
         homePage();
       }
-    }
+    
  
       else if(!user.getSavedSchools().isEmpty()){
     	
@@ -108,7 +112,11 @@ public class UserInterface
         homePage();
 
 	      }
-
+      else {
+    	  System.out.println("There's no school to view ");
+    	  
+      }
+    }
 	          
      else if (str.equals("p") || str.equals("P")) {  
     	viewProfile();

@@ -1,8 +1,6 @@
 package controllers;
 
-
 import controller.*;
-
 
 import static org.junit.Assert.*;
 import org.junit.Before;
