@@ -5,10 +5,11 @@ package entities;
 
 import static org.junit.Assert.*;
 
+import entity.*;
 import java.util.*;
-
 import org.junit.Before;
 import org.junit.Test;
+
 
 /**
  * @author nhussein001

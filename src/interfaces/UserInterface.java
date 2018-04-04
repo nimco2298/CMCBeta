@@ -8,8 +8,8 @@
  */
 package interfaces;
 import java.util.*;
-import entities.*;
-import controllers.*;
+import entity.*;
+import controller.*;
 
 /**
  * UserInterface is responsible for enabling various controllers to carry out a user function.
@@ -56,25 +56,29 @@ public class UserInterface
     String str = scan.next();
     
     if(str.equals("s") || str.equals("S")){
-      System.out.println("Here are all the schools:");
-      viewSearchedSchools(db.getUniversities());
-    }
+      //System.out.println("Here are all the schools:");
+      viewSearchedSchools(ufc.searchForSchools());
+      
+      System.out.println("s for save and v for view further details of a school:");
+      String s1 = scan.next();
+      if(s1.equals("s")){
+    	  System.out.println("Please enter the name of the school you want to save:");
+        String sName= scan.next();
+        ufc.saveToSavedSchoolList(db.getUniversity(sName));
+        this.user=(GeneralUser) db.getUser(user.getUsername());
+        ufc.updateUser(this.user);
+        homePage();
+      }
       else {
-    	  viewSearchedSchools(ufc.searchForSchools());
+        String sName=strIn("please enter the name of the school you want to view details:");
+        viewSchoolDetailsAndTop5(db.getUniversity(sName));
+      }
+   
+    }
+    
+    	 
 
-    	  System.out.println("s for save and v for view further details of a school:");
-	      String s1 = scan.next();
-	      if(s1.equals("s")){
-	    	  System.out.println("Please enter the name of the school you want to save:");
-	        String sName= scan.next();
-	        ufc.saveToSavedSchoolList(db.getUniversity(sName));
-	        homePage();
-	      }
-	      else {
-	        String sName=strIn("please enter the name of the school you want to view details:");
-	        viewSchoolDetailsAndTop5(db.getUniversity(sName));
-	      }
-	    }
+    	  
   
     if(str.equals("m") || str.equals("M")){  //MANAGE SAVED SCHOOLS
       viewSavedSchools();
@@ -89,9 +93,11 @@ public class UserInterface
       	String sName="";
       	sName= scan.next();
         ufc.removeSavedSchool(db.getUniversity(sName));
+        this.user=(GeneralUser) db.getUser(user.getUsername());
+        ufc.updateUser(this.user);
         homePage();
       }
-    }
+    
  
       else if(!user.getSavedSchools().isEmpty()){
     	
@@ -106,7 +112,11 @@ public class UserInterface
         homePage();
 
 	      }
-
+      else {
+    	  System.out.println("There's no school to view ");
+    	  
+      }
+    }
 	          
      else if (str.equals("p") || str.equals("P")) {  
     	viewProfile();

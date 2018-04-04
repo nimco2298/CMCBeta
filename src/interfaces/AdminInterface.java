@@ -3,7 +3,7 @@
  * File:AdminInterface.java
  */
 package interfaces;
-import controllers.*;
+import controller.*;
 
 
 /**

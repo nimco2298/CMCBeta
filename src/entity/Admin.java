@@ -1,7 +1,7 @@
 /*
  * File: Admin.java
  */
-package entities;
+package entity;
 
 /**
  * Admin is a class that is an Account and stores an admin's information.

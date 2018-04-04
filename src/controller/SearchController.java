@@ -1,8 +1,8 @@
 /* 
  * File: SearchController.java
  */
-package controllers;
-import entities.*;
+package controller;
+import entity.*;
 import java.util.*;
 
 /**
@@ -222,3 +222,4 @@ public class SearchController{
  
   
 }
+

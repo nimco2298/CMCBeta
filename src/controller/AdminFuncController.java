@@ -1,3 +1,4 @@
+
 /**
  * File: AdminFuncController
 
@@ -7,9 +8,9 @@
  * @author Sara Laufers
  * @version February 24, 2018
  */
-package controllers;
+package controller;
 import java.util.*;
-import entities.*;
+import entity.*;
 import interfaces.AccountInterface;
 
 public class AdminFuncController{

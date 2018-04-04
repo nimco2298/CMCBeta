@@ -1,8 +1,8 @@
 /** 
  * File: AccountController.java
  */
-package controllers;
-import entities.*;
+package controller;
+import entity.*;
 import interfaces.*;
 
  

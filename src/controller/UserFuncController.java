@@ -1,7 +1,7 @@
-package controllers;
+package controller;
 import java.util.ArrayList;
 import java.util.Scanner;
-import entities.*;
+import entity.*;
 
 /**
  * Controls functions for the general user 
@@ -36,7 +36,7 @@ public class UserFuncController
     return gu.getSavedSchools();
   }
   
-  /**
+  /**GeneralUser
    * Adds a school to the users saved school list
    * 
    * @param university the school to be added to the list
@@ -175,7 +175,7 @@ public class UserFuncController
 	  Scanner scan = new Scanner(System.in);  
 	  System.out.print(ss);
 	    String re= scan.next();
-	    scan.close();
+	  
 	    return re;
 	  }
   
@@ -183,7 +183,7 @@ public class UserFuncController
 	  Scanner scan = new Scanner(System.in);  
 	    System.out.print(ss);
 	    int re= scan.nextInt();
-	    scan.close();
+	   
 	    return re;
 	  }
   

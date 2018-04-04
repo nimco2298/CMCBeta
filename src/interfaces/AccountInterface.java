@@ -5,7 +5,7 @@
 
 package interfaces;
 import java.util.Scanner;
-import controllers.*;
+import controller.*;
 
 /**
  * The starting terminal in which the user will log into the system

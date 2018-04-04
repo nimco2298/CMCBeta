@@ -1,7 +1,7 @@
 /** 
  * File: Account.java
  */
-package entities;
+package entity;
 
 
 /**
@@ -131,7 +131,7 @@ public abstract class Account {
 	     }
 	     else
 	     {
-	         throw new IllegalArgumentException("Error! You can only enter a String to set the first name field!");
+	         throw new IllegalArgumentException("Error! You can only enter a non empty String to set the first name field!");
 	     }
   }
     
@@ -149,7 +149,7 @@ public abstract class Account {
      }
      else
      {
-         throw new IllegalArgumentException("Error! You can only enter a String to set the last name field!");
+         throw new IllegalArgumentException("Error! You can only enter a non empty String to set the last name field!");
      }
   }
     
