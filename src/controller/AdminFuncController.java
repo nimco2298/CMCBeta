@@ -210,7 +210,7 @@ public class AdminFuncController{
    * presents options for the admin to manage those
    * universities.
    */
-  public String viewUniversities(String prompt, String univName) {
+  public void viewUniversities(String prompt, String univName) {
 	  //show the list of universities
 	  this.viewUniversitiesList();
 	  //check for input
@@ -224,88 +224,88 @@ public class AdminFuncController{
 	  }
 	  else if(cmd.equals("r")) { // REMOVE UNIVERSITY
 		  if(!(this.getUniversity(univName) instanceof University)) {// if the university does not exist
-			  System.out.println("*** There is no such university ***");
+			  return "*** There is no such university ***";
 			  this.viewUniversities();
 		  }
   	  		this.removeUniversity(this.getUniversity(univName));
 	  }
 	  else if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY
 		  if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
-			  System.out.println("*** There is no such university ***");
+			  return "*** There is no such university ***";
 			  this.viewUniversities();
 		  }
 		  this.viewUniversityDetails(univ);
 	  }
 	  else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-		  System.out.println("Returning to homepage");
+		  return "Returning to homepage";
 	  }
 	  else{ // INPUT ERROR
-		  System.out.println("ERROR: Invalid input");
+		  return "ERROR: Invalid input";
 		  viewUniversities();
 	  }	
   }
   
-  /**
+  /**FROM USER INTERFACEEE
    * Shows a list of all users in the system (both general and admin)
    * and presents a list of options for the admin to manage those
    * users.
    */
-  public void viewUsers() {
-	this.viewUsersList();
-    System.out.print("======================================="					+'\n'+
-    					"Would you like to add, edit, or deactivate a user?" 	+'\n'+'\t'+
-                          "a: Add User" 										+'\n'+'\t'+
-                          "e: Edit User" 										+'\n'+'\t'+
-                          "d: Deactivate User" 									+'\n'+'\t'+
-                          //"r: Remove User" 										+'\n'+'\t'+
-                          "q: Quit (Return to Homepage)" 						+'\n'+
-                         "Enter Here: ");
-    String cmd = sc.nextLine();
-    if(cmd.equals("a")){ // ADD USER
-    	System.out.print("=======================================" +'\n'+"Enter Username: ");
-        String userName = sc.nextLine();
-        if(userName.length()==0) {//if the userName is empty
-          System.out.println("*** Please enter a user name ***");
-          this.viewUsers();
-        }
-        else if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
-          System.out.println("*** This user name already exists, please choose a different one ***");
-          this.viewUsers();
-        }
-        this.addAccount(userName);
-    }
-    else if(cmd.equals("e")){ // EDIT USER
-    	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
-      	String userName = sc.nextLine();
-      	if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username does not exist
-      		System.out.println("*** There is no such user ***");
-      		this.viewUsers();
-      	}
-      	this.editUser(this.getAccount(userName));
-    }
-    else if(cmd.equals("d")){ // DEACTIVATE USER
-    	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
-      	String userName = sc.nextLine();
-      	if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username does not exist
-      		System.out.println("ERROR: There is no such user");
-      		this.viewUsers();
-      	}
-      	this.deactivate(this.getAccount(userName));
-    }
+//  public String viewUsers(String prompt, String userName) {
+//	this.viewUsersList();
+//    System.out.print("======================================="					+'\n'+
+//    					"Would you like to add, edit, or deactivate a user?" 	+'\n'+'\t'+
+//                          "a: Add User" 										+'\n'+'\t'+
+//                          "e: Edit User" 										+'\n'+'\t'+
+//                          "d: Deactivate User" 									+'\n'+'\t'+
+//                          //"r: Remove User" 										+'\n'+'\t'+
+//                          "q: Quit (Return to Homepage)" 						+'\n'+
+//                         "Enter Here: ");
+//    
+//    if(prompt.equals("a")){ // ADD USER
+//    	System.out.print("=======================================" +'\n'+"Enter Username: ");
+//        //String userName = sc.nextLine();
+//        if(userName.length()==0) {//if the userName is empty
+//          throw new IllegalArgumentException() ;
+//          //this.viewUsers();
+//        }
+//        else if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username already exists
+//          return "*** This user name already exists, please choose a different one ***";
+//          this.viewUsers();
+//        }
+//        this.addAccount(userName);
+//    }
+//    else if(cmd.equals("e")){ // EDIT USER
+//    	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
+//      	String userName = sc.nextLine();
+//      	if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username does not exist
+//      		System.out.println("*** There is no such user ***");
+//      		this.viewUsers();
+//      	}
+//      	this.editUser(this.getAccount(userName));
+//    }
+//    else if(cmd.equals("d")){ // DEACTIVATE USER
+//    	System.out.print("=======================================" +'\n'+ "Enter a Username: ");
+//      	String userName = sc.nextLine();
+//      	if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the username does not exist
+//      		System.out.println("ERROR: There is no such user");
+//      		this.viewUsers();
+//      	}
+//      	this.deactivate(this.getAccount(userName));
+    //}
 //    else if(cmd.equals("r")){ // REMOVE USER (TESTING PURPOSE ONLY)
 //    	System.out.print("=======================================" +'\n'+ "Enter Username (check name!!!): ");
 //        String univ = sc.nextLine();
 //        dbc.deleteAccount(this.getAccount(univ));
 //        viewUsers();
 //    }
-    else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-    	homepage();
-    }
-    else{ // INPUT ERROR
-    	System.out.println("ERROR: Invalid input");
-    	viewUsers();
-    }
-  }
+//    else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
+//    	homepage();
+//    }
+//    else{ // INPUT ERROR
+//    	System.out.println("ERROR: Invalid input");
+//    	viewUsers();
+//    }
+  //}
   
   
   /**

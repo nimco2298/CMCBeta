@@ -108,7 +108,7 @@ public class AccountController
     	//S6
         AdminInterface ai = new AdminInterface();
         System.out.println("Login successful");
-        ai.homepage(); 
+        //ai.homepage(); 
         this.loginStatus = true;
         return true;
       }
