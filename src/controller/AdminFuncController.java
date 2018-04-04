@@ -210,41 +210,41 @@ public class AdminFuncController{
    * presents options for the admin to manage those
    * universities.
    */
-  public String viewUniversities(String prompt, String univName) {
-	  //show the list of universities
-	  this.viewUniversitiesList();
-	  //check for input
-	  if(prompt.equals("a")){ // ADD UNIVERSITIES
-		  return "*** Adding University ***";
-		  //this.addUniversity(univName);
-	  }
-	  else if(prompt.equals("e")){ // EDIT UNIVERSITIES
-		  
-		  //this.editUniversity(editPrompt, this.getUniversity(univName));
-	  }
-	  else if(cmd.equals("r")) { // REMOVE UNIVERSITY
-		  if(!(this.getUniversity(univName) instanceof University)) {// if the university does not exist
-			  System.out.println("*** There is no such university ***");
-			  this.viewUniversities();
-		  }
-  	  		this.removeUniversity(this.getUniversity(univName));
-	  }
-	  else if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY
-		  if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
-			  System.out.println("*** There is no such university ***");
-			  this.viewUniversities();
-		  }
-		  this.viewUniversityDetails(univ);
-	  }
-	  else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-		  System.out.println("Returning to homepage");
-	  }
-	  else{ // INPUT ERROR
-		  System.out.println("ERROR: Invalid input");
-		  viewUniversities();
-	  }	
-  }
-  
+//  public String viewUniversities(String prompt, String univName) {
+//	  //show the list of universities
+//	  this.viewUniversitiesList();
+//	  //check for input
+//	  if(prompt.equals("a")){ // ADD UNIVERSITIES
+//		  return "*** Adding University ***";
+//		  //this.addUniversity(univName);
+//	  }
+//	  else if(prompt.equals("e")){ // EDIT UNIVERSITIES
+//		  
+//		  //this.editUniversity(editPrompt, this.getUniversity(univName));
+//	  }
+//	  else if(cmd.equals("r")) { // REMOVE UNIVERSITY
+//		  if(!(this.getUniversity(univName) instanceof University)) {// if the university does not exist
+//			  System.out.println("*** There is no such university ***");
+//			  this.viewUniversities();
+//		  }
+//  	  		this.removeUniversity(this.getUniversity(univName));
+//	  }
+//	  else if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY
+//		  if(!(this.getUniversity(univ) instanceof University)) {// if the university does not exist
+//			  System.out.println("*** There is no such university ***");
+//			  this.viewUniversities();
+//		  }
+//		  this.viewUniversityDetails(univ);
+//	  }
+//	  else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
+//		  System.out.println("Returning to homepage");
+//	  }
+//	  else{ // INPUT ERROR
+//		  System.out.println("ERROR: Invalid input");
+//		  viewUniversities();
+//	  }	
+//  }
+//  
   /**
    * Shows a list of all users in the system (both general and admin)
    * and presents a list of options for the admin to manage those
@@ -434,60 +434,24 @@ public class AdminFuncController{
    * 
    * @param univ the name of the university to add
    */
-  public void addUniversity(String univName) {
+  public void addUniversity(String schoolName, String state, String location, String control, int students, int femPerc, int satV, int satM, int cost,
+          int finAidPerc, int applicants, int admitted, int enrolled, int acadScale, int socScale, int qualScale, ArrayList<String> emphases) {
 	//Fail: user entered a blank name for university
-	  if(univName.equals("")) {
-		  System.out.println("*** Error: University name is blank. Please enter a university name. ***");
+	  if(schoolName.equals("")) {
+		  //System.out.println("*** Error: University name is blank. Please enter a university name. ***");
 		  throw new IllegalArgumentException();
 	  }
 	  //Fail: university already exists in database
-	  else if(this.getUniversity(univName) instanceof University) {
-		  System.out.println("*** This university name already exists, please choose a different one ***");
+	  else if(this.getUniversity(schoolName) instanceof University) {
+		  //System.out.println("*** This university name already exists, please choose a different one ***");
 		  throw new IllegalArgumentException();
 	  }
-	  String state = sc.nextLine();
-      System.out.print("Enter location: ");
-	  String location = sc.nextLine();
-	  System.out.print("Enter control: ");
-	  String control = sc.nextLine();
-	  System.out.print("Enter number of students: ");
-	  int students = sc.nextInt();    
-	  System.out.print("Enter female percentage: ");
-	  int femPerc = sc.nextInt();
-	  System.out.print("Enter SAT verbal score: ");
-	  int satV = sc.nextInt();
-	  System.out.print("Enter SAT math score: ");
-	  int satM = sc.nextInt();
-	  System.out.print("Enter cost: ");
-	  int cost = sc.nextInt();
-	  System.out.print("Enter financial aid percentage: ");
-	  int finAidPerc = sc.nextInt();
-	  System.out.print("Enter applicants: ");
-	  int applicants = sc.nextInt();
-	  System.out.print("Enter number of admitted students: ");
-	  int admitted = sc.nextInt();
-	  System.out.print("Enter number of enrolled students: ");
-	  int enrolled = sc.nextInt();
-	  System.out.print("Enter academic scale: ");
-	  int acadScale = sc.nextInt();
-	  System.out.print("Enter social scale: ");
-	  int socScale = sc.nextInt();
-	  System.out.print("Enter quality scale: ");
-	  int qualScale = sc.nextInt();
-	  ArrayList<String> emphases = new ArrayList<String>(); // add emphases
-	  System.out.print("Enter an emphasis (Enter Press q to finish): ");
-	  String emphasis = sc.next();
-	  while(!emphasis.equals("q")){
-	     emphases.add(emphasis);
-	     System.out.print("Enter an emphasis (Enter Press q to finish2): ");
-	     emphasis = sc.next();
-	  }
-	  University u = new University(univ, state, location, control, students, femPerc, satV, satM, cost,
+
+	  University u = new University(schoolName, state, location, control, students, femPerc, satV, satM, cost,
   								finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
 	  dbc.addNewUniversity(u); // add the university to the database
 	  addEmphases(u);
-	  System.out.println("*** Saved university " + univ + " to list ***");
-	  viewUniversities();
+	  //System.out.println("*** Saved university " + schoolName + " to list ***");
   }
 
   /**
@@ -496,38 +460,23 @@ public class AdminFuncController{
    * @param u the university to remove
    */
   public void removeUniversity(University u) {
-	  System.out.println("=======================================" +'\n'+ "Are you sure you want to delete " + u.getName() + " from the list?" 	
-			  				+'\n'+'\t'+ "y: yes" +'\n'+'\t'+ "n: no"+ '\n' + "Enter Here: ");
-	  String prompt = sc.nextLine();
-	  if(prompt.equals("y") || prompt.equals("Y")) {
-		  System.out.println("*** Deleted " + u.getName() + " ***");
+	  //System.out.println("=======================================" +'\n'+ "Are you sure you want to delete " + u.getName() + " from the list?" 	
+			  			//	+'\n'+'\t'+ "y: yes" +'\n'+'\t'+ "n: no"+ '\n' + "Enter Here: ");
 		  delete(u);
-	  }
-	  else if(prompt.equals("n") || prompt.equals("N")) {
-		  System.out.println("*** Returning to Manage_University page ***");
-	  }
-	  else {
-		  System.out.println("ERROR: Invalid input");
-	  }
-	  viewUniversities();
   }
   /**
    * Prompts the user to add a GeneralUser and its properties
    * 
    * @param userName the name of the GeneralUser to add
    */
-  public void addAccount(String userName) {
+  public void addAccount(String userName, String password, String firstName, String lastName, String acType ) {
       ArrayList<String> information = new ArrayList<String>();
 	  information.add(userName);
-	  System.out.print("Please enter a new password: ");
-	  information.add(sc.nextLine());
+	  information.add(password);
 	  information.add("Y");
-	  System.out.print("Please enter the user's first name: ");
-	  information.add(sc.nextLine());
-	  System.out.print("Please enter the user's last name: ");
-	  information.add(sc.nextLine());
-	  System.out.print("Please enter the user's type (u=user, a=admin): ");
-	  String type = sc.nextLine();
+	  information.add(firstName);
+	  information.add(lastName);
+	  String type = acType;
 	  if(type.charAt(0) == 'a'){
 		  // new Admin(username, password, active, firstName, lastName)
 		  Admin ad = new Admin(information.get(0),  information.get(1),  information.get(2).charAt(0),  information.get(3),  information.get(4));
