@@ -581,30 +581,30 @@ public class AdminFuncController{
 	  
 	  ////////////////////////////////////////////////////////////////////////////////////////////////
 	//========================= Fail check: the user does not exist in the database =======================
-	  if(!(this.getAccount(user.getUsername()) instanceof Account)) {
+	  if(!(this.getAccount(user.toString()) instanceof Account)) {
 		  throw new IllegalArgumentException();
 	  }
-	 Account user = this.getAccount(user);
+	 Account account = this.getAccount(user.toString());
 	  //============================ Fail checks: check if all field inputs are correct ===========================
 	 
 	  if(firstName.length() == 0) {
 		  throw new IllegalArgumentException("Error: The firstname field is empty.");
 	  }
-	  user.setFirstName(firstName);
+	  account.setFirstName(firstName);
 	  
 	  if(lastName.length() == 0) {
 		  throw new IllegalArgumentException("Error: The lastname field is empty.");
 	  }
-	  user.setLastName(lastName);
+	  account.setLastName(lastName);
 	  if(password.length() == 0) {
 		  throw new IllegalArgumentException("Error: The firstname field is empty.");
 	  }
-	  user.setPassword(password);
+	  account.setPassword(password);
 	  if(type != 'a' ||type!= 'u' ) {
 		  throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'."); 
 	  }
-	  user.setType(type);
-	  this.saveAccountChanges(user);
+	  account.setType(type);
+	  this.saveAccountChanges(account);
   }
   /**
    * Prompts the user to deactivate an account
