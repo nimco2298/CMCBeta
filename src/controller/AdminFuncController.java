@@ -135,8 +135,11 @@ public class AdminFuncController{
    * @param univ the university to be deleted
    */
   public void delete(University univ){
-	deleteEmphases(univ);
-    dbc.deleteUniversity(univ);
+	  if(!(getUniversity(univ.getName()) instanceof University)) {// if the university does not exist
+		  throw new IllegalArgumentException();
+	  }
+	  deleteEmphases(univ);
+	  dbc.deleteUniversity(univ);
   }
   
   /**
@@ -169,6 +172,9 @@ public class AdminFuncController{
    * @param univ the University
    */
   public void addEmphases(University univ) {
+	  if(!(getUniversity(univ.getName()) instanceof University)) {// if the university does not exist
+		  throw new IllegalArgumentException();
+	  }
 	  for(String emphasis: univ.getEmphases()) {
 		  dbc.addEmphasis(univ, emphasis);
 	  }
@@ -180,6 +186,9 @@ public class AdminFuncController{
    * @param univ the University
    */
   public void deleteEmphases(University univ) {
+	  if(!(getUniversity(univ.getName()) instanceof University)) {// if the university does not exist
+		  throw new IllegalArgumentException();
+	  }
 	  for(String emphasis: univ.getEmphases()) {
 		  dbc.deleteEmphasis(univ, emphasis);
 	  }

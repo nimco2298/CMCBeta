@@ -55,7 +55,7 @@ public class University{
    */
   public University(){
     this.schoolName = "";
-    this.state = "";
+    this.state = "0";
     this.location = "";
     this.control = "";
     this.students = 0;
@@ -67,9 +67,9 @@ public class University{
     this.applicants = 0;
     this.admitted = 0;
     this.enrolled = 0;
-    this.acadScale = 0;
-    this.socScale = 0;
-    this.qualScale = 0;
+    this.acadScale = 1;
+    this.socScale = 1;
+    this.qualScale = 1;
     this.emphases = new ArrayList<String>();
   }
   
