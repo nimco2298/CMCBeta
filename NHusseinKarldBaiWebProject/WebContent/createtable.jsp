@@ -20,14 +20,14 @@ int c=Integer.parseInt(column);
 
 //int rowIssue = "";
 //int columnIssue= "";
-//String val = request.getParameter("rowField");
+String val = request.getParameter("nameField");
 
  if(r <=0){
 	 //rowIssue = "rowIssue";
      //session.setAttribute("error1",rowIssue);
-	session.setAttribute("error1", "Hello" + name + "PLEASE PROVIDE A ROW VALUE >=1");
+	 session.setAttribute("error1", "Hello" + name + "PLEASE PROVIDE A ROW VALUE >=1");
 	 // session.setAttribute("karld", 1 );
-	 response.sendRedirect("classexcercise.jsp?=error1");
+	 response.sendRedirect("classexcercise.jsp");
 	 return;
 }
  else if ( c <=0) {
@@ -35,7 +35,7 @@ int c=Integer.parseInt(column);
 	 //session.setAttribute("error2",columnIssue);
 	 session.setAttribute("error2", "Hello" + name + "PLEASE PROVIDE A COL VALUE >=1");
 	 //session.setAttribute("karld", null);
-      response.sendRedirect("classexcercise.jsp?=error2");
+      response.sendRedirect("classexcercise.jsp");
      return;
  }
 
