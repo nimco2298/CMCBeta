@@ -8,7 +8,7 @@
  * appropriate methods to access these properties of a university
  */
 //package CMCClasses;
-package entities;
+package entity;
 import java.util.ArrayList;
 public class University{
   
@@ -55,7 +55,7 @@ public class University{
    */
   public University(){
     this.schoolName = "";
-    this.state = "";
+    this.state = "0";
     this.location = "";
     this.control = "";
     this.students = 0;
@@ -67,9 +67,9 @@ public class University{
     this.applicants = 0;
     this.admitted = 0;
     this.enrolled = 0;
-    this.acadScale = 0;
-    this.socScale = 0;
-    this.qualScale = 0;
+    this.acadScale = 1;
+    this.socScale = 1;
+    this.qualScale = 1;
     this.emphases = new ArrayList<String>();
   }
   
@@ -457,6 +457,10 @@ public class University{
   public void removeEmphases(String field){
     this.emphases.remove(field);
   }
+  
+  public void removeAllEmphases() {
+	  this.emphases = new ArrayList<String>();
+  }
   /**
    * Displays all the details for the university
    */
@@ -481,7 +485,7 @@ public class University{
     System.out.println("Emphasis: ");
     for (String emph: this.emphases)
     {
-      System.out.print(emph);
+      System.out.println(emph);
     }
   }
 }

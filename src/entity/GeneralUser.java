@@ -1,22 +1,24 @@
-/** 
-  * File: GeneralUser.java
-  */
-package entities;
+/*
+ * File:GeneralUser.java
+ */
+
+package entity;
 import java.util.*; //Java's ArrayList<ET>
-//package cmcclasses
 
 /**
- * GeneralUser is a class that is extends Account.
+ * GeneralUser is a class that is an Account and stores a user's information.
  *
  * @author  Nimco Hussein
- * @version February 26, 2018
+ * @version March 20, 2018
  */
 public class GeneralUser extends Account
 {
 
+	
   /* the user's list of saved schools  */
   private ArrayList<String> savedUniversities;
  
+  
   /** A constructor that creates a GeneralUser object
   * @param String firstName   a user's first name
   * @param String  lastName   a user's last name 
@@ -27,16 +29,20 @@ public class GeneralUser extends Account
   */
   public GeneralUser(String firstName, String lastName, char active,String username, String password,ArrayList<String> savedUniversities) //add in paramaeter for savedUniverisisyd
   {
-    this.setUsername(username);
+	
+    this.setUsername(username); 
     this.setFirstName(firstName);
     this.setLastName(lastName);
-    this.setActive(active);
-    this.setType('u');
+    this.setActive(active); //Only admins can set the Type! NEW USERS WILL HAVE Y BY DEFUALT!
+    this.setType('u');    //by default a user type is 'u'
     this.setPassword(password);
-    this.savedUniversities = savedUniversities; // intializes all the users saved schools from DB
+    this.savedUniversities = savedUniversities; // initializes all the users saved schools from DB
   }
   
+  
+  
   /** Returns the list of saved schools as a string
+   * 
   * @return ArrayList<String>   list of saved schools of a General User
   */ 
   public ArrayList<String> getSavedSchools()
@@ -45,5 +51,20 @@ public class GeneralUser extends Account
    return this.savedUniversities;
       
   } 
+  /**Prints a the Users account details
+   * 
+   * @return String the string representation of Account details
+   */
+  public String getDetails() {
+	  
+	  return "\n" + "***ACCOUNT INFORMATION*** \n"
+			  +"First name:    " + "\t" + "\t" + this.getFirstName() + "\n" 
+			   + "Last Name:   " + "\t" + "\t"+ this.getLastName() + "\n" + 
+			    "Username:   " +"\t" + "\t"+ this.getUsername() + "\n" + 
+			   "Password:      " + "\t" + "\t" + this.getPassword() + "\n" +
+			   //"Saved Schools List: " + this.savedUniversities + "\n"
+			    "Account Status: " + "\t" + this.getActive() + "\n" ;
+			   
+  }
    
 }

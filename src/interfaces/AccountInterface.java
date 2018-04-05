@@ -1,21 +1,24 @@
-package interfaces;
-import java.util.Scanner;
-import controllers.*;
+
 /*
  * File:AccountInterface.java
  */
 
+package interfaces;
+import java.util.Scanner;
+import controller.*;
+
 /**
  * The starting terminal in which the user will log into the system
  * @author Ian Bush
- * @version February 23, 2018
+ * @version April 4th, 2018
  */
 public class AccountInterface
 {
+	/** instance of AccountController */
   private AccountController ac;
   
   /**
-   * Constructor 
+   * Constructor to create ac object
    */
   public AccountInterface()
   {
@@ -29,15 +32,11 @@ public class AccountInterface
    */
   public void login(String usr, String password)
   {
-    if (ac.login(usr, password))
-    {
-      System.out.println("Login successful");
-    }
-    else
-    {
-      System.out.println("Please try again");
-      this.start();
-    }
+	 
+	   if(ac.login(usr, password) == false)
+   {
+	   this.start();
+   }
   }
   
   /**
@@ -46,24 +45,30 @@ public class AccountInterface
    */
   public void logout()
   {
-    ac.logout();
-    System.out.println("You have been logged out of the system");
+    if(ac.loginStatus == true) // user is logged on
+    {
+    	ac.logout();
+    	System.out.println("You have been logged out of the system");
+    }
+      
+   System.out.println( "\n" + "You have been logged out. Please sign  in"); 
+    this.start();
   }
   
  
   
   /**
-   * Starting point for the user
+   * Starting point for the user to log in and access the system.
    */
   public void start()
   {
     @SuppressWarnings("resource")
 	Scanner sc = new Scanner(System.in);
     System.out.print("Please enter your username: ");
-    String u = sc.next();
+    String u = sc.nextLine();
     System.out.print("Now enter your password: ");
-    String p = sc.next();
+    String p = sc.nextLine();
     this.login(u,p);
-    //sc.close();
+    
   }
 }

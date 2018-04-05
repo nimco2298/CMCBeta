@@ -1,20 +1,25 @@
-package controllers;
+
+/*
+ * File:DBController.java
+ */
+
+package controller;
 import dblibrary.project.csci230.*;
 import java.util.ArrayList;
-import entities.*;
+import entity.*;
 
 /**
- * Performs all the messy work needed for accessing and modifiying the databse
+ * Performs all the messy work needed for accessing and modifying the database
  * @author Ian Bush
- * @version February 22, 2018
+ * @version April 4, 2018
  */
 public class DBController
 {
-  /* Accessing the database library */
+  /** Accessing the database library */
   private UniversityDBLibrary ud;
   
   /**
-   * Constructor
+   * Constructor to create a UniversityDBLibrary object
    */
   public DBController()
   {
@@ -23,7 +28,7 @@ public class DBController
   
   /**
    * Returns the list of all universities in the database
-   * @return all of the universities in the system
+   * @return ArrayList<University> all of the universities in the system
    */
   public ArrayList<University> getUniversities()
   {
@@ -31,24 +36,23 @@ public class DBController
     String[][] univEmph = ud.university_getNamesWithEmphases();
     String[][] univ = ud.university_getUniversities();
     University u;
-    @SuppressWarnings("unused")
-	int start = 0;
     for(int i = 0; i < univ.length; i++)
     {
-      u = new University(univ[i][0], univ[i][1], univ[i][2], univ[i][3], new Integer(univ[i][4]).intValue(), 
+       ArrayList<String> uEmph = new ArrayList<String>();
+      String uName = univ[i][0];
+      for (int x = 0; x < univEmph.length; x++)
+      {
+        if (uName.equals(univEmph[x][0]))
+        {
+            uEmph.add(univEmph[x][1]);
+        }
+      }
+      u = new University(uName, univ[i][1], univ[i][2], univ[i][3], new Integer(univ[i][4]).intValue(), 
                          new Integer(univ[i][5]).intValue(), new Integer(univ[i][6]).intValue(), new Integer(univ[i][7]).intValue(), 
                          new Integer(univ[i][8]).intValue(), new Integer(univ[i][9]).intValue(), new Integer(univ[i][10]).intValue(), 
                          new Integer(univ[i][11]).intValue(), new Integer(univ[i][12]).intValue(), new Integer(univ[i][13]).intValue(),
-                         new Integer(univ[i][14]).intValue(), new Integer(univ[i][15]).intValue(), new ArrayList<String>());
-      
-      for (int x = 0; x < univEmph.length; x++)
-      {
-        if (univ[i][0] == univEmph[x][0])
-        {
-            u.addEmphases(univEmph[x][1]);
-            start++;
-        }
-      }
+                         new Integer(univ[i][14]).intValue(), new Integer(univ[i][15]).intValue(), uEmph);
+     
       univList.add(u);
       
     }
@@ -57,23 +61,23 @@ public class DBController
   
   /**
    * Returns a specific university based on the name provided
-   * @param univName the name of the university
-   * @return the unviersity with the matching name
+   * @param univName    the name of the university
+   * @return University the university with the matching name
    */
   public University getUniversity(String univName)
   {
     ArrayList<University> list = this.getUniversities();
     for (University u: list)
     {
-      if (u.getName() == univName)
+      if (u.getName().equals(univName))
         return u;
     }
     return null;
   }
   
   /**
-   * Returns a list of all users in the databse
-   * @return all of the users in the system
+   * Returns a list of all users in the database
+   * @return ArrayList<Account> all of the users in the system
    */
   public ArrayList<Account> getAccounts()
   {
@@ -81,6 +85,7 @@ public class DBController
     String[][] users = ud.user_getUsers();
     String[][] userSchools = ud.user_getUsernamesWithSavedSchools();
     String[] userInfo;
+    
     for  (int i =0; i <users.length; i++)
     {
       userInfo = users[i];
@@ -94,12 +99,11 @@ public class DBController
         ArrayList<String> userUniv = new ArrayList<String>();
         for (int j = 0; j < userSchools.length; j++)
         {
-          if(userSchools[j][0] == userInfo[0])
+          if(userSchools[j][0].equals(userInfo[2]))
           {
-            for (int k = 1; k < userSchools[j].length; k++)
-            {
-              userUniv.add(userSchools[j][k]);
-            }
+        	 
+              userUniv.add(userSchools[j][1]);
+           
           }
         }
         accList.add(new GeneralUser(userInfo[0], userInfo[1], userInfo[5].charAt(0), userInfo[2], userInfo[3], userUniv));
@@ -149,23 +153,26 @@ public class DBController
    * post: a new University will be added to the database 
    * 
    * @param univ the University to add to the database
+   * @return an int value determining whether the university is unique or not
    */
-  public void addNewUniversity(University univ)
+  public int addNewUniversity(University univ)
   {
-    ud.university_addUniversity(univ.getName(), univ.getState(), univ.getLocation(), univ.getControl(), 
+    int i = ud.university_addUniversity(univ.getName(), univ.getState(), univ.getLocation(), univ.getControl(), 
                                 univ.getStudents(), new Integer(univ.getFemPerc()).doubleValue(), new Integer(univ.getSatV()).doubleValue(), 
                                 new Integer(univ.getSatM()).doubleValue(), new Integer(univ.getCost()).doubleValue(), new Integer(univ.getFinAidPerc()).doubleValue(),
                                 univ.getApplicants(), new Integer(univ.getAdmitted()).doubleValue(), new Integer(univ.getEnrolled()).doubleValue(), 
                                 univ.getAcadScale(), univ.getSocScale(), univ.getQualScale());
+    return i;
   }
   /**
    * Adds a new account to the database
    * post: a new Account will add to the database
    * @param acc the account to add to the database
    */
-  public void addAccount(Account acc)
+  public int addAccount(Account acc)
   {
-    this.ud.user_addUser(acc.getFirstName(), acc.getLastName(), acc.getUsername(), acc.getPassword(), acc.getType());
+    int i = this.ud.user_addUser(acc.getFirstName(), acc.getLastName(), acc.getUsername(), acc.getPassword(), acc.getType());
+    return i;
   }
   
   /**
@@ -174,11 +181,11 @@ public class DBController
    */
   public void updateAccount(Account acc)
   {
-    this.ud.user_editUser(acc.getFirstName(), acc.getLastName(), acc.getUsername(), acc.getPassword(), acc.getType(), acc.getActive());
+    this.ud.user_editUser(acc.getUsername(), acc.getFirstName(), acc.getLastName(), acc.getPassword(), acc.getType(), acc.getActive());
   }
   
   /**
-   * Modifies a univeristy
+   * Modifies a university
    * @param univ the University to modify
    */
   public void updateUniversity(University univ)
@@ -215,6 +222,34 @@ public class DBController
    */
   public void deleteAccount(Account acc)
   {
+	  if (acc.getType()=='u')
+	  {
+		  ArrayList<String> saved = ((GeneralUser) acc).getSavedSchools();
+		  for(String s: saved)
+		  {
+			  removeSchoolFromSavedSchoolList((GeneralUser) acc, getUniversity(s));
+		  }
+	  }
     ud.user_deleteUser(acc.getUsername());
+  }
+  
+  /**
+   * Adds an emphasis to the corresponding university in the database
+   * @param univ the university to add the emphasis
+   * @param emphasis the emphasis to add
+   */
+  public void addEmphasis(University univ, String emphasis) 
+  {
+	ud.university_addUniversityEmphasis(univ.getName(), emphasis);
+  }
+  
+  /**
+   * Deletes an emphasis to the corresponding university in the database
+   * @param univ the university to delete the emphasis
+   * @param emphasis the emphasis to delete
+   */
+  public void deleteEmphasis(University univ, String emphasis) 
+  {
+    ud.university_removeUniversityEmphasis(univ.getName(), emphasis);
   }
 }

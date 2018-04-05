@@ -1,19 +1,18 @@
 /** 
  * File: Account.java
  */
-package entities;
-import java.util.*;  //Java's ArrayList<ET>
+package entity;
 
 
 /**
  * Account is an abstract that is extends Admin and GeneralUser. 
  * The purpose of this class is to define the behavior of an Account for the CMC System.
- * The accesor methods in this class return information about an Account. 
+ * The accessor methods in this class return information about an Account. 
  * The mutator methods allow the information of an Account to be manipulated. 
  * 
  *
  * @author  Nimco Hussein
- * @version February 26, 2018
+ * @version April 4th, 2018
  */
 public abstract class Account {
   
@@ -30,12 +29,7 @@ public abstract class Account {
   /** The type of an Account */
   private char type;
   
-   /** The string representation of a list of saved universisities t */
-  private ArrayList<String> savedUniversities;
-  
- 
-  
-  /**
+   /**
    * Return the username of an Account
    * 
    * @return String  username
@@ -57,7 +51,7 @@ public abstract class Account {
   
   /**
    * Return the firstName of an Account
-   * 
+   * type
    * @return String  firstName
    */
   public String getFirstName()
@@ -95,24 +89,34 @@ public abstract class Account {
     return this.active;
   }
     
-  /**
+  /**USER CANNOT SET OWN USERNAME,ADMINS CANNOT SET USERNAMES AT ALL
    * Sets the username of an Account
    * 
    * @param String    newUsername  
    */
   public void setUsername (String newUsername)
   {
-    this.username = newUsername;
+	this.username = newUsername;  
+	   
   }
   
   /**
    * Sets the password of an Account
    * 
-   * @param String    newPassword  
+   * @param String    newPassword 
+   * @throws  IllegalArgumentException  when the parameter is not of type String  
    */
-  public void setPassword(String newPassword)
-  {
-    this.password = newPassword;
+  public void setPassword(String newPassword) {
+	  
+    if(newPassword.length() > 0) 
+    {
+ 	    this.password = newPassword;
+    }
+    else
+     {
+      throw new IllegalArgumentException("Error! You must enter a non-empty String to set the last name field!");
+      }
+   
   }
   
   /**
@@ -122,39 +126,68 @@ public abstract class Account {
    */
   public void setFirstName(String firstName) 
   {
-    this.firstName = firstName;
+	  if(firstName.length() > 0) {
+	    	 this.firstName = firstName; 
+	     }
+	     else
+	     {
+	         throw new IllegalArgumentException("Error! You can only enter a non empty String to set the first name field!");
+	     }
   }
     
   /**
    * Sets the lastName of an Account
    * 
-   * @param String lastName    
+   * @param String lastName
+   * @throws  IllegalArgumentException  when the parameter is not of type String    
    */
   public void setLastName(String lastName) 
   {
+     if(lastName.length() > 0) {
+    	 this.lastName = lastName; 
   
-     this.lastName = lastName;
+     }
+     else
+     {
+         throw new IllegalArgumentException("Error! You can only enter a non empty String to set the last name field!");
+     }
   }
     
   /**
-   * Sets the type of an Account
+   * Sets the type of an Account to either a 'a' for Admin or 'u' for User
    * 
    * @param char type    
+   * @throws  IllegalArgumentException  when the parameter is not of type char
    */
   public void setType(char type) 
   {
-     this.type = type;
+	  if(type == 'u' || type == 'a')
+	  {
+		  this.type = type;
+	  }
+	  else 
+	  {
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
+	  }
   }          
   
     
   /**
-   * Sets the activiy of an Account
+   * Sets the activity of an Account
    * 
-   * @param char activity  
+   * @param char activity 
+   * @throws  IllegalArgumentException  when the parameter is not of type char 
    */
   public void setActive(char activity)
   {
-     this.active = activity;
+	  if(activity == 'Y' || activity == 'N') // this was type before i changed it to activity
+	  {
+		  this.active = activity;
+	  }
+	  else
+	  {
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the activity status!");
+	  }
   }
   
     
@@ -163,10 +196,5 @@ public abstract class Account {
    * 
    * @return  ArrayList<String> list of account information 
    */
-  public String getDetails()
-  {
-    return  "First name: " +this.firstName + "Last Name:  " +
-      this.lastName + "Account Status: " + this.active + "Password: " + this.password + 
-      "Saved Schools List: " + this.savedUniversities;
-  }
+  public abstract String getDetails();
 }
