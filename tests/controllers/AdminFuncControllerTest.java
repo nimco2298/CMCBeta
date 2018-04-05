@@ -394,4 +394,25 @@ public class AdminFuncControllerTest {
 		emphases.add("6");
 		ad.editUniversity("Test", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 	}
+	@Test
+	public void testaddAccoountForUser() {
+		ad.addAccount("Test", "Test", "Test", "Test", "u");
+		Assert.assertTrue("User account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
+		dbc.deleteAccount(dbc.getUser("Test"));
+	}
+	@Test
+	public void testaddAccoountForAdmin() {
+		ad.addAccount("Test", "Test", "Test", "Test", "a");
+		Assert.assertTrue("Admin account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
+		dbc.deleteAccount(dbc.getUser("Test"));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddAccoountFailsForRepeatedUsername() {
+		ad.addAccount("juser", "Test", "Test", "Test", "u");
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddAccoountFailsForInvalidType() {
+		ad.addAccount("Test", "Test", "Test", "Test", "q");
+	}
+			
 }
