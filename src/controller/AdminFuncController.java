@@ -587,17 +587,17 @@ public class AdminFuncController {
 		// ============================ Fail checks: check if all field inputs are
 		// correct ===========================
 
-		if (firstName.length() == 0) {
+		if (firstName.length() == 0 || firstName.contains(" ")) {
 			throw new IllegalArgumentException("Error: The firstname field is empty.");
 		}
 		account.setFirstName(firstName);
 
-		if (lastName.length() == 0) {
+		if (lastName.length() == 0 || lastName.contains(" ")) {
 			throw new IllegalArgumentException("Error: The lastname field is empty.");
 		}
 		account.setLastName(lastName);
 		
-		if (password.length() == 0) {
+		if (password.length() == 0 ||password.contains(" ")) {
 			throw new IllegalArgumentException("Error: The firstname field is empty.");
 		}
 		account.setPassword(password);
@@ -610,24 +610,27 @@ public class AdminFuncController {
 	}
 
 	/**
-   * Prompts the user to deactivate an account
+   * This method will deactivate a user's account 
    * 
    * @param usr      the account to be deactivated
    * @return boolean true if the user was deactivated, false if not
    */
   public boolean deactivate(Account usr) {
-		  if(!(usr.getActive() == 'Y') || !(usr.getActive() == 'N')){
+	  if (!(this.getAccount(usr.toString()) instanceof Account)) {
+			throw new IllegalArgumentException();
+		}
+		Account account = this.getAccount(usr.toString());
+	  
+		  if(!(account.getActive() == 'Y') || !(account.getActive() == 'N')){
 			  throw new IllegalArgumentException("ERROR: Invalid Input. Must enter either a charachter ");
 			
 		  }
-	  
-		  else if(usr.getActive() == 'Y') {
-		  usr.setActive('N');
-		  saveAccountChanges(usr);
+		  else if(account.getActive() == 'Y') {
+		  account.setActive('N');
+		  saveAccountChanges(account);
 		  return true;
 		  
-	     }
-		  
+	     }  
 	      else {
 		  this.viewUsersList();
 		  return false;
