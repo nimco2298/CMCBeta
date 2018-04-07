@@ -32,7 +32,6 @@ public class AccountInterface
    */
   public void login(String usr, String password)
   {
-	 
 	   if(ac.login(usr, password) == false)
    {
 	   this.start();
@@ -45,30 +44,26 @@ public class AccountInterface
    */
   public void logout()
   {
-    if(ac.loginStatus == true) // user is logged on
-    {
-    	ac.logout();
-    	System.out.println("You have been logged out of the system");
-    }
-      
-   System.out.println( "\n" + "You have been logged out. Please sign  in"); 
+   ac.logout();
+   //System.out.println("You have been logged out of the system"); 
+   //System.out.println( "\n" + "You have been logged out. Please sign  in"); 
     this.start();
   }
   
- 
+
   
   /**
    * Starting point for the user to log in and access the system.
    */
-  public void start()
-  {
-    @SuppressWarnings("resource")
-	Scanner sc = new Scanner(System.in);
-    System.out.print("Please enter your username: ");
-    String u = sc.nextLine();
-    System.out.print("Now enter your password: ");
-    String p = sc.nextLine();
-    this.login(u,p);
+    public void start()
+    {
+     @SuppressWarnings("resource")
+  	 Scanner sc = new Scanner(System.in);
+      System.out.print("Please enter your username: ");
+      String u = sc.nextLine();
+      System.out.print("Now enter your password: ");
+      String p = sc.nextLine();
+     this.login(u,p);
     
   }
 }
