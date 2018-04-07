@@ -615,7 +615,7 @@ public class AdminFuncController {
 	}
 
 	/**
-	 * This metod will deactivate a user's account
+	 * This method will deactivate a user's account
 	 * 
 	 * @param usr      the account to be deactivated
 	 * @return boolean true if the user was deactivated, false if not
