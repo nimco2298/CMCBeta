@@ -631,36 +631,61 @@ public class AdminFuncControllerTest {
 		emphases.add("6");
 		ad.editUniversity("Test", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 */
 	@Test
-	public void testaddAccoountForUser() {
+	public void testaddAccountForUser() {
 		ad.addAccount("Test", "Test", "Test", "Test", "u");
 		Assert.assertTrue("User account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
 		dbc.deleteAccount(dbc.getUser("Test"));
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 */
 	@Test
-	public void testaddAccoountForAdmin() {
+	public void testaddAccountForAdmin() {
 		ad.addAccount("Test", "Test", "Test", "Test", "a");
 		Assert.assertTrue("Admin account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
 		dbc.deleteAccount(dbc.getUser("Test"));
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 * Catches an Exception for repeated username
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testaddAccoountFailsForRepeatedUsername() {
+	public void testaddAccountFailsForRepeatedUsername() {
 		ad.addAccount("juser", "Test", "Test", "Test", "u");
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 * Catches an Exception for invlaid type
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testaddAccoountFailsForInvalidType() {
+	public void testaddAccountFailsForInvalidType() {
 		ad.addAccount("Test", "Test", "Test", "Test", "q");
 	}
+	/**
+	 * Test method for addUniversity in AdminFuncController.
+	 */
 	@Test
 	public void testAddUniversity() {
 		ad.addUniversity("Test", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
 		Assert.assertTrue("University added correctly", dbc.getUniversity("Test").getName().equals("Test"));
 		dbc.deleteUniversity(dbc.getUniversity("Test"));
 	}
+	/**
+	 * Test method for addUniversity in AdminFuncController.
+	 * Catches an Exception for a blank university name
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUniversityFailsForBlankName() {
 		ad.addUniversity("", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());		
 	}
+	/**
+	 * Test method for addUniversity in AdminFuncController.
+	 * Catches an Exception for a duplicate university name
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddUniversityFailsForDuplicateName() {
 		ad.addUniversity("YALE", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());		
