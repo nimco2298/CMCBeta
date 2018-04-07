@@ -20,6 +20,7 @@ import entities.GeneralUser;
  */
 public class UserFuncControllerTest {
 	
+	/** instance variable    */
 	private UserFuncController ufc;
 
 	/**
