@@ -607,7 +607,7 @@ public class AdminFuncController {
 		}
 		account.setPassword(password);
 
-		if (type.charAt(0) != 'a' || type.charAt(0) != 'u'|| type.length() != 1) {
+		if ((type.charAt(0) != 'a') || (type.charAt(0) != 'u')||( type.length() != 1 )) {
 			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
 		}
 		account.setType(type.charAt(0));
@@ -620,7 +620,7 @@ public class AdminFuncController {
 	}
 
 	/**
-	 * This method will deactivate a user's account
+	 * This metod will deactivate a user's account
 	 * 
 	 * @param usr      the account to be deactivated
 	 * @return boolean true if the user was deactivated, false if not

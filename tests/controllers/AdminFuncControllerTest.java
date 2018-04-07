@@ -769,10 +769,10 @@ public class AdminFuncControllerTest {
 	 * Test method for editUser in AdminFuncController.
 	 * Catches an Exception for an invalid type input
 	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testEditUser_FailsInvalidStatus() {
+	@Test(expected = StringIndexOutOfBoundsException.class)
+	public void testEditUser_FailsEmptyType() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.editUser(account,"first","last","password", "Y","0");
+		ad.editUser(account,"first","last","password", "Y","");
 		//Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getFirstName().equals("T"));
 	}
 	
@@ -781,12 +781,34 @@ public class AdminFuncControllerTest {
 	 * Catches an Exception for an invalid type input
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testEditUser_FailsEmptyStatus() {
+	public void testEditUser_FailsInvalidStatus1() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.editUser(account,"first","last","password", "Y","");
+		ad.editUser(account,"first","last","password", "notactive","a");
 		//Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getFirstName().equals("T"));
 	}
-
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid type input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsInvalidStatus2() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","password", "L","a");
+		//Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getFirstName().equals("T"));
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid type input
+	 */
+	@Test(expected = StringIndexOutOfBoundsException.class)
+	public void testEditUser_FailsEmptyStatus() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","password", "","a");
+		//Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getFirstName().equals("T"));
+	}
+	
 	/**
 	 * Test method for addUniversity in AdminFuncController.
 	 */
