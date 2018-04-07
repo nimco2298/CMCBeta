@@ -511,7 +511,7 @@ public class AdminFuncController {
 	 * @param user
 	 *            the account to edit
 	 */
-	public void editUser(Account user, String firstName, String lastName, String password, char type) {
+	public void editUser(Account user, String firstName, String lastName, String password, String status, String type) {
 		// String prompt = "";
 		// do {
 		// System.out.print("=======================================" + '\n' +
@@ -602,10 +602,15 @@ public class AdminFuncController {
 		}
 		account.setPassword(password);
 
-		if (type != 'a' || type != 'u') {
+		if (type.charAt(0) != 'a' || type.charAt(0) != 'u'|| type.length() != 1) {
 			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
 		}
-		account.setType(type);
+		account.setType(type.charAt(0));
+		
+		if (status.charAt(0) != 'Y' || type.charAt(0) != 'N'|| status.length() != 1) {
+			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
+		}
+		account.setActive(status.charAt(0));
 		this.saveAccountChanges(account);
 	}
 
@@ -631,7 +636,7 @@ public class AdminFuncController {
 			return true;
 
 		} else {
-			this.viewUsersList();
+			//this.viewUsersList();
 			return false;
 		}
 

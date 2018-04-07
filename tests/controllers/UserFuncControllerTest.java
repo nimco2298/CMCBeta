@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller;
+package controllers;
 
 import static org.junit.Assert.*;
 
@@ -10,9 +10,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import controllers.DBController;
-import controllers.UserFuncController;
-import entities.GeneralUser;
+import controller.*;
+import entity.*;
 
 /**
  * @author Will Haanen
