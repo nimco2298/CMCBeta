@@ -651,5 +651,19 @@ public class AdminFuncControllerTest {
 	public void testaddAccoountFailsForInvalidType() {
 		ad.addAccount("Test", "Test", "Test", "Test", "q");
 	}
-			
+	@Test
+	public void testAddUniversity() {
+		ad.addUniversity("Test", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
+		Assert.assertTrue("University added correctly", dbc.getUniversity("Test").getName().equals("Test"));
+		dbc.deleteUniversity(dbc.getUniversity("Test"));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUniversityFailsForBlankName() {
+		ad.addUniversity("", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());		
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUniversityFailsForDuplicateName() {
+		ad.addUniversity("YALE", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());		
+	}
+	
 }
