@@ -26,6 +26,22 @@ public class CompleteFuncTest {
 	}
 	
 	/**
+	 * Tests homepage method in AdminFuncController and
+	 * checks if it works for viewing universities, viewing users, and logging out.
+	 */
+	@Test
+	public void testHomepage_ViewUniversities() {
+		String message = ad.homepage("1");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Going to Manage_Universities page. ***", ad.homepage("1"));
+		message = ad.homepage("2");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Going to Manage_Users page. ***", ad.homepage("2"));
+		message = ad.homepage("3");
+		Assert.assertTrue(message != null);
+		Assert.assertEquals("*** Logging out. ***", ad.homepage("3"));
+	}
+	/**
 	 * Deletes the test university and account from the database
 	 */
 	@After

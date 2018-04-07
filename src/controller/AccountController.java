@@ -71,7 +71,7 @@ public class AccountController
    else if(matchedUser.getUsername().equals("DummyUser"))
    { 
      //S3
-      System.out.println("Error: The username is not registered.");
+     // System.out.println("Error: The username is not registered.");
       this.loginStatus = false;
       return false;
     }
@@ -80,7 +80,7 @@ public class AccountController
     else if(!matchedUser.getPassword().equals(password) && matchedUser.getUsername().equals(username))
     {
       //S3
-      System.out.println("Error: The password entered does not match an account.");
+      //System.out.println("Error: The password entered does not match an account.");
       this.loginStatus = false;
       return false;
     }
@@ -89,7 +89,7 @@ public class AccountController
     else if(!matchedUser.getUsername().equals(username) && matchedUser.getPassword().equals(password))
     {
       //S4
-      System.out.println("Error: The username entered does not match an account");
+      //System.out.println("Error: The username entered does not match an account");
       this.loginStatus = false;
       return false;
     }
@@ -107,7 +107,7 @@ public class AccountController
       {
     	//S6
         AdminInterface ai = new AdminInterface();
-        System.out.println("Login successful");
+        //System.out.println("Login successful");
         //ai.homepage(); 
         this.loginStatus = true;
         return true;
@@ -117,7 +117,7 @@ public class AccountController
       {
     	//S7
         UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
-        System.out.println("Login successful");
+        //System.out.println("Login successful");
         this.loginStatus = true;
         ui.homePage();
         return true;
@@ -127,7 +127,7 @@ public class AccountController
       else if(!matchedUser.getUsername().equals(username) && !matchedUser.getPassword().equals(password))
       {
     	//S8
-        System.out.println("Error: The username and pasword entered doesnt match a registered account. Please try again.");
+        //System.out.println("Error: The username and pasword entered doesnt match a registered account. Please try again.");
         this.loginStatus = false;
        
       }

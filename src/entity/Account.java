@@ -12,7 +12,7 @@ package entity;
  * 
  *
  * @author  Nimco Hussein
- * @version April 4th, 2018
+ * @version April 8th, 2018
  */
 public abstract class Account {
   
@@ -108,7 +108,7 @@ public abstract class Account {
    */
   public void setPassword(String newPassword) {
 	  
-    if(newPassword.length() > 0) 
+    if(newPassword.length() > 0 || !(password.contains(" "))) 
     {
  	    this.password = newPassword;
     }
@@ -126,7 +126,7 @@ public abstract class Account {
    */
   public void setFirstName(String firstName) 
   {
-	  if(firstName.length() > 0) {
+	  if(firstName.length() > 0 || !(firstName.contains(" "))) {
 	    	 this.firstName = firstName; 
 	     }
 	     else
@@ -143,7 +143,7 @@ public abstract class Account {
    */
   public void setLastName(String lastName) 
   {
-     if(lastName.length() > 0) {
+     if(lastName.length() > 0 || !(lastName.contains(" "))) {
     	 this.lastName = lastName; 
   
      }

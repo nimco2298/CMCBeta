@@ -472,9 +472,6 @@ public class AdminFuncController {
 	 *            the university to remove
 	 */
 	public void removeUniversity(University u) {
-		// System.out.println("=======================================" +'\n'+ "Are you
-		// sure you want to delete " + u.getName() + " from the list?"
-		// +'\n'+'\t'+ "y: yes" +'\n'+'\t'+ "n: no"+ '\n' + "Enter Here: ");
 		delete(u);
 	}
 
@@ -486,11 +483,7 @@ public class AdminFuncController {
 	 */
 	public void addAccount(String userName, String password, String firstName, String lastName, String acType) {
 		ArrayList<String> information = new ArrayList<String>();
-		if (dbc.getUser(userName).getUsername().equals("DummyUser")) {
-			information.add(userName);
-		}
-		else throw new IllegalArgumentException();
-		
+		information.add(userName);
 		information.add(password);
 		information.add("Y");
 		information.add(firstName);
@@ -507,9 +500,9 @@ public class AdminFuncController {
 					information.get(0), information.get(1), new ArrayList<String>());
 			dbc.addAccount(gu);
 		} else {
-			throw new IllegalArgumentException();
+			System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
 		}
-		// viewUsers();
+		this.viewUsersList();
 	}
 
 	/**
@@ -518,87 +511,129 @@ public class AdminFuncController {
 	 * @param user
 	 *            the account to edit
 	 */
-	public void editUser(Account user) {
-		String prompt = "";
-		do {
-			System.out.print("=======================================" + '\n' + "What would you like to edit:" + '\n'
-					+ '\t' + "1: FirstName" + '\n' + '\t' + "2: LastName" + '\n' + '\t' + "3: Password" + '\n' + '\t'
-					+ "4: Type" + '\n' + '\t' + "5: Status" + '\n' + '\t' + "s: Save" + '\n' + '\t' + "c: Cancel" + '\n'
-					+ "Enter Here: ");
-			prompt = sc.nextLine();
-			switch (prompt) {
-			case "1":
-				System.out.print("Enter the new first name: ");
-				user.setFirstName(sc.nextLine());
-				break;
-			case "2":
-				System.out.print("Enter the new last name: ");
-				user.setLastName(sc.nextLine());
-				break;
-			case "3":
-				System.out.print("Enter the new password: ");
-				user.setPassword(sc.nextLine());
-				break;
-			case "4":
-				System.out.print("Enter the type (a=admin, u=general user): ");
-				char type = sc.nextLine().charAt(0);
-				if (type != 'a' && type != 'u') {
-					System.out.println("ERROR: Invalid input");
-				} else {
-					user.setType(type);
-				}
-				break;
-			case "5":
-				System.out.print("Enter the status (Y=active, N=deactive): ");
-				char status = sc.nextLine().charAt(0);
-				if (status != 'Y' && status != 'N') {
-					System.out.println("ERROR: Invalid input; inputs must be capitalized");
-				} else {
-					user.setActive(status);
-				}
-				break;
-			case "s":
-				saveAccountChanges(user);
-				System.out.println("=======================================" + '\n' + "Updates have been saved:" + '\n'
-						+ '\t' + "FirstName: " + user.getFirstName() + '\n' + '\t' + "LastName: " + user.getLastName()
-						+ '\n' + '\t' + "Password: " + user.getPassword() + '\n' + '\t' + "Type: " + user.getType()
-						+ '\n' + '\t' + "Active: " + user.getActive());
-				break;
-			case "c":
-				System.out.println("*** Returning to Manage_Users page ***");
-				break;
-			default:
-				System.out.println("ERROR: Invalid input");
-				break;
-			}
-		} while (!prompt.equals("s") && !prompt.equals("c"));
-		viewUsers();
+	public void editUser(Account user, String firstName, String lastName, String password, char type) {
+		// String prompt = "";
+		// do {
+		// System.out.print("=======================================" + '\n' +
+		// "What would you like to edit:" + '\n' +'\t'+
+		// "1: FirstName" + '\n' +'\t'+
+		// "2: LastName" + '\n' +'\t'+
+		// "3: Password" + '\n' +'\t'+
+		// "4: Type" + '\n' +'\t'+
+		// "5: Status" + '\n' +'\t'+
+		// "s: Save" + '\n' +'\t'+
+		// "c: Cancel" + '\n' +
+		// "Enter Here: ");
+		// prompt = sc.nextLine();
+		// switch (prompt){
+		// case "1":
+		// System.out.print("Enter the new first name: ");
+		// user.setFirstName(sc.nextLine());
+		// break;
+		// case "2":
+		// System.out.print("Enter the new last name: ");
+		// user.setLastName(sc.nextLine());
+		// break;
+		// case "3":
+		// System.out.print("Enter the new password: ");
+		// user.setPassword(sc.nextLine());
+		// break;
+		// case "4":
+		// System.out.print("Enter the type (a=admin, u=general user): ");
+		// char type = sc.nextLine().charAt(0);
+		// if(type != 'a' && type != 'u') {
+		// System.out.println("ERROR: Invalid input");
+		// }
+		// else {
+		// user.setType(type);
+		// }
+		// break;
+		// case "5":
+		// System.out.print("Enter the status (Y=active, N=deactive): ");
+		// char status = sc.nextLine().charAt(0);
+		// if(status != 'Y' && status != 'N') {
+		// System.out.println("ERROR: Invalid input; inputs must be capitalized");
+		// }
+		// else {
+		// user.setActive(status);
+		// }
+		// break;
+		// case "s":
+		// saveAccountChanges(user);
+		// System.out.println("=======================================" + '\n' +
+		// "Updates have been saved:" + '\n' + '\t'+
+		// "FirstName: " + user.getFirstName() + '\n' + '\t'+
+		// "LastName: " + user.getLastName() + '\n' + '\t'+
+		// "Password: " + user.getPassword() + '\n' + '\t'+
+		// "Type: " + user.getType() + '\n' + '\t'+
+		// "Active: " + user.getActive());
+		// break;
+		// case "c":
+		// System.out.println("*** Returning to Manage_Users page ***");
+		// break;
+		// default:
+		// System.out.println("ERROR: Invalid input");
+		// break;
+		// }
+		// } while(!prompt.equals("s")&&!prompt.equals("c"));
+
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		// ========================= Fail check: the user does not exist in the database
+		//////////////////////////////////////////////////////////////////////////////////////////////// =======================
+		if (!(this.getAccount(user.toString()) instanceof Account)) {
+			throw new IllegalArgumentException();
+		}
+		Account account = this.getAccount(user.toString());
+		// ============================ Fail checks: check if all field inputs are
+		// correct ===========================
+
+		if (firstName.length() == 0 || firstName.contains(" ")) {
+			throw new IllegalArgumentException("Error: The firstname field is empty.");
+		}
+		account.setFirstName(firstName);
+
+		if (lastName.length() == 0 || lastName.contains(" ")) {
+			throw new IllegalArgumentException("Error: The lastname field is empty.");
+		}
+		account.setLastName(lastName);
+
+		if (password.length() == 0 || password.contains(" ")) {
+			throw new IllegalArgumentException("Error: The firstname field is empty.");
+		}
+		account.setPassword(password);
+
+		if (type != 'a' || type != 'u') {
+			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
+		}
+		account.setType(type);
+		this.saveAccountChanges(account);
 	}
 
 	/**
-	 * Prompts the user to deactivate an account
+	 * This method will deactivate a user's account
 	 * 
-	 * @param usr
-	 *            the account to deactivate
+	 * @param usr      the account to be deactivated
+	 * @return boolean true if the user was deactivated, false if not
 	 */
-	public void deactivate(Account usr) {
-		System.out.print(
-				"=======================================" + '\n' + "Are you sure you want to deactivate this user?"
-						+ '\n' + '\t' + "y: yes" + '\n' + '\t' + "n: no" + '\n' + "Enter Here: ");
-		String prompt = sc.nextLine();
-		if (prompt.equals("y") || prompt.equals("Y")) {
-			if (usr.getActive() == 'Y') {
-				System.out.println("*** " + usr.getFirstName() + " has been deactivated ***");
-				usr.setActive('N');
-				saveAccountChanges(usr);
-			} else {
-				System.out.println("*** " + usr.getFirstName() + " is already deactivated ***");
-			}
-		} else if (prompt.equals("n") || prompt.equals("N")) {
-			System.out.println("*** Returning to Manage_Users page ***");
-		} else {
-			System.out.println("ERROR: Invalid Input");
+	public boolean deactivate(Account usr) {
+		
+		if (!(this.getAccount(usr.toString()) instanceof Account)) {
+			throw new IllegalArgumentException();
 		}
-		viewUsers();
+		Account account = this.getAccount(usr.toString());
+
+		if (!(account.getActive() == 'Y') || !(account.getActive() == 'N')) {
+			throw new IllegalArgumentException("ERROR: Invalid Input. Must enter either a charachter ");
+
+		} else if (account.getActive() == 'Y') {
+			account.setActive('N');
+			saveAccountChanges(account);
+			return true;
+
+		} else {
+			this.viewUsersList();
+			return false;
+		}
+
 	}
 }
