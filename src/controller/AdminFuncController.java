@@ -602,7 +602,7 @@ public class AdminFuncController {
 		}
 		account.setPassword(password);
 
-		if (type.charAt(0) != 'a' || type.charAt(0) != 'u'|| type.length() != 1) {
+		if ((type.charAt(0) != 'a') || (type.charAt(0) != 'u')||( type.length() != 1 )) {
 			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
 		}
 		account.setType(type.charAt(0));
