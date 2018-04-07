@@ -637,18 +637,18 @@ public class AdminFuncControllerTest {
 	 */
 	@Test
 	public void testaddAccountForUser() {
-		ad.addAccount("Test", "Test", "Test", "Test", "u");
-		Assert.assertTrue("User account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
-		dbc.deleteAccount(dbc.getUser("Test"));
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "u");
+		Assert.assertTrue("User account was correctly added", dbc.getUser("Test1").getFirstName().equals("Test1"));
+		dbc.deleteAccount(dbc.getUser("Test1"));
 	}
 	/**
 	 * Test method for addAccount in AdminFuncController.
 	 */
 	@Test
 	public void testaddAccountForAdmin() {
-		ad.addAccount("Test", "Test", "Test", "Test", "a");
-		Assert.assertTrue("Admin account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
-		dbc.deleteAccount(dbc.getUser("Test"));
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "a");
+		Assert.assertTrue("Admin account was correctly added", dbc.getUser("Test1").getFirstName().equals("Test1"));
+		dbc.deleteAccount(dbc.getUser("Test1"));
 	}
 	/**
 	 * Test method for addAccount in AdminFuncController.
@@ -664,7 +664,7 @@ public class AdminFuncControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testaddAccountFailsForInvalidType() {
-		ad.addAccount("Test", "Test", "Test", "Test", "q");
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "h");
 	}
 
 	
@@ -847,9 +847,9 @@ public class AdminFuncControllerTest {
 	 */
 	@Test
 	public void testAddUniversity() {
-		ad.addUniversity("Test", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
+		ad.addUniversity("Test2", "Test2", "Test2", "Test2", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
 		Assert.assertTrue("University added correctly", dbc.getUniversity("Test").getName().equals("Test"));
-		dbc.deleteUniversity(dbc.getUniversity("Test"));
+		dbc.deleteUniversity(dbc.getUniversity("Test2"));
 	}
 	/**
 	 * Test method for addUniversity in AdminFuncController.

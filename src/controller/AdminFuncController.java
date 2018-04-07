@@ -483,6 +483,10 @@ public class AdminFuncController {
 	 */
 	public void addAccount(String userName, String password, String firstName, String lastName, String acType) {
 		ArrayList<String> information = new ArrayList<String>();
+		if (!(dbc.getUser(userName).getUsername().equals("DummyUser")))
+		{
+			throw new IllegalArgumentException();
+		}
 		information.add(userName);
 		information.add(password);
 		information.add("Y");
@@ -500,7 +504,8 @@ public class AdminFuncController {
 					information.get(0), information.get(1), new ArrayList<String>());
 			dbc.addAccount(gu);
 		} else {
-			System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
+			throw new IllegalArgumentException();
+			//System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
 		}
 		this.viewUsersList();
 	}
