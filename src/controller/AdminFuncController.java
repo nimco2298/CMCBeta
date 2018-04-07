@@ -596,12 +596,12 @@ public class AdminFuncController {
 			throw new IllegalArgumentException("Error: The lastname field is empty.");
 		}
 		account.setLastName(lastName);
-		
-		if (password.length() == 0 ||password.contains(" ")) {
+
+		if (password.length() == 0 || password.contains(" ")) {
 			throw new IllegalArgumentException("Error: The firstname field is empty.");
 		}
 		account.setPassword(password);
-		
+
 		if (type != 'a' || type != 'u') {
 			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
 		}
@@ -610,31 +610,30 @@ public class AdminFuncController {
 	}
 
 	/**
-   * This method will deactivate a user's account 
-   * 
-   * @param usr      the account to be deactivated
-   * @return boolean true if the user was deactivated, false if not
-   */
-  public boolean deactivate(Account usr) {
-	  if (!(this.getAccount(usr.toString()) instanceof Account)) {
+	 * This method will deactivate a user's account
+	 * 
+	 * @param usr      the account to be deactivated
+	 * @return boolean true if the user was deactivated, false if not
+	 */
+	public boolean deactivate(Account usr) {
+		
+		if (!(this.getAccount(usr.toString()) instanceof Account)) {
 			throw new IllegalArgumentException();
 		}
 		Account account = this.getAccount(usr.toString());
-	  
-		  if(!(account.getActive() == 'Y') || !(account.getActive() == 'N')){
-			  throw new IllegalArgumentException("ERROR: Invalid Input. Must enter either a charachter ");
-			
-		  }
-		  else if(account.getActive() == 'Y') {
-		  account.setActive('N');
-		  saveAccountChanges(account);
-		  return true;
-		  
-	     }  
-	      else {
-		  this.viewUsersList();
-		  return false;
-	  }
-	  
-  }
+
+		if (!(account.getActive() == 'Y') || !(account.getActive() == 'N')) {
+			throw new IllegalArgumentException("ERROR: Invalid Input. Must enter either a charachter ");
+
+		} else if (account.getActive() == 'Y') {
+			account.setActive('N');
+			saveAccountChanges(account);
+			return true;
+
+		} else {
+			this.viewUsersList();
+			return false;
+		}
+
+	}
 }
