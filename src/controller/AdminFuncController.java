@@ -516,7 +516,7 @@ public class AdminFuncController {
 	 * @param user
 	 *            the account to edit
 	 */
-	public void editUser(Account user, String firstName, String lastName, String password, String status, String type) {
+	public void editUser(Account user, String firstName, String lastName, String password, char status, char type) {
 		// String prompt = "";
 		// do {
 		// System.out.print("=======================================" + '\n' +
@@ -592,12 +592,13 @@ public class AdminFuncController {
 		// ============================ Fail checks: check if all field inputs are
 		// correct ===========================
 
-		if (firstName.length() == 0 || firstName.contains(" ")) {
+		if (firstName.length() == 0 ) {
 			throw new IllegalArgumentException("Error: The firstname field is empty.");
 		}
+		
 		account.setFirstName(firstName);
 
-		if (lastName.length() == 0 || lastName.contains(" ")) {
+		if (lastName.length() == 0) {
 			throw new IllegalArgumentException("Error: The lastname field is empty.");
 		}
 		account.setLastName(lastName);
@@ -607,15 +608,15 @@ public class AdminFuncController {
 		}
 		account.setPassword(password);
 
-		if ((type.charAt(0) != 'a') || (type.charAt(0) != 'u')||( type.length() != 1 )) {
+		if ((type != 'a') || (type != 'u')) {
 			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
 		}
-		account.setType(type.charAt(0));
+		account.setType(type);
 		
-		if (status.charAt(0) != 'Y' || type.charAt(0) != 'N'|| status.length() != 1) {
+		if ((status != 'Y') || (type != 'N')) {
 			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
 		}
-		account.setActive(status.charAt(0));
+		account.setActive(status);
 		this.saveAccountChanges(account);
 	}
 

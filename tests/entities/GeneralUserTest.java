@@ -121,14 +121,6 @@ public class GeneralUserTest {
 	}
 	
 	/**
-	 * Fails to set empty  password
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetPasswordFails() {
-		user.setPassword("");
-	}
-
-	/**
 	 * Test method for {@link entities.Account#setFirstName(java.lang.String)}.
 	 */
 	@Test
@@ -138,14 +130,7 @@ public class GeneralUserTest {
 		String result = user.getFirstName();
 		assertEquals("Your first name is now: " + result, expected,result);
 	}
-	/**
-	 * Fails to set empty first name
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetFirstNameFails() {
-		user.setFirstName("");
-	}
-
+	
 	/**
 	 * Test method for {@link entities.Account#setLastName(java.lang.String)}.
 	 */
@@ -157,13 +142,7 @@ public class GeneralUserTest {
 		assertEquals("Your last name is now: " + result, expected,result);
 	}
 	
-	/**
-	 * Fails to set empty last name 
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetLastNameFails() {
-		user.setLastName("");
-	}
+	
 
 	/**USER CANNOT SET THEIR TYPE,ADMINS CAN MODIFY TYPE
 	 * Test method for {@link entities.Account#setType(char)}.
@@ -186,6 +165,33 @@ public class GeneralUserTest {
 		user.setActive(expected);
 		char result = user.getActive();
 		assertEquals("Your activity status is now: " + result, expected,result);
+	}
+
+	//***************************************Fail Test Cases *********************************************//
+	
+	/**
+	 * Fails to set empty first name
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testSetFirstNameFails() {
+		user.setFirstName("");
+	}
+
+	
+	/**
+	 * Fails to set empty last name 
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetLastNameFails() {
+		user.setLastName("");
+	}
+	
+	/**
+	 * Fails to set empty  password
+	 */
+	@Test (expected = IllegalArgumentException.class)
+	public void testSetPasswordFails() {
+		user.setPassword("");
 	}
 
 }
