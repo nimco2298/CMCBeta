@@ -45,7 +45,7 @@ public class DBControllerTest {
 	@Test
 	public void testGetUniversities()
 	{
-		
+		fail("Not yet implemented");
 	}
 	//=====================================================getUniversity()===================================================
 	/**
@@ -84,7 +84,7 @@ public class DBControllerTest {
 	@Test
 	public void testGetAccounts()
 	{
-		
+		fail("Not yet implemented");
 	}
 	//=====================================================getUser()======================================================
 	/**
@@ -111,6 +111,9 @@ public class DBControllerTest {
 		assertEquals("User type should be 'a'",testAdmin.getType(), a.getType());
 		assertEquals("Username does not match expected", a.getUsername(),testAdmin.getUsername());
 		assertEquals("Password does not match expected", a.getPassword(), testAdmin.getPassword());
+		assertEquals("First name does not match expected", a.getFirstName(), testAdmin.getFirstName());
+		assertEquals("Last name does not match expected", a.getLastName(), testAdmin.getLastName());
+		assertEquals("Activity does not match expected", a.getActive(), testAdmin.getActive());
 	}
 	
 	/**
@@ -124,10 +127,13 @@ public class DBControllerTest {
 		assertEquals("Username is 'DummyUser'", testUser.getUsername(), "DummyUser");
 	}
 	//=============================================addSchoolToUserList()==============================================
+	/**
+	 * Tests addSchoolToUserList()
+	 */
 	@Test
 	public void testAddSchoolToUserList()
 	{
-		
+		fail("Not yet implemented");
 	}
 	
 	/**
@@ -136,7 +142,16 @@ public class DBControllerTest {
 	@Test
 	public void testAddSchoolToUserListFailsForUniversityAlreadySavedToList()
 	{
-		
+		fail("Not yet implemented");
+	}
+	
+	/**
+	 * Tests that the addSchoolToUserList() method fails if the university is not in the database
+	 */
+	@Test
+	public void testAddSchoolToUserListFailsForUniversityNotInTheSystem()
+	{
+		fail("Not yet implemented");
 	}
 	//====================================================addNewUniversity()=====================================================
 	@Test
@@ -173,57 +188,64 @@ public class DBControllerTest {
 	}
 	
 	//======================================================updateAccount()====================================================
+	/**
+	 * Tests the updateAccount() method for a valid user
+	 */
 	@Test
 	public void testUpdateAccount()
 	{
 		fail("Not yet implemented");
 	}
 	
+	/**
+	 * Tests that updateAccount() fails if the requested user is not located in the system
+	 */
 	@Test
 	public void testUpdateAccountFailsForAccountNotInTheSystem()
 	{
-		fail("Not yet implemented");
+		GeneralUser testFail = new GeneralUser("ImMad", "Rahal", 'Y', "UserFail", "failure", new ArrayList<String>());
+		assertEquals("Account should not have been updated", 0, db.updateAccount(testFail));
 	}
 	
 	//==================================================updateUniversity()===============================================
 	@Test
 	public void testUpdateUniversity()
 	{
-		
+		fail("Not yet implemented");
 	}
 	//=========================================removeSchoolFromSavedSchoolList()==========================================
 	@Test
 	public void testRemoveSchoolFromSavedSchoolList()
 	{
-		
+		fail("Not yet implemented");
 	}
 	
 	@Test
 	public void testRemoveSchoolFromSavedSchoolListFailsForUniversityNotAlreadyRemoved()
 	{
-		
+		fail("Not yet implemented");
 	}
 	//=================================================deleteUniversity()=================================================
 	@Test
 	public void testDeleteUniversity()
 	{
-		
+		fail("Not yet implemented");
 	}
 	//=================================================deleteAccount()=====================================================
 	@Test
 	public void testDeleteAccount()
 	{
-		
+		fail("Not yet implemented");
 	}
 	//=================================================addEmphasis()======================================================
 	@Test
 	public void testAddEmphasis()
 	{
-		
+		fail("Not yet implemented");
 	}
 	//=================================================deleteEmphasis()=====================================================
 	public void testDeleteEmphasis()
 	{
-	
+		fail("Not yet implemented");
 	}
 }
