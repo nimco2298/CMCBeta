@@ -608,15 +608,15 @@ public class AdminFuncController {
 		}
 		account.setPassword(password);
 
-		if ((type != 'a') || (type != 'u')) {
-			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
-		}
-		account.setType(type);
-		
-		if ((status != 'Y') || (type != 'N')) {
-			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
-		}
-		account.setActive(status);
+//		if ((type != 'a') || (type != 'u')) {
+//			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
+//		}
+//		account.setType(type);
+//		
+//		if ((status != 'Y') || (type != 'N')) {
+//			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
+//		}
+//		account.setActive(status);
 		this.saveAccountChanges(account);
 	}
 

@@ -106,11 +106,12 @@ public class AccountController
       else if(actualtype == 'u')
       {
     	//S7
-        //UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
+        UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
         //System.out.println("Login successful");
         this.loginStatus = true;
-        //ui.homePage();
+        ui.homePage();
         //return true;
+
       }
     }
       //C8

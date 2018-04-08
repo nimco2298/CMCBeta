@@ -673,6 +673,7 @@ public class AdminFuncControllerTest {
 	/**
 	 * Test method for editing a first name using the editUser method 
 	 */
+
 	@Test 
 	public void testEditUser_FirstName() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
