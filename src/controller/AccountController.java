@@ -119,7 +119,7 @@ public class AccountController
         UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
         //System.out.println("Login successful");
         this.loginStatus = true;
-        ui.homePage();
+        //ui.homePage();
         return true;
       }
     }

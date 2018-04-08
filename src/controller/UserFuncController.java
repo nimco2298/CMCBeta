@@ -193,17 +193,17 @@ public class UserFuncController
 
   public void editProfile(GeneralUser account, String firstName, String lastName, String password)
   {
-		if (firstName.length() == 0 || firstName.contains(" ")) {
+		if (firstName == "") {
 			throw new IllegalArgumentException("Error: The firstname field is empty.");
 		}
 		account.setFirstName(firstName);
 
-		if (lastName.length() == 0 || lastName.contains(" ")) {
+		if (lastName == "") {
 			throw new IllegalArgumentException("Error: The lastname field is empty.");
 		}
 		account.setLastName(lastName);
 
-		if (password.length() == 0 || password.contains(" ")) {
+		if (password == "" || password.contains(" ")) {
 			throw new IllegalArgumentException("Error: The firstname field is empty.");
 		}
 		account.setPassword(password);
