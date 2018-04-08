@@ -70,7 +70,7 @@ public class SearchControllerTest {
 	            0,  99999,  0,  9,  0,
 	            9,  0,  9, 
 	            emphases);
-		assertTrue("Should be 3",uList.size()==2);
+		assertTrue("Should be 3",uList.size()==3);
 	}
 	@Test
 	public void testSearchByStringAndInt() {
