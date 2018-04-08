@@ -468,12 +468,12 @@ public class AdminFuncController {
 	/**
 	 * Prompts the user to remove a university and confirm deletion
 	 * 
-	 * @param u
-	 *            the university to remove
+	 * @param u     the university to remove
+	 *            
 	 */
-	public void removeUniversity(University u) {
-		delete(u);
-	}
+	//public void removeUniversity(University u) {
+		//delete(u);
+	//}
 
 	/**
 	 * Prompts the user to add a GeneralUser and its properties

@@ -820,7 +820,7 @@ public class AdminFuncControllerTest {
 		
 	}
 	
-	//*************************************************************************************************// 
+	//***************************Deactivate()**********************************************************************// 
 	/**
 	 * Test method for deactivate() in AdminFuncController.
 	 * Catches an Exception for an invalid user
