@@ -678,7 +678,7 @@ public class AdminFuncControllerTest {
 	public void testEditUser_FirstName() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.editUser(account,"Sasha","last","password", 'Y','a');
-		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getFirstName().equals("Sasha"));
+		Assert.assertTrue("User first name was correctly edited", dbc.getUser("test").getFirstName().equals("Sasha")); //changed Test into test 
 	}	
 	/**
 	 * Test method for editing a last name using the editUser method
@@ -686,8 +686,8 @@ public class AdminFuncControllerTest {
 	@Test 
 	public void testEditUser_LastName() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.editUser(account,"test","Fiercelinaa","password", 'Y','a');
-		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getLastName().equals("Fiercelinaa"));
+		ad.editUser(account,"first","Fiercelin","password", 'Y','a');
+		Assert.assertTrue("User last name was correctly edited", dbc.getUser("test").getLastName().equals("Fiercelin"));
 	}
 	
 	/**
@@ -697,7 +697,7 @@ public class AdminFuncControllerTest {
 	public void testEditUser_Password() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.editUser(account,"first","last","admin" , 'Y','a');
-		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getLastName().equals("admin"));
+		Assert.assertTrue("User password was correctly edited", dbc.getUser("test").getPassword().equals("admin"));
 	}
 	
 	
@@ -708,7 +708,7 @@ public class AdminFuncControllerTest {
 	public void testEditUser_Type() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.editUser(account,"first", "last","password", 'Y','u');
-		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getType() == 'u');
+		Assert.assertTrue("User type was correctly edited", dbc.getUser("test").getType() == 'u');
 	}
 	
 	/**
@@ -718,7 +718,7 @@ public class AdminFuncControllerTest {
 	public void testEditUser_Status() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.editUser(account,"first","last","password", 'N','a');
-		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getActive() == 'N');
+		Assert.assertTrue("User status was correctly edited", dbc.getUser("test").getActive() == 'N');
 	}
 	
 	/**
@@ -776,22 +776,13 @@ public class AdminFuncControllerTest {
 		
 	}
 	
-	/**
-	 * Test method for editUser in AdminFuncController.
-	 * Catches an Exception for an invalid type input
-	 */
-	@Test(expected = StringIndexOutOfBoundsException.class)
-	public void testEditUser_FailsEmptyType() {
-		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.editUser(account,"first","last","password", 'Y','a');
-		
-	}
+	
 	
 	/**
 	 * Test method for editUser in AdminFuncController.
 	 * Catches an Exception for an invalid type input
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test (expected = IllegalArgumentException.class)
 	public void testEditUser_FailsInvalidStatus1() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.editUser(account,"first","last","password", 'K','a');
@@ -809,16 +800,7 @@ public class AdminFuncControllerTest {
 		
 	}
 	
-	/**
-	 * Test method for editUser in AdminFuncController.
-	 * Catches an Exception for an invalid type input
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testEditUser_FailsEmptyStatus() {
-		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.editUser(account,"first","last","password", 'l','a');
-		
-	}
+
 	
 	//***************************Deactivate()**********************************************************************// 
 	/**
@@ -839,7 +821,7 @@ public class AdminFuncControllerTest {
 	public void testDeactivateUser_ValidUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.deactivate(account);
-		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("Test").getActive() == 'N');
+		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("test").getActive() == 'N'); //chnged Test to test
 	}
 	
 	/**

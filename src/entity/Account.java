@@ -115,7 +115,7 @@ public abstract class Account {
    */
   public void setPassword(String newPassword) {
     
-    if(newPassword.length() == 0 ||newPassword.matches(" ")){
+    if((newPassword.length() == 0) || (newPassword.contains(" "))){
 		  throw new IllegalArgumentException("Error! You must enter a non-empty String to set the password field!");
 	  }
     else
@@ -134,7 +134,7 @@ public abstract class Account {
   public void setFirstName(String firstName) 
   {
 
-	  if(firstName.length() == 0 ||firstName.matches(" ")){
+	  if(firstName.length() == 0 ){
 		  throw new IllegalArgumentException("Error! You can only enter a non empty String to set the first name field!");
 	  }
 	  
@@ -152,7 +152,7 @@ public abstract class Account {
    */
   public void setLastName(String lastName) 
   {
-	  if(lastName.length() == 0 ||lastName.matches(" ")){
+	  if(lastName.length() == 0 ){
 		  throw new IllegalArgumentException("Error! You can only enter a non empty String to set the last name field!");
 	  }
 	  
@@ -168,15 +168,16 @@ public abstract class Account {
    * @param char type    
    * @throws  IllegalArgumentException  when the parameter is not of type char
    */
-  public void setType(char type) 
+  public void setType(char newType) 
   {
-	  if(!(type == 'u') ||!(type == 'a') )
+	  if( (newType != 'u') || (newType != 'a') )
 	  {
-		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
+		  //System.out.println("new type:  " + newType);
+		  //throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
 	  }
 	  else 
 	  {
-		  this.type = type; 
+		  this.type = newType; 
 	  }
 	  
   }          
@@ -190,13 +191,17 @@ public abstract class Account {
    */
   public void setActive(char activity)
   {
-	  if(!(activity == 'Y') ||!(activity == 'N') )
-	  {
-		  throw new IllegalArgumentException("Error! You can only enter a single digit char of either 'Y' or 'N' to set the activity status!");
+	 
+	  if( (activity != 'Y') || (activity != 'N')  ) {
+		   
+		  System.out.println("Actvity to be set: " + activity);
+		//throw new IllegalArgumentException("Error! You can only enter a single digit char of either 'Y' or 'N' to set the activity ss!");  
 	  }
+	  
 	  else 
 	  {
-		  this.active = activity; 
+		 // System.out.println("we lit"); 
+		  this.active = activity;
 	  }
   }
   
