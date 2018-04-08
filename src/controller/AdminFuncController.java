@@ -613,7 +613,7 @@ public class AdminFuncController {
 			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
 		}
 		account.setType(type1);
-//		
+		
 		if ((status != 'Y') || (status != 'N')) {
 			throw new IllegalArgumentException("Error: The status field of an account  must be either 'Y' or 'N'.");
 		}
