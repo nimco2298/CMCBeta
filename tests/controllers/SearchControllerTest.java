@@ -21,6 +21,7 @@ public class SearchControllerTest {
 		sc=new SearchController();
 		emphases= new ArrayList<String>();
 		uList = new ArrayList<University>();
+		db = new DBController();
 	}
 
 	@Test

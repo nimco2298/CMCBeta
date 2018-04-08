@@ -129,7 +129,7 @@ public class SearchController{
     int[][] data = new int[12][n];
     int[] diff = new int[12];
     double[] distList = new double[n];
-    Map<Double, University> map=new HashMap<Double, University>();
+    Map<Double, University> map=new TreeMap<Double, University>();
     
     for(int i=0; i<n; i++){    
         data[0][i]=ulist.get(i).getStudents();
@@ -201,7 +201,7 @@ public class SearchController{
       if(!u.getControl().equals(cu.getControl()))
        dist++;
       for(String em: cu.getEmphases()) {
-    	  if(u.getEmphases().contains(em)) {
+    	  if(!(u.getEmphases().contains(em))) {
     		  dist++;
     		  break;
     	  }
