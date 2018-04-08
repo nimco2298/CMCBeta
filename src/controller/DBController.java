@@ -11,7 +11,7 @@ import entity.*;
 /**
  * Performs all the messy work needed for accessing and modifying the database
  * @author Ian Bush
- * @version April 4, 2018
+ * @version April 8, 2018
  */
 public class DBController
 {
@@ -212,18 +212,35 @@ public class DBController
   
   /**
    * deletes a university from the database
+   * 
    * @param univ the university to delete from the database
    */
-  public void deleteUniversity(University univ)
+  public int deleteUniversity(University univ)
   {
-    ud.university_deleteUniversity(univ.getName());
+	  String[][] saved = ud.user_getUsernamesWithSavedSchools();
+	  String[][] emph = ud.university_getNamesWithEmphases();
+	  for(int i = 0; i < emph.length; i++)
+	  {
+		  if(emph[i][0].equals(univ.getName()))
+		  {
+			  ud.university_removeUniversityEmphasis(univ.getName(), emph[i][1]);
+		  }
+	  }
+	  for(int i =0; i < saved.length; i++)
+	  {
+		  if(emph[i][1].equals(univ.getName()))
+		  {
+			  ud.user_removeSchool(emph[i][0], univ.getName());
+		  }
+	  }
+    return ud.university_deleteUniversity(univ.getName());
   }
   
   /**
    * deletes an account from the database
    * @param acc the account to deleted from the database
    */
-  public void deleteAccount(Account acc)
+  public int deleteAccount(Account acc)
   {
 	  if (acc.getType()=='u')
 	  {
@@ -233,7 +250,7 @@ public class DBController
 			  removeSchoolFromSavedSchoolList((GeneralUser) acc, getUniversity(s));
 		  }
 	  }
-    ud.user_deleteUser(acc.getUsername());
+    return ud.user_deleteUser(acc.getUsername());
   }
   
   /**
@@ -241,9 +258,9 @@ public class DBController
    * @param univ the university to add the emphasis
    * @param emphasis the emphasis to add
    */
-  public void addEmphasis(University univ, String emphasis) 
+  public int addEmphasis(University univ, String emphasis) 
   {
-	ud.university_addUniversityEmphasis(univ.getName(), emphasis);
+	return ud.university_addUniversityEmphasis(univ.getName(), emphasis);
   }
   
   /**
@@ -251,8 +268,8 @@ public class DBController
    * @param univ the university to delete the emphasis
    * @param emphasis the emphasis to delete
    */
-  public void deleteEmphasis(University univ, String emphasis) 
+  public int deleteEmphasis(University univ, String emphasis) 
   {
-    ud.university_removeUniversityEmphasis(univ.getName(), emphasis);
+    return ud.university_removeUniversityEmphasis(univ.getName(), emphasis);
   }
 }

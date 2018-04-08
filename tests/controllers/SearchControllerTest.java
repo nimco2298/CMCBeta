@@ -14,11 +14,14 @@ public class SearchControllerTest {
 	private SearchController sc;
 	private ArrayList<String> emphases;
 	private ArrayList<University> uList;
+	private DBController db;
+	
 	@Before
 	public void setUp() throws Exception {
 		sc=new SearchController();
 		emphases= new ArrayList<String>();
 		uList = new ArrayList<University>();
+		db = new DBController();
 	}
 
 	@Test
@@ -70,7 +73,7 @@ public class SearchControllerTest {
 	            0,  99999,  0,  9,  0,
 	            9,  0,  9, 
 	            emphases);
-		assertTrue("Should be 3",uList.size()==2);
+		assertTrue("Should be 3",uList.size()==3);
 	}
 	@Test
 	public void testSearchByStringAndInt() {
@@ -105,6 +108,7 @@ public class SearchControllerTest {
 	}
 	@Test
 	public void testRecSearch() {
+		uList=sc.recSearch(db.getUniversity("BARD"));
 		
 	}
 
