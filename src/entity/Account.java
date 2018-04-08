@@ -172,7 +172,7 @@ public abstract class Account {
   {
 	  if( (newType != 'u') || (newType != 'a') )
 	  {
-		  //System.out.println("new type:  " + newType);
+		  System.out.println("new type:  " + newType);
 		  //throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
 	  }
 	  else 

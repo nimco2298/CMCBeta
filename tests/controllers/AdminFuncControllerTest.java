@@ -678,7 +678,7 @@ public class AdminFuncControllerTest {
 	public void testEditUser_FirstName() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.editUser(account,"Sasha","last","password", 'Y','a');
-		Assert.assertTrue("User first name was correctly edited", dbc.getUser("test").getFirstName().equals("Sasha")); //changed Test into test 
+		Assert.assertTrue("User first name was correctly edited", dbc.getUser("Test").getFirstName().equals("Sasha")); //changed Test into test 
 	}	
 	/**
 	 * Test method for editing a last name using the editUser method
