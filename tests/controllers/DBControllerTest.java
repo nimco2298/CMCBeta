@@ -46,6 +46,11 @@ public class DBControllerTest {
 	 */
 	@Test
 	public void testGetUniversity() {
+		University testUniversity = db.getUniversity("YANKTOWN COLLEGE");
+		assertEquals("University name does not match expected", u.getName(), testUniversity.getName());
+		assertEquals("University state does not match expected", u.getState(), testUniversity.getState());
+		assertEquals("University location does not match expected", u.getLocation(), testUniversity.getLocation());
+		assertEquals("University control does not match expected", u.getControl(), testUniversity.getControl());
 		fail("Not yet implemented");
 	}
 	
