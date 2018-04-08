@@ -125,7 +125,7 @@ public class UserInterface
         System.out.print("Do you want to edit your profile? y/n: ");
         String s4 = scan.next();
         if(s4.equals("y")){
-        	ufc.editProfile();
+        	//ufc.editProfile();
             homePage();
         }
         else { 

@@ -219,7 +219,7 @@ public class University{
   /**
    * Returns the number of admitted students of the university
    * 
-   * @return admitted the addmitted students of the university
+   * @return admitted the admitted students of the university
    */
   public int getAdmitted(){
     return admitted;

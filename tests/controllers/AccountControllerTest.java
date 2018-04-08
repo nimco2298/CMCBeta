@@ -15,7 +15,7 @@ import org.junit.Test;
 public class AccountControllerTest {
 
 	private AccountController ac;
-	public boolean loginStatus;
+	//public boolean loginStatus;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -55,7 +55,7 @@ public class AccountControllerTest {
 		String expectedUser = "lolaa982";
 		String expectedPass = "user";
 		boolean loginvalue = ac.login(expectedUser,expectedPass);
-		assertEquals("Your login status is: " + loginvalue, loginStatus, loginvalue);
+		assertEquals("Your login status is: " + loginvalue, ac.loginStatus, loginvalue);
 			
 	}
 	
@@ -67,12 +67,8 @@ public class AccountControllerTest {
 		String expectedUser1 = "nadmin";
 		String expectedPass1 = "oooooo14";
 		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
-		assertEquals("Your login status is: " + loginvalue1, loginStatus, loginvalue1);
+		assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
 		
-		String expectedUser2 = "kuser";
-		String expectedPass2 = "min1234";
-		boolean loginvalue2 = ac.login(expectedUser2,expectedPass2);
-		assertEquals("Your login status is: " + loginvalue2, loginStatus, loginvalue2);
 		
 	}	
 	
@@ -84,12 +80,8 @@ public class AccountControllerTest {
 		String expectedUser1 = "nadmin";
 		String expectedPass1 = "admin";
 		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
-		assertEquals("Your login status is: " + loginvalue1, loginStatus, loginvalue1);
+		assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
 		
-		String expectedUser2 = "kuser";
-		String expectedPass2 = "admin";
-		boolean loginvalue2 = ac.login(expectedUser2,expectedPass2);
-		assertEquals("Your login status is: " + loginvalue2, loginStatus, loginvalue2);
 		
 	}
 	
@@ -100,14 +92,8 @@ public class AccountControllerTest {
 		String expectedUser1 = "luser";
 		String expectedPass1 = "user";
 		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
-		assertEquals("Your login status is: " + loginvalue1, loginStatus, loginvalue1);
-		
-		ac.logout();
-		
-		String expectedUser2 = "juser";
-		String expectedPass2 = "user";
-		boolean loginvalue2 = ac.login(expectedUser2,expectedPass2);
-		assertEquals("Your login status is: " + loginvalue2, loginStatus, loginvalue2);
+		assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
+	
 		
 	}
 	
@@ -118,13 +104,8 @@ public class AccountControllerTest {
 	    String expectedUser1 = "invalidme";
 		String expectedPass1 = "unvalid123";
 		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
-		assertEquals("Your login status is: " + loginvalue1, loginStatus, loginvalue1);
-			
-		String expectedUser2 = "ok6";
-		String expectedPass2 = "admin11";
-		boolean loginvalue2 = ac.login(expectedUser2,expectedPass2);
-		assertEquals("Your login status is: " + loginvalue2, loginStatus, loginvalue2);
-			
+		assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
+	
 		}
 
 	/**
@@ -134,11 +115,23 @@ public class AccountControllerTest {
 	public void testLogout() {
 		String expectedUser1 = "juser";
 		String expectedPass1 = "user";
-		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
-		
+		boolean loginvalue = ac.login(expectedUser1,expectedPass1);
 		ac.logout();
-		assertEquals("Your login status is: " + loginvalue1, loginStatus, loginvalue1);	
-		fail("Not yet implemented"); // TODO
+		assertEquals("Your login status was : " + loginvalue + ". Now, it is ", ac.loginStatus, false);	
+		
+	}
+	
+	/**
+	 * Test method for {@link controllers.AccountController#logout()}.
+	 */
+	@Test
+	public void testLogout_Fails() {
+		String expectedUser1 = "juser";
+		String expectedPass1 = "admin";
+		boolean loginvalue = ac.login(expectedUser1,expectedPass1);
+		ac.logout();
+		assertEquals("Your login status was : " + loginvalue + ". Now, it is ", ac.loginStatus, loginvalue);	
+		
 	}
 
 }

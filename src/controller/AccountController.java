@@ -3,7 +3,7 @@
  */
 package controller;
 import entity.*;
-import interfaces.*;
+//import interfaces.*;
 
  
 /**
@@ -54,44 +54,34 @@ public class AccountController
         //S2
     	//System.out.println("Error: Your account is deactivated and you cannot be logged in");
     	this.loginStatus = false;
-    	return false;
+    	//return false;
     }
-//    //C2
-//    else if(matchedUser.getUsername().equals("") && matchedUser.getPassword().equals(""))
-//    {
-//    	//S2
-//    	System.out.println("Error: A username and password was not entered.");
-//        this.loginStatus = false;
-//        return false;
-//    	
-//    }
-     
     
     //C3
    else if(matchedUser.getUsername().equals("DummyUser"))
    { 
      //S3
-      System.out.println("Error: The username is not registered.");
+     // System.out.println("Error: The username is not registered.");
       this.loginStatus = false;
-      return false;
+      //return false;
     }
     
     //C3
     else if(!matchedUser.getPassword().equals(password) && matchedUser.getUsername().equals(username))
     {
       //S3
-      System.out.println("Error: The password entered does not match an account.");
+      //System.out.println("Error: The password entered does not match an account.");
       this.loginStatus = false;
-      return false;
+      //return false;
     }
     
     //C4
     else if(!matchedUser.getUsername().equals(username) && matchedUser.getPassword().equals(password))
     {
       //S4
-      System.out.println("Error: The username entered does not match an account");
+      //System.out.println("Error: The username entered does not match an account");
       this.loginStatus = false;
-      return false;
+      //return false;
     }
     
     //C5
@@ -99,47 +89,55 @@ public class AccountController
     	
       //S5
       this.account = matchedUser;  
-      this.loginStatus = true;
-      char type = account.getType(); // get the type associated with this account 
+      
+      char actualtype = account.getType(); // get the type associated with this account 
       
       //C6
-      if(type == 'a') 
+      if(actualtype == 'a') 
       {
     	//S6
-        AdminInterface ai = new AdminInterface();
-        System.out.println("Login successful");
+        //AdminInterface ai = new AdminInterface();
+        //System.out.println("Login successful");
         //ai.homepage(); 
         this.loginStatus = true;
-        return true;
+        //return true;
       }
       //C7
-      else if(type == 'u')
+      else if(actualtype == 'u')
       {
     	//S7
-        UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
-        System.out.println("Login successful");
+        //UserInterface ui = new UserInterface((GeneralUser)matchedUser);  
+        //System.out.println("Login successful");
         this.loginStatus = true;
-        ui.homePage();
-        return true;
+        //ui.homePage();
+        //return true;
       }
     }
       //C8
-      else if(!matchedUser.getUsername().equals(username) && !matchedUser.getPassword().equals(password))
+      else if(!(matchedUser.getUsername().equals(username)) && !(matchedUser.getPassword().equals(password)))
       {
     	//S8
-        System.out.println("Error: The username and pasword entered doesnt match a registered account. Please try again.");
+        //System.out.println("Error: The username and pasword entered doesnt match a registered account. Please try again.");
         this.loginStatus = false;
-       
+       //return false;
       }
-    return false;
-    
+ 
+   return loginStatus;
   }
   
   /** The logout method will set their account login status to false.
-    */ 
-  public void logout() 
-  {
-    this.loginStatus = false;   
+   * 
+   * @return  boolean  true if the user was logged out, false if not 
+   */ 
+  public boolean logout() 
+  {    
+	  if(this.loginStatus == true) {
+		  
+		  this.loginStatus = false;
+		  return true;
+	  }
+	 return false; 
+		   
   } 
   
 }
