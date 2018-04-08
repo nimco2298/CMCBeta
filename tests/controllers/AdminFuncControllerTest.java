@@ -815,7 +815,7 @@ public class AdminFuncControllerTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUser_FailsEmptyStatus() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.editUser(account,"first","last","password", char.MIN_VALUE,'a');
+		ad.editUser(account,"first","last","password", 'l','a');
 		
 	}
 	
