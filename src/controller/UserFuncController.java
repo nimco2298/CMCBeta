@@ -191,46 +191,24 @@ public class UserFuncController
    * Takes the edit file command and redirect the user to the edit page
    */
 
-  public void editProfile()
+  public void editProfile(GeneralUser account, String firstName, String lastName, String password)
   {
-	  Scanner scan = new Scanner(System.in);
-  
-	  System.out.println("What would you like to edit:" + '\n' +
-              "1: FirstName" + '\n' +
-               "2: LastName" + '\n' +
-               "3: Password" + '\n' +                            
-               "4: Quit " + '\n'
-               + "Enter here: ");
-	      
-	String prompt = scan.next();
-	switch (prompt){
-	case "1":
-	System.out.print("Enter the new first name: ");
-	String change=scan.next();
-	submitProfileChanges(change,gu.getLastName(),gu.getPassword());
-	gu.setFirstName(change);
-	break;
-	case "2":
-	System.out.print("Enter the new last name: ");
-	change=scan.next();
-	submitProfileChanges(gu.getFirstName(),change,gu.getPassword());
-	gu.setLastName(change);
-	break;
-	case "3":
-	System.out.print("Enter the new password: ");
-	change=scan.next();
-	submitProfileChanges(gu.getFirstName(),gu.getLastName(),change);
-	gu.setPassword(change);
-	break;
-	
-	case "4":
-	break;
-	default:
-	System.out.println("Invalid input");
-	editProfile();
-	break;
-	
+		if (firstName.length() == 0 || firstName.contains(" ")) {
+			throw new IllegalArgumentException("Error: The firstname field is empty.");
+		}
+		account.setFirstName(firstName);
+
+		if (lastName.length() == 0 || lastName.contains(" ")) {
+			throw new IllegalArgumentException("Error: The lastname field is empty.");
+		}
+		account.setLastName(lastName);
+
+		if (password.length() == 0 || password.contains(" ")) {
+			throw new IllegalArgumentException("Error: The firstname field is empty.");
+		}
+		account.setPassword(password);
+
+
+		db.updateAccount(account);
 	}
-	scan.close();
-  }
 }

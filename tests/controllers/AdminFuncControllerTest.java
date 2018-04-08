@@ -13,6 +13,7 @@ public class AdminFuncControllerTest {
 	private University u;
 	private Account account;
 	
+	
 	/**
 	 * Inserts a test university and account into the database
 	 */
@@ -631,25 +632,240 @@ public class AdminFuncControllerTest {
 		emphases.add("6");
 		ad.editUniversity("Test", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 */
 	@Test
-	public void testaddAccoountForUser() {
-		ad.addAccount("Test", "Test", "Test", "Test", "u");
-		Assert.assertTrue("User account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
-		dbc.deleteAccount(dbc.getUser("Test"));
+	public void testaddAccountForUser() {
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "u");
+		Assert.assertTrue("User account was correctly added", dbc.getUser("Test1").getFirstName().equals("Test1"));
+		dbc.deleteAccount(dbc.getUser("Test1"));
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 */
 	@Test
-	public void testaddAccoountForAdmin() {
-		ad.addAccount("Test", "Test", "Test", "Test", "a");
-		Assert.assertTrue("Admin account was correctly added", dbc.getUser("Test").getFirstName().equals("Test"));
-		dbc.deleteAccount(dbc.getUser("Test"));
+	public void testaddAccountForAdmin() {
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "a");
+		Assert.assertTrue("Admin account was correctly added", dbc.getUser("Test1").getFirstName().equals("Test1"));
+		dbc.deleteAccount(dbc.getUser("Test1"));
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 * Catches an Exception for repeated username
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testaddAccoountFailsForRepeatedUsername() {
+	public void testaddAccountFailsForRepeatedUsername() {
 		ad.addAccount("juser", "Test", "Test", "Test", "u");
 	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 * Catches an Exception for invlaid type
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testaddAccoountFailsForInvalidType() {
-		ad.addAccount("Test", "Test", "Test", "Test", "q");
+	public void testaddAccountFailsForInvalidType() {
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "h");
 	}
-			
+
+	
+	
+	// *********************TEST CASES FOR EDITUSER********************************************************* //
+	/**
+	 * Test method for editing a first name using the editUser method 
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FirstName() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"Sasha","last","password", "Y","a");
+		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getFirstName().equals("Sasha"));
+	}
+	
+	/**
+	 * Test method for editing a last name using the editUser method
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_LastName() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"test","Fiercelinaa","password", "Y","a");
+		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getLastName().equals("Fiercelinaa"));
+	}
+	
+	/**
+	 * Test method for editing a password using the editUser method
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_Password() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","admin" , "Y","a");
+		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getLastName().equals("admin"));
+	}
+	
+	
+	/**
+	 * Test method for editing the users type using the editUser method
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_Type() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first", "last","admin", "Y","a");
+		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getType() == 'u');
+	}
+	
+	/**
+	 * Test method for editing the users status using the editUser method
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_Status() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","admin", "N","u");
+		Assert.assertTrue("User account was correctly edited", dbc.getUser("Test").getActive() == 'N');
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid user
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsInvalidUser() {
+		Account account1 = new Admin("user459", "password", 'Y', "Cardi", "B");
+		ad.editUser(account1,"Simone","Salahi","pass123","Y","u");
+		
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an empty first name input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsEmptyFirstName() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"","last","password","Y","a");
+		
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an empty last name input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsEmptyLastName() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","","password", "Y","a");
+		
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an empty last name input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsEmptyPassword() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","", "Y","a");
+		
+	}
+		
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid type input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsInvalidType() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","password", "I", "a");
+		
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid type input
+	 */
+	@Test(expected = StringIndexOutOfBoundsException.class)
+	public void testEditUser_FailsEmptyType() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","password", "Y","");
+		
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid type input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsInvalidStatus1() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","password", "notactive","a");
+		
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid type input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsInvalidStatus2() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","password", "L","a");
+		
+	}
+	
+	/**
+	 * Test method for editUser in AdminFuncController.
+	 * Catches an Exception for an invalid type input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testEditUser_FailsEmptyStatus() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first","last","password", "","a");
+		
+	}
+	
+	//***************************Deactivate()**********************************************************************// 
+	/**
+	 * Test method for deactivate() in AdminFuncController.
+	 * Catches an Exception for an invalid user
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeactivateUser_FailsInvalidUser() {
+		Account account1 = new Admin("user459", "password", 'Y', "Cardi", "B");
+		ad.deactivate(account1);
+		
+	}
+	
+	/**
+	 * Test method for editing a first name using the editUser method 
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeactivateUser_ValidUser() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.deactivate(account);
+		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("Test").getActive() == 'N');
+	}
+	
+	/**
+	 * Test method for addUniversity in AdminFuncController.
+	 */
+	@Test
+	public void testAddUniversity() {
+		ad.addUniversity("Test2", "Test2", "Test2", "Test2", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
+		Assert.assertTrue("University added correctly", dbc.getUniversity("Test").getName().equals("Test"));
+		dbc.deleteUniversity(dbc.getUniversity("Test2"));
+	}
+	/**
+	 * Test method for addUniversity in AdminFuncController.
+	 * Catches an Exception for a blank university name
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUniversityFailsForBlankName() {
+		ad.addUniversity("", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());		
+	}
+	/**
+	 * Test method for addUniversity in AdminFuncController.
+	 * Catches an Exception for a duplicate university name
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddUniversityFailsForDuplicateName() {
+		ad.addUniversity("YALE", "Test", "Test", "Test", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());		
+	}
+	
 }
