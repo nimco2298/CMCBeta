@@ -143,9 +143,10 @@ public class DBController
    * @param usr the User whose list will now include the selected university
    * @param univ the University which will be added to the User's school list
    */
-  public void addSchoolToUserList(GeneralUser usr, University univ)
+  public int addSchoolToUserList(GeneralUser usr, University univ)
   {
-    ud.user_saveSchool(usr.getUsername(), univ.getName());
+    int i = ud.user_saveSchool(usr.getUsername(), univ.getName());
+    return i;
   }
   
   /** 
@@ -179,22 +180,24 @@ public class DBController
    * Modifies an account
    * @param acc the account to modify
    */
-  public void updateAccount(Account acc)
+  public int updateAccount(Account acc)
   {
-    this.ud.user_editUser(acc.getUsername(), acc.getFirstName(), acc.getLastName(), acc.getPassword(), acc.getType(), acc.getActive());
+    int i = this.ud.user_editUser(acc.getUsername(), acc.getFirstName(), acc.getLastName(), acc.getPassword(), acc.getType(), acc.getActive());
+    return i;
   }
   
   /**
    * Modifies a university
    * @param univ the University to modify
    */
-  public void updateUniversity(University univ)
+  public int updateUniversity(University univ)
   {
-    ud.university_editUniversity(univ.getName(), univ.getState(), univ.getLocation(), univ.getControl(), 
+    int i = ud.university_editUniversity(univ.getName(), univ.getState(), univ.getLocation(), univ.getControl(), 
                                  univ.getStudents(), new Integer(univ.getFemPerc()).doubleValue(), new Integer(univ.getSatV()).doubleValue(), 
                                  new Integer(univ.getSatM()).doubleValue(), new Integer(univ.getCost()).doubleValue(), new Integer(univ.getFinAidPerc()).doubleValue(),
                                  univ.getApplicants(), new Integer(univ.getAdmitted()).doubleValue(), new Integer(univ.getEnrolled()).doubleValue(), 
                                  univ.getAcadScale(), univ.getSocScale(), univ.getQualScale());
+    return i;
   }
   
   /**

@@ -181,7 +181,7 @@ public class SearchController{
       diff[i]=max-min;
     }
     //int index=ulist.indexOf(cu);
-    int index=-1;
+    int index=0;
     for(University u: ulist)
     {
     	if(u.getName().equals(cu.getName()))
