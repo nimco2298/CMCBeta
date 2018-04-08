@@ -16,9 +16,9 @@ import interfaces.AccountInterface;
 @SuppressWarnings("unused")
 public class CMCDriver
 {
-	public static void main(String [] args)
+	public static void main(String[] args)
 	{
-		System.out.println("Welcome to CMC System!");
+		System.out.println("Welcome to CMC SystemMMMM!");
 		AccountInterface ai = new AccountInterface();
 		ai.start();
 	}

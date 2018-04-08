@@ -44,6 +44,8 @@ public class UserInterface
    * Redirects the user to their homepage
    */
   public void homePage(){
+	  
+	  
     System.out.println( "=======================================" 			+'\n'+
     		            "Welcome " + user.getFirstName() +  " " + user.getLastName() + "! " +'\n'+
     					"Would would you like to do?" 	+'\n'+'\t'+
