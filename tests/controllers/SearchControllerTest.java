@@ -14,6 +14,8 @@ public class SearchControllerTest {
 	private SearchController sc;
 	private ArrayList<String> emphases;
 	private ArrayList<University> uList;
+	private DBController db;
+	
 	@Before
 	public void setUp() throws Exception {
 		sc=new SearchController();
@@ -105,6 +107,7 @@ public class SearchControllerTest {
 	}
 	@Test
 	public void testRecSearch() {
+		uList=sc.recSearch(db.getUniversity("BARD"));
 		
 	}
 
