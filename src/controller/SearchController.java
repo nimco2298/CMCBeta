@@ -193,14 +193,20 @@ public class SearchController{
     {
       
       dist=0;
-      if(!u.getName().equals(cu.getName()))
-       dist++;
+      
       if(!u.getState().equals(cu.getState()))
        dist++;
       if(!u.getLocation().equals(cu.getLocation()))
        dist++;
       if(!u.getControl().equals(cu.getControl()))
        dist++;
+      for(String em: cu.getEmphases()) {
+    	  if(u.getEmphases().contains(em)) {
+    		  dist++;
+    		  break;
+    	  }
+      }
+      
       for(int i=0; i<12; i++)
       {
        dist+=Math.abs((double)(data[i][index]-data[i][j])/(double)diff[i]);
