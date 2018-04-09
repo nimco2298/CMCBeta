@@ -96,7 +96,7 @@ public abstract class Account {
    */
   public void setUsername (String newUsername)
   {
-	if(newUsername.length() == 0 ||newUsername.matches(" ")){
+	if((newUsername.length() == 0) ||newUsername.matches(" ")){
 		  throw new IllegalArgumentException("Error! You must enter a non-empty String to set the username field!");
 	}
     else
@@ -134,7 +134,7 @@ public abstract class Account {
   public void setFirstName(String firstName) 
   {
 
-	  if(firstName.isEmpty() ){
+	  if(firstName.isEmpty()){
 		  throw new IllegalArgumentException("Error! You can only enter a non empty String to set the first name field!");
 	  }
 	  

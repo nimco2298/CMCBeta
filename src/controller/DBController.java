@@ -110,7 +110,7 @@ public class DBController
       }
       else
       {
-        System.out.println("Error: Invalid user type within the system");
+        //System.out.println("Error: Invalid user type within the system");
       }
     }
     return accList;
@@ -217,22 +217,6 @@ public class DBController
    */
   public int deleteUniversity(University univ)
   {
-	  String[][] saved = ud.user_getUsernamesWithSavedSchools();
-	  String[][] emph = ud.university_getNamesWithEmphases();
-	  for(int i = 0; i < emph.length; i++)
-	  {
-		  if(emph[i][0].equals(univ.getName()))
-		  {
-			  ud.university_removeUniversityEmphasis(univ.getName(), emph[i][1]);
-		  }
-	  }
-	  for(int i =0; i < saved.length; i++)
-	  {
-		  if(emph[i][1].equals(univ.getName()))
-		  {
-			  ud.user_removeSchool(emph[i][0], univ.getName());
-		  }
-	  }
     return ud.university_deleteUniversity(univ.getName());
   }
   
@@ -242,14 +226,6 @@ public class DBController
    */
   public int deleteAccount(Account acc)
   {
-	  if (acc.getType()=='u')
-	  {
-		  ArrayList<String> saved = ((GeneralUser) acc).getSavedSchools();
-		  for(String s: saved)
-		  {
-			  removeSchoolFromSavedSchoolList((GeneralUser) acc, getUniversity(s));
-		  }
-	  }
     return ud.user_deleteUser(acc.getUsername());
   }
   
