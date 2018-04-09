@@ -16,12 +16,13 @@ import entity.*;
  * @author Will Haanen
  *
  */
+@SuppressWarnings("unused")
 public class UserFuncControllerTest {
 	
 	/** instance variable    */
 	private UserFuncController ufc;
 	private DBController dbc = new DBController();
-	private University u;
+	//private University u;
 	private GeneralUser account;
 	
 
