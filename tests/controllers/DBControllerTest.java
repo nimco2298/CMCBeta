@@ -1,6 +1,8 @@
 package controllers;
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import controller.DBController;
@@ -41,7 +43,7 @@ public class DBControllerTest {
 		u = new University("YANKTOWN COLLEGE", "SOUTH DAKOTA", "SUBURBAN", "PRIVATE", 10000, 30, 450, 400, 15736, 95, 4000, 95, 90, 1, 2, 2, emphases);
 	}
 	
-	//===================================================getUniversities()==================================================
+	//===================================================getUniversities()===================================
 	@Test
 	public void testGetUniversities()
 	{
@@ -78,7 +80,8 @@ public class DBControllerTest {
 	 */
 	@Test
 	public void testGetUniversityForUniversityNotInDatabase() {
-		fail("Not yet implemented");
+		University un = db.getUniversity("PizzaGuy");
+		assertEquals("Answer should be null", un, null);
 	}
 	//==================================================getAccounts()====================================================
 	@Test
@@ -123,7 +126,7 @@ public class DBControllerTest {
 	@Test
 	public void testGetUserFailsForIncorrectUserName()
 	{
-		GeneralUser testUser = (GeneralUser)db.getUser("Greasy Steve");
+	    Admin testUser = (Admin)db.getUser("GreasySteve");
 		assertEquals("Username is 'DummyUser'", testUser.getUsername(), "DummyUser");
 	}
 	//=============================================addSchoolToUserList()==============================================
@@ -133,7 +136,7 @@ public class DBControllerTest {
 	@Test
 	public void testAddSchoolToUserList()
 	{
-		fail("Not yet implemented");
+		
 	}
 	
 	/**
@@ -194,6 +197,7 @@ public class DBControllerTest {
 	@Test
 	public void testUpdateAccount()
 	{
+		
 		fail("Not yet implemented");
 	}
 	
@@ -235,7 +239,8 @@ public class DBControllerTest {
 	@Test
 	public void testDeleteAccount()
 	{
-		fail("Not yet implemented");
+		int i = db.deleteAccount(gu);
+		assertFalse("Value should not equal -1", i == -1);
 	}
 	//=================================================addEmphasis()======================================================
 	@Test
@@ -244,8 +249,20 @@ public class DBControllerTest {
 		fail("Not yet implemented");
 	}
 	//=================================================deleteEmphasis()=====================================================
+	@Test
 	public void testDeleteEmphasis()
 	{
 		fail("Not yet implemented");
+	}
+	
+	@After
+	public void run()
+	{
+		ArrayList<String> saved = new ArrayList<String>();
+		saved.add("YALE");
+		saved.add("YALE2");
+		saved.add("YANKTOWN COLLEGE");
+		gu = new GeneralUser("James", "Smith", 'Y', "juser", "user", saved);
+		db.addAccount(gu);
 	}
 }
