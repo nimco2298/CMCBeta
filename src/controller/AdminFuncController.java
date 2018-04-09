@@ -585,10 +585,10 @@ public class AdminFuncController {
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		// ========================= Fail check: the user does not exist in the database
 		//////////////////////////////////////////////////////////////////////////////////////////////// =======================
-		if (!(this.getAccount(user.toString()) instanceof Account)) {
+		if (!(this.getAccount(user.getFirstName()) instanceof Account)) {
 			throw new IllegalArgumentException();
 		}
-		Account account = this.getAccount(user.toString());
+		Account account = this.getAccount(user.getFirstName());
 		
 		
 		

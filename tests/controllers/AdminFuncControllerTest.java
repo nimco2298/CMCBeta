@@ -101,16 +101,16 @@ public class AdminFuncControllerTest {
 		ad.saveAccountChanges(account);
 		Assert.assertTrue(ad.getAccount("test").getLastName().equals("Laufers"));
 	}
-//	/**
-//	 * Tests saveAccountChanges method in AdminFuncController and
-//	 * checks if it works for the password.
-//	 */
-//	@Test
-//	public void testSaveAccountChanges_Password() {
-//		account.setPassword("drowssap");
-//		ad.saveAccountChanges(account);
-//		Assert.assertTrue(ad.getAccount("test").getPassword().equals("drowssap"));
-//	}
+	/**
+	 * Tests saveAccountChanges method in AdminFuncController and
+	 * checks if it works for the password.
+	 */
+	@Test
+	public void testSaveAccountChanges_Password() {
+		account.setPassword("drowssap");
+		ad.saveAccountChanges(account);
+		Assert.assertTrue(ad.getAccount("test").getPassword().equals("drowssap"));
+	}
 	/**
 	 * Tests saveAccountChanges method in AdminFuncController and
 	 * checks if it works for the type.
