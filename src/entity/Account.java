@@ -96,7 +96,14 @@ public abstract class Account {
    */
   public void setUsername (String newUsername)
   {
-	this.username = newUsername;  
+	if((newUsername.length() == 0) ||newUsername.matches(" ")){
+		  throw new IllegalArgumentException("Error! You must enter a non-empty String to set the username field!");
+	}
+    else
+    {
+    	this.username = newUsername; 
+    }
+	
 	   
   }
   
@@ -107,15 +114,14 @@ public abstract class Account {
    * @throws  IllegalArgumentException  when the parameter is not of type String  
    */
   public void setPassword(String newPassword) {
-	  
-    if(newPassword.length() > 0 || !(password.contains(" "))) 
-    {
- 	    this.password = newPassword;
-    }
+    
+    if((newPassword.length() == 0) || (newPassword.contains(" "))){
+		  throw new IllegalArgumentException("Error! You must enter a non-empty String to set the password field!");
+	  }
     else
-     {
-      throw new IllegalArgumentException("Error! You must enter a non-empty String to set the last name field!");
-      }
+    {
+    	this.password = newPassword;
+    }
    
   }
   
@@ -123,16 +129,19 @@ public abstract class Account {
    * Sets the firstName of an Account
    * 
    * @param String firstName    
+   * @throws  IllegalArgumentExcetion when parameter is empty or blank
    */
   public void setFirstName(String firstName) 
   {
-	  if(firstName.length() > 0 || !(firstName.contains(" "))) {
-	    	 this.firstName = firstName; 
-	     }
-	     else
-	     {
-	         throw new IllegalArgumentException("Error! You can only enter a non empty String to set the first name field!");
-	     }
+
+	  if(firstName.isEmpty()){
+		  throw new IllegalArgumentException("Error! You can only enter a non empty String to set the first name field!");
+	  }
+	  
+	  else
+	  {
+		  this.firstName = firstName; 
+	  }
   }
     
   /**
@@ -143,14 +152,14 @@ public abstract class Account {
    */
   public void setLastName(String lastName) 
   {
-     if(lastName.length() > 0 || !(lastName.contains(" "))) {
-    	 this.lastName = lastName; 
-  
-     }
-     else
-     {
-         throw new IllegalArgumentException("Error! You can only enter a non empty String to set the last name field!");
-     }
+	  if(lastName.length() == 0 ){
+		  throw new IllegalArgumentException("Error! You can only enter a non empty String to set the last name field!");
+	  }
+	  
+	  else
+	  {
+		  this.lastName = lastName; 
+	  }
   }
     
   /**
@@ -159,16 +168,32 @@ public abstract class Account {
    * @param char type    
    * @throws  IllegalArgumentException  when the parameter is not of type char
    */
-  public void setType(char type) 
+  public void setType(char newType) 
   {
-	  if(type == 'u' || type == 'a')
-	  {
-		  this.type = type;
+//	  if( (newType != 'u') || (newType != 'a') )
+//	  {
+//		  System.out.println("new type:  " + newType);
+//		  //throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
+//	  }
+//	  else 
+//	  {
+//		  this.type = newType; 
+//	  }
+	  
+	  
+	  if( (newType == 'a') || (newType == 'u')  ) {
+		  this.type = newType; 
+		  //System.out.println("Actvity to be set: " + activity);
+		//  
 	  }
+	  
 	  else 
 	  {
-		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char  of 'u' or 'a' to set the type!");
+		 // System.out.println("we lit"); 
+		  //this.active = activity;
 	  }
+	  
   }          
   
     
@@ -180,13 +205,18 @@ public abstract class Account {
    */
   public void setActive(char activity)
   {
-	  if(activity == 'Y' || activity == 'N') // this was type before i changed it to activity
-	  {
-		  this.active = activity;
+	 
+	  if( (activity == 'Y') || (activity == 'N')  ) {
+		  this.active = activity; 
+		  //System.out.println("Actvity to be set: " + activity);
+		//  
 	  }
-	  else
+	  
+	  else 
 	  {
-		  throw new IllegalArgumentException("Error! You can only enter a single digit char to set the activity status!");
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char of either 'Y' or 'N' to set the activity status!");
+		 // System.out.println("we lit"); 
+		  //this.active = activity;
 	  }
   }
   

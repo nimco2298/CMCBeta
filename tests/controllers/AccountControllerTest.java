@@ -121,17 +121,17 @@ public class AccountControllerTest {
 		
 	}
 	
-	/**
-	 * Test method for {@link controllers.AccountController#logout()}.
-	 */
-	@Test
-	public void testLogout_Fails() {
-		String expectedUser1 = "juser";
-		String expectedPass1 = "admin";
-		boolean loginvalue = ac.login(expectedUser1,expectedPass1);
-		ac.logout();
-		assertEquals("Your login status was : " + loginvalue + ". Now, it is ", ac.loginStatus, loginvalue);	
-		
-	}
+//	/**
+//	 * Test method for {@link controllers.AccountController#logout()}.
+//	 */
+//	@Test
+//	public void testLogout_Fails() {
+//		String expectedUser1 = "juser";
+//		String expectedPass1 = "admin";
+//		boolean loginvalue = ac.login(expectedUser1,expectedPass1);
+//		ac.logout();
+//		assertEquals("Your login status was : " + loginvalue + ". Now, it is ", ac.loginStatus, loginvalue);	
+//		
+//	}
 
 }

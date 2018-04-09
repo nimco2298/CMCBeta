@@ -324,7 +324,7 @@ public class AdminFuncController {
 		// ========================= Fail check: the university does not exist in the
 		// database =======================
 		if (!(this.getUniversity(univName) instanceof University)) {
-			System.out.println("*** University " + univName + " does not exist in the database ***");
+			//System.out.println("*** University " + univName + " does not exist in the database ***");
 			throw new IllegalArgumentException();
 		}
 		University u = this.getUniversity(univName);
@@ -516,7 +516,7 @@ public class AdminFuncController {
 	 * @param user
 	 *            the account to edit
 	 */
-	public void editUser(Account user, String firstName, String lastName, String password, String status, String type) {
+	public void editUser(Account user, String firstName, String lastName, String password, char status, char type) {
 		// String prompt = "";
 		// do {
 		// System.out.print("=======================================" + '\n' +
@@ -585,37 +585,41 @@ public class AdminFuncController {
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		// ========================= Fail check: the user does not exist in the database
 		//////////////////////////////////////////////////////////////////////////////////////////////// =======================
-		if (!(this.getAccount(user.toString()) instanceof Account)) {
+		if ((this.getAccount(user.getUsername()).equals("DummyUser"))) {
+			System.out.println("account doesnt exsist");
 			throw new IllegalArgumentException();
+			
 		}
-		Account account = this.getAccount(user.toString());
+		Account account = this.getAccount(user.getUsername());
+				
 		// ============================ Fail checks: check if all field inputs are
 		// correct ===========================
 
-		if (firstName.length() == 0 || firstName.contains(" ")) {
-			throw new IllegalArgumentException("Error: The firstname field is empty.");
-		}
+//		if (firstName.length() == 0 ) {
+//			throw new IllegalArgumentException("Error: The firstname field is empty.");
+//		}
+		
 		account.setFirstName(firstName);
 
-		if (lastName.length() == 0 || lastName.contains(" ")) {
-			throw new IllegalArgumentException("Error: The lastname field is empty.");
-		}
+//		if (lastName.length() == 0) {
+//			throw new IllegalArgumentException("Error: The lastname field is empty.");
+//		}
 		account.setLastName(lastName);
 
-		if (password.length() == 0 || password.contains(" ")) {
-			throw new IllegalArgumentException("Error: The firstname field is empty.");
-		}
+//		if ((password.length() == 0) || (password.contains(" "))) {
+//			throw new IllegalArgumentException("Error: The firstname field is empty.");
+//		}
 		account.setPassword(password);
 
-		if ((type.charAt(0) != 'a') || (type.charAt(0) != 'u')||( type.length() != 1 )) {
-			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
-		}
-		account.setType(type.charAt(0));
+// 		if ((type1 != 'u') || (type1 != 'a')) {
+//			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
+//		}
+		account.setType(type);
 		
-		if (status.charAt(0) != 'Y' || type.charAt(0) != 'N'|| status.length() != 1) {
-			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
-		}
-		account.setActive(status.charAt(0));
+//		if ((status != 'Y') || (status != 'N')) {
+//			throw new IllegalArgumentException("Error: The status field of an account  must be either 'Y' or 'N'.");
+//		}
+		account.setActive(status);
 		this.saveAccountChanges(account);
 	}
 
