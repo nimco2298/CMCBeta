@@ -324,7 +324,7 @@ public class AdminFuncController {
 		// ========================= Fail check: the university does not exist in the
 		// database =======================
 		if (!(this.getUniversity(univName) instanceof University)) {
-			System.out.println("*** University " + univName + " does not exist in the database ***");
+			//System.out.println("*** University " + univName + " does not exist in the database ***");
 			throw new IllegalArgumentException();
 		}
 		University u = this.getUniversity(univName);
@@ -585,13 +585,13 @@ public class AdminFuncController {
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		// ========================= Fail check: the user does not exist in the database
 		//////////////////////////////////////////////////////////////////////////////////////////////// =======================
-		if (!(this.getAccount(user.getFirstName()) instanceof Account)) {
+		if ((this.getAccount(user.getUsername()).equals("DummyUser"))) {
+			System.out.println("account doesnt exsist");
 			throw new IllegalArgumentException();
+			
 		}
-		Account account = this.getAccount(user.getFirstName());
-		
-		
-		
+		Account account = this.getAccount(user.getUsername());
+				
 		// ============================ Fail checks: check if all field inputs are
 		// correct ===========================
 

@@ -51,6 +51,21 @@ public class GeneralUser extends Account
    return this.savedUniversities;
       
   } 
+  
+  
+  /**Sets the list of saved schools for a user 
+   * 
+  * @param ArrayList<String>   list of saved schools of a General User
+  */ 
+  public void getSavedSchools(ArrayList<String>  savedSchools)
+  {
+   
+    this.savedUniversities = savedSchools;
+     
+  } 
+  
+  
+  
   /**Prints a the Users account details
    * 
    * @return String the string representation of Account details
