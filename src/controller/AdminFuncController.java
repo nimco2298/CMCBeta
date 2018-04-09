@@ -516,7 +516,7 @@ public class AdminFuncController {
 	 * @param user
 	 *            the account to edit
 	 */
-	public void editUser(Account user, String firstName, String lastName, String password, char status, char type1) {
+	public void editUser(Account user, String firstName, String lastName, String password, char status, char type) {
 		// String prompt = "";
 		// do {
 		// System.out.print("=======================================" + '\n' +
@@ -589,34 +589,36 @@ public class AdminFuncController {
 			throw new IllegalArgumentException();
 		}
 		Account account = this.getAccount(user.toString());
-		//System.out.println(account.getDetails());
+		
+		
+		
 		// ============================ Fail checks: check if all field inputs are
 		// correct ===========================
 
-		if (firstName.length() == 0 ) {
-			throw new IllegalArgumentException("Error: The firstname field is empty.");
-		}
+//		if (firstName.length() == 0 ) {
+//			throw new IllegalArgumentException("Error: The firstname field is empty.");
+//		}
 		
 		account.setFirstName(firstName);
 
-		if (lastName.length() == 0) {
-			throw new IllegalArgumentException("Error: The lastname field is empty.");
-		}
+//		if (lastName.length() == 0) {
+//			throw new IllegalArgumentException("Error: The lastname field is empty.");
+//		}
 		account.setLastName(lastName);
 
-		if ((password.length() == 0) || (password.contains(" "))) {
-			throw new IllegalArgumentException("Error: The firstname field is empty.");
-		}
+//		if ((password.length() == 0) || (password.contains(" "))) {
+//			throw new IllegalArgumentException("Error: The firstname field is empty.");
+//		}
 		account.setPassword(password);
 
- 		if ((type1 != 'u') || (type1 != 'a')) {
-			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
-		}
-		account.setType(type1);
+// 		if ((type1 != 'u') || (type1 != 'a')) {
+//			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
+//		}
+		account.setType(type);
 		
-		if ((status != 'Y') || (status != 'N')) {
-			throw new IllegalArgumentException("Error: The status field of an account  must be either 'Y' or 'N'.");
-		}
+//		if ((status != 'Y') || (status != 'N')) {
+//			throw new IllegalArgumentException("Error: The status field of an account  must be either 'Y' or 'N'.");
+//		}
 		account.setActive(status);
 		this.saveAccountChanges(account);
 	}

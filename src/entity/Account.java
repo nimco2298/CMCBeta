@@ -134,7 +134,7 @@ public abstract class Account {
   public void setFirstName(String firstName) 
   {
 
-	  if(firstName.length() == 0 ){
+	  if(firstName.isEmpty() ){
 		  throw new IllegalArgumentException("Error! You can only enter a non empty String to set the first name field!");
 	  }
 	  
@@ -170,14 +170,28 @@ public abstract class Account {
    */
   public void setType(char newType) 
   {
-	  if( (newType != 'u') || (newType != 'a') )
-	  {
-		  System.out.println("new type:  " + newType);
-		  //throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
+//	  if( (newType != 'u') || (newType != 'a') )
+//	  {
+//		  System.out.println("new type:  " + newType);
+//		  //throw new IllegalArgumentException("Error! You can only enter a single digit char to set the type!");
+//	  }
+//	  else 
+//	  {
+//		  this.type = newType; 
+//	  }
+	  
+	  
+	  if( (newType == 'a') || (newType == 'u')  ) {
+		  this.type = newType; 
+		  //System.out.println("Actvity to be set: " + activity);
+		//  
 	  }
+	  
 	  else 
 	  {
-		  this.type = newType; 
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char  of 'u' or 'a' to set the type!");
+		 // System.out.println("we lit"); 
+		  //this.active = activity;
 	  }
 	  
   }          
@@ -192,16 +206,17 @@ public abstract class Account {
   public void setActive(char activity)
   {
 	 
-	  if( (activity != 'Y') || (activity != 'N')  ) {
-		   
-		  System.out.println("Actvity to be set: " + activity);
-		//throw new IllegalArgumentException("Error! You can only enter a single digit char of either 'Y' or 'N' to set the activity ss!");  
+	  if( (activity == 'Y') || (activity == 'N')  ) {
+		  this.active = activity; 
+		  //System.out.println("Actvity to be set: " + activity);
+		//  
 	  }
 	  
 	  else 
 	  {
+		  throw new IllegalArgumentException("Error! You can only enter a single digit char of either 'Y' or 'N' to set the activity status!");
 		 // System.out.println("we lit"); 
-		  this.active = activity;
+		  //this.active = activity;
 	  }
   }
   
