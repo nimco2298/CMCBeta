@@ -730,7 +730,6 @@ public class AdminFuncControllerTest {
 	public void testEditUser_FailsInvalidUser() {
 		Account account1 = new Admin("user459", "password", 'Y', "Cardi", "B");
 		ad.editUser(account1,"Simone","Salahi","pass123",'Y','a');
-		
 	}
 	
 	/**
