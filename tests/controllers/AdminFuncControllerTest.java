@@ -663,10 +663,10 @@ public class AdminFuncControllerTest {
 	 * Test method for addAccount in AdminFuncController.
 	 * Catches an Exception for invlaid type
 	 */
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testaddAccountFailsForInvalidType() {
-//		ad.addAccount("Test1", "Test1", "Test1", "Test1", "h");
-//	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddAccountFailsForInvalidType() {
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "h");
+	}
 
 	
 	
@@ -678,8 +678,8 @@ public class AdminFuncControllerTest {
 	@Test 
 	public void testEditUser_FirstName() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		//ad.editUser(account,"Sasha","last","password", 'Y','a');
-		Assert.assertTrue("User first name was correctly edited", account.getFirstName().equals("first")); //changed Test into test 
+		ad.editUser(account,"Sasha","last","password", 'Y','a');
+		Assert.assertTrue("User first name was correctly edited", account.getFirstName().equals("Sasha")); //changed Test into test 
 	}	
 	/**
 	 * Test method for editing a last name using the editUser method
@@ -697,7 +697,7 @@ public class AdminFuncControllerTest {
 	@Test  
 	public void testEditUser_Password() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.editUser(account,"first","last","admin" , 'Y','a');
+		ad.editUser(account,"first","last","admin", 'Y','a');
 		Assert.assertTrue("User password was correctly edited", account.getPassword().equals("admin"));
 	}
 	
@@ -705,12 +705,12 @@ public class AdminFuncControllerTest {
 	/**NIMCO MUST FIX
 	 * Test method for editing the users type using the editUser method
 	 */
-//	@Test 
-//	public void testEditUser_Type1() {
-//		//account = new Admin("test", "password", 'Y', "first", "last");
-//		ad.editUser(account,"first", "last","password", 'Y','u');
-//		Assert.assertTrue("User type was correctly edited", account.getType() == 'u');
-//	}
+	@Test 
+	public void testEditUser_Type1() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.editUser(account,"first", "last","password", 'Y','u');
+		Assert.assertTrue("User type was correctly edited", account.getType() == 'u');
+	}
 	
 	/**
 	 * Test method for editing the users status using the editUser method
