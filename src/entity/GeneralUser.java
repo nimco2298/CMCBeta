@@ -57,12 +57,12 @@ public class GeneralUser extends Account
    * 
   * @param ArrayList<String>   list of saved schools of a General User
   */ 
-  public void getSavedSchools(ArrayList<String>  savedSchools)
-  {
-   
-    this.savedUniversities = savedSchools;
-     
-  } 
+//  public void setSavedSchools(ArrayList<String>  savedSchools)
+//  {
+//   
+//    this.savedUniversities = savedSchools;
+//     
+//  } 
   
   
   

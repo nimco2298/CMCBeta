@@ -29,7 +29,8 @@ public class GeneralUserTest {
 		
 	    savUnisList.add("VASSAR");
 	    savUnisList.add("MESA");
-	    savUnisList.add("MESA");
+	    savUnisList.add("VANDERBILT");
+	    savUnisList.add("UNIVERSITY OF TOLEDO");
 	    
 		user = new GeneralUser("Simon","Cloud", 'Y', "sassySimon", "simonSays1", savUnisList);
 	}
@@ -44,10 +45,16 @@ public class GeneralUserTest {
 	    savUnis.add("UNIVERSITY OF MINNESOTA");
 	    GeneralUser newUser = new GeneralUser("Salahi", "Takahashi",'Y',"sTaka", "coolKid1",savUnis);
 	    newUser.getDetails();
-		//fail("Not yet implemented"); // TODO
+		
 	}
 
 
+	@Test
+	public void testGetSavedSchools() {
+		assertTrue(user.getSavedSchools().contains("MESA"));
+		assertTrue(user.getSavedSchools().contains("UNIVERSITY OF TOLEDO"));
+		
+	}
 
 	/**
 	 * Test method for {@link entities.Account#getUsername()}.
@@ -187,11 +194,12 @@ public class GeneralUserTest {
 	}
 	
 	/**
-	 * Fails to set empty  password
+	 * Fails to set an invalid password
 	 */
 	@Test (expected = IllegalArgumentException.class)
 	public void testSetPasswordFails() {
-		user.setPassword("");
+		user.setPassword("Pass34 word34");
 	}
 
+	
 }
