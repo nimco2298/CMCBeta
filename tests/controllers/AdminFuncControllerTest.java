@@ -815,7 +815,7 @@ public class AdminFuncControllerTest {
 	}
 	
 	/**
-	 * Test method for editing a first name using the editUser method 
+	 * Test method for deactivating a user
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testDeactivateUser_ValidUser() {
@@ -824,14 +824,21 @@ public class AdminFuncControllerTest {
 		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("test").getActive() == 'N'); //chnged Test to test
 	}
 	
+	
+	
+	//***************************AddUniversity()**********************************************************************// 
 	/**
 	 * Test method for addUniversity in AdminFuncController.
 	 */
 	@Test
 	public void testAddUniversity() {
-		ad.addUniversity("Test2", "Test2", "Test2", "Test2", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
-		Assert.assertTrue("University added correctly", dbc.getUniversity("Test").getName().equals("Test"));
-		dbc.deleteUniversity(dbc.getUniversity("Test2"));
+//		ad.addUniversity("Test2", "Test2", "Test2", "Test2", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
+//		Assert.assertTrue("University added correctly", dbc.getUniversity("Test").getName().equals("Test"));
+//		dbc.deleteUniversity(dbc.getUniversity("Test2"));
+		
+	ad.addUniversity("Test3", "MINNESOTA", "URBAN",  "PUBLIC", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, new ArrayList<String>());
+	Assert.assertTrue("University added correctly", dbc.getUniversity("Test3").getName().equals("Test3"));
+	dbc.deleteUniversity(dbc.getUniversity("Test3"));
 	}
 	/**
 	 * Test method for addUniversity in AdminFuncController.

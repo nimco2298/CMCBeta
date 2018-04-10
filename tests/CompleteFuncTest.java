@@ -56,12 +56,12 @@ public class CompleteFuncTest {
 		}
 	}
 	
-	
+	// ****************************************LOGIN USE CASE***************************************************************************//
 	/**MAIN SCENARIO FOR USE CASE: 1
 	 * Test case for succesful login in as a User
 	 */
 		@Test
-		public void testLogin_ValidPassValidUser() {
+		public void testLogin_ValidPassValidUsername() {
 			String expectedUser1 = "luser";
 			String expectedPass1 = "user";
 			boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
@@ -83,10 +83,44 @@ public class CompleteFuncTest {
 		
 	/**ALTERATIVE SCENARIO FOR USE CASE 1: INCORRECT USERNAME
 	 * 
+	 * Test method for login fails for invalid username,and a valid password
 	 */
-		
+	@Test
+	public void testLogin_InvalidUsernameValidPass() {
+		String expectedUser = "lolaa982";
+		String expectedPass = "user";
+		boolean loginvalue = ac.login(expectedUser,expectedPass);
+		assertEquals("Your login status is: " + loginvalue, ac.loginStatus, loginvalue);
+			
+	}
+	 
+	/**ALTERATIVE SCENARIO FOR USE CASE 1: INCORRECT PASSWORD
+	 * 
+	 * Test method for login fails for invalid username,and a valid password
+	 */
+	@Test
+	public void testLogin_InvalidPassValidUsername() {
+		String expectedUser1 = "nadmin";
+		String expectedPass1 = "oooooo14";
+		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
+		assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
+	}	
 	
+	
+	
+	/**ALTERATIVE SCENARIO FOR USE CASE 1: EMPTY USERNAME AND EMPTY PASSWORD
+	 * Test method for login fails due to invalid user input
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testLogin_InvalidInput() {
+		String expectedUser = "";
+		String expectedPass = "";
+		ac.login(expectedUser,expectedPass);
+		
+	}
 
+	
+	// ****************************************EDIT UNIVERSITY USE CASE***************************************************************************//
 	/**MAIN SCENARIO FOR USE CASE: 12
 	 * Test method for editUniversity in AdminFuncController.
 	 * Tests each field parameter.
@@ -116,7 +150,7 @@ public class CompleteFuncTest {
 		Assert.assertTrue(ad.getUniversity("Test").getEmphases().contains("BIOLOGY"));
 	}
 	
-	/**
+	/**ALTERATIVE SCENARIO FOR USE CASE 1: EMPTY STATE 
 	 * Test method for editUniversity in AdminFuncController.
 	 * Catches an Exception for an empty state input
 	 */
@@ -124,7 +158,7 @@ public class CompleteFuncTest {
 	public void testEditUniversity_FailsEmptyState() {
 		ad.editUniversity("Test", "", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, new ArrayList<String>());
 	}
-	/**
+	/**ALTERATIVE SCENARIO FOR USE CASE 1: EMPTY LOCATION
 	 * Test method for editUniversity in AdminFuncController.
 	 * Catches an Exception for an invalid location input
 	 */
@@ -132,7 +166,8 @@ public class CompleteFuncTest {
 	public void testEditUniversity_FailsInvalidLocation() {
 		ad.editUniversity("Test", "0", "invalid", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, new ArrayList<String>());
 	}
-	/**
+	
+	/**ALTERATIVE SCENARIO FOR USE CASE 1: EMPTY LOCATION
 	 * Test method for editUniversity in AdminFuncController.
 	 * Catches an Exception for an invalid control input
 	 */
