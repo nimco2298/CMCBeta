@@ -43,7 +43,7 @@ public class UserFuncController
    */
   public void saveToSavedSchoolList(University university)
   {
-    db.addSchoolToUserList(gu,university);
+    db.addSchoolToUserList(gu, university);
     gu = (GeneralUser)db.getUser(gu.getUsername());
   }
   

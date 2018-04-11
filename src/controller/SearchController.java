@@ -58,6 +58,7 @@ public class SearchController{
                                       int socLifeScaleHigh, int qualLifeScaleLow, int qualLifeScaleHigh, 
                                       ArrayList<String> emphases){
     ArrayList<University> rlist = new ArrayList<University>();
+    ArrayList<University> sort = new ArrayList<University>();
     boolean n=false, s=false, l=false, c=false, ns=false, pf=false, sv=false, sm=false, exp=false, pfa=false, na=false, 
       pa=false, pe=false, as=false, ss=false, qls=false, em=true;
     ArrayList<University> ulist = db.getUniversities();
@@ -110,6 +111,7 @@ public class SearchController{
         rlist.add(u);
       }
     }
+
     return rlist;
   }
   

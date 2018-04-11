@@ -24,7 +24,7 @@ public class SearchControllerTest {
 	private DBController db;
 	
 	/**
-	 * This method initializes the information for testing
+	 * This method initializes the information and clears up the emphases and schools used for testing
 	 */
 	@Before
 	public void setUp() throws Exception {
@@ -45,58 +45,9 @@ public class SearchControllerTest {
 				uList=db.getUniversities();
 			}
 		}
-		
-		
-		
 		emphases= new ArrayList<String>();
 	}
-	/**
-	 * This method clears up the emphases and schools used for testing
-	 */
-	@After
-	public void tearDown() throws Exception {
-		if(db.getUniversity("Z1")!=null) {
-			emphases= db.getUniversity("Z1").getEmphases();
-			for(String s:emphases) {
-				db.deleteEmphasis(db.getUniversity("Z1"), s);
-			}
-			db.deleteUniversity(db.getUniversity("Z1"));
-		}
-		if(db.getUniversity("Z1")!=null) {
-			emphases= db.getUniversity("Z2").getEmphases();
-			for(String s:emphases) {
-				db.deleteEmphasis(db.getUniversity("Z2"), s);
-			}
-			db.deleteUniversity(db.getUniversity("Z2"));
-		}
-		if(db.getUniversity("Z1")!=null) {
-			emphases= db.getUniversity("Z3").getEmphases();
-			for(String s:emphases) {
-				db.deleteEmphasis(db.getUniversity("Z3"), s);
-			}
-			db.deleteUniversity(db.getUniversity("Z3"));
-		}
-		if(db.getUniversity("Z1")!=null) {
-			emphases= db.getUniversity("Z4").getEmphases();
-			for(String s:emphases) {
-				db.deleteEmphasis(db.getUniversity("Z4"), s);
-			}
-			db.deleteUniversity(db.getUniversity("Z4"));
-		}
-		if(db.getUniversity("Z1")!=null) {
-			emphases= db.getUniversity("Z5").getEmphases();
-			for(String s:emphases) {
-				db.deleteEmphasis(db.getUniversity("Z5"), s);
-			}
-			db.deleteUniversity(db.getUniversity("Z5"));
-		}
-		
-		
-		
-		
-		
-	}
-
+	
 	/**
 	 * Test 
 	 */
@@ -142,7 +93,7 @@ public class SearchControllerTest {
 	@Test
 	public void testSearchByStudent() {
 		
-		uList = sc.search("",  "",  "",  "", 0,
+		uList = sc.search("",  "",  "",  "", 1,
 	            9999,  0,  100,  0,  999, 
 	            0,  999,  0,  99999,  0,  100,
 	            0,  99999,  0,  99999, 
@@ -150,7 +101,7 @@ public class SearchControllerTest {
 	            9,  0,  9, 
 	            emphases);
 		
-		assertTrue("Should be 3",uList.size()==1);
+		assertTrue("Should be 3",uList.size()==3);
 	}
 	@Test
 	public void testSearchByStringAndInt() {

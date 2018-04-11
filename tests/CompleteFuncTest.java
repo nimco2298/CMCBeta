@@ -8,17 +8,19 @@ public class CompleteFuncTest {
 	private AdminFuncController ad = new AdminFuncController();
 	private DBController dbc = new DBController();
 	private AccountController ac = new AccountController();
+	private SearchController sc=new SearchController();
 	private University u;
 	private Account account;
 	private UserFuncController ufc;
 	private GeneralUser uAccount;
-	
+
+	private ArrayList<String> emphases;
 	/**
 	 * Inserts a test university and account into the database
 	 */
 	@Before
 	public void init() {
-		ArrayList<String> emphases = new ArrayList<String>();
+		emphases = new ArrayList<String>();
 		emphases.add("TestForRemoval");
 		u = new University("Test", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 		dbc.addNewUniversity(u);
@@ -27,6 +29,7 @@ public class CompleteFuncTest {
 		dbc.addAccount(account);
 		uAccount = new GeneralUser("first", "last", 'Y', "test", "password", new ArrayList<String>());
 		ufc = new UserFuncController(uAccount);
+		
 	}
 	
 	/**
@@ -61,7 +64,7 @@ public class CompleteFuncTest {
 	
 	// ****************************************LOGIN USE CASE***************************************************************************//
 	/**MAIN SCENARIO FOR USE CASE: 1
-	 * Test case for succesful login in as a User
+	 * Test case for successful login in as a User
 	 */
 		@Test
 		public void testLogin_ValidPassValidUsername() {
@@ -74,7 +77,7 @@ public class CompleteFuncTest {
 		}
 	
 		/**MAIN SCENARIO FOR USE CASE: 1
-		 * Test method for succesful login in as an Admin
+		 * Test method for successful login in as an Admin
 		 */
 		@Test
 		public void testLogin_ValidPassValidAdmin() {
@@ -87,7 +90,7 @@ public class CompleteFuncTest {
 		
 	/**ALTERATIVE SCENARIO FOR USE CASE 1: INCORRECT USERNAME
 	 * 
-	 * Test method for login fails for invalid username,and a valid password
+	 * Test method for login fails for invalid username, and a valid password
 	 */
 	@Test
 	public void testLogin_InvalidUsernameValidPass() {
@@ -100,7 +103,7 @@ public class CompleteFuncTest {
 	 
 	/**ALTERATIVE SCENARIO FOR USE CASE 1: INCORRECT PASSWORD
 	 * 
-	 * Test method for login fails for invalid username,and a valid password
+	 * Test method for login fails for invalid username, and a valid password
 	 */
 	@Test
 	public void testLogin_InvalidPassValidUsername() {
@@ -129,7 +132,8 @@ public class CompleteFuncTest {
 	@Test
 	public void testSaveSchool()
 	{
-		
+		ufc.saveToSavedSchoolList(dbc.getUniversity("Test"));
+		assertTrue("Test university was not saved to uAccount's Saved School List", uAccount.getSavedSchools().contains("Test"));
 	}
 	// ****************************************EDIT USER PROFILE USE CASE***************************************************************************//
 
@@ -572,10 +576,24 @@ public class CompleteFuncTest {
 		ad.editUser(account,"first","last","password", 'L','a');
 		
 	}
+	/**
+	 * TEST MAIN SCENARIO OF SEARCH
+	 */
+	@Test
+	public void testSearchByStringAndInt() {
+		ArrayList<University> uList=new ArrayList<University>();
+		emphases=new ArrayList<String>();
+		uList = sc.search("YA",  "",  "",  "", 10000, 10000,  0,  100,  0,  999, 0,  999,  0,  99999,  
+							0,  100, 0,  99999,  0,  99999, 0,  99999,  0,  9,  0, 9,  0,  9, emphases);
+		assertTrue("Should be WESLEYAN",uList.get(0).getName().equals("WESLEYAN"));
+		assertTrue("Should be YALE",uList.get(1).getName().equals("YALE"));
+		assertTrue("Should be YANKTOWN COLLEGE",uList.get(2).getName().equals("YANKTOWN COLLEGE"));
+	}
 	
 	@After
 	public void reset()
 	{
+		dbc.deleteAccount(uAccount);
 	dbc.deleteUniversity(u);
 	}
 }
