@@ -53,60 +53,60 @@ public class AdminFuncController {
 
 	// ================================= METHODS =================================
 
-	/**
-	 * View a list of users; gets a list of users from the database
-	 */
-	public void viewUsersList() {
-		ArrayList<Account> accountList = dbc.getAccounts();
-		System.out.println(
-				"========================================================================================================================"
-						+ '\n' + "First" + '\t' + '\t' + "Last" + '\t' + '\t' + "Username" + '\t' + '\t' + "Password"
-						+ '\t' + '\t' + "Type" + '\t' + '\t' + "Status" + '\n'
-						+ "========================================================================================================================");
-		for (Account user : accountList) {
-			System.out.println(user.getFirstName() + '\t' + '\t' + user.getLastName() + '\t' + '\t' + user.getUsername()
-					+ '\t' + '\t' + '\t' + user.getPassword() + '\t' + '\t' + '\t' + user.getType() + '\t' + '\t'
-					+ user.getActive());
-		}
-	}
+//	/**
+//	 * View a list of users; gets a list of users from the database
+//	 */
+//	public void viewUsersList() {
+//		ArrayList<Account> accountList = dbc.getAccounts();
+//		System.out.println(
+//				"========================================================================================================================"
+//						+ '\n' + "First" + '\t' + '\t' + "Last" + '\t' + '\t' + "Username" + '\t' + '\t' + "Password"
+//						+ '\t' + '\t' + "Type" + '\t' + '\t' + "Status" + '\n'
+//						+ "========================================================================================================================");
+//		for (Account user : accountList) {
+//			System.out.println(user.getFirstName() + '\t' + '\t' + user.getLastName() + '\t' + '\t' + user.getUsername()
+//					+ '\t' + '\t' + '\t' + user.getPassword() + '\t' + '\t' + '\t' + user.getType() + '\t' + '\t'
+//					+ user.getActive());
+//		}
+//	}
+//
+//	/**
+//	 * View a list of university names; gets a list of universities from the
+//	 * database
+//	 */
+//	public void viewUniversitiesList() {
+//		ArrayList<University> list = dbc.getUniversities();
+//		System.out.println("=======================================" + '\n' + "             SchoolNames" + '\n'
+//				+ "=======================================");
+//		for (University u : list) {
+//			System.out.println(u.getName());
+//		}
+//
+//	}
 
-	/**
-	 * View a list of university names; gets a list of universities from the
-	 * database
-	 */
-	public void viewUniversitiesList() {
-		ArrayList<University> list = dbc.getUniversities();
-		System.out.println("=======================================" + '\n' + "             SchoolNames" + '\n'
-				+ "=======================================");
-		for (University u : list) {
-			System.out.println(u.getName());
-		}
-
-	}
-
-	/**
-	 * View the university's details
-	 * 
-	 * @param univName
-	 *            the name of the university
-	 */
-	public void viewUniversityDetails(String univName) {
-		University u = dbc.getUniversity(univName);
-		System.out.println("=======================================" + '\n' + '\t' + univName + " Details" + '\n'
-				+ "=======================================" + '\n' + "State: " + u.getState() + '\n' + "Location: "
-				+ u.getLocation() + '\n' + "Control: " + u.getControl() + '\n' + "# of Students: " + u.getStudents()
-				+ '\n' + "% Females: " + u.getFemPerc() + '\n' + "SAT Verbal: " + u.getSatV() + '\n' + "SAT Math: "
-				+ u.getSatM() + '\n' + "Expenses: " + u.getCost() + '\n' + "% with Financial Aid: " + u.getFinAidPerc()
-				+ '\n' + "# of Applicants: " + u.getApplicants() + '\n' + "% Admitted: " + u.getAdmitted() + '\n'
-				+ "% Enrolled: " + u.getEnrolled() + '\n' + "Academic Scale (1-5): " + u.getAcadScale() + '\n'
-				+ "Social Scale (1-5): " + u.getSocScale() + '\n' + "Quality of Life Scale (1-5): " + u.getQualScale());
-		ArrayList<String> emphases = u.getEmphases();
-		System.out.println("Emphases:");
-		for (String emphasis : emphases) {
-			System.out.println('\t' + emphasis);
-		}
-		// viewUniversities();
-	}
+//	/**
+//	 * View the university's details
+//	 * 
+//	 * @param univName
+//	 *            the name of the university
+//	 */
+//	public void viewUniversityDetails(String univName) {
+//		University u = dbc.getUniversity(univName);
+//		System.out.println("=======================================" + '\n' + '\t' + univName + " Details" + '\n'
+//				+ "=======================================" + '\n' + "State: " + u.getState() + '\n' + "Location: "
+//				+ u.getLocation() + '\n' + "Control: " + u.getControl() + '\n' + "# of Students: " + u.getStudents()
+//				+ '\n' + "% Females: " + u.getFemPerc() + '\n' + "SAT Verbal: " + u.getSatV() + '\n' + "SAT Math: "
+//				+ u.getSatM() + '\n' + "Expenses: " + u.getCost() + '\n' + "% with Financial Aid: " + u.getFinAidPerc()
+//				+ '\n' + "# of Applicants: " + u.getApplicants() + '\n' + "% Admitted: " + u.getAdmitted() + '\n'
+//				+ "% Enrolled: " + u.getEnrolled() + '\n' + "Academic Scale (1-5): " + u.getAcadScale() + '\n'
+//				+ "Social Scale (1-5): " + u.getSocScale() + '\n' + "Quality of Life Scale (1-5): " + u.getQualScale());
+//		ArrayList<String> emphases = u.getEmphases();
+//		System.out.println("Emphases:");
+//		for (String emphasis : emphases) {
+//			System.out.println('\t' + emphasis);
+//		}
+//		// viewUniversities();
+//	}
 
 	/**
 	 * Accesses the Database and saves changes made to an account
@@ -223,92 +223,6 @@ public class AdminFuncController {
 		}
 	}
 
-	/**
-	 * FROM USER INTERFACEEE // public String viewUniversities(String prompt, String
-	 * univName) { // //show the list of universities //
-	 * this.viewUniversitiesList(); // //check for input // if(prompt.equals("a")){
-	 * // ADD UNIVERSITIES // return "*** Adding University ***"; //
-	 * //this.addUniversity(univName); // } // else if(prompt.equals("e")){ // EDIT
-	 * UNIVERSITIES // // //this.editUniversity(editPrompt,
-	 * this.getUniversity(univName)); // } // else if(cmd.equals("r")) { // REMOVE
-	 * UNIVERSITY // if(!(this.getUniversity(univName) instanceof University)) {//
-	 * if the university does not exist // System.out.println("*** There is no such
-	 * university ***"); // this.viewUniversities(); // } //
-	 * this.removeUniversity(this.getUniversity(univName)); // } // else
-	 * if(cmd.equals("d")||cmd.equals("D")) { // SHOW DETAILS OF A UNIVERSITY //
-	 * if(!(this.getUniversity(univ) instanceof University)) {// if the university
-	 * does not exist // System.out.println("*** There is no such university ***");
-	 * // this.viewUniversities(); // } // this.viewUniversityDetails(univ); // } //
-	 * else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT //
-	 * System.out.println("Returning to homepage"); // } // else{ // INPUT ERROR //
-	 * System.out.println("ERROR: Invalid input"); // viewUniversities(); // } // }
-	 * // /** Shows a list of all users in the system (both general and admin) and
-	 * presents a list of options for the admin to manage those users.
-	 */
-	// public String viewUsers(String prompt, String userName) {
-	// this.viewUsersList();
-	// System.out.print("=======================================" +'\n'+
-	// "Would you like to add, edit, or deactivate a user?" +'\n'+'\t'+
-	// "a: Add User" +'\n'+'\t'+
-	// "e: Edit User" +'\n'+'\t'+
-	// "d: Deactivate User" +'\n'+'\t'+
-	// //"r: Remove User" +'\n'+'\t'+
-	// "q: Quit (Return to Homepage)" +'\n'+
-	// "Enter Here: ");
-	//
-	// if(prompt.equals("a")){ // ADD USER
-	// System.out.print("=======================================" +'\n'+"Enter
-	// Username: ");
-	// //String userName = sc.nextLine();
-	// if(userName.length()==0) {//if the userName is empty
-	// throw new IllegalArgumentException() ;
-	// //this.viewUsers();
-	// }
-	// else if(!this.getAccount(userName).getUsername().equals("DummyUser")) {//if
-	// the username already exists
-	// return "*** This user name already exists, please choose a different one
-	// ***";
-	// this.viewUsers();
-	// }
-	// this.addAccount(userName);
-	// }
-	// else if(cmd.equals("e")){ // EDIT USER
-	// System.out.print("=======================================" +'\n'+ "Enter a
-	// Username: ");
-	// String userName = sc.nextLine();
-	// if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the
-	// username does not exist
-	// System.out.println("*** There is no such user ***");
-	// this.viewUsers();
-	// }
-	// this.editUser(this.getAccount(userName));
-	// }
-	// else if(cmd.equals("d")){ // DEACTIVATE USER
-	// System.out.print("=======================================" +'\n'+ "Enter a
-	// Username: ");
-	// String userName = sc.nextLine();
-	// if(this.getAccount(userName).getUsername().equals("DummyUser")) {//if the
-	// username does not exist
-	// System.out.println("ERROR: There is no such user");
-	// this.viewUsers();
-	// }
-	// this.deactivate(this.getAccount(userName));
-	// }
-	// else if(cmd.equals("r")){ // REMOVE USER (TESTING PURPOSE ONLY)
-	// System.out.print("=======================================" +'\n'+ "Enter
-	// Username (check name!!!): ");
-	// String univ = sc.nextLine();
-	// dbc.deleteAccount(this.getAccount(univ));
-	// viewUsers();
-	// }
-	// else if(cmd.equals("q")||cmd.equals("Q")){ // QUIT
-	// homepage();
-	// }
-	// else{ // INPUT ERROR
-	// System.out.println("ERROR: Invalid input");
-	// viewUsers();
-	// }
-	// }
 
 	/**
 	 * Prompts the user to edit a university's fields and then save the changes to
@@ -316,7 +230,6 @@ public class AdminFuncController {
 	 * 
 	 * 
 	 */
-
 	public void editUniversity(String univName, String state, String location, String control, int students,
 			int femPerc, int satv, int satm, int cost, int finAidPerc, int applicants, int admitted, int enrolled,
 			int acadScale, int socScale, int qualScale, ArrayList<String> emphases) {
@@ -365,50 +278,50 @@ public class AdminFuncController {
 		u.setFemPerc(femPerc);
 		// SATV must be between 0 and 800
 		if (satv < 0 || satv > 800) {
-			System.out.println("Error: The SAT verbal score must be between 0 and 800.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The SAT verbal score must be between 0 and 800.");
 		}
 		u.setSatV(satv);
 		// SATM must be between 0 and 800
 		if (satm < 0 || satm > 800) {
-			System.out.println("Error: The SAT math score must be between 0 and 800");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The SAT math score must be between 0 and 800");
 		}
 		u.setSatM(satm);
 		// cost must be an integer; cannot be negative
 		if (cost < 0) {
-			System.out.println("Error: The cost is not in range.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The cost is not in range.");
 		}
 		u.setCost(cost);
 		// financial aid must be between 0 and 100
 		if (finAidPerc < 0 || finAidPerc > 100) {
-			System.out.println("Error: The financial aid percentage must be between 0 and 100.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The financial aid percentage must be between 0 and 100.");
 		}
 		u.setFinAidPerc(finAidPerc);
 		// applicants must be an integer; cannot be negative
 		if (applicants < 0) {
-			System.out.println("Error: The number of applicants is not in range.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The number of applicants is not in range.");
 		}
 		u.setApplicants(applicants);
 		// admitted must be between 0 and 100
 		if (admitted < 0 || admitted > 100) {
-			System.out.println("Error: The admitted percentage is not in range.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The admitted percentage is not in range.");
 		}
 		u.setAdmitted(admitted);
 		// enrolled must be between 0 and 100
 		if (enrolled < 0 || enrolled > 100) {
-			System.out.println("Error: The enrolled percentage is not in range.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The enrolled percentage is not in range.");
 		}
 		u.setEnrolled(enrolled);
 		// acadScale must be between 1 and 5
 		if (acadScale < 1 || acadScale > 5) {
-			System.out.println("Error: The academic scale must be between 1 and 5");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The academic scale must be between 1 and 5");
 		}
 		u.setAcadScale(acadScale);
 		// socScale must be between 1 and 5
@@ -425,8 +338,8 @@ public class AdminFuncController {
 		u.setQualScale(qualScale);
 		// number of emphasis is limited to 5
 		if (emphases.size() > 5) { // almost never be true due to GUI but just in case for testing
-			System.out.println("Error: The number of emphases is over 5.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The number of emphases is over 5.");
 		}
 		// replaces u's emphases
 		u.removeAllEmphases(); // remove all the emphases (not in database)
@@ -446,34 +359,30 @@ public class AdminFuncController {
 			int femPerc, int satV, int satM, int cost, int finAidPerc, int applicants, int admitted, int enrolled,
 			int acadScale, int socScale, int qualScale, ArrayList<String> emphases) {
 		// Fail: user entered a blank name for university
-		if (schoolName.equals("")) {
-			// System.out.println("*** Error: University name is blank. Please enter a
-			// university name. ***");
-			throw new IllegalArgumentException();
+		if (schoolName.equals("")) {;
+			throw new IllegalArgumentException("*** Error: University name is blank. Please enter a university name. ***");
 		}
 		// Fail: university already exists in database
-		else if (this.getUniversity(schoolName) instanceof University) {
-			// System.out.println("*** This university name already exists, please choose a
-			// different one ***");
-			throw new IllegalArgumentException();
+		else if (this.getUniversity(schoolName) instanceof University) {;
+			throw new IllegalArgumentException("Error: This university name already exists, please choose a different one");
 		}
 
 		University u = new University(schoolName, state, location, control, students, femPerc, satV, satM, cost,
 				finAidPerc, applicants, admitted, enrolled, acadScale, socScale, qualScale, emphases);
 		dbc.addNewUniversity(u); // add the university to the database
 		addEmphases(u);
-		// System.out.println("*** Saved university " + schoolName + " to list ***");
+		
 	}
 
-	/**
-	 * Prompts the user to remove a university and confirm deletion
-	 * 
-	 * @param u     the university to remove
-	 *            
-	 */
-	//public void removeUniversity(University u) {
-		//delete(u);
-	//}
+//	/**
+//	 * Prompts the user to remove a university and confirm deletion
+//	 * 
+//	 * @param u     the university to remove
+//	 *            
+//	 */
+//	//public void removeUniversity(University u) {
+//		//delete(u);
+//	//}
 
 	/**
 	 * Prompts the user to add a GeneralUser and its properties
@@ -504,10 +413,10 @@ public class AdminFuncController {
 					information.get(0), information.get(1), new ArrayList<String>());
 			dbc.addAccount(gu);
 		} else {
-			throw new IllegalArgumentException();
-			//System.out.println("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
+			throw new IllegalArgumentException("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
+			
 		}
-		this.viewUsersList();
+		//this.viewUsersList();
 	}
 
 	/**
@@ -517,90 +426,24 @@ public class AdminFuncController {
 	 *            the account to edit
 	 */
 	public void editUser(Account user, String firstName, String lastName, String password, char status, char type) {
-		// String prompt = "";
-		// do {
-		// System.out.print("=======================================" + '\n' +
-		// "What would you like to edit:" + '\n' +'\t'+
-		// "1: FirstName" + '\n' +'\t'+
-		// "2: LastName" + '\n' +'\t'+
-		// "3: Password" + '\n' +'\t'+
-		// "4: Type" + '\n' +'\t'+
-		// "5: Status" + '\n' +'\t'+
-		// "s: Save" + '\n' +'\t'+
-		// "c: Cancel" + '\n' +
-		// "Enter Here: ");
-		// prompt = sc.nextLine();
-		// switch (prompt){
-		// case "1":
-		// System.out.print("Enter the new first name: ");
-		// user.setFirstName(sc.nextLine());
-		// break;
-		// case "2":
-		// System.out.print("Enter the new last name: ");
-		// user.setLastName(sc.nextLine());
-		// break;
-		// case "3":
-		// System.out.print("Enter the new password: ");
-		// user.setPassword(sc.nextLine());
-		// break;
-		// case "4":
-		// System.out.print("Enter the type (a=admin, u=general user): ");
-		// char type = sc.nextLine().charAt(0);
-		// if(type != 'a' && type != 'u') {
-		// System.out.println("ERROR: Invalid input");
-		// }
-		// else {
-		// user.setType(type);
-		// }
-		// break;
-		// case "5":
-		// System.out.print("Enter the status (Y=active, N=deactive): ");
-		// char status = sc.nextLine().charAt(0);
-		// if(status != 'Y' && status != 'N') {
-		// System.out.println("ERROR: Invalid input; inputs must be capitalized");
-		// }
-		// else {
-		// user.setActive(status);
-		// }
-		// break;
-		// case "s":
-		// saveAccountChanges(user);
-		// System.out.println("=======================================" + '\n' +
-		// "Updates have been saved:" + '\n' + '\t'+
-		// "FirstName: " + user.getFirstName() + '\n' + '\t'+
-		// "LastName: " + user.getLastName() + '\n' + '\t'+
-		// "Password: " + user.getPassword() + '\n' + '\t'+
-		// "Type: " + user.getType() + '\n' + '\t'+
-		// "Active: " + user.getActive());
-		// break;
-		// case "c":
-		// System.out.println("*** Returning to Manage_Users page ***");
-		// break;
-		// default:
-		// System.out.println("ERROR: Invalid input");
-		// break;
-		// }
-		// } while(!prompt.equals("s")&&!prompt.equals("c"));
 
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		// ========================= Fail check: the user does not exist in the database
 		//////////////////////////////////////////////////////////////////////////////////////////////// =======================
 		
 //		System.out.println("actual: " + this.getAccount(user.getUsername()));
-//		if ((this.getAccount(user.getUsername()).equals("DummyUser"))) {
-//			
-//			throw new IllegalArgumentException();
-//			
-//		}
+		if ((this.getAccount(user.getUsername()).equals("DummyUser"))) {
+			
+			throw new IllegalArgumentException();
+			
+		}
 		//System.out.println("account exsist  " + user.getUsername());
 		Account account = this.getAccount(user.getUsername());
 				
 		// ============================ Fail checks: check if all field inputs are
 		// correct ===========================
 
-//		if (firstName.length() == 0 ) {
-//			throw new IllegalArgumentException("Error: The firstname field is empty.");
-//		}
+
 		
 		account.setFirstName(firstName);
 

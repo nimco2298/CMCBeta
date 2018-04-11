@@ -722,16 +722,8 @@ public class AdminFuncControllerTest {
 		Assert.assertTrue("User status was correctly edited", dbc.getUser("test").getActive() == 'N');
 	}
 	
-	/**
-	 * Test method for editUser in AdminFuncController.
-	 * Catches an Exception for an invalid user
-	 */
-	//@Test (expected = IllegalArgumentException.class)
-//	public void testEditUser_FailsInvalidUser() {
-//		Account account1 = new Admin("user459", "password", 'Y', "Cardi", "B");
-//		ad.editUser(account1,"Simone","Salahi","pass123",'Y','a');
-//	}
-//	
+
+	
 	/**
 	 * Test method for editUser in AdminFuncController.
 	 * Catches an Exception for an empty first name input
