@@ -31,7 +31,7 @@ public class CompleteFuncTest {
 	 * checks if it works for viewing universities, viewing users, and logging out.
 	 */
 	@Test
-	public void testHomepage_ViewUniversities() {
+	public void testHomepage_Admin() {
 		String message = ad.homepage("1");
 		Assert.assertTrue(message != null);
 		Assert.assertEquals("*** Going to Manage_Universities page. ***", ad.homepage("1"));
@@ -65,7 +65,9 @@ public class CompleteFuncTest {
 			String expectedUser1 = "luser";
 			String expectedPass1 = "user";
 			boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
-			assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);	
+			assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
+			
+			
 		}
 	
 		/**MAIN SCENARIO FOR USE CASE: 1
@@ -77,8 +79,7 @@ public class CompleteFuncTest {
 			String expectedPass1 = "admin";
 			boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
 			assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
-			
-			
+		
 		}
 		
 	/**ALTERATIVE SCENARIO FOR USE CASE 1: INCORRECT USERNAME
@@ -359,9 +360,4 @@ public class CompleteFuncTest {
 		ad.editUniversity("Test", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 	}
 	
-	
-	
-	
-	
-
 }
