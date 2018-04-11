@@ -111,8 +111,8 @@ public class AdminFuncController {
 	/**
 	 * Accesses the Database and saves changes made to an account
 	 * 
-	 * @param account
-	 *            the account of the user
+	 * @param account  the account of the user
+	 *           
 	 */
 	public void saveAccountChanges(Account account) {
 		dbc.updateAccount(account);
@@ -121,8 +121,8 @@ public class AdminFuncController {
 	/**
 	 * Save changes made to a university
 	 * 
-	 * @param univ
-	 *            the university
+	 * @param univ the university
+	 *            
 	 */
 	public void saveUnivChanges(University univ) {
 		// takes the database's university and deletes all the old emphases
@@ -137,8 +137,8 @@ public class AdminFuncController {
 	/**
 	 * Deletes a university and its emphases
 	 * 
-	 * @param univ
-	 *            the university to be deleted
+	 * @param univ    the university to be deleted
+	 *           
 	 */
 	public void delete(University univ) {
 		if (!(getUniversity(univ.getName()) instanceof University)) {// if the university does not exist
@@ -151,8 +151,8 @@ public class AdminFuncController {
 	/**
 	 * Finds a university based on name
 	 * 
-	 * @param univ
-	 *            the name of the university
+	 * @param univ   the name of the university
+	 *            
 	 * @return the university
 	 */
 	public University getUniversity(String univ) throws NullPointerException {
@@ -162,8 +162,8 @@ public class AdminFuncController {
 	/**
 	 * Finds an account based on username
 	 * 
-	 * @param account
-	 *            the username of the requested account
+	 * @param account  the username of the requested account
+	 *            
 	 * @return the user
 	 */
 	public Account getAccount(String account) throws NullPointerException {
@@ -173,8 +173,8 @@ public class AdminFuncController {
 	/**
 	 * Adds all emphases to a university in the database
 	 * 
-	 * @param univ
-	 *            the University
+	 * @param univ   the University
+	 *            
 	 */
 	public void addEmphases(University univ) {
 		if (!(getUniversity(univ.getName()) instanceof University)) {// if the university does not exist
@@ -188,8 +188,8 @@ public class AdminFuncController {
 	/**
 	 * Deletes all emphases from a university in the database
 	 * 
-	 * @param univ
-	 *            the University
+	 * @param univ   the University
+	 *           
 	 */
 	public void deleteEmphases(University univ) {
 		if (!(getUniversity(univ.getName()) instanceof University)) {// if the university does not exist
@@ -205,9 +205,10 @@ public class AdminFuncController {
 	/**
 	 * Brings the admin to their homepage.
 	 * 
+	 * @param  prompt 
 	 * @return a message of which page the user will be directed to next.
-	 * @throws IllegalArgumentException
-	 *             the user input an invalid prompt.
+	 * @throws IllegalArgumentException   the user input an invalid prompt.
+	 *             
 	 */
 	public String homepage(String prompt) {
 		if (prompt.equals("1")) { // Manage universities
@@ -228,7 +229,23 @@ public class AdminFuncController {
 	 * Prompts the user to edit a university's fields and then save the changes to
 	 * the database
 	 * 
-	 * 
+	 * @param univName
+	 * @param state
+	 * @param location
+	 * @param control
+	 * @param students
+	 * @param femPerc
+	 * @param satv
+	 * @param satm
+	 * @param cost
+	 * @param finAidPerc
+	 * @param applicants
+	 * @param admitted
+	 * @param enrolled
+	 * @param acadScale
+	 * @param socScale
+	 * @param qualScale
+	 * @param emphases
 	 */
 	public void editUniversity(String univName, String state, String location, String control, int students,
 			int femPerc, int satv, int satm, int cost, int finAidPerc, int applicants, int admitted, int enrolled,
@@ -351,9 +368,24 @@ public class AdminFuncController {
 
 	/**
 	 * Prompts the user to add a university's properties
-	 * 
-	 * @param univ
-	 *            the name of the university to add
+	 *           
+	 * @param schoolName
+	 * @param state
+	 * @param location
+	 * @param control
+	 * @param students
+	 * @param femPerc
+	 * @param satV
+	 * @param satM
+	 * @param cost
+	 * @param finAidPerc
+	 * @param applicants
+	 * @param admitted
+	 * @param enrolled
+	 * @param acadScale
+	 * @param socScale
+	 * @param qualScale
+	 * @param emphases
 	 */
 	public void addUniversity(String schoolName, String state, String location, String control, int students,
 			int femPerc, int satV, int satM, int cost, int finAidPerc, int applicants, int admitted, int enrolled,
@@ -378,8 +410,11 @@ public class AdminFuncController {
 	/**
 	 * Prompts the user to add a GeneralUser and its properties
 	 * 
-	 * @param userName     the name of the GeneralUser to add
-	 *            
+	 * @param userName
+	 * @param password
+	 * @param firstName
+	 * @param lastName
+	 * @param acType
 	 */
 	public void addAccount(String userName, String password, String firstName, String lastName, String acType) {
 		
@@ -413,10 +448,13 @@ public class AdminFuncController {
 
 	/**
 	 * Prompts the user to edit an account through several options
-	 * 
-	 * @param user    the account to edit
-	 * @param 
-	 *            
+	 *    
+	 * @param user
+	 * @param firstName
+	 * @param lastName
+	 * @param password
+	 * @param status
+	 * @param type
 	 */
 	public void editUser(Account user, String firstName, String lastName, String password, char status, char type) {
 		Account account = this.getAccount(user.getUsername());		
@@ -436,21 +474,28 @@ public class AdminFuncController {
 	 */
 	public boolean deactivate(Account usr) {
 		
+		//C1
 		if (!(this.getAccount(usr.toString()) instanceof Account)) {
+			//S1
 			throw new IllegalArgumentException();
 		}
+		//S3
 		Account account = this.getAccount(usr.toString());
-
+       
+		//C2
 		if (!(account.getActive() == 'Y') || !(account.getActive() == 'N')) {
+			//S2
 			throw new IllegalArgumentException("ERROR: Invalid Input. Must enter either a charachter ");
 
+		//C3	
 		} else if (account.getActive() == 'Y') {
+			//S3
 			account.setActive('N');
 			saveAccountChanges(account);
 			return true;
-
+       //C4
 		} else {
-			
+			//S4
 			return false;
 		}
 
