@@ -68,8 +68,6 @@ public class AccountControllerTest {
 		String expectedPass1 = "oooooo14";
 		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
 		assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
-		
-		
 	}	
 	
 	/**
@@ -93,7 +91,6 @@ public class AccountControllerTest {
 		String expectedPass1 = "user";
 		boolean loginvalue1 = ac.login(expectedUser1,expectedPass1);
 		assertEquals("Your login status is: " + loginvalue1, ac.loginStatus, loginvalue1);
-	
 		
 	}
 	
