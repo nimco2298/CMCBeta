@@ -795,16 +795,7 @@ public class AdminFuncControllerTest {
 
 	
 	//***************************Deactivate()**********************************************************************// 
-	/**
-	 * Test method for deactivate() in AdminFuncController.
-	 * Catches an Exception for an invalid user
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testDeactivateUser_FailsInvalidUser() {
-		Account account1 = new Admin("user459", "password", 'Y', "Cardi", "B");
-		ad.deactivate(account1);
-		
-	}
+
 	
 	/**
 	 * Test method for deactivating a user
@@ -816,6 +807,16 @@ public class AdminFuncControllerTest {
 		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("test").getActive() == 'N'); //chnged Test to test
 	}
 	
+	/**
+	 * Test method for deactivating a user
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeactivateUser_DeactivatedUser() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+	    account.setActive('N');  
+		boolean actualval = ad.deactivate(account);
+		Assert.assertEquals("User account was not deactivated", actualval,false ); 
+	}
 	
 	
 	//***************************AddUniversity()**********************************************************************// 

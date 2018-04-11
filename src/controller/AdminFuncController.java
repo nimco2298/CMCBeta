@@ -473,29 +473,22 @@ public class AdminFuncController {
 	 * @return boolean true if the user was deactivated, false if not
 	 */
 	public boolean deactivate(Account usr) {
-		
-		//C1
-		if (!(this.getAccount(usr.toString()) instanceof Account)) {
-			//S1
-			throw new IllegalArgumentException();
-		}
-		//S3
 		Account account = this.getAccount(usr.toString());
        
-		//C2
+		//C1
 		if (!(account.getActive() == 'Y') || !(account.getActive() == 'N')) {
-			//S2
+			//S1
 			throw new IllegalArgumentException("ERROR: Invalid Input. Must enter either a charachter ");
 
-		//C3	
+		//C2
 		} else if (account.getActive() == 'Y') {
-			//S3
+			//S2
 			account.setActive('N');
 			saveAccountChanges(account);
 			return true;
-       //C4
-		} else {
-			//S4
+       //C3
+		} else   {
+			//S3
 			return false;
 		}
 
