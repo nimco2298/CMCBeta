@@ -405,6 +405,44 @@ public class CompleteFuncTest {
 		ad.editUniversity("Test", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 	}
 	
+	// ****************************************EDIT USER USE CASE***************************************************************************//
+
+	/** MAIN SCENARIO FOR USE CASE: 14
+	 * Test method for addAccount in AdminFuncController.
+	 */
+	@Test
+	public void testaddAccountForUser() {
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "u");
+		Assert.assertTrue("User account was correctly added", dbc.getUser("Test1").getFirstName().equals("Test1"));
+		dbc.deleteAccount(dbc.getUser("Test1"));
+	}
+	/**
+	 * Test method for addAccount in AdminFuncController.
+	 */
+	@Test
+	public void testaddAccountForAdmin() {
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "a");
+		Assert.assertTrue("Admin account was correctly added", dbc.getUser("Test1").getFirstName().equals("Test1"));
+		dbc.deleteAccount(dbc.getUser("Test1"));
+	}
+	/**ALTERNATE SCENARIO 1 
+	 * Test method for addAccount in AdminFuncController.
+	 * Catches an Exception for repeated username
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddAccountFailsForRepeatedUsername() {
+		ad.addAccount("juser", "Test", "Test", "Test", "u");
+	}
+	
+	/** ALTERNATE SCENARIO 2
+	 * Test method for addAccount in AdminFuncController.
+	 * Catches an Exception for invlaid type
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testaddAccountFailsForInvalidType() {
+		ad.addAccount("Test1", "Test1", "Test1", "Test1", "h");
+	}
+	
 
 	// ****************************************EDIT USER USE CASE***************************************************************************//
 
