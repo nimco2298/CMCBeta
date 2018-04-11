@@ -226,7 +226,8 @@ public class DBControllerTest {
 	@Test
 	public void testDeleteUniversity()
 	{
-		fail("Not yet implemented");
+		int i = db.deleteUniversity(u);
+		assertTrue("University should be deleted",i == 0);
 	}
 	//=================================================deleteAccount()=====================================================
 	@Test
@@ -239,6 +240,9 @@ public class DBControllerTest {
 	@Test
 	public void testAddEmphasis()
 	{
+		db.addEmphasis(uNu, "BIOLOGY");
+		uNu.addEmphases("BIOLOGY");
+		
 		fail("Not yet implemented");
 	}
 	//=================================================deleteEmphasis()=====================================================
@@ -259,6 +263,7 @@ public class DBControllerTest {
 		db.addAccount(gu);
 		db.addAccount(a);
 		db.removeSchoolFromSavedSchoolList(gu, db.getUniversity("BARD"));
+		db.addNewUniversity(u);
 		db.deleteUniversity(uNu);
 	}
 }

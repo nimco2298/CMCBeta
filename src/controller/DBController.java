@@ -208,6 +208,7 @@ public class DBController
    */
   public int removeSchoolFromSavedSchoolList(GeneralUser gu, University univ)
   {
+	  
     return ud.user_removeSchool(gu.getUsername(), univ.getName());
   }
   
