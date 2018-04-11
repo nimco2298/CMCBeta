@@ -107,6 +107,7 @@ public class DBController
           }
         }
         accList.add(new GeneralUser(userInfo[0], userInfo[1], userInfo[5].charAt(0), userInfo[2], userInfo[3], userUniv));
+        userUniv = new ArrayList<String>();
       }
       else
       {
@@ -205,9 +206,9 @@ public class DBController
    * @param gu the GeneralUser who wishes to remove a saved school 
    * @param univ University to be removed
    */
-  public void removeSchoolFromSavedSchoolList(GeneralUser gu, University univ)
+  public int removeSchoolFromSavedSchoolList(GeneralUser gu, University univ)
   {
-    ud.user_removeSchool(gu.getUsername(), univ.getName());
+    return ud.user_removeSchool(gu.getUsername(), univ.getName());
   }
   
   /**

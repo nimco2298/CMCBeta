@@ -20,7 +20,7 @@ public class DBControllerTest {
 	private DBController db;
 	private GeneralUser gu;
 	private Admin a;
-	private University u;
+	private University u, uNu;
 	
 	/**
 	 * This method initializes the information for testing
@@ -39,15 +39,10 @@ public class DBControllerTest {
 		emphases.add("SOCIAL-SCIENCE");
 		
 		gu = new GeneralUser("James", "Smith", 'Y', "juser", "user", saved);
-		a = new Admin("nadmin", "admin", 'Y', "Noreen", "Admin");
+		a = new Admin("kuser", "admin", 'Y', "Caaarld", "Paul");
 		u = new University("YANKTOWN COLLEGE", "SOUTH DAKOTA", "SUBURBAN", "PRIVATE", 10000, 30, 450, 400, 15736, 95, 4000, 95, 90, 1, 2, 2, emphases);
-	}
-	
-	//===================================================getUniversities()===================================
-	@Test
-	public void testGetUniversities()
-	{
-		fail("Not yet implemented");
+		uNu = new University();
+		uNu.setName("TRUMP");
 	}
 	//=====================================================getUniversity()===================================================
 	/**
@@ -83,12 +78,6 @@ public class DBControllerTest {
 		University un = db.getUniversity("PizzaGuy");
 		assertEquals("Answer should be null", un, null);
 	}
-	//==================================================getAccounts()====================================================
-	@Test
-	public void testGetAccounts()
-	{
-		fail("Not yet implemented");
-	}
 	//=====================================================getUser()======================================================
 	/**
 	 * Checks to see if the getUser() method works properly for a GeneralUser
@@ -110,7 +99,7 @@ public class DBControllerTest {
 	@Test
 	public void testGetUserForAdmin()
 	{
-		Admin testAdmin = (Admin)db.getUser("nadmin");
+		Admin testAdmin = (Admin)db.getUser("kuser");
 		assertEquals("User type should be 'a'",testAdmin.getType(), a.getType());
 		assertEquals("Username does not match expected", a.getUsername(),testAdmin.getUsername());
 		assertEquals("Password does not match expected", a.getPassword(), testAdmin.getPassword());
@@ -126,7 +115,7 @@ public class DBControllerTest {
 	@Test
 	public void testGetUserFailsForIncorrectUserName()
 	{
-	    Admin testUser = (Admin)db.getUser("GreasySteve");
+	    GeneralUser testUser = (GeneralUser)db.getUser("GreasySteve");
 		assertEquals("Username is 'DummyUser'", testUser.getUsername(), "DummyUser");
 	}
 	//=============================================addSchoolToUserList()==============================================
@@ -136,7 +125,8 @@ public class DBControllerTest {
 	@Test
 	public void testAddSchoolToUserList()
 	{
-		
+		int i = db.addSchoolToUserList(gu, db.getUniversity("BARD"));
+		assertEquals("Test failed", 1, i);
 	}
 	
 	/**
@@ -145,7 +135,8 @@ public class DBControllerTest {
 	@Test
 	public void testAddSchoolToUserListFailsForUniversityAlreadySavedToList()
 	{
-		fail("Not yet implemented");
+		int i = db.addSchoolToUserList(gu, db.getUniversity("YALE2"));
+		assertEquals("Test failed", -1, i);
 	}
 	
 	/**
@@ -160,13 +151,15 @@ public class DBControllerTest {
 	@Test
 	public void testAddNewUniversity()
 	{
-		
-		fail("not yet implemented");
+		int i = db.addNewUniversity(uNu);
+		assertFalse(i == -1);
+		assertTrue(db.getUniversity("TRUMP") != null);
 	}
 	@Test
 	public void testAddNewUniversityFailsForUniversityAlreadyInSystem()
 	{
-		fail("Not yet implemented");
+		int i = db.addNewUniversity(db.getUniversity("YALE2"));
+		assertEquals("Test should have failed", i, -1);
 	}
 	//===================================================addAccount()====================================================
 	/**
@@ -239,8 +232,8 @@ public class DBControllerTest {
 	@Test
 	public void testDeleteAccount()
 	{
-		int i = db.deleteAccount(gu);
-		assertFalse("Value should not equal -1", i == -1);
+		int i = db.deleteAccount(a);
+		assertFalse("Account should have been deleted", i == -1);
 	}
 	//=================================================addEmphasis()======================================================
 	@Test
@@ -264,5 +257,8 @@ public class DBControllerTest {
 		saved.add("YANKTOWN COLLEGE");
 		gu = new GeneralUser("James", "Smith", 'Y', "juser", "user", saved);
 		db.addAccount(gu);
+		db.addAccount(a);
+		db.removeSchoolFromSavedSchoolList(gu, db.getUniversity("BARD"));
+		db.deleteUniversity(uNu);
 	}
 }
