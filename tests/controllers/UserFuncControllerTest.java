@@ -54,25 +54,40 @@ public class UserFuncControllerTest {
 		dbc.removeSchoolFromSavedSchoolList(user, dbc.getUniversity("YALE"));
 
 	}
+	/** 
+	 * Test if the user profile can be edited
+	 */
 	@Test
 	public void testEditProfile() {
 		ufc.editProfile(account, "TestFirst", "TestLast", "TestPass");
 		Assert.assertTrue("Succesful first name edit", dbc.getUser("test").getFirstName().equals("TestFirst"));
-		Assert.assertTrue("Succesful lasr name edit", dbc.getUser("test").getLastName().equals("TestLast"));
+		Assert.assertTrue("Succesful last name edit", dbc.getUser("test").getLastName().equals("TestLast"));
 		Assert.assertTrue("Succesful password edit", dbc.getUser("test").getPassword().equals("TestPass"));
 	}
+	/** 
+	 * Tests if edit fails for empty first name
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditProfileFailsEmptyFirstName() {
 		ufc.editProfile(account, "", "TestLast", "TestPass");
 	}
+	/** 
+	 * Tests if edit fails for empty last name
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditProfileFailsEmptyLastName() {
 		ufc.editProfile(account, "Test", "", "TestPass");
 	}
+	/** 
+	 * Tests if edit fails for empty password
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditProfileFailsEmptyPass() {
 		ufc.editProfile(account, "Test", "Test", "");
 	}
+	/** 
+	 * Tests if edit fails for a space in the password
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditProfileFailsSpaceInPass() {
 		ufc.editProfile(account, "Test", "Test", "Oh No");
