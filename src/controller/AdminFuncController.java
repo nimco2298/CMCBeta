@@ -326,14 +326,14 @@ public class AdminFuncController {
 		u.setAcadScale(acadScale);
 		// socScale must be between 1 and 5
 		if (socScale < 1 || socScale > 5) {
-			System.out.println("Error: The social scale must be between 1 and 5.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The social scale must be between 1 and 5.");
 		}
 		u.setSocScale(socScale);
 		// qualScale must be between 1 and 5
 		if (qualScale < 1 || qualScale > 5) {
-			System.out.println("Error: The quality scale must be between 1 and 5.");
-			throw new IllegalArgumentException();
+			
+			throw new IllegalArgumentException("Error: The quality scale must be between 1 and 5.");
 		}
 		u.setQualScale(qualScale);
 		// number of emphasis is limited to 5
@@ -374,23 +374,15 @@ public class AdminFuncController {
 		
 	}
 
-//	/**
-//	 * Prompts the user to remove a university and confirm deletion
-//	 * 
-//	 * @param u     the university to remove
-//	 *            
-//	 */
-//	//public void removeUniversity(University u) {
-//		//delete(u);
-//	//}
 
 	/**
 	 * Prompts the user to add a GeneralUser and its properties
 	 * 
-	 * @param userName
-	 *            the name of the GeneralUser to add
+	 * @param userName     the name of the GeneralUser to add
+	 *            
 	 */
 	public void addAccount(String userName, String password, String firstName, String lastName, String acType) {
+		
 		ArrayList<String> information = new ArrayList<String>();
 		if (!(dbc.getUser(userName).getUsername().equals("DummyUser")))
 		{
@@ -416,55 +408,22 @@ public class AdminFuncController {
 			throw new IllegalArgumentException("ERROR: Invalid Input; " + "The input needs to be either 'u' or 'a'");
 			
 		}
-		//this.viewUsersList();
+		
 	}
 
 	/**
 	 * Prompts the user to edit an account through several options
 	 * 
-	 * @param user
-	 *            the account to edit
+	 * @param user    the account to edit
+	 * @param 
+	 *            
 	 */
 	public void editUser(Account user, String firstName, String lastName, String password, char status, char type) {
-
-		////////////////////////////////////////////////////////////////////////////////////////////////
-		// ========================= Fail check: the user does not exist in the database
-		//////////////////////////////////////////////////////////////////////////////////////////////// =======================
-		
-//		System.out.println("actual: " + this.getAccount(user.getUsername()));
-		if ((this.getAccount(user.getUsername()).equals("DummyUser"))) {
-			
-			throw new IllegalArgumentException();
-			
-		}
-		//System.out.println("account exsist  " + user.getUsername());
-		Account account = this.getAccount(user.getUsername());
-				
-		// ============================ Fail checks: check if all field inputs are
-		// correct ===========================
-
-
-		
+		Account account = this.getAccount(user.getUsername());		
 		account.setFirstName(firstName);
-
-//		if (lastName.length() == 0) {
-//			throw new IllegalArgumentException("Error: The lastname field is empty.");
-//		}
 		account.setLastName(lastName);
-
-//		if ((password.length() == 0) || (password.contains(" "))) {
-//			throw new IllegalArgumentException("Error: The firstname field is empty.");
-//		}
 		account.setPassword(password);
-
-// 		if ((type1 != 'u') || (type1 != 'a')) {
-//			throw new IllegalArgumentException("Error: The type field of an account  must be either 'a' or 'u'.");
-//		}
 		account.setType(type);
-		
-//		if ((status != 'Y') || (status != 'N')) {
-//			throw new IllegalArgumentException("Error: The status field of an account  must be either 'Y' or 'N'.");
-//		}
 		account.setActive(status);
 		this.saveAccountChanges(account);
 	}
@@ -472,7 +431,7 @@ public class AdminFuncController {
 	/**
 	 * This method will deactivate a user's account
 	 * 
-	 * @param usr      the account to be deactivated
+	 * @param  usr      the account to be deactivated
 	 * @return boolean true if the user was deactivated, false if not
 	 */
 	public boolean deactivate(Account usr) {
@@ -491,7 +450,7 @@ public class AdminFuncController {
 			return true;
 
 		} else {
-			//this.viewUsersList();
+			
 			return false;
 		}
 
