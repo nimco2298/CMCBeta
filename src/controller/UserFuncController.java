@@ -148,13 +148,13 @@ public class UserFuncController
    * @param firstName users first name
    * @param lastName users last name
    */
-  public void submitProfileChanges( String firstName, String lastName,String password)
-  {
-    gu.setPassword(password);
-    gu.setFirstName(firstName);
-    gu.setLastName(lastName);
-    db.updateAccount(gu); 
-  }
+//  public void submitProfileChanges( String firstName, String lastName,String password)
+//  {
+//    gu.setPassword(password);
+//    gu.setFirstName(firstName);
+//    gu.setLastName(lastName);
+//    db.updateAccount(gu); 
+//  }
   
   /**
    * Update the controlled user if changes were made to the account
