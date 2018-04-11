@@ -24,15 +24,14 @@ public class UserFuncControllerTest {
 	private DBController dbc = new DBController();
 	//private University u;
 	private GeneralUser account;
-	
+	private GeneralUser user;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		DBController db = new DBController();
-		GeneralUser user = (GeneralUser) db.getUser("juser");
+		user = (GeneralUser) dbc.getUser("juser");
 		ufc = new UserFuncController(user);
 		account = new GeneralUser("first", "last", 'Y', "test", "password", null);
 		dbc.addAccount(account);
@@ -50,8 +49,10 @@ public class UserFuncControllerTest {
 	@Test
 	public void testGetSavedSchools() {
 		ArrayList<String> schools = ufc.getSavedSchools();
+		dbc.addSchoolToUserList(user, dbc.getUniversity("YALE"));
 		Assert.assertTrue(schools.contains("YALE"));
-		Assert.assertTrue(schools.contains("YANKTOWN COLLEGE"));
+		dbc.removeSchoolFromSavedSchoolList(user, dbc.getUniversity("YALE"));
+
 	}
 	@Test
 	public void testEditProfile() {
@@ -80,53 +81,16 @@ public class UserFuncControllerTest {
 	
 	
 
-//	/**
-//	 * Test method for {@link controllers.UserFuncController#saveToSavedSchoolList(entities.University)}.
-//	 */
-//	@Test
-//	public void testSaveToSavedSchoolList() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link controllers.UserFuncController#searchForSchools()}.
-//	 */
-//	@Test
-//	public void testSearchForSchools() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link controllers.UserFuncController#removeSavedSchool(entities.University)}.
-//	 */
-//	@Test
-//	public void testRemoveSavedSchool() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link controllers.UserFuncController#submitProfileChanges(java.lang.String, java.lang.String, java.lang.String)}.
-//	 */
-//	@Test
-//	public void testSubmitProfileChanges() {
-//		fail("Not yet implemented");
-//	}
-//
-//	/**
-//	 * Test method for {@link controllers.UserFuncController#updateUser(entities.GeneralUser)}.
-//	 */
-//	@Test
-//	public void testUpdateUser() {
-//		fail("Not yet implemented");
-//	}
-//
-//
-//	/**
-//	 * Test method for {@link controllers.UserFuncController#editProfile()}.
-//	 */
-//	@Test
-//	public void testEditProfile() {
-//		fail("Not yet implemented");
-//	}
+	/**
+	 * Test method for {@link controllers.UserFuncController#saveToSavedSchoolList(entities.University)}.
+	 */
+	@Test
+	public void testSaveToSavedSchoolList() {
+		ufc.saveToSavedSchoolList(dbc.getUniversity("BARD"));
+		ArrayList<String> list = ufc.getSavedSchools();
+		Assert.assertTrue("Check to see if school was added", list.contains("BARD"));
+		dbc.removeSchoolFromSavedSchoolList((GeneralUser)dbc.getUser("juser"), dbc.getUniversity("BARD"));
+	}
+
 
 }

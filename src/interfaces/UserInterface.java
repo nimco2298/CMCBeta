@@ -59,7 +59,7 @@ public class UserInterface
     
     if(str.equals("s") || str.equals("S")){
       //System.out.println("Here are all the schools:");
-      viewSearchedSchools(ufc.searchForSchools());
+      //viewSearchedSchools(ufc.searchForSchools());
       
       System.out.println("s for save and v for view further details of a school:");
       String s1 = scan.next();

@@ -107,7 +107,7 @@ public class AccountController {
 				this.loginStatus = true;
 				// ui.homePage();
 				// return true;
-
+ 
 			}
 		}
 		// C8
@@ -117,7 +117,7 @@ public class AccountController {
 			// registered account. Please try again.");
 			this.loginStatus = false;
 			// return false;
-		}
+		} 
 
 		return loginStatus;
 	}
