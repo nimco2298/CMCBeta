@@ -27,7 +27,8 @@ public class CompleteFuncTest {
 		ad.addEmphases(u);
 		account = new Admin("test", "password", 'Y', "first", "last");
 		dbc.addAccount(account);
-		uAccount = new GeneralUser("first", "last", 'Y', "test", "password", new ArrayList<String>());
+		uAccount = new GeneralUser("first", "last", 'Y', "testu", "password", new ArrayList<String>());
+		dbc.addAccount(uAccount);
 		ufc = new UserFuncController(uAccount);
 		
 	}
@@ -125,6 +126,43 @@ public class CompleteFuncTest {
 		ac.login(expectedUser,expectedPass);
 		
 	}
+	// ****************************************SEARCH FOR SCHOOLS USE CASE 2***************************************************************************//
+	/**
+	 * TEST MAIN SCENARIO FOR USE CASE 2
+	 */
+	@Test
+	public void testSearchByStringAndInt() {
+		ArrayList<University> uList=new ArrayList<University>();
+		emphases=new ArrayList<String>();
+		uList = sc.search("YA",  "",  "",  "", 10000, 10000,  0,  100,  0,  999, 0,  999,  0,  99999,  
+							0,  100, 0,  99999,  0,  99999, 0,  99999,  0,  9,  0, 9,  0,  9, emphases);
+		assertTrue("Should be WESLEYAN",uList.get(0).getName().equals("WESLEYAN"));
+		assertTrue("Should be YALE",uList.get(1).getName().equals("YALE"));
+		assertTrue("Should be YANKTOWN COLLEGE",uList.get(2).getName().equals("YANKTOWN COLLEGE"));
+	}
+	
+	/**
+	 * TEST ALTERNATIVE SCENARIO 1 FOR USE CASE 2
+	 */
+	@Test
+	public void testSearchNoMatch() {
+		ArrayList<University> uList=new ArrayList<University>();
+		emphases=new ArrayList<String>();
+		uList = sc.search("UNIVERSITY OF NULL",  "",  "",  "", 100, 101,  0,  100,  0,  999, 0,  999,  0,  99999,  
+							0,  100, 0,  99999,  0,  99999, 0,  99999,  0,  9,  0, 9,  0,  9, emphases);
+		assertTrue("Should be empty",uList.isEmpty());
+	}
+	/**
+	 * TEST ALTERNATIVE SCENARIO 2 FOR USE CASE 2
+	 */
+	@Test
+	public void testSearchWittoutCriteria() {
+		ArrayList<University> uList=new ArrayList<University>();
+		emphases=new ArrayList<String>();
+		uList = sc.search("",  "",  "",  "", -1, 99999,  -1,  100,  -1,  999, -1,  999,  -1,  99999,  
+							-1,  100, -1,  99999,  -1,  99999, -1,  99999,  -1,  9,  -1, 9,  -1,  9, emphases);
+		assertTrue("Should contains all the schools",uList.size()==dbc.getUniversities().size());
+	}
 	// ****************************************SAVE SCHOOL USE CASE***************************************************************************//
 	/** MAIN SCENARIO FOR USE CASE: 6
 	 * Test if schools are saved
@@ -133,8 +171,25 @@ public class CompleteFuncTest {
 	public void testSaveSchool()
 	{
 		ufc.saveToSavedSchoolList(dbc.getUniversity("Test"));
+		uAccount=(GeneralUser) dbc.getUser("testu");
 		assertTrue("Test university was not saved to uAccount's Saved School List", uAccount.getSavedSchools().contains("Test"));
 	}
+	
+	// ****************************************REMOVE SAVED SCHOOL USE CASE***************************************************************************//
+		/** MAIN SCENARIO FOR USE CASE: 7
+		 * Test if a school saved can be removed
+		 */
+		@Test
+		public void testRemoveSavedSchool()
+		{
+			ufc.saveToSavedSchoolList(dbc.getUniversity("Test"));
+			uAccount=(GeneralUser) dbc.getUser("testu");
+			assertTrue("Test university was not saved to uAccount's Saved School List", uAccount.getSavedSchools().contains("Test"));
+			ufc.removeSavedSchool(dbc.getUniversity("Test"));
+			uAccount=(GeneralUser) dbc.getUser("testu");
+			assertFalse("Test university was not saved to uAccount's Saved School List", uAccount.getSavedSchools().contains("Test"));
+		}
+		
 	// ****************************************EDIT USER PROFILE USE CASE***************************************************************************//
 
 		/** MAIN SCENARIO FOR USE CASE: 8
@@ -143,9 +198,9 @@ public class CompleteFuncTest {
 		@Test
 		public void testEditProfile() {
 			ufc.editProfile(uAccount, "TestFirst", "TestLast", "TestPass");
-			Assert.assertTrue("Succesful first name edit", dbc.getUser("test").getFirstName().equals("TestFirst"));
-			Assert.assertTrue("Succesful last name edit", dbc.getUser("test").getLastName().equals("TestLast"));
-			Assert.assertTrue("Succesful password edit", dbc.getUser("test").getPassword().equals("TestPass"));
+			Assert.assertTrue("Succesful first name edit", dbc.getUser("testu").getFirstName().equals("TestFirst"));
+			Assert.assertTrue("Succesful last name edit", dbc.getUser("testu").getLastName().equals("TestLast"));
+			Assert.assertTrue("Succesful password edit", dbc.getUser("testu").getPassword().equals("TestPass"));
 		}
 		
 		/** Alternate scenarios for use case: 8
@@ -590,19 +645,7 @@ public class CompleteFuncTest {
 		ad.editUser(account,"first","last","password", 'L','a');
 		
 	}
-	/**
-	 * TEST MAIN SCENARIO OF SEARCH
-	 */
-	@Test
-	public void testSearchByStringAndInt() {
-		ArrayList<University> uList=new ArrayList<University>();
-		emphases=new ArrayList<String>();
-		uList = sc.search("YA",  "",  "",  "", 10000, 10000,  0,  100,  0,  999, 0,  999,  0,  99999,  
-							0,  100, 0,  99999,  0,  99999, 0,  99999,  0,  9,  0, 9,  0,  9, emphases);
-		assertTrue("Should be WESLEYAN",uList.get(0).getName().equals("WESLEYAN"));
-		assertTrue("Should be YALE",uList.get(1).getName().equals("YALE"));
-		assertTrue("Should be YANKTOWN COLLEGE",uList.get(2).getName().equals("YANKTOWN COLLEGE"));
-	}
+	
 
 
 	/**MAIN SCENARIO USE CASE :16
@@ -629,13 +672,28 @@ public class CompleteFuncTest {
 		boolean actualval = ad.deactivate(account);
 		Assert.assertEquals("User account was not deactivated", actualval,false ); 
 	}
-	
+	// ****************************************View School Recommendations USE CASE***************************************************************************//
+
+		/** MAIN SCENARIO FOR USE CASE: 18
+		 * Test method for recSearch for SearchController
+		 */
+	@Test
+	public void testRecSearchOrigin() {
+		ArrayList<University> uList = sc.recSearch(dbc.getUniversity("BARD"));
+		assertTrue("Should be CLARKSON UNIVERSITY", uList.get(0).getName().equals("CLARKSON UNIVERSITY"));
+		assertTrue("Should be TOURO", uList.get(1).getName().equals("TOURO"));
+		assertTrue("Should be HAMPSHIRE COLLEGE", uList.get(2).getName().equals("HAMPSHIRE COLLEGE"));
+		assertTrue("Should be SUNY PLATTSBURGH", uList.get(3).getName().equals("SUNY PLATTSBURGH"));
+		assertTrue("Should be MANHATTANVILLE COLLEGE", uList.get(4).getName().equals("MANHATTANVILLE COLLEGE"));
+	}
 	
 	@After
 	public void reset()
 	{
+		dbc.deleteEmphasis(u, "TestForRemoval");
 		dbc.deleteAccount(uAccount);
-	dbc.deleteUniversity(u);
+		dbc.deleteAccount(account);
+		dbc.deleteUniversity(u);
 	}
 
 }
