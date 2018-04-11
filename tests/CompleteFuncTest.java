@@ -177,6 +177,20 @@ public class CompleteFuncTest {
 			ufc.editProfile(uAccount, "Test", "Test", "Oh No");
 		}
 
+		
+		/** MAIN SCENARIO FOR USE CASE: 9
+		 * Test if the user can be logged out 
+		 */
+		@Test
+		public void testLogout() {
+			String expectedUser1 = "juser";
+			String expectedPass1 = "user";
+			boolean loginvalue = ac.login(expectedUser1,expectedPass1);
+			ac.logout();
+			assertEquals("Your login status was : " + loginvalue + ". Now, it is ", ac.loginStatus, false);	
+			
+		}
+		
 	
 	// ****************************************EDIT UNIVERSITY USE CASE***************************************************************************//
 	/**MAIN SCENARIO FOR USE CASE: 12
@@ -417,7 +431,7 @@ public class CompleteFuncTest {
 		ad.editUniversity("Test", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 	}
 	
-	// ****************************************EDIT USER USE CASE***************************************************************************//
+	// ****************************************ADD ACCOUNT USE CASE***************************************************************************//
 
 	/** MAIN SCENARIO FOR USE CASE: 14
 	 * Test method for addAccount in AdminFuncController.
@@ -589,6 +603,33 @@ public class CompleteFuncTest {
 		assertTrue("Should be YALE",uList.get(1).getName().equals("YALE"));
 		assertTrue("Should be YANKTOWN COLLEGE",uList.get(2).getName().equals("YANKTOWN COLLEGE"));
 	}
+
+
+	/**MAIN SCENARIO USE CASE :16
+	 * Test method for deactivating a user
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeactivateUser_ValidUser() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+		ad.deactivate(account);
+		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("test").getActive() == 'N'); //chnged Test to test
+	}
+	
+	/**ALTERNATIVE SCENARIO USE CASE:16  
+	 * Test method for deactivate() in AdminFuncController.
+	 * Catches an Exception for an invalid user
+	 */
+	/**
+	 * Test method for deactivating a user
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testDeactivateUser_DeactivatedUser() {
+		//account = new Admin("test", "password", 'Y', "first", "last");
+	    account.setActive('N');  
+		boolean actualval = ad.deactivate(account);
+		Assert.assertEquals("User account was not deactivated", actualval,false ); 
+	}
+	
 	
 	@After
 	public void reset()
@@ -596,4 +637,5 @@ public class CompleteFuncTest {
 		dbc.deleteAccount(uAccount);
 	dbc.deleteUniversity(u);
 	}
+
 }
