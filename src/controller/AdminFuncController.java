@@ -395,7 +395,7 @@ public class AdminFuncController {
 			throw new IllegalArgumentException("*** Error: University name is blank. Please enter a university name. ***");
 		}
 		// Fail: university already exists in database
-		else if (this.getUniversity(schoolName) instanceof University) {;
+		else if (this.getUniversity(schoolName) != null) {;
 			throw new IllegalArgumentException("Error: This university name already exists, please choose a different one");
 		}
 

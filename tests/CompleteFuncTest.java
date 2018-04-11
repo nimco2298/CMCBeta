@@ -30,6 +30,8 @@ public class CompleteFuncTest {
 		uAccount = new GeneralUser("first", "last", 'Y', "testu", "password", new ArrayList<String>());
 		dbc.addAccount(uAccount);
 		ufc = new UserFuncController(uAccount);
+		University u2 = dbc.getUniversity("Test3");
+		dbc.deleteUniversity(u2);
 		
 	}
 	
@@ -175,6 +177,7 @@ public class CompleteFuncTest {
 		assertTrue("Test university was not saved to uAccount's Saved School List", uAccount.getSavedSchools().contains("Test"));
 	}
 	
+	
 	// ****************************************REMOVE SAVED SCHOOL USE CASE***************************************************************************//
 		/** MAIN SCENARIO FOR USE CASE: 7
 		 * Test if a school saved can be removed
@@ -246,7 +249,22 @@ public class CompleteFuncTest {
 			
 		}
 		
-	
+    // ****************************************EDIT UNIVERSITY USE CASE***************************************************************************//
+		/**MAIN SCENARIO FOR USE CASE: 11
+		 * 
+		 */
+		@Test
+		public void testAddUniversity()
+		{
+			ad.addUniversity("Test3", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
+			assertFalse("Test University is missing", dbc.getUniversity("Test3") == null);
+		}
+		
+		@Test(expected=IllegalArgumentException.class)
+		public void testAddUniversityFailsForInvalidInput()
+		{
+			ad.addUniversity("", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
+		}
 	// ****************************************EDIT UNIVERSITY USE CASE***************************************************************************//
 	/**MAIN SCENARIO FOR USE CASE: 12
 	 * Test method for editUniversity in AdminFuncController.
