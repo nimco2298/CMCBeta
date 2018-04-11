@@ -31,7 +31,7 @@ public class CompleteFuncTest {
 		dbc.addAccount(uAccount);
 		ufc = new UserFuncController(uAccount);
 		University u2 = dbc.getUniversity("Test3");
-		dbc.deleteUniversity(u2);
+		//dbc.deleteUniversity(u2);
 		
 	}
 	
@@ -63,6 +63,10 @@ public class CompleteFuncTest {
 		if(!account.getUsername().equals("DummyUser")) {
 			dbc.deleteAccount(account);
 		}
+		dbc.deleteEmphasis(u, "TestForRemoval");
+		dbc.deleteAccount(uAccount);
+		dbc.deleteAccount(account);
+		dbc.deleteUniversity(u);
 	}
 	
 	// ****************************************LOGIN USE CASE***************************************************************************//
@@ -669,7 +673,7 @@ public class CompleteFuncTest {
 	/**MAIN SCENARIO USE CASE :16
 	 * Test method for deactivating a user
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testDeactivateUser_ValidUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 		ad.deactivate(account);
@@ -683,12 +687,12 @@ public class CompleteFuncTest {
 	/**
 	 * Test method for deactivating a user
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testDeactivateUser_DeactivatedUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 	    account.setActive('N');  
 		boolean actualval = ad.deactivate(account);
-		Assert.assertEquals("User account was not deactivated", actualval,false ); 
+		Assert.assertFalse("User account was not deactivated", actualval); 
 	}
 	// ****************************************View School Recommendations USE CASE***************************************************************************//
 
@@ -705,13 +709,5 @@ public class CompleteFuncTest {
 		assertTrue("Should be MANHATTANVILLE COLLEGE", uList.get(4).getName().equals("MANHATTANVILLE COLLEGE"));
 	}
 	
-	@After
-	public void reset()
-	{
-		dbc.deleteEmphasis(u, "TestForRemoval");
-		dbc.deleteAccount(uAccount);
-		dbc.deleteAccount(account);
-		dbc.deleteUniversity(u);
-	}
 
 }
