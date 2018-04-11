@@ -25,7 +25,7 @@ public class CompleteFuncTest {
 		ad.addEmphases(u);
 		account = new Admin("test", "password", 'Y', "first", "last");
 		dbc.addAccount(account);
-		uAccount = new GeneralUser("first", "last", 'Y', "test", "password", null);
+		uAccount = new GeneralUser("first", "last", 'Y', "test", "password", new ArrayList<String>());
 		ufc = new UserFuncController(uAccount);
 	}
 	
@@ -122,7 +122,15 @@ public class CompleteFuncTest {
 		ac.login(expectedUser,expectedPass);
 		
 	}
-	
+	// ****************************************SAVE SCHOOL USE CASE***************************************************************************//
+	/** MAIN SCENARIO FOR USE CASE: 6
+	 * Test if schools are saved
+	 */
+	@Test
+	public void testSaveSchool()
+	{
+		
+	}
 	// ****************************************EDIT USER PROFILE USE CASE***************************************************************************//
 
 		/** MAIN SCENARIO FOR USE CASE: 8
@@ -579,9 +587,7 @@ public class CompleteFuncTest {
 		
 	}
 
-	
-	
-	
+
 	/**MAIN SCENARIO USE CASE :16
 	 * Test method for deactivating a user
 	 */
@@ -608,5 +614,10 @@ public class CompleteFuncTest {
 	}
 	
 	
+	@After
+	public void reset()
+	{
+	dbc.deleteUniversity(u);
+	}
 
 }
