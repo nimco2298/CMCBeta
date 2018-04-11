@@ -204,7 +204,7 @@ public class UserFuncController
 		account.setLastName(lastName);
 
 		if (password == "" || password.contains(" ")) {
-			throw new IllegalArgumentException("Error: The firstname field is empty.");
+			throw new IllegalArgumentException("Invalid Password");
 		}
 		account.setPassword(password);
 
