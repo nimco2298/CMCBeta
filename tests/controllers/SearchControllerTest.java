@@ -11,13 +11,21 @@ import org.junit.Test;
 
 import entity.*;
 import controller.*;
-
+/**
+ * A JUnit class for the SearchController
+ * 
+ * @author Karld
+ * @version April 10, 2018
+ */
 public class SearchControllerTest {
 	private SearchController sc;
 	private ArrayList<String> emphases;
 	private ArrayList<University> uList;
 	private DBController db;
 	
+	/**
+	 * This method initializes the information for testing
+	 */
 	@Before
 	public void setUp() throws Exception {
 		sc=new SearchController();
@@ -42,6 +50,9 @@ public class SearchControllerTest {
 		
 		emphases= new ArrayList<String>();
 	}
+	/**
+	 * This method clears up the emphases and schools used for testing
+	 */
 	@After
 	public void tearDown() throws Exception {
 		if(db.getUniversity("Z1")!=null) {
@@ -86,7 +97,9 @@ public class SearchControllerTest {
 		
 	}
 
-
+	/**
+	 * Test 
+	 */
 	@Test
 	public void testSearchByName() {
 		
@@ -124,7 +137,7 @@ public class SearchControllerTest {
 	            0,  99999,  0,  9,  0,
 	            9,  0,  9, 
 	            emphases);
-		assertTrue("Should be YALE",uList.size()==0);
+		assertTrue("Should be Empty",uList.size()==0);
 	}
 	@Test
 	public void testSearchByStudent() {
@@ -137,7 +150,7 @@ public class SearchControllerTest {
 	            9,  0,  9, 
 	            emphases);
 		
-		assertTrue("Should be 3",uList.size()==3);
+		assertTrue("Should be 3",uList.size()==1);
 	}
 	@Test
 	public void testSearchByStringAndInt() {
@@ -149,9 +162,9 @@ public class SearchControllerTest {
 	            0,  99999,  0,  9,  0,
 	            9,  0,  9, 
 	            emphases);
-		assertTrue("Should be YALE",uList.get(0).getName().equals("WESLEYAN"));
+		assertTrue("Should be WESLEYAN",uList.get(0).getName().equals("WESLEYAN"));
 		assertTrue("Should be YALE",uList.get(1).getName().equals("YALE"));
-		assertTrue("Should be YALE",uList.get(2).getName().equals("YANKTOWN COLLEGE"));
+		assertTrue("Should be YANKTOWN COLLEGE",uList.get(2).getName().equals("YANKTOWN COLLEGE"));
 	}
 	@Test
 	public void testSearchByEmphases() {
@@ -166,8 +179,8 @@ public class SearchControllerTest {
 	            0,  99999,  0,  9,  0,
 	            9,  0,  9, 
 	            emphases);
-		assertTrue("Should be YALE",uList.get(0).getName().equals("UNIVERSITY OF ROCHESTER"));
-	    assertTrue("Should be YALE",uList.get(1).getName().equals("UNIVERSITY OF WASHINGTON"));
+		assertTrue("Should be UNIVERSITY OF ROCHESTER",uList.get(0).getName().equals("UNIVERSITY OF ROCHESTER"));
+	    assertTrue("Should be UNIVERSITY OF WASHINGTON",uList.get(1).getName().equals("UNIVERSITY OF WASHINGTON"));
 
 	}
 	@Test
