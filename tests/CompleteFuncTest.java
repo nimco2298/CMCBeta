@@ -694,7 +694,7 @@ public class CompleteFuncTest {
 	@Test
 	public void testDeactivateUser_DeactivatedUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-	    account.setActive('N');  
+	    ad.deactivate(account.getUsername());  
 		assertFalse("User account was not deactivated", ad.deactivate(account.getUsername())); 
 	}
 	// ****************************************View School Recommendations USE CASE***************************************************************************//
