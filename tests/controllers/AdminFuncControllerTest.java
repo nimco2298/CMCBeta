@@ -51,7 +51,7 @@ public class AdminFuncControllerTest {
 	@Test
 	public void testDeleteUniversity_Works() {
 		ad.delete(u);
-		Assert.assertTrue(!(ad.getUniversity(u.getName()) instanceof University));
+		Assert.assertTrue((ad.getUniversity(u.getName()) == null));
 	}
 	/**
 	 * Tests delete method in AdminFuncController and

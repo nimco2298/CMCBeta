@@ -116,7 +116,7 @@ public class DBControllerTest {
 	@Test
 	public void testGetUserFailsForIncorrectUserName()
 	{
-	    GeneralUser testUser = (GeneralUser)db.getUser("GreasySteve");
+	    Admin testUser = (Admin)db.getUser("GreasySteve");
 		assertEquals("Username is 'DummyUser'", testUser.getUsername(), "DummyUser");
 	}
 	//=============================================addSchoolToUserList()==============================================
