@@ -192,7 +192,7 @@ public class AdminFuncController {
 	 *           
 	 */
 	public void deleteEmphases(University univ) {
-		if (!(getUniversity(univ.getName()) instanceof University)) {// if the university does not exist
+		if ((getUniversity(univ.getName()) == null)) {// if the university does not exist
 			throw new IllegalArgumentException();
 		}
 		for (String emphasis : univ.getEmphases()) {

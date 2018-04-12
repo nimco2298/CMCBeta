@@ -1,4 +1,6 @@
 package controllers;
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 
 import org.junit.*;
@@ -34,7 +36,7 @@ public class AdminFuncControllerTest {
 	 */
 	@After
 	public void revert() {
-		if(ad.getUniversity(u.getName()) instanceof University) {
+		if(ad.getUniversity(u.getName()) != null) {
 			ad.deleteEmphases(u);
 			dbc.deleteUniversity(u);
 		}
@@ -800,22 +802,22 @@ public class AdminFuncControllerTest {
 	/**
 	 * Test method for deactivating a user
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testDeactivateUser_ValidUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.deactivate(account);
+		ad.deactivate(account.getUsername());
 		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("test").getActive() == 'N'); //chnged Test to test
 	}
 	
 	/**
 	 * Test method for deactivating a user
 	 */
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void testDeactivateUser_DeactivatedUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 	    account.setActive('N');  
-		boolean actualval = ad.deactivate(account);
-		Assert.assertEquals("User account was not deactivated", actualval,false ); 
+		boolean actualval = ad.deactivate(account.getUsername());
+		assertFalse("User account was not deactivated", actualval); 
 	}
 	
 	
