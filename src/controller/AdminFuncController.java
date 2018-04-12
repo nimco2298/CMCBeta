@@ -395,7 +395,7 @@ public class AdminFuncController {
 			throw new IllegalArgumentException("*** Error: University name is blank. Please enter a university name. ***");
 		}
 		// Fail: university already exists in database
-		else if (this.getUniversity(schoolName) != null) {;
+		else if (dbc.getUniversity(schoolName) != null) {;
 			throw new IllegalArgumentException("Error: This university name already exists, please choose a different one");
 		}
 
@@ -472,25 +472,24 @@ public class AdminFuncController {
 	 * @param  usr      the account to be deactivated
 	 * @return boolean true if the user was deactivated, false if not
 	 */
-	public boolean deactivate(Account usr) {
-		Account account = this.getAccount(usr.toString());
+	public boolean deactivate(String usr) {
+		Account account = this.getAccount(usr);
        
-		//C1
-		if (!(account.getActive() == 'Y') || !(account.getActive() == 'N')) {
-			//S1
-			throw new IllegalArgumentException("ERROR: Invalid Input. Must enter either a charachter ");
-
-		//C2
-		} else if (account.getActive() == 'Y') {
+		
+		if (account.getActive() == 'Y') {
 			//S2
 			account.setActive('N');
 			saveAccountChanges(account);
 			return true;
        //C3
-		} else   {
+		} 
+		else if(account.getActive() == 'N')
+		{
 			//S3
 			return false;
 		}
+		else
+			throw new IllegalArgumentException("ERROR: Invalid Input");
 
 	}
 }

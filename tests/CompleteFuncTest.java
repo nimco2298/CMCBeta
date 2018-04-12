@@ -30,8 +30,8 @@ public class CompleteFuncTest {
 		uAccount = new GeneralUser("first", "last", 'Y', "testu", "password", new ArrayList<String>());
 		dbc.addAccount(uAccount);
 		ufc = new UserFuncController(uAccount);
-		University u2 = dbc.getUniversity("Test3");
-		//dbc.deleteUniversity(u2);
+		//u2 = dbc.getUniversity("Test3");
+		//ad.delete(u2);
 		
 	}
 	
@@ -67,6 +67,7 @@ public class CompleteFuncTest {
 		dbc.deleteAccount(uAccount);
 		dbc.deleteAccount(account);
 		dbc.deleteUniversity(u);
+		//dbc.deleteUniversity(u2);
 	}
 	
 	// ****************************************LOGIN USE CASE***************************************************************************//
@@ -263,6 +264,7 @@ public class CompleteFuncTest {
 			//note: there seems to be a problem with the database
 			ad.addUniversity("Test3", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
 			assertFalse("Test University is missing", dbc.getUniversity("Test3") == null);
+			ad.delete(dbc.getUniversity("Test3"));
 		}
 		
 		@Test(expected=IllegalArgumentException.class)
@@ -415,7 +417,8 @@ public class CompleteFuncTest {
 	}
 	/**
 	 * Test method for editUniversity in AdminFuncController.
-	 * Catches an Exception for an out of range (under) admitted percentage input
+	 * Catches an Exception for a.addUniversity("Test3", "0", "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, emphases);
+			asn out of range (under) admitted percentage input
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testEditUniversity_FailsRangeAdmitted_Case1() {
@@ -677,8 +680,8 @@ public class CompleteFuncTest {
 	@Test
 	public void testDeactivateUser_ValidUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
-		ad.deactivate(account);
-		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("test").getActive() == 'N'); //chnged Test to test
+		ad.deactivate(account.getUsername());
+		Assert.assertTrue("User account was correctly deactivated", dbc.getUser("test").getActive() == 'N'); //changed Test to test
 	}
 	
 	/**ALTERNATIVE SCENARIO USE CASE:16  
@@ -692,8 +695,7 @@ public class CompleteFuncTest {
 	public void testDeactivateUser_DeactivatedUser() {
 		//account = new Admin("test", "password", 'Y', "first", "last");
 	    account.setActive('N');  
-		boolean actualval = ad.deactivate(account);
-		Assert.assertFalse("User account was not deactivated", actualval); 
+		assertFalse("User account was not deactivated", ad.deactivate(account.getUsername())); 
 	}
 	// ****************************************View School Recommendations USE CASE***************************************************************************//
 

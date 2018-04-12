@@ -189,9 +189,7 @@ public abstract class Account {
 
 		if ((activity == 'Y') || (activity == 'N')) {
 			this.active = activity;
-
 		}
-
 		else {
 			throw new IllegalArgumentException("Error! You can only enter a single digit char of either 'Y' or 'N' to set the activity status!");
 					
